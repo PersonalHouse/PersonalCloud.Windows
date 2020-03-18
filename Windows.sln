@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DokanFS.TopFolderClient", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apps.WindowsService", "Service\Apps.WindowsService.csproj", "{1901BB3E-EEB7-4222-9227-BF3489B56C6C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interface", "..\..\src\Interface\Interface.csproj", "{658B3812-FA97-49C6-975A-497AD951A7BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{1901BB3E-EEB7-4222-9227-BF3489B56C6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1901BB3E-EEB7-4222-9227-BF3489B56C6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1901BB3E-EEB7-4222-9227-BF3489B56C6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{658B3812-FA97-49C6-975A-497AD951A7BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{658B3812-FA97-49C6-975A-497AD951A7BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{658B3812-FA97-49C6-975A-497AD951A7BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{658B3812-FA97-49C6-975A-497AD951A7BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{23154230-C049-4E01-91A5-EFB66959FC08} = {45225AC0-A5CF-4AD8-8827-2447791A5225}
 		{056F117F-E2E7-45DE-A3C9-1D91C53C35F6} = {45225AC0-A5CF-4AD8-8827-2447791A5225}
 		{68E44A00-D93C-47F6-8E0A-986A21AB6116} = {45225AC0-A5CF-4AD8-8827-2447791A5225}
+		{658B3812-FA97-49C6-975A-497AD951A7BE} = {45225AC0-A5CF-4AD8-8827-2447791A5225}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C56E5B9B-DB07-4FA1-B3C0-20F7EAC5C1C1}

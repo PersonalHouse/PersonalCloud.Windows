@@ -34,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\src\Interface\Interface.csproj" />
     <ProjectReference Include="..\Contract\Apps.WindowsContract.csproj" />
   </ItemGroup>
 
@@ -42,20 +43,29 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\UIStrings.Designer.cs">
+    <Compile Update="Resources\UILanding.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>UIStrings.resx</DependentUpon>
+      <DependentUpon>UILanding.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\UISettings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UISettings.resx</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\UIStrings.en-US.resx">
+    <EmbeddedResource Update="Resources\UILanding.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UILanding.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\UISettings.en-US.resx">
       <Generator></Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\UIStrings.resx">
+    <EmbeddedResource Update="Resources\UISettings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>UIStrings.Designer.cs</LastGenOutput>
+      <LastGenOutput>UISettings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.IO;
-using System.Threading;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
 using Ookii.Dialogs.Wpf;
+
+using Unishare.Apps.WindowsConfigurator.Resources;
 
 namespace Unishare.Apps.WindowsConfigurator
 {
@@ -14,7 +16,7 @@ namespace Unishare.Apps.WindowsConfigurator
         public MainWindow()
         {
             InitializeComponent();
-            if (Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName == "zh") FontFamily = new FontFamily("Microsoft YaHei UI");
+            FontFamily = new FontFamily("Microsoft YaHei UI");
 
             SharingPathBox.Text = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             Task.Run(async () => {
@@ -35,9 +37,10 @@ namespace Unishare.Apps.WindowsConfigurator
                     CloudNameBox.Text = cloudName;
                     MountedCloudName.Text = cloudName;
 
-                    if (mountPoint == @"N:\") MountedCloudDrive.SelectedIndex = 0;
-                    else if (mountPoint == @"P:\") MountedCloudDrive.SelectedIndex = 1;
-                    else if (mountPoint == @"Z:\") MountedCloudDrive.SelectedIndex = 2;
+                    if (mountPoint == @"N:\") MountedCloudDrive.SelectedIndex = 1;
+                    else if (mountPoint == @"P:\") MountedCloudDrive.SelectedIndex = 2;
+                    else if (mountPoint == @"Z:\") MountedCloudDrive.SelectedIndex = 3;
+                    else MountedCloudDrive.SelectedIndex = 0;
 
                     MountSwitch.IsChecked = mounted;
                 });
@@ -47,16 +50,12 @@ namespace Unishare.Apps.WindowsConfigurator
         private void OnSharingChecked(object sender, RoutedEventArgs e)
         {
             var path = SharingPathBox.Text;
-            Task.Run(async () => {
-                await Globals.CloudManager.InvokeAsync(x => x.ChangeSharingRoot(path, null)).ConfigureAwait(false);
-            });
+            _ = Globals.CloudManager.InvokeAsync(x => x.ChangeSharingRoot(path, null));
         }
 
         private void OnSharingUnchecked(object sender, RoutedEventArgs e)
         {
-            Task.Run(async () => {
-                await Globals.CloudManager.InvokeAsync(x => x.ChangeSharingRoot(null, null)).ConfigureAwait(false);
-            });
+            _ = Globals.CloudManager.InvokeAsync(x => x.ChangeSharingRoot(null, null));
         }
 
         private void OnChangePathClicked(object sender, RoutedEventArgs e)
@@ -72,18 +71,32 @@ namespace Unishare.Apps.WindowsConfigurator
                 if (!Directory.Exists(path)) return;
                 SharingPathBox.Text = path;
 
-                Task.Run(async () => {
-                    await Globals.CloudManager.InvokeAsync(x => x.ChangeSharingRoot(path, null)).ConfigureAwait(false);
-                });
+                _ = Globals.CloudManager.InvokeAsync(x => x.ChangeSharingRoot(path, null));
             }
         }
 
         private void OnChangeDeviceNameClicked(object sender, RoutedEventArgs e)
         {
             var name = DeviceNameBox.Text;
-            Task.Run(async () => {
-                await Globals.CloudManager.InvokeAsync(x => x.ChangeDeviceName(name, null)).ConfigureAwait(false);
-            });
+            foreach (var c in name)
+            {
+                if (Path.GetInvalidFileNameChars().Contains(c))
+                {
+                    using var dialog = new TaskDialog {
+                        MainIcon = TaskDialogIcon.Error,
+                        WindowTitle = UISettings.Configurator,
+                        MainInstruction = UISettings.AlertInvalidDeviceName,
+                        Content = UISettings.AlertInvalidDeviceNameMessage
+                    };
+
+                    var ok = new TaskDialogButton(ButtonType.Ok);
+                    dialog.Buttons.Add(ok);
+                    dialog.ShowDialog(this);
+                    return;
+                }
+            }
+
+            _ = Globals.CloudManager.InvokeAsync(x => x.ChangeDeviceName(name, null));
         }
 
         private void OnInviteClicked(object sender, RoutedEventArgs e)
@@ -92,21 +105,19 @@ namespace Unishare.Apps.WindowsConfigurator
                 var code = await Globals.CloudManager.InvokeAsync(x => x.StartBroadcastingInvitation(null)).ConfigureAwait(false);
                 this.ShowAlert("邀请码已生成", "使用此邀请码将其它设备加入个人云：" + Environment.NewLine + Environment.NewLine + code + Environment.NewLine + Environment.NewLine +
                     "关闭此窗口后邀请码将失效。", "停止邀请", true, () => {
-                        Task.Run(async () => {
-                            await Globals.CloudManager.InvokeAsync(x => x.StopBroadcastingInvitation(null)).ConfigureAwait(false);
-                        });
+                        _ = Globals.CloudManager.InvokeAsync(x => x.StopBroadcastingInvitation(null));
                     });
             });
         }
 
         private void OnMountChecked(object sender, RoutedEventArgs e)
         {
-            string mountPoint;
-            if (MountedCloudDrive.SelectedIndex == 0) mountPoint = @"N:\";
-            else if (MountedCloudDrive.SelectedIndex == 1) mountPoint = @"P:\";
-            else mountPoint = @"Z:\";
+            string mountPoint = null;
+            if (MountedCloudDrive.SelectedIndex == 1) mountPoint = @"N:\";
+            else if (MountedCloudDrive.SelectedIndex == 2) mountPoint = @"P:\";
+            else if (MountedCloudDrive.SelectedIndex == 3) mountPoint = @"Z:\";
 
-            _ = Globals.Mounter.InvokeAsync(x => x.MountNetworkDrive(Globals.PersonalCloud.Value, mountPoint));
+            if (mountPoint != null) _ = Globals.Mounter.InvokeAsync(x => x.MountNetworkDrive(Globals.PersonalCloud.Value, mountPoint));
         }
 
         private void OnMountUnchecked(object sender, RoutedEventArgs e)
@@ -116,17 +127,25 @@ namespace Unishare.Apps.WindowsConfigurator
 
         private void OnMountPointChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            string mountPoint;
-            if (MountedCloudDrive.SelectedIndex == 0) mountPoint = @"N:\";
-            else if (MountedCloudDrive.SelectedIndex == 1) mountPoint = @"P:\";
-            else mountPoint = @"Z:\";
+            if (MountSwitch.IsChecked != true) return;
 
-            if (MountSwitch.IsChecked == true) _ = Globals.Mounter.InvokeAsync(x => x.MountNetworkDrive(Globals.PersonalCloud.Value, mountPoint));
+            string mountPoint = null;
+            if (MountedCloudDrive.SelectedIndex == 1) mountPoint = @"N:\";
+            else if (MountedCloudDrive.SelectedIndex == 2) mountPoint = @"P:\";
+            else if (MountedCloudDrive.SelectedIndex == 3) mountPoint = @"Z:\";
+
+            if (mountPoint != null)            _ = Globals.Mounter.InvokeAsync(x => x.MountNetworkDrive(Globals.PersonalCloud.Value, mountPoint));
+            else _ = Globals.Mounter.InvokeAsync(x => x.UnmountNetworkDrive(Globals.PersonalCloud.Value));
         }
 
         private void OnLeaveClicked(object sender, RoutedEventArgs e)
         {
             _ = Globals.CloudManager.InvokeAsync(x => x.LeavePersonalCloud(Globals.PersonalCloud.Value));
+        }
+
+        private void OnQuitClicked(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

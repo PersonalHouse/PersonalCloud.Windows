@@ -22,14 +22,14 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class UIStrings {
+    public class UISettings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal UIStrings() {
+        internal UISettings() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Unishare.Apps.WindowsConfigurator.Resources.UIStrings", typeof(UIStrings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Unishare.Apps.WindowsConfigurator.Resources.UISettings", typeof(UISettings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,24 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 设备名称无效.
+        /// </summary>
+        public static string AlertInvalidDeviceName {
+            get {
+                return ResourceManager.GetString("AlertInvalidDeviceName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 请使用简短的名称，尽量不与其它设备重复，且尽量不包含特殊字符。.
+        /// </summary>
+        public static string AlertInvalidDeviceNameMessage {
+            get {
+                return ResourceManager.GetString("AlertInvalidDeviceNameMessage", resourceCulture);
             }
         }
         
@@ -142,29 +160,20 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 高级工具.
+        ///   Looks up a localized string similar to 个人云控制台.
         /// </summary>
-        public static string Developer {
+        public static string Configurator {
             get {
-                return ResourceManager.GetString("Developer", resourceCulture);
+                return ResourceManager.GetString("Configurator", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 查看日志文件.
+        ///   Looks up a localized string similar to 退出控制台.
         /// </summary>
-        public static string DeveloperLog {
+        public static string DeveloperExit {
             get {
-                return ResourceManager.GetString("DeveloperLog", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 重新加载网络驱动器.
-        /// </summary>
-        public static string DeveloperRemount {
-            get {
-                return ResourceManager.GetString("DeveloperRemount", resourceCulture);
+                return ResourceManager.GetString("DeveloperExit", resourceCulture);
             }
         }
         
@@ -237,15 +246,6 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         public static string FileSharingPathSelect {
             get {
                 return ResourceManager.GetString("FileSharingPathSelect", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 个人云控制台.
-        /// </summary>
-        public static string WindowTitle {
-            get {
-                return ResourceManager.GetString("WindowTitle", resourceCulture);
             }
         }
     }

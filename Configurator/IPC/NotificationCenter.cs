@@ -32,15 +32,17 @@ namespace Unishare.Apps.WindowsConfigurator.IPC
         public void OnLeftPersonalCloud()
         {
             Application.Current.Dispatcher.Invoke(() => {
+                var shouldShow = false;
                 if (Application.Current.MainWindow != null)
                 {
+                    if (Application.Current.MainWindow.IsVisible) shouldShow = true;
                     Application.Current.MainWindow.Close();
                     Application.Current.MainWindow = null;
                 }
 
                 Globals.PersonalCloud = null;
                 Application.Current.MainWindow = new WelcomeWindow();
-                Application.Current.MainWindow.Show();
+                if (shouldShow) Application.Current.MainWindow.Show();
             });
         }
 
@@ -51,18 +53,24 @@ namespace Unishare.Apps.WindowsConfigurator.IPC
 
         public void OnPersonalCloudAdded()
         {
-            Application.Current.Dispatcher.Invoke(async () => {
+            var shouldShow = false;
+            Application.Current.Dispatcher.Invoke(() => {
                 if (Application.Current.MainWindow != null)
                 {
+                    if (Application.Current.MainWindow.IsVisible) shouldShow = true;
                     Application.Current.MainWindow.Close();
                     Application.Current.MainWindow = null;
                 }
+            });
 
+            Task.Run(async ()=> { 
                 var cloud = await Globals.Storage.InvokeAsync(x => x.GetAllPersonalCloud()).ConfigureAwait(false);
                 Globals.PersonalCloud = cloud[0];
 
-                Application.Current.MainWindow = new MainWindow();
-                Application.Current.MainWindow.Show();
+                Application.Current.Dispatcher.Invoke(() => {
+                    Application.Current.MainWindow = new MainWindow();
+                    if (shouldShow) Application.Current.MainWindow.Show();
+                });
             });
         }
 

@@ -3,9 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:resx="clr-namespace:Unishare.Apps.WindowsConfigurator.Resources"
         TextElement.FontSize="14"
+        Background="#F9F9FA"
         WindowStartupLocation="CenterScreen"
-        Title="{x:Static resx:UIStrings.WindowTitle}"
-        SizeToContent="WidthAndHeight">
+        Title="{x:Static resx:UISettings.Configurator}"
+        SizeToContent="WidthAndHeight"
+        ResizeMode="CanMinimize">
 
     <Grid Margin="5">
         <Grid.RowDefinitions>
@@ -18,7 +20,7 @@
         <GroupBox Grid.Row="0"
                   Margin="5"
                   Padding="5"
-                  Header="{x:Static resx:UIStrings.FileSharing}">
+                  Header="{x:Static resx:UISettings.FileSharing}">
 
             <StackPanel Orientation="Vertical">
                 <DockPanel>
@@ -27,24 +29,22 @@
                               Checked="OnSharingChecked"
                               Unchecked="OnSharingUnchecked" />
 
-                    <TextBlock Text="{x:Static resx:UIStrings.FileSharingMasterSwitch}"
+                    <TextBlock Text="{x:Static resx:UISettings.FileSharingMasterSwitch}"
                                VerticalAlignment="Center" />
                 </DockPanel>
 
                 <Separator Margin="0, 5" />
 
-                <TextBlock Text="{x:Static resx:UIStrings.FileSharingPath}" />
+                <TextBlock Text="{x:Static resx:UISettings.FileSharingPath}" />
 
                 <DockPanel>
                     <Button DockPanel.Dock="Right"
                             Margin="10, 0, 0, 0"
                             Padding="5"
-                            BorderThickness="0"
-                            Content="{x:Static resx:UIStrings.FileSharingPathSelect}"
+                            Content="{x:Static resx:UISettings.FileSharingPathSelect}"
                             Click="OnChangePathClicked" />
                     <TextBox x:Name="SharingPathBox"
                              Padding="2"
-                             Text="C:\ProgramData\Personal Cloud"
                              IsReadOnly="True"
                              MaxLines="1"
                              VerticalAlignment="Center" />
@@ -53,40 +53,36 @@
         </GroupBox>
 
         <GroupBox Grid.Row="1"
-                  Header="{x:Static resx:UIStrings.Cloud}"
+                  Header="{x:Static resx:UISettings.Cloud}"
                   Margin="5"
                   Padding="5">
 
             <StackPanel Orientation="Vertical">
-                <TextBlock Text="{x:Static resx:UIStrings.CloudDeviceName}" />
+                <TextBlock Text="{x:Static resx:UISettings.CloudDeviceName}" />
 
                 <DockPanel>
                     <Button DockPanel.Dock="Right"
                             Margin="10, 0, 0, 0"
                             Padding="5"
-                            BorderThickness="0"
-                            Content="{x:Static resx:UIStrings.CloudSaveChanges}"
+                            Content="{x:Static resx:UISettings.CloudSaveChanges}"
                             Click="OnChangeDeviceNameClicked" />
                     <TextBox x:Name="DeviceNameBox"
                              Padding="2"
-                             Text="YD-DESKTOP"
                              VerticalAlignment="Center" />
                 </DockPanel>
 
                 <Separator Margin="0, 5" />
 
-                <TextBlock Text="{x:Static resx:UIStrings.CloudName}" />
+                <TextBlock Text="{x:Static resx:UISettings.CloudName}" />
 
                 <DockPanel>
                     <Button DockPanel.Dock="Right"
                             IsEnabled="False"
                             Margin="10, 0, 0, 0"
                             Padding="5"
-                            BorderThickness="0"
-                            Content="{x:Static resx:UIStrings.CloudSaveChanges}" />
+                            Content="{x:Static resx:UISettings.CloudSaveChanges}" />
                     <TextBox x:Name="CloudNameBox"
                              Padding="2"
-                             Text="Personal Cloud 1"
                              IsReadOnly="True"
                              VerticalAlignment="Center" />
                 </DockPanel>
@@ -97,29 +93,27 @@
                     <Button DockPanel.Dock="Right"
                             Margin="10, 0, 0, 0"
                             Padding="5"
-                            BorderThickness="0"
-                            Content="{x:Static resx:UIStrings.CloudInviteStart}"
+                            Content="{x:Static resx:UISettings.CloudInviteStart}"
                             Click="OnInviteClicked" />
                     <TextBlock DockPanel.Dock="Left"
-                               Text="{x:Static resx:UIStrings.CloudInviteNone}"
+                               Text="{x:Static resx:UISettings.CloudInviteNone}"
                                VerticalAlignment="Center" />
                 </DockPanel>
 
                 <Separator Margin="0, 5" />
 
-                <Button Margin="10, 0, 0, 0"
+                <Button Margin="10, 5, 0, 0"
                         Padding="5"
-                        BorderThickness="0"
                         HorizontalAlignment="Center"
-                        MinWidth="200"
-                        Content="{x:Static resx:UIStrings.CloudLeave}"
+                        MinWidth="250"
+                        Content="{x:Static resx:UISettings.CloudLeave}"
                         Foreground="Red"
                         Click="OnLeaveClicked" />
             </StackPanel>
         </GroupBox>
 
         <GroupBox Grid.Row="2"
-                  Header="{x:Static resx:UIStrings.Explorer}"
+                  Header="{x:Static resx:UISettings.Explorer}"
                   Margin="5"
                   Padding="5">
 
@@ -130,7 +124,7 @@
                               Checked="OnMountChecked"
                               Unchecked="OnMountUnchecked" />
 
-                    <TextBlock Text="{x:Static resx:UIStrings.ExplorerMasterSwitch}"
+                    <TextBlock Text="{x:Static resx:UISettings.ExplorerMasterSwitch}"
                                VerticalAlignment="Center" />
                 </DockPanel>
 
@@ -141,6 +135,7 @@
                               DockPanel.Dock="Right"
                               SelectedIndex="0"
                               SelectionChanged="OnMountPointChanged">
+                        <ComboBoxItem Content="—" />
                         <ComboBoxItem Content="N" />
                         <ComboBoxItem Content="P" />
                         <ComboBoxItem Content="Z" />
@@ -152,44 +147,30 @@
                                VerticalAlignment="Center" />
 
                     <TextBlock Margin="0, 0, 10, 0"
-                               Text="{x:Static resx:UIStrings.ExplorerMountPoint}"
+                               Text="{x:Static resx:UISettings.ExplorerMountPoint}"
                                HorizontalAlignment="Right"
                                VerticalAlignment="Center" />
                 </DockPanel>
             </StackPanel>
         </GroupBox>
 
-        <GroupBox Grid.Row="3"
-                  Header="{x:Static resx:UIStrings.Developer}"
-                  Margin="5"
-                  Padding="5">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="10" />
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="10" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
+        <StackPanel Grid.Row="4"
+                    Margin="5"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
 
-                <Button Grid.Column="0"
-                        Padding="5"
-                        BorderThickness="0"
-                        HorizontalAlignment="Center"
-                        Content="{x:Static resx:UIStrings.DeveloperRestartService}" />
+            <Button Grid.Column="0"
+                    Padding="5"
+                    HorizontalAlignment="Center"
+                    IsEnabled="False"
+                    Content="{x:Static resx:UISettings.DeveloperRestartService}" />
 
-                <Button Grid.Column="2"
-                        Padding="5"
-                        BorderThickness="0"
-                        HorizontalAlignment="Center"
-                        Content="{x:Static resx:UIStrings.DeveloperRemount}" />
-
-                <Button Grid.Column="4"
-                        Padding="5"
-                        BorderThickness="0"
-                        HorizontalAlignment="Center"
-                        Content="{x:Static resx:UIStrings.DeveloperLog}" />
-            </Grid>
-        </GroupBox>
+            <Button Grid.Column="4"
+                    Padding="5"
+                    Margin="5, 0, 0, 0"
+                    HorizontalAlignment="Center"
+                    Content="{x:Static resx:UISettings.DeveloperExit}"
+                    Click="OnQuitClicked"/>
+        </StackPanel>
     </Grid>
 </Window>

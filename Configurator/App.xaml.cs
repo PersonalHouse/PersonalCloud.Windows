@@ -46,6 +46,7 @@ namespace Unishare.Apps.WindowsConfigurator
             Globals.Mounter = new IpcServiceClientBuilder<IFileSystemController>().UseNamedPipe(Pipes.DiskMounter).Build();
             Globals.Storage = new IpcServiceClientBuilder<IPersistentStorage>().UseNamedPipe(Pipes.UserSettings).Build();
 
+            /*
             Task.Run(async () => {
                 var cloud = await Globals.Storage.InvokeAsync(x => x.GetAllPersonalCloud()).ConfigureAwait(false);
                 Globals.PersonalCloud = cloud.Length == 0 ? null : (Guid?) cloud[0];
@@ -55,6 +56,7 @@ namespace Unishare.Apps.WindowsConfigurator
                     else MainWindow = new WelcomeWindow();
                 });
             });
+            */
         }
 
         private void OnApplicationExit(object sender, ExitEventArgs e)

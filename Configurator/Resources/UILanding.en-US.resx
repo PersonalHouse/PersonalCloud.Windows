@@ -117,67 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Cloud" xml:space="preserve">
-    <value>Personal Cloud</value>
-  </data>
-  <data name="CloudDeviceName" xml:space="preserve">
-    <value>Device Name</value>
-  </data>
-  <data name="CloudInviteError" xml:space="preserve">
-    <value>Cannot generate invitation.</value>
-  </data>
-  <data name="CloudInviteNone" xml:space="preserve">
-    <value>Generate an invitation to add other devices.</value>
-  </data>
-  <data name="CloudInviteStart" xml:space="preserve">
-    <value>Generate</value>
-  </data>
-  <data name="CloudInviteStop" xml:space="preserve">
-    <value>Stop</value>
-  </data>
-  <data name="CloudLeave" xml:space="preserve">
-    <value>LEAVE / SWITCH PERSONAL CLOUD</value>
-  </data>
   <data name="CloudName" xml:space="preserve">
     <value>Cloud Name</value>
   </data>
-  <data name="CloudSaveChanges" xml:space="preserve">
-    <value>Save</value>
+  <data name="CreateCloud" xml:space="preserve">
+    <value>Create Personal Cloud</value>
   </data>
-  <data name="Developer" xml:space="preserve">
-    <value>Developer Tools</value>
+  <data name="CreateCloudHint" xml:space="preserve">
+    <value>Create new Personal Cloud and add this device to it.</value>
   </data>
-  <data name="DeveloperLog" xml:space="preserve">
-    <value>View Log File</value>
+  <data name="DeviceName" xml:space="preserve">
+    <value>Device Name</value>
   </data>
-  <data name="DeveloperRemount" xml:space="preserve">
-    <value>Refresh Mounted Drives</value>
+  <data name="Exit" xml:space="preserve">
+    <value>Quit Configurator</value>
   </data>
-  <data name="DeveloperRestartService" xml:space="preserve">
-    <value>Restart Windows Service</value>
+  <data name="Invitation" xml:space="preserve">
+    <value>Invitation Code</value>
   </data>
-  <data name="Explorer" xml:space="preserve">
-    <value>File Explorer Integration</value>
+  <data name="JoinCloud" xml:space="preserve">
+    <value>Join by Invitation</value>
   </data>
-  <data name="ExplorerMasterSwitch" xml:space="preserve">
-    <value>Mount Cloud as Network Drive</value>
+  <data name="JoinCloudHint" xml:space="preserve">
+    <value>Add this device to existing Personal Cloud.</value>
   </data>
-  <data name="ExplorerMountPoint" xml:space="preserve">
-    <value>Drive Letter</value>
+  <data name="PersonalCloud" xml:space="preserve">
+    <value>Personal Cloud</value>
   </data>
-  <data name="FileSharing" xml:space="preserve">
-    <value>File Sharing</value>
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome to Personal Cloud Configurator</value>
   </data>
-  <data name="FileSharingMasterSwitch" xml:space="preserve">
-    <value>Allow File Sharing on This Device</value>
-  </data>
-  <data name="FileSharingPath" xml:space="preserve">
-    <value>Share This Folder</value>
-  </data>
-  <data name="FileSharingPathSelect" xml:space="preserve">
-    <value>Change</value>
-  </data>
-  <data name="WindowTitle" xml:space="preserve">
-    <value>Configurator</value>
+  <data name="WelcomeHint" xml:space="preserve">
+    <value>This device doesn not belong to any Personal Cloud. You may...</value>
   </data>
 </root>

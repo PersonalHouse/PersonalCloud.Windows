@@ -27,7 +27,7 @@ namespace Unishare.Apps.WindowsService.IPC
             else Globals.CloudService.PersonalClouds.First(x => new Guid(x.Id) == cloudId).NodeDisplayName = newName;
 
             Globals.Database.SaveSetting(UserSettings.DeviceName, newName);
-            Globals.CloudService.StartNetwork();
+            Globals.CloudService.NetworkRefeshNodes();
         }
 
         public void ChangeSharingRoot(string absolutePath, Guid? cloudId)
@@ -41,6 +41,7 @@ namespace Unishare.Apps.WindowsService.IPC
 
             if (!Directory.Exists(absolutePath)) throw new InvalidOperationException("Path does not exist.");
 
+            Globals.Database.SaveSetting(UserSettings.SharingRoot, absolutePath);
             Globals.Database.SaveSetting(UserSettings.EnableSharing, "1");
             if (cloudId == null) Globals.CloudFileSystem.RootPath = absolutePath;
             else throw new NotSupportedException();
@@ -74,6 +75,7 @@ namespace Unishare.Apps.WindowsService.IPC
 
             var cloud = Globals.CloudService.JoinPersonalCloud(code, deviceName).Result;
             Globals.Database.SaveSetting(UserSettings.DeviceName, deviceName);
+            _ = Globals.NotificationCenter.InvokeAsync(x => x.OnPersonalCloudAdded());
             return new Guid(cloud.Id);
         }
 
@@ -121,6 +123,8 @@ namespace Unishare.Apps.WindowsService.IPC
                     _ = Globals.NotificationCenter.InvokeAsync(x => x.OnVolumeIOError(mountPoint, exception));
                 }
             });
+
+            Globals.Database.SaveSetting(WindowsUserSettings.EnableVolumeMounting, "1");
             Globals.Database.SaveMountPoint(cloudId, mountPoint);
             Globals.Volumes[cloudId] = dokanThread;
         }

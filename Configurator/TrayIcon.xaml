@@ -3,9 +3,23 @@
                     xmlns:tb="http://www.hardcodet.net/taskbar"
                     xmlns:local="clr-namespace:Unishare.Apps.WindowsConfigurator">
 
+    <ContextMenu x:Shared="false"
+                 x:Key="TrayMenu">
+        <MenuItem Header="个人云"
+                  FontFamily="Microsoft YaHei UI"
+                  IsEnabled="False"/>
+        <MenuItem Header="Windows (2.0, 200318)"
+                  FontFamily="Microsoft YaHei UI"
+                  IsEnabled="False" />
+        <Separator />
+        <MenuItem Header="退出"
+                  FontFamily="Microsoft YaHei UI"
+                  Command="{Binding ExitApplicationCommand}" />
+    </ContextMenu>
+
     <tb:TaskbarIcon x:Key="TrayIcon"
                     IconSource="pack://application:,,,/App.ico"
-                    ToolTipText="Personal Cloud"
+                    ToolTipText="个人云控制台"
                     DoubleClickCommand="{Binding ShowWindowCommand}">
 
         <tb:TaskbarIcon.DataContext>
