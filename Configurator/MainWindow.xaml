@@ -1,0 +1,195 @@
+﻿<Window x:Class="Unishare.Apps.WindowsConfigurator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:resx="clr-namespace:Unishare.Apps.WindowsConfigurator.Resources"
+        TextElement.FontSize="14"
+        WindowStartupLocation="CenterScreen"
+        Title="{x:Static resx:UIStrings.WindowTitle}"
+        SizeToContent="WidthAndHeight">
+
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <GroupBox Grid.Row="0"
+                  Margin="5"
+                  Padding="5"
+                  Header="{x:Static resx:UIStrings.FileSharing}">
+
+            <StackPanel Orientation="Vertical">
+                <DockPanel>
+                    <CheckBox x:Name="SharingSwitch"
+                              DockPanel.Dock="Right"
+                              Checked="OnSharingChecked"
+                              Unchecked="OnSharingUnchecked" />
+
+                    <TextBlock Text="{x:Static resx:UIStrings.FileSharingMasterSwitch}"
+                               VerticalAlignment="Center" />
+                </DockPanel>
+
+                <Separator Margin="0, 5" />
+
+                <TextBlock Text="{x:Static resx:UIStrings.FileSharingPath}" />
+
+                <DockPanel>
+                    <Button DockPanel.Dock="Right"
+                            Margin="10, 0, 0, 0"
+                            Padding="5"
+                            BorderThickness="0"
+                            Content="{x:Static resx:UIStrings.FileSharingPathSelect}"
+                            Click="OnChangePathClicked" />
+                    <TextBox x:Name="SharingPathBox"
+                             Padding="2"
+                             Text="C:\ProgramData\Personal Cloud"
+                             IsReadOnly="True"
+                             MaxLines="1"
+                             VerticalAlignment="Center" />
+                </DockPanel>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Grid.Row="1"
+                  Header="{x:Static resx:UIStrings.Cloud}"
+                  Margin="5"
+                  Padding="5">
+
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="{x:Static resx:UIStrings.CloudDeviceName}" />
+
+                <DockPanel>
+                    <Button DockPanel.Dock="Right"
+                            Margin="10, 0, 0, 0"
+                            Padding="5"
+                            BorderThickness="0"
+                            Content="{x:Static resx:UIStrings.CloudSaveChanges}"
+                            Click="OnChangeDeviceNameClicked" />
+                    <TextBox x:Name="DeviceNameBox"
+                             Padding="2"
+                             Text="YD-DESKTOP"
+                             VerticalAlignment="Center" />
+                </DockPanel>
+
+                <Separator Margin="0, 5" />
+
+                <TextBlock Text="{x:Static resx:UIStrings.CloudName}" />
+
+                <DockPanel>
+                    <Button DockPanel.Dock="Right"
+                            IsEnabled="False"
+                            Margin="10, 0, 0, 0"
+                            Padding="5"
+                            BorderThickness="0"
+                            Content="{x:Static resx:UIStrings.CloudSaveChanges}" />
+                    <TextBox x:Name="CloudNameBox"
+                             Padding="2"
+                             Text="Personal Cloud 1"
+                             IsReadOnly="True"
+                             VerticalAlignment="Center" />
+                </DockPanel>
+
+                <Separator Margin="0, 5" />
+
+                <DockPanel>
+                    <Button DockPanel.Dock="Right"
+                            Margin="10, 0, 0, 0"
+                            Padding="5"
+                            BorderThickness="0"
+                            Content="{x:Static resx:UIStrings.CloudInviteStart}"
+                            Click="OnInviteClicked" />
+                    <TextBlock DockPanel.Dock="Left"
+                               Text="{x:Static resx:UIStrings.CloudInviteNone}"
+                               VerticalAlignment="Center" />
+                </DockPanel>
+
+                <Separator Margin="0, 5" />
+
+                <Button Margin="10, 0, 0, 0"
+                        Padding="5"
+                        BorderThickness="0"
+                        HorizontalAlignment="Center"
+                        MinWidth="200"
+                        Content="{x:Static resx:UIStrings.CloudLeave}"
+                        Foreground="Red"
+                        Click="OnLeaveClicked" />
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Grid.Row="2"
+                  Header="{x:Static resx:UIStrings.Explorer}"
+                  Margin="5"
+                  Padding="5">
+
+            <StackPanel Orientation="Vertical">
+                <DockPanel>
+                    <CheckBox x:Name="MountSwitch"
+                              DockPanel.Dock="Right"
+                              Checked="OnMountChecked"
+                              Unchecked="OnMountUnchecked" />
+
+                    <TextBlock Text="{x:Static resx:UIStrings.ExplorerMasterSwitch}"
+                               VerticalAlignment="Center" />
+                </DockPanel>
+
+                <Separator Margin="0, 5" />
+
+                <DockPanel>
+                    <ComboBox x:Name="MountedCloudDrive"
+                              DockPanel.Dock="Right"
+                              SelectedIndex="0"
+                              SelectionChanged="OnMountPointChanged">
+                        <ComboBoxItem Content="N" />
+                        <ComboBoxItem Content="P" />
+                        <ComboBoxItem Content="Z" />
+                    </ComboBox>
+
+                    <TextBlock x:Name="MountedCloudName"
+                               DockPanel.Dock="Left"
+                               Text="Personal Cloud"
+                               VerticalAlignment="Center" />
+
+                    <TextBlock Margin="0, 0, 10, 0"
+                               Text="{x:Static resx:UIStrings.ExplorerMountPoint}"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Center" />
+                </DockPanel>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Grid.Row="3"
+                  Header="{x:Static resx:UIStrings.Developer}"
+                  Margin="5"
+                  Padding="5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0"
+                        Padding="5"
+                        BorderThickness="0"
+                        HorizontalAlignment="Center"
+                        Content="{x:Static resx:UIStrings.DeveloperRestartService}" />
+
+                <Button Grid.Column="2"
+                        Padding="5"
+                        BorderThickness="0"
+                        HorizontalAlignment="Center"
+                        Content="{x:Static resx:UIStrings.DeveloperRemount}" />
+
+                <Button Grid.Column="4"
+                        Padding="5"
+                        BorderThickness="0"
+                        HorizontalAlignment="Center"
+                        Content="{x:Static resx:UIStrings.DeveloperLog}" />
+            </Grid>
+        </GroupBox>
+    </Grid>
+</Window>
