@@ -122,7 +122,7 @@ namespace Unishare.Apps.WindowsConfigurator
 
         private void OnMountUnchecked(object sender, RoutedEventArgs e)
         {
-            _ = Globals.Mounter.InvokeAsync(x => x.UnmountNetworkDrive(Globals.PersonalCloud.Value));
+            _ = Globals.Mounter.InvokeAsync(x => x.UnmountAllDrives());
         }
 
         private void OnMountPointChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)

@@ -1,0 +1,35 @@
+name: Build
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    env:
+      SolutionPath: Windows.sln
+      Configuration: Release
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+        with:
+          submodules: 'recursive'
+        
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.101
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.0.0
+
+      - name: Restore
+        run: msbuild $env:SolutionPath /t:Restore /p:Configuration=$env:Configuration
+
+      - name: Build
+        run: msbuild $env:SolutionPath /v:d /t:Restore /p:Configuration=$env:Configuration 
