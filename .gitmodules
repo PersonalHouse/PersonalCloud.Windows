@@ -1,9 +1,9 @@
 [submodule "PersonalCloud.Core"]
 	path = PersonalCloud.Core
 	url = https://github.com/Personal-Cloud/PersonalCloud.git
-[submodule "PersonalCloud.DokanFS"]
-	path = PersonalCloud.DokanFS
-	url = https://github.com/Personal-Cloud/DokanFS.git
 [submodule "PersonalCloud.Apps.Common"]
 	path = PersonalCloud.Apps.Common
 	url = https://github.com/Personal-Cloud/Apps.Common.git
+[submodule "DokanFS"]
+	path = DokanFS
+	url = https://github.com/Personal-Cloud/DokanFS.git

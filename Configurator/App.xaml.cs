@@ -5,6 +5,9 @@ using Hardcodet.Wpf.TaskbarNotification;
 
 using JKang.IpcServiceFramework;
 
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Microsoft.Extensions.DependencyInjection;
 
 using Unishare.Apps.WindowsConfigurator.IPC;
@@ -20,6 +23,12 @@ namespace Unishare.Apps.WindowsConfigurator
         public TaskbarIcon TrayIcon { get; private set; }
 
         private CancellationTokenSource runners;
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            AppCenter.Start("b3c9ef09-9572-4eab-bb3c-33e203d862ea", typeof(Analytics), typeof(Crashes));
+        }
 
         private void OnApplicationStarted(object sender, StartupEventArgs e)
         {
