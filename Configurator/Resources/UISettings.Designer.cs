@@ -106,16 +106,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 通过邀请码将其它设备加入个人云.
-        /// </summary>
-        public static string CloudInviteNone {
-            get {
-                return ResourceManager.GetString("CloudInviteNone", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 生成邀请码.
+        ///   Looks up a localized string similar to 邀请其它设备加入.
         /// </summary>
         public static string CloudInviteStart {
             get {
@@ -133,7 +124,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 退出 / 切换个人云.
+        ///   Looks up a localized string similar to 离开个人云.
         /// </summary>
         public static string CloudLeave {
             get {

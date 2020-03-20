@@ -132,17 +132,14 @@
   <data name="CloudInviteError" xml:space="preserve">
     <value>Cannot generate invitation.</value>
   </data>
-  <data name="CloudInviteNone" xml:space="preserve">
-    <value>Generate an invitation to add other devices.</value>
-  </data>
   <data name="CloudInviteStart" xml:space="preserve">
-    <value>Generate</value>
+    <value>Generate Invite for Other Devices</value>
   </data>
   <data name="CloudInviteStop" xml:space="preserve">
     <value>Stop</value>
   </data>
   <data name="CloudLeave" xml:space="preserve">
-    <value>LEAVE / SWITCH PERSONAL CLOUD</value>
+    <value>Leave Personal Cloud</value>
   </data>
   <data name="CloudName" xml:space="preserve">
     <value>Cloud Name</value>
@@ -154,7 +151,7 @@
     <value>Personal Cloud Configurator</value>
   </data>
   <data name="DeveloperExit" xml:space="preserve">
-    <value>Quit</value>
+    <value>Quit Configurator</value>
   </data>
   <data name="DeveloperRestartService" xml:space="preserve">
     <value>Restart Windows Service</value>

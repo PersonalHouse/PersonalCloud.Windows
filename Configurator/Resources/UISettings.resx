@@ -132,17 +132,14 @@
   <data name="CloudInviteError" xml:space="preserve">
     <value>无法生成个人云邀请码</value>
   </data>
-  <data name="CloudInviteNone" xml:space="preserve">
-    <value>通过邀请码将其它设备加入个人云</value>
-  </data>
   <data name="CloudInviteStart" xml:space="preserve">
-    <value>生成邀请码</value>
+    <value>邀请其它设备加入</value>
   </data>
   <data name="CloudInviteStop" xml:space="preserve">
     <value>停止邀请</value>
   </data>
   <data name="CloudLeave" xml:space="preserve">
-    <value>退出 / 切换个人云</value>
+    <value>离开个人云</value>
   </data>
   <data name="CloudName" xml:space="preserve">
     <value>云名称</value>

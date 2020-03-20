@@ -3,7 +3,10 @@ using System.Collections.Concurrent;
 using System.IO;
 using System.Threading;
 
+using DokanFS;
+
 using DokanNet;
+using DokanNet.Logging;
 
 using JKang.IpcServiceFramework;
 
@@ -44,23 +47,7 @@ namespace Unishare.Apps.WindowsService
             Globals.Database.CreateTable<NodeModel>();
             Globals.Database.CreateTable<DiskModel>();
 
-            if (Globals.Database.CheckSetting(UserSettings.EnableSharing, "1"))
-            {
-                var sharedPath = Globals.Database.LoadSetting(UserSettings.SharingRoot);
-                if (string.IsNullOrEmpty(sharedPath) || !Directory.Exists(sharedPath))
-                {
-                    Globals.Database.Delete<KeyValueModel>(UserSettings.SharingRoot);
-                    Globals.Database.SaveSetting(UserSettings.EnableSharing, "0");
-                    sharedPath = null;
-                }
-
-                Globals.CloudFileSystem = new VirtualFileSystem(sharedPath);
-            }
-            else
-            {
-                Globals.CloudFileSystem = new VirtualFileSystem(null);
-            }
-
+            Globals.CloudFileSystem = new VirtualFileSystem(null);
             Globals.CloudConfig = new WindowsDataStorage();
 
             Globals.Volumes = new ConcurrentDictionary<Guid, AsyncContextThread>();
@@ -92,6 +79,23 @@ namespace Unishare.Apps.WindowsService
             Globals.PopupPresenter = new IpcServiceClientBuilder<IPopupPresenter>().UseNamedPipe(Pipes.Messenger).Build();
             Globals.NotificationCenter = new IpcServiceClientBuilder<ICloudEventHandler>().UseNamedPipe(Pipes.NotificationCenter).Build();
 
+            #region Restore last-known state of File Sharing
+
+            if (Globals.Database.CheckSetting(UserSettings.EnableSharing, "1"))
+            {
+                var sharedPath = Globals.Database.LoadSetting(UserSettings.SharingRoot);
+                if (string.IsNullOrEmpty(sharedPath) || !Directory.Exists(sharedPath))
+                {
+                    Globals.Database.Delete<KeyValueModel>(UserSettings.SharingRoot);
+                    Globals.Database.SaveSetting(UserSettings.EnableSharing, "0");
+                    sharedPath = null;
+                }
+
+                Globals.CloudFileSystem.RootPath = sharedPath;
+            }
+
+            #endregion Restore last-known state of File Sharing
+
             Globals.CloudService = new PCLocalService(Globals.CloudConfig, new LoggerFactory(), Globals.CloudFileSystem);
             Globals.CloudService.OnError += (o, e) => {
                 if (e.ErrorCode == ErrorCode.NeedUpdate)
@@ -99,6 +103,35 @@ namespace Unishare.Apps.WindowsService
             };
             Globals.CloudService.StartService();
             _ = Globals.NotificationCenter.InvokeAsync(x => x.OnServiceStarted());
+
+            #region Restore last-known state of Network Drives
+
+            if (Globals.Database.CheckSetting(WindowsUserSettings.EnableVolumeMounting, "1"))
+            {
+
+                foreach (var cloud in Globals.CloudService.PersonalClouds)
+                {
+                    var cloudId = new Guid(cloud.Id);
+                    var mountPoint = Globals.Database.GetMountPoint(cloudId);
+
+                    var dokanThread = new AsyncContextThread();
+                    dokanThread.Factory.Run(() => {
+                        try
+                        {
+                            var disk = new DokanFileSystemAdapter(new PersonalCloudRootFileSystem(cloud));
+                            disk.Mount(mountPoint, DokanOptions.EnableNotificationAPI, 5, new NullLogger());
+                        }
+                        catch (Exception exception)
+                        {
+                            _ = Globals.NotificationCenter.InvokeAsync(x => x.OnVolumeIOError(mountPoint, exception));
+                        }
+                    });
+
+                    Globals.Volumes[cloudId] = dokanThread;
+                }
+            }
+
+            #endregion
 
             return true;
         }

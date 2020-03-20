@@ -16,10 +16,18 @@ namespace Unishare.Apps.WindowsService
         {
             Console.WriteLine("Personal Cloud service started.");
 
+            #region Library Architecture
+
+            // Load DLL according to process architecture.
             var appPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var is64Bit = Environment.Is64BitOperatingSystem && Environment.Is64BitProcess;
+            var is64Bit = Environment.Is64BitOperatingSystem
+                          // Comment out ONLY the next line to use CPU architecture.
+                          && Environment.Is64BitProcess
+                          ;
             var libFolder = !is64Bit ? "x86" : "x64";
             SetDllDirectory(Path.Combine(appPath, libFolder));
+
+            #endregion Library Architecture
 
             var rc = HostFactory.Run(x => {
                 x.Service<PersonalCloudWindowsService>();
@@ -30,6 +38,7 @@ namespace Unishare.Apps.WindowsService
                 x.SetDisplayName("Personal Cloud");
 
                 x.EnableServiceRecovery(service => service.RestartService(1));
+                x.StartAutomaticallyDelayed();
             });
 
             var exitCode = (int) Convert.ChangeType(rc, rc.GetTypeCode());

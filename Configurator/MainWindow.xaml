@@ -9,7 +9,8 @@
         SizeToContent="WidthAndHeight"
         ResizeMode="CanMinimize">
 
-    <Grid Margin="5">
+    <Grid Margin="5"
+          MinWidth="400">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -18,41 +19,6 @@
         </Grid.RowDefinitions>
 
         <GroupBox Grid.Row="0"
-                  Margin="5"
-                  Padding="5"
-                  Header="{x:Static resx:UISettings.FileSharing}">
-
-            <StackPanel Orientation="Vertical">
-                <DockPanel>
-                    <CheckBox x:Name="SharingSwitch"
-                              DockPanel.Dock="Right"
-                              Checked="OnSharingChecked"
-                              Unchecked="OnSharingUnchecked" />
-
-                    <TextBlock Text="{x:Static resx:UISettings.FileSharingMasterSwitch}"
-                               VerticalAlignment="Center" />
-                </DockPanel>
-
-                <Separator Margin="0, 5" />
-
-                <TextBlock Text="{x:Static resx:UISettings.FileSharingPath}" />
-
-                <DockPanel>
-                    <Button DockPanel.Dock="Right"
-                            Margin="10, 0, 0, 0"
-                            Padding="5"
-                            Content="{x:Static resx:UISettings.FileSharingPathSelect}"
-                            Click="OnChangePathClicked" />
-                    <TextBox x:Name="SharingPathBox"
-                             Padding="2"
-                             IsReadOnly="True"
-                             MaxLines="1"
-                             VerticalAlignment="Center" />
-                </DockPanel>
-            </StackPanel>
-        </GroupBox>
-
-        <GroupBox Grid.Row="1"
                   Header="{x:Static resx:UISettings.Cloud}"
                   Margin="5"
                   Padding="5">
@@ -89,26 +55,47 @@
 
                 <Separator Margin="0, 5" />
 
+                <Button DockPanel.Dock="Right"
+                        Padding="5"
+                        MaxWidth="300"
+                        Content="{x:Static resx:UISettings.CloudInviteStart}"
+                        FontWeight="DemiBold"
+                        Click="OnInviteClicked" />
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Grid.Row="1"
+                  Margin="5, 15"
+                  Padding="5"
+                  Header="{x:Static resx:UISettings.FileSharing}">
+
+            <StackPanel Orientation="Vertical">
                 <DockPanel>
-                    <Button DockPanel.Dock="Right"
-                            Margin="10, 0, 0, 0"
-                            Padding="5"
-                            Content="{x:Static resx:UISettings.CloudInviteStart}"
-                            Click="OnInviteClicked" />
-                    <TextBlock DockPanel.Dock="Left"
-                               Text="{x:Static resx:UISettings.CloudInviteNone}"
+                    <CheckBox x:Name="SharingSwitch"
+                              DockPanel.Dock="Right"
+                              Checked="OnSharingChecked"
+                              Unchecked="OnSharingUnchecked" />
+
+                    <TextBlock Text="{x:Static resx:UISettings.FileSharingMasterSwitch}"
                                VerticalAlignment="Center" />
                 </DockPanel>
 
                 <Separator Margin="0, 5" />
 
-                <Button Margin="10, 5, 0, 0"
-                        Padding="5"
-                        HorizontalAlignment="Center"
-                        MinWidth="250"
-                        Content="{x:Static resx:UISettings.CloudLeave}"
-                        Foreground="Red"
-                        Click="OnLeaveClicked" />
+                <TextBlock Text="{x:Static resx:UISettings.FileSharingPath}" />
+
+                <DockPanel>
+                    <Button DockPanel.Dock="Right"
+                            Margin="10, 0, 0, 0"
+                            Padding="5"
+                            Content="{x:Static resx:UISettings.FileSharingPathSelect}"
+                            Click="OnChangePathClicked" />
+                    <TextBox x:Name="SharingPathBox"
+                             Padding="2"
+                             IsReadOnly="True"
+                             MaxLines="1"
+                             VerticalAlignment="Center" />
+                </DockPanel>
             </StackPanel>
         </GroupBox>
 
@@ -133,13 +120,9 @@
                 <DockPanel>
                     <ComboBox x:Name="MountedCloudDrive"
                               DockPanel.Dock="Right"
-                              SelectedIndex="0"
-                              SelectionChanged="OnMountPointChanged">
-                        <ComboBoxItem Content="—" />
-                        <ComboBoxItem Content="N" />
-                        <ComboBoxItem Content="P" />
-                        <ComboBoxItem Content="Z" />
-                    </ComboBox>
+                              MinWidth="50"
+                              HorizontalContentAlignment="Center"
+                              SelectionChanged="OnMountPointChanged" />
 
                     <TextBlock x:Name="MountedCloudName"
                                DockPanel.Dock="Left"
@@ -169,8 +152,10 @@
                     Padding="5"
                     Margin="5, 0, 0, 0"
                     HorizontalAlignment="Center"
-                    Content="{x:Static resx:UISettings.DeveloperExit}"
-                    Click="OnQuitClicked"/>
+                    Foreground="Red"
+                    FontWeight="DemiBold"
+                    Content="{x:Static resx:UISettings.CloudLeave}"
+                    Click="OnLeaveClicked" />
         </StackPanel>
     </Grid>
 </Window>

@@ -8,133 +8,119 @@
         WindowStartupLocation="CenterScreen"
         SizeToContent="WidthAndHeight"
         ResizeMode="CanMinimize">
-    <Grid Margin="10">
+    <Grid Margin="10"
+          MinWidth="350">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="10" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="20" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="10" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="10" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="10" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="30" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="20" />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Row="0"
                    Grid.ColumnSpan="3"
                    Text="{x:Static resx:UILanding.Welcome}"
-                   FontSize="24"
-                   HorizontalAlignment="Center" />
-
-        <TextBlock Grid.Row="2"
-                   Grid.ColumnSpan="3"
-                   Text="{x:Static resx:UILanding.WelcomeHint}"
                    FontSize="18"
                    HorizontalAlignment="Center" />
 
-        <TextBlock Grid.Row="4"
-                   Text="{x:Static resx:UILanding.CreateCloudHint}"
-                   MinWidth="300" />
+        <Expander Grid.Row="2"
+                  x:Name="CreateSectionExpander"
+                  FlowDirection="RightToLeft"
+                  IsExpanded="True"
+                  Expanded="OnExpanded">
+            <Expander.Header>
+                <TextBlock FlowDirection="LeftToRight"
+                           VerticalAlignment="Center"
+                           Text="{x:Static resx:UILanding.CreateCloudHint}" />
+            </Expander.Header>
 
-        <DockPanel Grid.Row="6">
-            <TextBlock DockPanel.Dock="Left"
-                       Margin="0, 0, 5, 0"
-                       Text="{x:Static resx:UILanding.CloudName}"
-                       MinWidth="100"
-                       VerticalAlignment="Center" />
+            <StackPanel Margin="10"
+                        Orientation="Vertical"
+                        FlowDirection="LeftToRight">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Left"
+                               Margin="0, 0, 5, 0"
+                               Text="{x:Static resx:UILanding.CloudName}"
+                               MinWidth="120"
+                               VerticalAlignment="Center" />
 
-            <TextBox x:Name="CreateCloudNameBox"
-                     Padding="2"
-                     MaxLines="1"
-                     VerticalAlignment="Center" />
-        </DockPanel>
-        
-        <DockPanel Grid.Row="8">
-            <TextBlock DockPanel.Dock="Left"
-                       Margin="0, 0, 5, 0"
-                       Text="{x:Static resx:UILanding.DeviceName}"
-                       MinWidth="100"
-                       VerticalAlignment="Center" />
+                    <TextBox x:Name="CreateCloudNameBox"
+                             Padding="2"
+                             MaxLines="1"
+                             VerticalAlignment="Center" />
+                </DockPanel>
 
-            <TextBox x:Name="CreateDeviceNameBox"
-                     Padding="2"
-                     MaxLines="1"
-                     VerticalAlignment="Center" />
-        </DockPanel>
+                <DockPanel Margin="0, 5">
+                    <TextBlock DockPanel.Dock="Left"
+                               Margin="0, 0, 5, 0"
+                               Text="{x:Static resx:UILanding.DeviceName}"
+                               MinWidth="120"
+                               VerticalAlignment="Center" />
 
-        <Button x:Name="CreateButton"
-            Grid.Row="10"
-                Padding="5"
-                MaxWidth="250"
-                Content="{x:Static resx:UILanding.CreateCloud}"
-                Click="OnCreateClicked"/>
+                    <TextBox x:Name="CreateDeviceNameBox"
+                             Padding="2"
+                             MaxLines="1"
+                             VerticalAlignment="Center" />
+                </DockPanel>
 
-        <StackPanel Grid.Row="4"
-                    Grid.Column="1"
-                    Grid.RowSpan="7"
-                    Orientation="Horizontal"
-                    HorizontalAlignment="Center">
-            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
-        </StackPanel>
+                <Button x:Name="CreateButton"
+                        Margin="0, 5, 0, 0"
+                        Padding="5"
+                        MaxWidth="250"
+                        Content="{x:Static resx:UILanding.CreateCloud}"
+                        Click="OnCreateClicked" />
+            </StackPanel>
+        </Expander>
 
-        <TextBlock Grid.Row="4"
-                   Grid.Column="2"
-                   Text="{x:Static resx:UILanding.JoinCloudHint}"
-                   MinWidth="300" />
+        <Expander Grid.Row="4"
+                  x:Name="JoinSectionExpander"
+                  FlowDirection="RightToLeft"
+                  Expanded="OnExpanded">
+            <Expander.Header>
+                <TextBlock FlowDirection="LeftToRight"
+                           VerticalAlignment="Center"
+                           Text="{x:Static resx:UILanding.JoinCloudHint}" />
+            </Expander.Header>
 
-        <DockPanel Grid.Row="6"
-                   Grid.Column="2">
-            <TextBlock DockPanel.Dock="Left"
-                       Margin="0, 0, 5, 0"
-                       Text="{x:Static resx:UILanding.DeviceName}"
-                       MinWidth="120"
-                       VerticalAlignment="Center" />
+            <StackPanel Margin="10"
+                        Orientation="Vertical"
+                        FlowDirection="LeftToRight">
 
-            <TextBox x:Name="JoinDeviceNameBox"
-                     Padding="2"
-                     MaxLines="1"
-                     VerticalAlignment="Center" />
-        </DockPanel>
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Left"
+                               Margin="0, 0, 5, 0"
+                               Text="{x:Static resx:UILanding.DeviceName}"
+                               MinWidth="120"
+                               VerticalAlignment="Center" />
 
-        <DockPanel Grid.Row="8"
-                   Grid.Column="2">
-            <TextBlock DockPanel.Dock="Left"
-                       Margin="0, 0, 5, 0"
-                       Text="{x:Static resx:UILanding.Invitation}"
-                       MinWidth="120"
-                       VerticalAlignment="Center" />
+                    <TextBox x:Name="JoinDeviceNameBox"
+                             Padding="2"
+                             MaxLines="1"
+                             VerticalAlignment="Center" />
+                </DockPanel>
 
-            <TextBox x:Name="JoinInvitationBox"
-                     Padding="2"
-                     MaxLines="1"
-                     MaxLength="4"
-                     VerticalAlignment="Center" />
-        </DockPanel>
+                <DockPanel Margin="0, 5">
+                    <TextBlock DockPanel.Dock="Left"
+                               Margin="0, 0, 5, 0"
+                               Text="{x:Static resx:UILanding.Invitation}"
+                               MinWidth="120"
+                               VerticalAlignment="Center" />
 
-        <Button x:Name="JoinButton"
-            Grid.Row="10"
-                Grid.Column="2"
-                Padding="5"
-                MaxWidth="250"
-                Content="{x:Static resx:UILanding.JoinCloud}"
-                Click="OnJoinClicked"/>
+                    <TextBox x:Name="JoinInvitationBox"
+                             Padding="2"
+                             MaxLines="1"
+                             MaxLength="4"
+                             VerticalAlignment="Center" />
+                </DockPanel>
 
-        <Button Grid.Row="12"
-                Grid.ColumnSpan="3"
-                Padding="5"
-                MaxWidth="250"
-                Content="{x:Static resx:UILanding.Exit}"
-                Click="OnQuitClicked"/>
+                <Button x:Name="JoinButton"
+                        Margin="0, 5, 0, 0"
+                        Padding="5"
+                        MaxWidth="250"
+                        Content="{x:Static resx:UILanding.JoinCloud}"
+                        Click="OnJoinClicked" />
+            </StackPanel>
+        </Expander>
     </Grid>
 </Window>

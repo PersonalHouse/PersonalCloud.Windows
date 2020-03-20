@@ -10,6 +10,7 @@ using DokanNet.Logging;
 using Nito.AsyncEx;
 
 using Unishare.Apps.Common;
+using Unishare.Apps.Common.Models;
 using Unishare.Apps.WindowsContract;
 using Unishare.Apps.WindowsService.Data;
 
@@ -59,8 +60,21 @@ namespace Unishare.Apps.WindowsService.IPC
 
             var cloud = Globals.CloudService.CreatePersonalCloud(cloudName, deviceName).Result;
             Globals.Database.SaveSetting(UserSettings.DeviceName, deviceName);
+
+            var cloudId = new Guid(cloud.Id);
+
+            #region Auto Mount
+
+            // Todo: Check for Dokany readiness?
+
+            var connectedDrives = DriveInfo.GetDrives().Select(x => x.Name[0]);
+            var availableLetter = Algorithms.LowestMissingLetter(connectedDrives);
+            if (availableLetter != char.MinValue) MountNetworkDrive(cloudId, availableLetter + @":\");
+
+            #endregion Auto Mount
+
             _ = Globals.NotificationCenter.InvokeAsync(x => x.OnPersonalCloudAdded());
-            return new Guid(cloud.Id);
+            return cloudId;
         }
 
         public Guid? JoinPersonalCloud(string invite, string deviceName)
@@ -75,14 +89,30 @@ namespace Unishare.Apps.WindowsService.IPC
 
             var cloud = Globals.CloudService.JoinPersonalCloud(code, deviceName).Result;
             Globals.Database.SaveSetting(UserSettings.DeviceName, deviceName);
+
+            var cloudId = new Guid(cloud.Id);
+
+            #region Auto Mount
+
+            // Todo: Check for Dokany readiness?
+
+            var connectedDrives = DriveInfo.GetDrives().Select(x => x.Name[0]);
+            var availableLetter = Algorithms.LowestMissingLetter(connectedDrives);
+            if (availableLetter != char.MinValue) MountNetworkDrive(cloudId, availableLetter + @":\");
+
+            #endregion Auto Mount
+
             _ = Globals.NotificationCenter.InvokeAsync(x => x.OnPersonalCloudAdded());
-            return new Guid(cloud.Id);
+            return cloudId;
         }
 
         public void LeavePersonalCloud(Guid id)
         {
             var cloud = Globals.CloudService.PersonalClouds.First(x => new Guid(x.Id) == id);
             Globals.CloudService.ExitFromCloud(cloud);
+
+            Globals.Database.Delete<CloudModel>(id);
+            Globals.Database.Delete<DiskModel>(id);
 
             _ = Globals.NotificationCenter.InvokeAsync(x => x.OnLeftPersonalCloud());
         }

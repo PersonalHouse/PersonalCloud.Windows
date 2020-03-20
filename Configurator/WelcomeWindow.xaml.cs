@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,14 +13,20 @@ namespace Unishare.Apps.WindowsConfigurator
 {
     public partial class WelcomeWindow : Window
     {
+        private bool initialized;
+
         public WelcomeWindow()
         {
             InitializeComponent();
-            FontFamily = new FontFamily("Microsoft YaHei UI");
+            if (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "zh") FontFamily = new FontFamily("Microsoft YaHei UI");
+
+            initialized = true;
         }
 
         private void OnCreateClicked(object sender, RoutedEventArgs e)
         {
+            if (!initialized) return;
+
             var deviceName = CreateDeviceNameBox.Text;
             foreach (var c in deviceName)
             {
@@ -69,6 +76,8 @@ namespace Unishare.Apps.WindowsConfigurator
 
         private void OnJoinClicked(object sender, RoutedEventArgs e)
         {
+            if (!initialized) return;
+
             var deviceName = JoinDeviceNameBox.Text;
             foreach (var c in deviceName)
             {
@@ -116,9 +125,12 @@ namespace Unishare.Apps.WindowsConfigurator
             });
         }
 
-        private void OnQuitClicked(object sender, RoutedEventArgs e)
+        private void OnExpanded(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            if (!initialized) return;
+
+            if (sender == CreateSectionExpander) JoinSectionExpander.IsExpanded = false;
+            else if (sender == JoinSectionExpander) CreateSectionExpander.IsExpanded = false;
         }
     }
 }
