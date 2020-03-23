@@ -14,7 +14,6 @@
   <ItemGroup>
     <PackageReference Include="DokanNet" Version="1.3.0" />
     <PackageReference Include="JKang.IpcServiceFramework.Client" Version="2.3.1" />
-    <PackageReference Include="JKang.IpcServiceFramework.Server" Version="2.3.1" />
     <PackageReference Include="Nito.AsyncEx.Context" Version="5.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="1.1.14" />
@@ -22,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\IpcServiceFramework\src\JKang.IpcServiceFramework.Server\JKang.IpcServiceFramework.Server.csproj" />
     <ProjectReference Include="..\Contract\Apps.WindowsContract.csproj" />
     <ProjectReference Include="..\DokanFS.PersonalCloud\DokanFS.PersonalCloud.csproj" />
     <ProjectReference Include="..\PersonalCloud.Apps.Common\Apps.Common.csproj" />
