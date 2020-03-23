@@ -7,3 +7,6 @@
 [submodule "DokanFS"]
 	path = DokanFS
 	url = https://github.com/Personal-Cloud/DokanFS.git
+[submodule "IpcServiceFramework"]
+	path = IpcServiceFramework
+	url = https://github.com/Personal-Cloud/IpcServiceFramework.git
