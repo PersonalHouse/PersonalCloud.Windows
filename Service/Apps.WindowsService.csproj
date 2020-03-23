@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\IpcServiceFramework\src\JKang.IpcServiceFramework.Server\JKang.IpcServiceFramework.Server.csproj" />
+    <ProjectReference Include="..\IpcServiceFramework\src\JKang.IpcServiceFramework.Server\JKang.IpcServiceFramework.Server.csproj" />
     <ProjectReference Include="..\Contract\Apps.WindowsContract.csproj" />
     <ProjectReference Include="..\DokanFS.PersonalCloud\DokanFS.PersonalCloud.csproj" />
     <ProjectReference Include="..\PersonalCloud.Apps.Common\Apps.Common.csproj" />

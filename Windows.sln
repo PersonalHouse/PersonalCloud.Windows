@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DokanFS.Core", "DokanFS\Sou
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DokanFS.PersonalCloud", "DokanFS.PersonalCloud\DokanFS.PersonalCloud.csproj", "{854D6C5C-F833-4440-9057-2557C3BB8185}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JKang.IpcServiceFramework.Server", "..\IpcServiceFramework\src\JKang.IpcServiceFramework.Server\JKang.IpcServiceFramework.Server.csproj", "{DFEDEB08-65BE-4C5D-AE24-E7B731924B66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JKang.IpcServiceFramework.Server", "IpcServiceFramework\src\JKang.IpcServiceFramework.Server\JKang.IpcServiceFramework.Server.csproj", "{DFEDEB08-65BE-4C5D-AE24-E7B731924B66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +75,7 @@ Global
 		{4FB0FDA6-8593-40C3-98AD-B5B94F5C17B1} = {45225AC0-A5CF-4AD8-8827-2447791A5225}
 		{B2D078B3-95C2-4A67-844C-8C393D689734} = {45225AC0-A5CF-4AD8-8827-2447791A5225}
 		{854D6C5C-F833-4440-9057-2557C3BB8185} = {45225AC0-A5CF-4AD8-8827-2447791A5225}
+		{DFEDEB08-65BE-4C5D-AE24-E7B731924B66} = {45225AC0-A5CF-4AD8-8827-2447791A5225}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C56E5B9B-DB07-4FA1-B3C0-20F7EAC5C1C1}
