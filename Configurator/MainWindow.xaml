@@ -55,12 +55,28 @@
 
                 <Separator Margin="0, 5" />
 
-                <Button DockPanel.Dock="Right"
-                        Padding="5"
-                        MaxWidth="300"
-                        Content="{x:Static resx:UISettings.CloudInviteStart}"
-                        FontWeight="DemiBold"
-                        Click="OnInviteClicked" />
+                <StackPanel DockPanel.Dock="Right"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right">
+
+                    <Button Padding="5"
+                            Content="{x:Static resx:UISettings.CloudAddService}"
+                            Click="OnConnectToStorageClicked" />
+
+                    <Button Padding="5"
+                            Margin="5, 0, 0, 0"
+                            Content="{x:Static resx:UISettings.CloudInviteStart}"
+                            Click="OnInviteClicked" />
+
+                </StackPanel>
+
+                <Separator Margin="0, 5" />
+
+                <Button Padding="5"
+                        HorizontalAlignment="Right"
+                        MinWidth="100"
+                        Content="{x:Static resx:UISettings.ConfigureApps}"
+                        Click="OnEditExtensionsClicked" />
             </StackPanel>
         </GroupBox>
 
@@ -142,16 +158,12 @@
                     Orientation="Horizontal"
                     HorizontalAlignment="Right">
 
-            <Button Grid.Column="0"
-                    Padding="5"
-                    HorizontalAlignment="Center"
+            <Button Padding="5"
                     IsEnabled="False"
                     Content="{x:Static resx:UISettings.DeveloperRestartService}" />
 
-            <Button Grid.Column="4"
-                    Padding="5"
+            <Button Padding="5"
                     Margin="5, 0, 0, 0"
-                    HorizontalAlignment="Center"
                     Foreground="Red"
                     FontWeight="DemiBold"
                     Content="{x:Static resx:UISettings.CloudLeave}"

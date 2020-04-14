@@ -178,5 +178,17 @@ namespace Unishare.Apps.WindowsConfigurator
         {
             Application.Current.Shutdown();
         }
+
+        private void OnConnectToStorageClicked(object sender, RoutedEventArgs e)
+        {
+            var child = new ConnectionsWindow();
+            child.ShowDialog();
+        }
+
+        private void OnEditExtensionsClicked(object sender, RoutedEventArgs e)
+        {
+            var child = new ExtensionsWindow();
+            child.ShowDialog();
+        }
     }
 }

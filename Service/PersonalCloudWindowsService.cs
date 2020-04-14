@@ -46,6 +46,7 @@ namespace Unishare.Apps.WindowsService
             Globals.Database.CreateTable<CloudModel>();
             Globals.Database.CreateTable<NodeModel>();
             Globals.Database.CreateTable<DiskModel>();
+            Globals.Database.CreateTable<AliYunOSS>();
 
             Globals.CloudFileSystem = new VirtualFileSystem(null);
             Globals.CloudConfig = new WindowsDataStorage();

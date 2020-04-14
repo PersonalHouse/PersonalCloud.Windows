@@ -8,7 +8,7 @@ using DokanNet;
 using DokanNet.Logging;
 
 using Nito.AsyncEx;
-
+using NSPersonalCloud.FileSharing.Aliyun;
 using Unishare.Apps.Common;
 using Unishare.Apps.Common.Models;
 using Unishare.Apps.WindowsContract;
@@ -127,6 +127,19 @@ namespace Unishare.Apps.WindowsService.IPC
         {
             if (id == null) Globals.CloudService.StopSharePersonalCloud(Globals.CloudService.PersonalClouds[0]).Wait();
             else Globals.CloudService.StopSharePersonalCloud(Globals.CloudService.PersonalClouds.First(x => new Guid(x.Id) == id)).Wait();
+        }
+
+        public void ConnectToAlibabaCloud(string name, OssConfig config)
+        {
+            // Hack!
+            Globals.Database.Insert(config.ToModel(name));
+            Globals.CloudService.PersonalClouds[0].RootFS.ClientList[name] = new AliyunOSSFileSystemClient(config);
+        }
+
+        public string[] GetConnectedServices()
+        {
+            // Hack!
+            return Globals.Database.Table<AliYunOSS>().Select(x => x.Name).ToArray();
         }
 
         #endregion ICloudManager

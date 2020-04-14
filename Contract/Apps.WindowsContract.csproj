@@ -5,4 +5,8 @@
     <RootNamespace>Unishare.Apps.WindowsContract</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PersonalCloud.Core\src\PersonalCloud\PersonalCloud.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -88,6 +88,15 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 配置第三方服务.
+        /// </summary>
+        public static string CloudAddService {
+            get {
+                return ResourceManager.GetString("CloudAddService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 设备名称.
         /// </summary>
         public static string CloudDeviceName {
@@ -106,7 +115,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 邀请其它设备加入.
+        ///   Looks up a localized string similar to 添加设备.
         /// </summary>
         public static string CloudInviteStart {
             get {
@@ -156,6 +165,15 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         public static string Configurator {
             get {
                 return ResourceManager.GetString("Configurator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 配置个人云扩展功能.
+        /// </summary>
+        public static string ConfigureApps {
+            get {
+                return ResourceManager.GetString("ConfigureApps", resourceCulture);
             }
         }
         

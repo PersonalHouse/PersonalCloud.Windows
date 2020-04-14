@@ -126,6 +126,9 @@
   <data name="Cloud" xml:space="preserve">
     <value>Personal Cloud</value>
   </data>
+  <data name="CloudAddService" xml:space="preserve">
+    <value>Manage Connections</value>
+  </data>
   <data name="CloudDeviceName" xml:space="preserve">
     <value>Device Name</value>
   </data>
@@ -133,7 +136,7 @@
     <value>Cannot generate invitation.</value>
   </data>
   <data name="CloudInviteStart" xml:space="preserve">
-    <value>Generate Invite for Other Devices</value>
+    <value>Add A Device</value>
   </data>
   <data name="CloudInviteStop" xml:space="preserve">
     <value>Stop</value>

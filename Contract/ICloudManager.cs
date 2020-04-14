@@ -1,4 +1,5 @@
 ﻿using System;
+using NSPersonalCloud.FileSharing.Aliyun;
 
 namespace Unishare.Apps.WindowsContract
 {
@@ -55,5 +56,9 @@ namespace Unishare.Apps.WindowsContract
         /// </summary>
         /// <param name="id">(Optional) GUID of a target cloud to observe change. If not specified, the first cloud is used.</param>
         void StopBroadcastingInvitation(Guid? id);
+
+        void ConnectToAlibabaCloud(string name, OssConfig config);
+
+        string[] GetConnectedServices();
     }
 }

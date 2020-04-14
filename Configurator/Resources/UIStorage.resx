@@ -117,70 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AlertInvalidDeviceName" xml:space="preserve">
-    <value>设备名称无效</value>
+  <data name="Add" xml:space="preserve">
+    <value>添加</value>
   </data>
-  <data name="AlertInvalidDeviceNameMessage" xml:space="preserve">
-    <value>请使用简短的名称，尽量不与其它设备重复，且尽量不包含特殊字符。</value>
+  <data name="AliYunAccessID" xml:space="preserve">
+    <value>用户 ID</value>
   </data>
-  <data name="Cloud" xml:space="preserve">
-    <value>个人云</value>
+  <data name="AliYunAccessKey" xml:space="preserve">
+    <value>访问密钥</value>
   </data>
-  <data name="CloudAddService" xml:space="preserve">
+  <data name="AliYunBucket" xml:space="preserve">
+    <value>存储空间</value>
+  </data>
+  <data name="AliYunConnectionName" xml:space="preserve">
+    <value>服务名称</value>
+  </data>
+  <data name="AliYunEndpoint" xml:space="preserve">
+    <value>域名</value>
+  </data>
+  <data name="ConnectToStorage" xml:space="preserve">
+    <value>添加第三方服务</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="ManageConnections" xml:space="preserve">
     <value>配置第三方服务</value>
   </data>
-  <data name="CloudDeviceName" xml:space="preserve">
-    <value>设备名称</value>
+  <data name="ProviderAliYun" xml:space="preserve">
+    <value>阿里云</value>
   </data>
-  <data name="CloudInviteError" xml:space="preserve">
-    <value>无法生成个人云邀请码</value>
+  <data name="SaveAndClose" xml:space="preserve">
+    <value>保存</value>
   </data>
-  <data name="CloudInviteStart" xml:space="preserve">
-    <value>添加设备</value>
+  <data name="SavedStorageConnections" xml:space="preserve">
+    <value>已保存的凭据</value>
   </data>
-  <data name="CloudInviteStop" xml:space="preserve">
-    <value>停止邀请</value>
+  <data name="StorageProvider" xml:space="preserve">
+    <value>存储提供商</value>
   </data>
-  <data name="CloudLeave" xml:space="preserve">
-    <value>离开个人云</value>
-  </data>
-  <data name="CloudName" xml:space="preserve">
-    <value>云名称</value>
-  </data>
-  <data name="CloudSaveChanges" xml:space="preserve">
-    <value>保存更改</value>
-  </data>
-  <data name="Configurator" xml:space="preserve">
-    <value>个人云控制台</value>
-  </data>
-  <data name="ConfigureApps" xml:space="preserve">
-    <value>配置个人云扩展功能</value>
-  </data>
-  <data name="DeveloperExit" xml:space="preserve">
-    <value>退出控制台</value>
-  </data>
-  <data name="DeveloperRestartService" xml:space="preserve">
-    <value>重新启动服务</value>
-  </data>
-  <data name="Explorer" xml:space="preserve">
-    <value>文件管理器插件</value>
-  </data>
-  <data name="ExplorerMasterSwitch" xml:space="preserve">
-    <value>将个人云显示为网络驱动器</value>
-  </data>
-  <data name="ExplorerMountPoint" xml:space="preserve">
-    <value>盘符</value>
-  </data>
-  <data name="FileSharing" xml:space="preserve">
-    <value>文件共享</value>
-  </data>
-  <data name="FileSharingMasterSwitch" xml:space="preserve">
-    <value>允许此设备分享文件</value>
-  </data>
-  <data name="FileSharingPath" xml:space="preserve">
-    <value>分享文件夹</value>
-  </data>
-  <data name="FileSharingPathSelect" xml:space="preserve">
-    <value>重新选择</value>
+  <data name="StorageServices" xml:space="preserve">
+    <value>在线存储服务</value>
   </data>
 </root>
