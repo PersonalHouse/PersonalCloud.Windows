@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -9,6 +10,7 @@ using DokanNet.Logging;
 
 using Nito.AsyncEx;
 using NSPersonalCloud.FileSharing.Aliyun;
+using NSPersonalCloud.Interfaces.Errors;
 using Unishare.Apps.Common;
 using Unishare.Apps.Common.Models;
 using Unishare.Apps.WindowsContract;
@@ -131,15 +133,28 @@ namespace Unishare.Apps.WindowsService.IPC
 
         public void ConnectToAlibabaCloud(string name, OssConfig config)
         {
+            // TODO: Add Cloud Id in parameters
+            string cloudId = null;
+            Globals.CloudService.AddStorageProvider(cloudId, name, config, NSPersonalCloud.StorageProviderVisibility.Private);
             // Hack!
-            Globals.Database.Insert(config.ToModel(name));
-            Globals.CloudService.PersonalClouds[0].RootFS.ClientList[name] = new AliyunOSSFileSystemClient(config);
+            //Globals.Database.Insert(config.ToModel(name));
+            //Globals.CloudService.PersonalClouds[0].RootFS.ClientList[name] = new AliyunOSSFileSystemClient(config);
         }
 
         public string[] GetConnectedServices()
         {
+            // TODO: Add Cloud Id in parameters
+            string cloudId = null;
+            try
+            {
+                return Globals.CloudService.GetStorageProviderInstances(cloudId).Select(x => x.ProviderInfo.Name).ToArray();
+            }
+            catch(NoSuchCloudException)
+            {
+                return new string[0];
+            }
             // Hack!
-            return Globals.Database.Table<AliYunOSS>().Select(x => x.Name).ToArray();
+            //return Globals.Database.Table<AliYunOSS>().Select(x => x.Name).ToArray();
         }
 
         #endregion ICloudManager

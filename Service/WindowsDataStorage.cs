@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
-
+using Newtonsoft.Json;
 using NSPersonalCloud;
 using NSPersonalCloud.Config;
-
+using NSPersonalCloud.FileSharing.Aliyun;
 using Unishare.Apps.Common;
 using Unishare.Apps.Common.Models;
 
@@ -19,11 +19,22 @@ namespace Unishare.Apps.WindowsService
         public IEnumerable<PersonalCloudInfo> LoadCloud()
         {
             var deviceName = Globals.Database.LoadSetting(UserSettings.DeviceName) ?? Environment.MachineName;
-            return Globals.Database.Table<CloudModel>().Select(x => new PersonalCloudInfo {
-                Id = x.Id.ToString("N"),
-                DisplayName = x.Name,
-                NodeDisplayName = deviceName,
-                MasterKey = Convert.FromBase64String(x.Key)
+            return Globals.Database.Table<CloudModel>().Select(x => {
+                List<StorageProviderInfo> storageProviderInfos = null;
+                try
+                {
+                    storageProviderInfos = JsonConvert.DeserializeObject<List<StorageProviderInfo>>(x.StorageProviders);
+                }
+                catch
+                {
+                    // Ignore
+                }
+                return new PersonalCloudInfo(storageProviderInfos) {
+                    Id = x.Id.ToString("N"),
+                    DisplayName = x.Name,
+                    NodeDisplayName = deviceName,
+                    MasterKey = Convert.FromBase64String(x.Key)
+                };
             });
         }
 
@@ -49,6 +60,7 @@ namespace Unishare.Apps.WindowsService
                     Id = new Guid(item.Id),
                     Name = item.DisplayName,
                     Key = Convert.ToBase64String(item.MasterKey),
+                    StorageProviders = JsonConvert.SerializeObject(item.StorageProviders),
                     Version = Definition.CloudVersion
                 });
             }
