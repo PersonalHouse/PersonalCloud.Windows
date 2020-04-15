@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -9,8 +8,11 @@ using DokanNet;
 using DokanNet.Logging;
 
 using Nito.AsyncEx;
+
+using NSPersonalCloud;
 using NSPersonalCloud.FileSharing.Aliyun;
 using NSPersonalCloud.Interfaces.Errors;
+
 using Unishare.Apps.Common;
 using Unishare.Apps.Common.Models;
 using Unishare.Apps.WindowsContract;
@@ -131,30 +133,21 @@ namespace Unishare.Apps.WindowsService.IPC
             else Globals.CloudService.StopSharePersonalCloud(Globals.CloudService.PersonalClouds.First(x => new Guid(x.Id) == id)).Wait();
         }
 
-        public void ConnectToAlibabaCloud(string name, OssConfig config)
+        public void ConnectToAlibabaCloud(Guid cloudId, string name, OssConfig config)
         {
-            // TODO: Add Cloud Id in parameters
-            string cloudId = null;
-            Globals.CloudService.AddStorageProvider(cloudId, name, config, NSPersonalCloud.StorageProviderVisibility.Private);
-            // Hack!
-            //Globals.Database.Insert(config.ToModel(name));
-            //Globals.CloudService.PersonalClouds[0].RootFS.ClientList[name] = new AliyunOSSFileSystemClient(config);
+            Globals.CloudService.AddStorageProvider(cloudId.ToString("N"), name, config, StorageProviderVisibility.Private);
         }
 
-        public string[] GetConnectedServices()
+        public string[] GetConnectedServices(Guid cloudId)
         {
-            // TODO: Add Cloud Id in parameters
-            string cloudId = null;
             try
             {
-                return Globals.CloudService.GetStorageProviderInstances(cloudId).Select(x => x.ProviderInfo.Name).ToArray();
+                return Globals.CloudService.GetStorageProviderInstances(cloudId.ToString("N")).Select(x => x.ProviderInfo.Name).ToArray();
             }
-            catch(NoSuchCloudException)
+            catch (NoSuchCloudException)
             {
-                return new string[0];
+                return Array.Empty<string>();
             }
-            // Hack!
-            //return Globals.Database.Table<AliYunOSS>().Select(x => x.Name).ToArray();
         }
 
         #endregion ICloudManager
