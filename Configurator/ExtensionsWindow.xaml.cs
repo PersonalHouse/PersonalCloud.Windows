@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+
+using NSPersonalCloud.Apps.Album;
 
 using Ookii.Dialogs.Wpf;
 
@@ -44,9 +47,21 @@ namespace Unishare.Apps.WindowsConfigurator
             {
                 var path = Path.GetFullPath(browseDialog.SelectedPath);
                 if (!Directory.Exists(path)) return;
-                if (!LibraryPaths.Contains(path)) LibraryPaths.Add(path);
 
-                // Notify applet of path changes.
+                if (LibraryPaths.Contains(path)) return;
+                LibraryPaths.Add(path);
+
+                var configs = new List<AlbumConfig>(LibraryPaths.Count);
+                foreach (var album in LibraryPaths) {
+                    var name = Path.GetFileName(album.TrimEnd(Path.DirectorySeparatorChar));
+                    var cache = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Personal Cloud", "Thumbnails", name);
+                    configs.Add(new AlbumConfig {
+                        Name = name,
+                        MediaFolder = album,
+                        ThumbnailFolder = cache
+                    });
+                }
+                Globals.CloudManager.InvokeAsync(x => x.ChangeAlbumSettings(Globals.PersonalCloud.Value, configs));
             }
         }
     }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 
+using NSPersonalCloud.Apps.Album;
 using NSPersonalCloud.FileSharing.Aliyun;
 
 namespace Unishare.Apps.WindowsContract
@@ -61,5 +63,9 @@ namespace Unishare.Apps.WindowsContract
         void ConnectToAlibabaCloud(Guid cloudId, string name, OssConfig config);
 
         string[] GetConnectedServices(Guid cloudId);
+
+        void ChangeAlbumSettings(Guid cloudId, List<AlbumConfig> settings);
+
+        List<AlbumConfig> GetAlbumSettings(Guid cloudId);
     }
 }
