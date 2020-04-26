@@ -224,6 +224,11 @@ namespace Unishare.Apps.WindowsService.IPC
             return Globals.CloudService.GetAlbumConfig(cloudId.ToString("N")).Result;
         }
 
+        public void RemoveConnection(Guid cloudId, string name)
+        {
+            Globals.CloudService.RemoveStorageProvider(cloudId.ToString("N"), name);
+        }
+
         #endregion ICloudManager
     }
 }

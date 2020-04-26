@@ -61,7 +61,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 云名称.
+        ///   Looks up a localized string similar to Cloud Name.
         /// </summary>
         public static string CloudName {
             get {
@@ -70,7 +70,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 创建个人云.
+        ///   Looks up a localized string similar to Create Personal Cloud.
         /// </summary>
         public static string CreateCloud {
             get {
@@ -79,7 +79,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 创建并将此设备加入新的个人云。.
+        ///   Looks up a localized string similar to Create new Personal Cloud and add this device to it..
         /// </summary>
         public static string CreateCloudHint {
             get {
@@ -88,7 +88,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 设备名称.
+        ///   Looks up a localized string similar to Device Name.
         /// </summary>
         public static string DeviceName {
             get {
@@ -97,7 +97,25 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 退出向导.
+        ///   Looks up a localized string similar to Unable to Create Personal Cloud.
+        /// </summary>
+        public static string ErrorCreatingCloud {
+            get {
+                return ResourceManager.GetString("ErrorCreatingCloud", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to Enroll This Device.
+        /// </summary>
+        public static string ErrorEnrollingDevice {
+            get {
+                return ResourceManager.GetString("ErrorEnrollingDevice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quit Configurator.
         /// </summary>
         public static string Exit {
             get {
@@ -106,7 +124,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 邀请码.
+        ///   Looks up a localized string similar to Invitation Code.
         /// </summary>
         public static string Invitation {
             get {
@@ -115,7 +133,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 加入已有个人云.
+        ///   Looks up a localized string similar to Join by Invitation.
         /// </summary>
         public static string JoinCloud {
             get {
@@ -124,7 +142,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 加入其它设备创建的个人云。.
+        ///   Looks up a localized string similar to Add this device to existing Personal Cloud..
         /// </summary>
         public static string JoinCloudHint {
             get {
@@ -133,7 +151,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 个人云.
+        ///   Looks up a localized string similar to Personal Cloud.
         /// </summary>
         public static string PersonalCloud {
             get {
@@ -142,7 +160,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 欢迎使用个人云.
+        ///   Looks up a localized string similar to Welcome to Personal Cloud Configurator.
         /// </summary>
         public static string Welcome {
             get {
@@ -151,7 +169,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 您的设备目前没有加入个人云，您可以…….
+        ///   Looks up a localized string similar to This device doesn not belong to any Personal Cloud. You may....
         /// </summary>
         public static string WelcomeHint {
             get {

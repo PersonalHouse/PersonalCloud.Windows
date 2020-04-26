@@ -117,19 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Applets" xml:space="preserve">
-    <value>Functions</value>
+  <data name="CloudName" xml:space="preserve">
+    <value>云名称</value>
   </data>
-  <data name="LibraryAdd" xml:space="preserve">
-    <value>Add</value>
+  <data name="CreateCloud" xml:space="preserve">
+    <value>创建个人云</value>
   </data>
-  <data name="LibraryDelete" xml:space="preserve">
-    <value>Remove</value>
+  <data name="CreateCloudHint" xml:space="preserve">
+    <value>创建并将此设备加入新的个人云。</value>
   </data>
-  <data name="LibraryFolders" xml:space="preserve">
-    <value>Library Path</value>
+  <data name="DeviceName" xml:space="preserve">
+    <value>设备名称</value>
   </data>
-  <data name="Photos" xml:space="preserve">
-    <value>Photos</value>
+  <data name="ErrorCreatingCloud" xml:space="preserve">
+    <value>创建个人云失败</value>
+  </data>
+  <data name="ErrorEnrollingDevice" xml:space="preserve">
+    <value>加入个人云失败</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>退出向导</value>
+  </data>
+  <data name="Invitation" xml:space="preserve">
+    <value>邀请码</value>
+  </data>
+  <data name="JoinCloud" xml:space="preserve">
+    <value>加入已有个人云</value>
+  </data>
+  <data name="JoinCloudHint" xml:space="preserve">
+    <value>加入其它设备创建的个人云。</value>
+  </data>
+  <data name="PersonalCloud" xml:space="preserve">
+    <value>个人云</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>欢迎使用个人云</value>
+  </data>
+  <data name="WelcomeHint" xml:space="preserve">
+    <value>您的设备目前没有加入个人云，您可以……</value>
   </data>
 </root>

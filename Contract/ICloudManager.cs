@@ -64,6 +64,8 @@ namespace Unishare.Apps.WindowsContract
 
         string[] GetConnectedServices(Guid cloudId);
 
+        void RemoveConnection(Guid cloudId, string name);
+
         void ChangeAlbumSettings(Guid cloudId, List<AlbumConfig> settings);
 
         List<AlbumConfig> GetAlbumSettings(Guid cloudId);

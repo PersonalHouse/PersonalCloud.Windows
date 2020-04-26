@@ -4,6 +4,8 @@ using System.Windows.Threading;
 
 using Ookii.Dialogs.Wpf;
 
+using Unishare.Apps.WindowsConfigurator.Resources;
+
 namespace Unishare.Apps.WindowsConfigurator
 {
     public static class UIHelpers
@@ -12,9 +14,9 @@ namespace Unishare.Apps.WindowsConfigurator
         {
             var dialog = new TaskDialog {
                 MainIcon = TaskDialogIcon.Information,
-                WindowTitle = "个人云",
-                MainInstruction = "个人云尚未就绪",
-                Content = "个人云正在初始化 Windows 服务和其它内部组件。目前无法添加、退出个人云或查看、修改设置，请稍后再试。"
+                WindowTitle = UISettings.Cloud,
+                MainInstruction = UISettings.ServiceNotRunning,
+                Content = UISettings.WaitForService
             };
 
             var ok = new TaskDialogButton(ButtonType.Ok);
@@ -34,7 +36,7 @@ namespace Unishare.Apps.WindowsConfigurator
         {
             var dialog = new TaskDialog {
                 MainIcon = TaskDialogIcon.Information,
-                WindowTitle = "个人云",
+                WindowTitle = UISettings.Cloud,
                 MainInstruction = title,
                 Content = message
             };
@@ -58,7 +60,7 @@ namespace Unishare.Apps.WindowsConfigurator
         {
             var dialog = new TaskDialog {
                 MainIcon = TaskDialogIcon.Information,
-                WindowTitle = "个人云",
+                WindowTitle = UISettings.Cloud,
                 MainInstruction = title,
                 Content = message
             };

@@ -17,7 +17,7 @@ namespace Unishare.Apps.WindowsConfigurator
             OnlineConnectionsList.ItemsSource = ConnectedServices;
 
             Task.Run(async () => {
-                var connections = await Globals.CloudManager.InvokeAsync(x => x.GetConnectedServices()).ConfigureAwait(false);
+                var connections = await Globals.CloudManager.InvokeAsync(x => x.GetConnectedServices(Globals.PersonalCloud.Value)).ConfigureAwait(false);
                 foreach (var connection in connections) ConnectedServices.Add(connection);
             });
         }
@@ -27,7 +27,7 @@ namespace Unishare.Apps.WindowsConfigurator
             var child = new ConnectToStorageWindow();
             child.ShowDialog();
             Task.Run(async () => {
-                var connections = await Globals.CloudManager.InvokeAsync(x => x.GetConnectedServices()).ConfigureAwait(false);
+                var connections = await Globals.CloudManager.InvokeAsync(x => x.GetConnectedServices(Globals.PersonalCloud.Value)).ConfigureAwait(false);
                 ConnectedServices.Clear();
                 foreach (var connection in connections) ConnectedServices.Add(connection);
             });
@@ -35,7 +35,12 @@ namespace Unishare.Apps.WindowsConfigurator
 
         private void OnDeleteClicked(object sender, RoutedEventArgs e)
         {
-            this.ShowAlert("Not Supported", "This operation cannot be completed.");
+            if (OnlineConnectionsList.SelectedIndex == -1) return;
+
+            var name = ConnectedServices[OnlineConnectionsList.SelectedIndex];
+            Task.Run(async () => {
+                await Globals.CloudManager.InvokeAsync(x => x.RemoveConnection(Globals.PersonalCloud.Value, name)).ConfigureAwait(false);
+            });
         }
 
         private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)

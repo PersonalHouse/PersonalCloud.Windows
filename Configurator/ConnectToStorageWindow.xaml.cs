@@ -1,6 +1,9 @@
-﻿using System.Windows;
+﻿using System.Threading.Tasks;
+using System.Windows;
 
 using NSPersonalCloud.FileSharing.Aliyun;
+
+using Unishare.Apps.WindowsConfigurator.Resources;
 
 namespace Unishare.Apps.WindowsConfigurator
 {
@@ -22,19 +25,20 @@ namespace Unishare.Apps.WindowsConfigurator
 
             if (config.Verify())
             {
-                try
-                {
-                    Globals.CloudManager.InvokeAsync(x => x.ConnectToAlibabaCloud(ConnectionNameBox.Text, config));
-                    Close();
-                }
-                catch
-                {
-                    this.ShowAlert("IPC Error", "An error occurred communicating with target Service.");
-                }
+                Task.Run(async () => {
+                    try
+                    {
+                        await Globals.CloudManager.InvokeAsync(x => x.ConnectToAlibabaCloud(Globals.PersonalCloud.Value, ConnectionNameBox.Text, config)).ConfigureAwait(false);
+                    }
+                    finally
+                    {
+                        Dispatcher.Invoke(Close);
+                    }
+                });
             }
             else
             {
-                this.ShowAlert("Unable to Verify Credentials", "Alibaba Cloud does not accept these credentials.");
+                this.ShowAlert(UIStorage.ErrorAuthenticating, UIStorage.ErrorAuthenticatingAliYun);
             }
         }
     }

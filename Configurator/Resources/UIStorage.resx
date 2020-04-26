@@ -118,45 +118,51 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Add" xml:space="preserve">
-    <value>添加</value>
+    <value>Add</value>
   </data>
   <data name="AliYunAccessID" xml:space="preserve">
-    <value>用户 ID</value>
+    <value>Access Key ID</value>
   </data>
   <data name="AliYunAccessKey" xml:space="preserve">
-    <value>访问密钥</value>
+    <value>Access Key Secret</value>
   </data>
   <data name="AliYunBucket" xml:space="preserve">
-    <value>存储空间</value>
+    <value>Bucket</value>
   </data>
   <data name="AliYunConnectionName" xml:space="preserve">
-    <value>服务名称</value>
+    <value>Name</value>
   </data>
   <data name="AliYunEndpoint" xml:space="preserve">
-    <value>域名</value>
+    <value>Endpoint</value>
   </data>
   <data name="ConnectToStorage" xml:space="preserve">
-    <value>添加第三方服务</value>
+    <value>Connect to Online Storage</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>删除</value>
+    <value>Remove</value>
+  </data>
+  <data name="ErrorAuthenticating" xml:space="preserve">
+    <value>Unable to Verify Credentials</value>
+  </data>
+  <data name="ErrorAuthenticatingAliYun" xml:space="preserve">
+    <value>Alibaba Cloud does not accept these credentials.</value>
   </data>
   <data name="ManageConnections" xml:space="preserve">
-    <value>配置第三方服务</value>
+    <value>Configure Online Storage</value>
   </data>
   <data name="ProviderAliYun" xml:space="preserve">
-    <value>阿里云</value>
+    <value>Alibaba Cloud</value>
   </data>
   <data name="SaveAndClose" xml:space="preserve">
-    <value>保存</value>
+    <value>Save</value>
   </data>
   <data name="SavedStorageConnections" xml:space="preserve">
-    <value>已保存的凭据</value>
+    <value>Saved Connections</value>
   </data>
   <data name="StorageProvider" xml:space="preserve">
-    <value>存储提供商</value>
+    <value>Storage</value>
   </data>
   <data name="StorageServices" xml:space="preserve">
-    <value>在线存储服务</value>
+    <value>Storage Services</value>
   </data>
 </root>

@@ -61,7 +61,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 设备名称无效.
+        ///   Looks up a localized string similar to Invalid Device Name.
         /// </summary>
         public static string AlertInvalidDeviceName {
             get {
@@ -70,7 +70,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 请使用简短的名称，尽量不与其它设备重复，且尽量不包含特殊字符。.
+        ///   Looks up a localized string similar to Please use a short and unique name, and do not use special characters..
         /// </summary>
         public static string AlertInvalidDeviceNameMessage {
             get {
@@ -79,7 +79,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 个人云.
+        ///   Looks up a localized string similar to Personal Cloud.
         /// </summary>
         public static string Cloud {
             get {
@@ -88,7 +88,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 配置第三方服务.
+        ///   Looks up a localized string similar to Manage Connections.
         /// </summary>
         public static string CloudAddService {
             get {
@@ -97,7 +97,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 设备名称.
+        ///   Looks up a localized string similar to Device Name.
         /// </summary>
         public static string CloudDeviceName {
             get {
@@ -106,7 +106,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 无法生成个人云邀请码.
+        ///   Looks up a localized string similar to Cannot generate invitation..
         /// </summary>
         public static string CloudInviteError {
             get {
@@ -115,7 +115,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 添加设备.
+        ///   Looks up a localized string similar to Add A Device.
         /// </summary>
         public static string CloudInviteStart {
             get {
@@ -124,7 +124,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 停止邀请.
+        ///   Looks up a localized string similar to Stop.
         /// </summary>
         public static string CloudInviteStop {
             get {
@@ -133,7 +133,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 离开个人云.
+        ///   Looks up a localized string similar to Leave Personal Cloud.
         /// </summary>
         public static string CloudLeave {
             get {
@@ -142,7 +142,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 云名称.
+        ///   Looks up a localized string similar to Cloud Name.
         /// </summary>
         public static string CloudName {
             get {
@@ -151,7 +151,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 保存更改.
+        ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string CloudSaveChanges {
             get {
@@ -160,7 +160,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 个人云控制台.
+        ///   Looks up a localized string similar to Personal Cloud Configurator.
         /// </summary>
         public static string Configurator {
             get {
@@ -169,7 +169,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 配置个人云扩展功能.
+        ///   Looks up a localized string similar to Configure Functions.
         /// </summary>
         public static string ConfigureApps {
             get {
@@ -178,7 +178,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 退出控制台.
+        ///   Looks up a localized string similar to Quit Configurator.
         /// </summary>
         public static string DeveloperExit {
             get {
@@ -187,7 +187,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 重新启动服务.
+        ///   Looks up a localized string similar to Restart Windows Service.
         /// </summary>
         public static string DeveloperRestartService {
             get {
@@ -196,7 +196,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 文件管理器插件.
+        ///   Looks up a localized string similar to File Explorer Integration.
         /// </summary>
         public static string Explorer {
             get {
@@ -205,7 +205,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 将个人云显示为网络驱动器.
+        ///   Looks up a localized string similar to Mount Cloud as Network Drive.
         /// </summary>
         public static string ExplorerMasterSwitch {
             get {
@@ -214,7 +214,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 盘符.
+        ///   Looks up a localized string similar to Drive Letter.
         /// </summary>
         public static string ExplorerMountPoint {
             get {
@@ -223,7 +223,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 文件共享.
+        ///   Looks up a localized string similar to File Sharing.
         /// </summary>
         public static string FileSharing {
             get {
@@ -232,7 +232,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 允许此设备分享文件.
+        ///   Looks up a localized string similar to Allow File Sharing on This Device.
         /// </summary>
         public static string FileSharingMasterSwitch {
             get {
@@ -241,7 +241,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 分享文件夹.
+        ///   Looks up a localized string similar to Share This Folder.
         /// </summary>
         public static string FileSharingPath {
             get {
@@ -250,11 +250,60 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 重新选择.
+        ///   Looks up a localized string similar to Change.
         /// </summary>
         public static string FileSharingPathSelect {
             get {
                 return ResourceManager.GetString("FileSharingPathSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the following code on other devices:
+        ///
+        ///{0}
+        ///
+        ///Closing this dialog terminates verification session..
+        /// </summary>
+        public static string InvitesSentMessage {
+            get {
+                return ResourceManager.GetString("InvitesSentMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invitations Sent.
+        /// </summary>
+        public static string InvitesSentTitle {
+            get {
+                return ResourceManager.GetString("InvitesSentTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configurator Not Ready.
+        /// </summary>
+        public static string ServiceNotRunning {
+            get {
+                return ResourceManager.GetString("ServiceNotRunning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop Verification.
+        /// </summary>
+        public static string StopVerification {
+            get {
+                return ResourceManager.GetString("StopVerification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Personal Cloud and its components are initializing. Please wait for a few minutes and try again..
+        /// </summary>
+        public static string WaitForService {
+            get {
+                return ResourceManager.GetString("WaitForService", resourceCulture);
             }
         }
     }

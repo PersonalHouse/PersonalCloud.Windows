@@ -61,7 +61,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 添加.
+        ///   Looks up a localized string similar to Add.
         /// </summary>
         public static string Add {
             get {
@@ -70,7 +70,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 用户 ID.
+        ///   Looks up a localized string similar to Access Key ID.
         /// </summary>
         public static string AliYunAccessID {
             get {
@@ -79,7 +79,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 访问密钥.
+        ///   Looks up a localized string similar to Access Key Secret.
         /// </summary>
         public static string AliYunAccessKey {
             get {
@@ -88,7 +88,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 存储空间.
+        ///   Looks up a localized string similar to Bucket.
         /// </summary>
         public static string AliYunBucket {
             get {
@@ -97,7 +97,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 服务名称.
+        ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string AliYunConnectionName {
             get {
@@ -106,7 +106,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 域名.
+        ///   Looks up a localized string similar to Endpoint.
         /// </summary>
         public static string AliYunEndpoint {
             get {
@@ -115,7 +115,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 添加第三方服务.
+        ///   Looks up a localized string similar to Connect to Online Storage.
         /// </summary>
         public static string ConnectToStorage {
             get {
@@ -124,7 +124,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 删除.
+        ///   Looks up a localized string similar to Remove.
         /// </summary>
         public static string Delete {
             get {
@@ -133,7 +133,25 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 配置第三方服务.
+        ///   Looks up a localized string similar to Unable to Verify Credentials.
+        /// </summary>
+        public static string ErrorAuthenticating {
+            get {
+                return ResourceManager.GetString("ErrorAuthenticating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alibaba Cloud does not accept these credentials..
+        /// </summary>
+        public static string ErrorAuthenticatingAliYun {
+            get {
+                return ResourceManager.GetString("ErrorAuthenticatingAliYun", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configure Online Storage.
         /// </summary>
         public static string ManageConnections {
             get {
@@ -142,7 +160,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 阿里云.
+        ///   Looks up a localized string similar to Alibaba Cloud.
         /// </summary>
         public static string ProviderAliYun {
             get {
@@ -151,7 +169,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 保存.
+        ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string SaveAndClose {
             get {
@@ -160,7 +178,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 已保存的凭据.
+        ///   Looks up a localized string similar to Saved Connections.
         /// </summary>
         public static string SavedStorageConnections {
             get {
@@ -169,7 +187,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 存储提供商.
+        ///   Looks up a localized string similar to Storage.
         /// </summary>
         public static string StorageProvider {
             get {
@@ -178,7 +196,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 在线存储服务.
+        ///   Looks up a localized string similar to Storage Services.
         /// </summary>
         public static string StorageServices {
             get {

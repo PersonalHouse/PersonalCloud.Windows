@@ -77,9 +77,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UILanding.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\UISettings.en-US.resx">
-      <Generator></Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Resources\UISettings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UISettings.Designer.cs</LastGenOutput>
