@@ -192,7 +192,15 @@ namespace DokanFS
             fileName = fileName?.Replace("\\", "/");
             var stream = _PersonalCloud.RootFS.ReadPartialFileAsync(fileName, offset, offset + buffer.Length - 1).ConfigureAwait(false).GetAwaiter().GetResult();
             Array.Clear(buffer, 0, buffer.Length);
-            bytesRead = stream.Read(buffer, 0, buffer.Length);
+            int remainBytes = buffer.Length;
+            bytesRead = 0;
+            while (remainBytes > 0)
+            {
+                int count = stream.Read(buffer, bytesRead, remainBytes);
+                if (count == 0) break;
+                bytesRead += count;
+                remainBytes -= count;
+            }
         }
     }
 }
