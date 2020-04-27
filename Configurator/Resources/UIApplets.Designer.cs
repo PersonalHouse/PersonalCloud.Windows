@@ -61,7 +61,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 扩展功能.
+        ///   Looks up a localized string similar to Functions.
         /// </summary>
         public static string Applets {
             get {
@@ -70,7 +70,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 添加.
+        ///   Looks up a localized string similar to Add.
         /// </summary>
         public static string LibraryAdd {
             get {
@@ -79,7 +79,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 删除.
+        ///   Looks up a localized string similar to Remove.
         /// </summary>
         public static string LibraryDelete {
             get {
@@ -88,7 +88,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 存储路径.
+        ///   Looks up a localized string similar to Library Path.
         /// </summary>
         public static string LibraryFolders {
             get {
@@ -97,7 +97,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 照片库.
+        ///   Looks up a localized string similar to Photos.
         /// </summary>
         public static string Photos {
             get {

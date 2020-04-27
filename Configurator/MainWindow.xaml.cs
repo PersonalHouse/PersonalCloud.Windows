@@ -137,8 +137,7 @@ namespace Unishare.Apps.WindowsConfigurator
 
             Task.Run(async () => {
                 var code = await Globals.CloudManager.InvokeAsync(x => x.StartBroadcastingInvitation(null)).ConfigureAwait(false);
-                this.ShowAlert("邀请码已生成", "使用此邀请码将其它设备加入个人云：" + Environment.NewLine + Environment.NewLine + code + Environment.NewLine + Environment.NewLine +
-                    "关闭窗口后邀请码将失效。", "停止邀请", true, () => _ = Globals.CloudManager.InvokeAsync(x => x.StopBroadcastingInvitation(null)));
+                this.ShowAlert(UISettings.InvitesSentTitle, string.Format(UISettings.InvitesSentMessage, code), UISettings.StopVerification, true, () => _ = Globals.CloudManager.InvokeAsync(x => x.StopBroadcastingInvitation(null)));
             });
         }
 

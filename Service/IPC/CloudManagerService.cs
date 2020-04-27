@@ -9,8 +9,12 @@ using DokanNet;
 using DokanNet.Logging;
 
 using Nito.AsyncEx;
+
+using NSPersonalCloud;
+using NSPersonalCloud.Apps.Album;
 using NSPersonalCloud.FileSharing.Aliyun;
 using NSPersonalCloud.Interfaces.Errors;
+
 using Unishare.Apps.Common;
 using Unishare.Apps.Common.Models;
 using Unishare.Apps.WindowsContract;
@@ -20,6 +24,68 @@ namespace Unishare.Apps.WindowsService.IPC
 {
     public class CloudManagerService : ICloudManager
     {
+        #region File System Controller
+
+        public void MountNetworkDrive(Guid cloudId, string mountPoint)
+        {
+            if (mountPoint?.Length != 3 || !mountPoint.EndsWith(@":\", StringComparison.OrdinalIgnoreCase)) throw new ArgumentException("Mount Point is invalid.");
+
+            if (Globals.Volumes.TryGetValue(cloudId, out var thread) && thread != null) UnmountNetworkDrive(cloudId);
+
+            var cloud = Globals.CloudService.PersonalClouds.First(x => new Guid(x.Id) == cloudId);
+
+            var dokanThread = new AsyncContextThread();
+            dokanThread.Factory.Run(() => {
+                try
+                {
+                    var disk = new DokanFileSystemAdapter(new PersonalCloudRootFileSystem(cloud));
+                    disk.Mount(mountPoint, DokanOptions.EnableNotificationAPI, 5, new NullLogger());
+                }
+                catch (Exception exception)
+                {
+                    _ = Globals.NotificationCenter.InvokeAsync(x => x.OnVolumeIOError(mountPoint, exception));
+                }
+            });
+
+            Globals.Database.SaveSetting(WindowsUserSettings.EnableVolumeMounting, "1");
+            Globals.Database.SaveMountPoint(cloudId, mountPoint);
+            Globals.Volumes[cloudId] = dokanThread;
+        }
+
+        public void RemountAllDrives()
+        {
+            throw new NotSupportedException();
+        }
+
+        public void Restart()
+        {
+            Globals.Host.Stop();
+            // Todo: Restart?
+        }
+
+        public void UnmountAllDrives()
+        {
+            foreach (var volume in Globals.Database.Table<DiskModel>().ToList())
+            {
+                var mountPoint = Globals.Database.GetMountPoint(volume.Id);
+                if (Dokan.RemoveMountPoint(mountPoint)) Globals.Database.RemoveMountPoint(volume.Id);
+            }
+
+            Globals.Database.SaveSetting(WindowsUserSettings.EnableVolumeMounting, "0");
+        }
+
+        public void UnmountNetworkDrive(Guid cloudId)
+        {
+            var mountPoint = Globals.Database.GetMountPoint(cloudId);
+            if (Dokan.RemoveMountPoint(mountPoint))
+            {
+                Globals.Database.RemoveMountPoint(cloudId);
+                if (Globals.Volumes.TryRemove(cloudId, out var thread)) thread.Dispose();
+            }
+        }
+
+        #endregion File System Controller
+
         #region ICloudManager
 
         public void ChangeDeviceName(string newName, Guid? cloudId)
@@ -131,94 +197,38 @@ namespace Unishare.Apps.WindowsService.IPC
             else Globals.CloudService.StopSharePersonalCloud(Globals.CloudService.PersonalClouds.First(x => new Guid(x.Id) == id)).Wait();
         }
 
-        public void ConnectToAlibabaCloud(string name, OssConfig config)
+        public void ConnectToAlibabaCloud(Guid cloudId, string name, OssConfig config)
         {
-            // TODO: Add Cloud Id in parameters
-            string cloudId = null;
-            Globals.CloudService.AddStorageProvider(cloudId, name, config, NSPersonalCloud.StorageProviderVisibility.Private);
-            // Hack!
-            //Globals.Database.Insert(config.ToModel(name));
-            //Globals.CloudService.PersonalClouds[0].RootFS.ClientList[name] = new AliyunOSSFileSystemClient(config);
+            Globals.CloudService.AddStorageProvider(cloudId.ToString("N"), name, config, StorageProviderVisibility.Private);
         }
 
-        public string[] GetConnectedServices()
+        public string[] GetConnectedServices(Guid cloudId)
         {
-            // TODO: Add Cloud Id in parameters
-            string cloudId = null;
             try
             {
-                return Globals.CloudService.GetStorageProviderInstances(cloudId).Select(x => x.ProviderInfo.Name).ToArray();
+                return Globals.CloudService.GetStorageProviderInstances(cloudId.ToString("N")).Select(x => x.ProviderInfo.Name).ToArray();
             }
-            catch(NoSuchCloudException)
+            catch (NoSuchCloudException)
             {
-                return new string[0];
+                return Array.Empty<string>();
             }
-            // Hack!
-            //return Globals.Database.Table<AliYunOSS>().Select(x => x.Name).ToArray();
+        }
+
+        public void ChangeAlbumSettings(Guid cloudId, List<AlbumConfig> settings)
+        {
+            Globals.CloudService.SetAlbumConfig(cloudId.ToString("N"), settings);
+        }
+
+        public List<AlbumConfig> GetAlbumSettings(Guid cloudId)
+        {
+            return Globals.CloudService.GetAlbumConfig(cloudId.ToString("N")).Result;
+        }
+
+        public void RemoveConnection(Guid cloudId, string name)
+        {
+            Globals.CloudService.RemoveStorageProvider(cloudId.ToString("N"), name);
         }
 
         #endregion ICloudManager
-
-        #region File System Controller
-
-        public void MountNetworkDrive(Guid cloudId, string mountPoint)
-        {
-            if (mountPoint?.Length != 3 || !mountPoint.EndsWith(@":\", StringComparison.OrdinalIgnoreCase)) throw new ArgumentException("Mount Point is invalid.");
-
-            if (Globals.Volumes.TryGetValue(cloudId, out var thread) && thread != null) UnmountNetworkDrive(cloudId);
-
-            var cloud = Globals.CloudService.PersonalClouds.First(x => new Guid(x.Id) == cloudId);
-
-            var dokanThread = new AsyncContextThread();
-            dokanThread.Factory.Run(() => {
-                try
-                {
-                    var disk = new DokanFileSystemAdapter(new PersonalCloudRootFileSystem(cloud));
-                    disk.Mount(mountPoint, DokanOptions.EnableNotificationAPI, 5, new NullLogger());
-                }
-                catch (Exception exception)
-                {
-                    _ = Globals.NotificationCenter.InvokeAsync(x => x.OnVolumeIOError(mountPoint, exception));
-                }
-            });
-
-            Globals.Database.SaveSetting(WindowsUserSettings.EnableVolumeMounting, "1");
-            Globals.Database.SaveMountPoint(cloudId, mountPoint);
-            Globals.Volumes[cloudId] = dokanThread;
-        }
-
-        public void RemountAllDrives()
-        {
-            throw new NotSupportedException();
-        }
-
-        public void Restart()
-        {
-            Globals.Host.Stop();
-            // Todo: Restart?
-        }
-
-        public void UnmountAllDrives()
-        {
-            foreach (var volume in Globals.Database.Table<DiskModel>().ToList())
-            {
-                var mountPoint = Globals.Database.GetMountPoint(volume.Id);
-                if (Dokan.RemoveMountPoint(mountPoint)) Globals.Database.RemoveMountPoint(volume.Id);
-            }
-
-            Globals.Database.SaveSetting(WindowsUserSettings.EnableVolumeMounting, "0");
-        }
-
-        public void UnmountNetworkDrive(Guid cloudId)
-        {
-            var mountPoint = Globals.Database.GetMountPoint(cloudId);
-            if (Dokan.RemoveMountPoint(mountPoint))
-            {
-                Globals.Database.RemoveMountPoint(cloudId);
-                if (Globals.Volumes.TryRemove(cloudId, out var thread)) thread.Dispose();
-            }
-        }
-
-        #endregion File System Controller
     }
 }

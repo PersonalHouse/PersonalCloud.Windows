@@ -117,37 +117,89 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AlertInvalidDeviceName" xml:space="preserve">
+    <value>设备名称无效</value>
+  </data>
+  <data name="AlertInvalidDeviceNameMessage" xml:space="preserve">
+    <value>请使用简短的名称，尽量不与其它设备重复，且尽量不包含特殊字符。</value>
+  </data>
+  <data name="Cloud" xml:space="preserve">
+    <value>个人云</value>
+  </data>
+  <data name="CloudAddService" xml:space="preserve">
+    <value>配置第三方服务</value>
+  </data>
+  <data name="CloudDeviceName" xml:space="preserve">
+    <value>设备名称</value>
+  </data>
+  <data name="CloudInviteError" xml:space="preserve">
+    <value>无法生成个人云邀请码</value>
+  </data>
+  <data name="CloudInviteStart" xml:space="preserve">
+    <value>添加设备</value>
+  </data>
+  <data name="CloudInviteStop" xml:space="preserve">
+    <value>停止邀请</value>
+  </data>
+  <data name="CloudLeave" xml:space="preserve">
+    <value>离开个人云</value>
+  </data>
   <data name="CloudName" xml:space="preserve">
-    <value>Cloud Name</value>
+    <value>云名称</value>
   </data>
-  <data name="CreateCloud" xml:space="preserve">
-    <value>Create Personal Cloud</value>
+  <data name="CloudSaveChanges" xml:space="preserve">
+    <value>保存更改</value>
   </data>
-  <data name="CreateCloudHint" xml:space="preserve">
-    <value>Create new Personal Cloud and add this device to it.</value>
+  <data name="Configurator" xml:space="preserve">
+    <value>个人云控制台</value>
   </data>
-  <data name="DeviceName" xml:space="preserve">
-    <value>Device Name</value>
+  <data name="ConfigureApps" xml:space="preserve">
+    <value>配置扩展功能</value>
   </data>
-  <data name="Exit" xml:space="preserve">
-    <value>Quit Configurator</value>
+  <data name="DeveloperExit" xml:space="preserve">
+    <value>退出控制台</value>
   </data>
-  <data name="Invitation" xml:space="preserve">
-    <value>Invitation Code</value>
+  <data name="DeveloperRestartService" xml:space="preserve">
+    <value>重新启动服务</value>
   </data>
-  <data name="JoinCloud" xml:space="preserve">
-    <value>Join by Invitation</value>
+  <data name="Explorer" xml:space="preserve">
+    <value>文件管理器插件</value>
   </data>
-  <data name="JoinCloudHint" xml:space="preserve">
-    <value>Add this device to existing Personal Cloud.</value>
+  <data name="ExplorerMasterSwitch" xml:space="preserve">
+    <value>将个人云显示为网络驱动器</value>
   </data>
-  <data name="PersonalCloud" xml:space="preserve">
-    <value>Personal Cloud</value>
+  <data name="ExplorerMountPoint" xml:space="preserve">
+    <value>盘符</value>
   </data>
-  <data name="Welcome" xml:space="preserve">
-    <value>Welcome to Personal Cloud Configurator</value>
+  <data name="FileSharing" xml:space="preserve">
+    <value>文件共享</value>
   </data>
-  <data name="WelcomeHint" xml:space="preserve">
-    <value>This device doesn not belong to any Personal Cloud. You may...</value>
+  <data name="FileSharingMasterSwitch" xml:space="preserve">
+    <value>允许此设备分享文件</value>
+  </data>
+  <data name="FileSharingPath" xml:space="preserve">
+    <value>分享文件夹</value>
+  </data>
+  <data name="FileSharingPathSelect" xml:space="preserve">
+    <value>重新选择</value>
+  </data>
+  <data name="InvitesSentMessage" xml:space="preserve">
+    <value>使用此邀请码将其它设备加入个人云：
+
+{0}
+
+关闭窗口后邀请码将失效。</value>
+  </data>
+  <data name="InvitesSentTitle" xml:space="preserve">
+    <value>邀请码已生成</value>
+  </data>
+  <data name="ServiceNotRunning" xml:space="preserve">
+    <value>尚未就绪</value>
+  </data>
+  <data name="StopVerification" xml:space="preserve">
+    <value>停止邀请</value>
+  </data>
+  <data name="WaitForService" xml:space="preserve">
+    <value>个人云正在初始化 Windows 服务和其它内部组件。目前无法添加、退出个人云或查看、修改设置，请稍后再试。</value>
   </data>
 </root>

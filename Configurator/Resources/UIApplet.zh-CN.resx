@@ -118,18 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Applets" xml:space="preserve">
-    <value>Functions</value>
+    <value>扩展功能</value>
   </data>
   <data name="LibraryAdd" xml:space="preserve">
-    <value>Add</value>
+    <value>添加</value>
   </data>
   <data name="LibraryDelete" xml:space="preserve">
-    <value>Remove</value>
+    <value>删除</value>
   </data>
   <data name="LibraryFolders" xml:space="preserve">
-    <value>Library Path</value>
+    <value>存储路径</value>
   </data>
   <data name="Photos" xml:space="preserve">
-    <value>Photos</value>
+    <value>照片库</value>
   </data>
 </root>

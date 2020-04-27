@@ -118,69 +118,88 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AlertInvalidDeviceName" xml:space="preserve">
-    <value>设备名称无效</value>
+    <value>Invalid Device Name</value>
   </data>
   <data name="AlertInvalidDeviceNameMessage" xml:space="preserve">
-    <value>请使用简短的名称，尽量不与其它设备重复，且尽量不包含特殊字符。</value>
+    <value>Please use a short and unique name, and do not use special characters.</value>
   </data>
   <data name="Cloud" xml:space="preserve">
-    <value>个人云</value>
+    <value>Personal Cloud</value>
   </data>
   <data name="CloudAddService" xml:space="preserve">
-    <value>配置第三方服务</value>
+    <value>Manage Connections</value>
   </data>
   <data name="CloudDeviceName" xml:space="preserve">
-    <value>设备名称</value>
+    <value>Device Name</value>
   </data>
   <data name="CloudInviteError" xml:space="preserve">
-    <value>无法生成个人云邀请码</value>
+    <value>Cannot generate invitation.</value>
   </data>
   <data name="CloudInviteStart" xml:space="preserve">
-    <value>添加设备</value>
+    <value>Add A Device</value>
   </data>
   <data name="CloudInviteStop" xml:space="preserve">
-    <value>停止邀请</value>
+    <value>Stop</value>
   </data>
   <data name="CloudLeave" xml:space="preserve">
-    <value>离开个人云</value>
+    <value>Leave Personal Cloud</value>
   </data>
   <data name="CloudName" xml:space="preserve">
-    <value>云名称</value>
+    <value>Cloud Name</value>
   </data>
   <data name="CloudSaveChanges" xml:space="preserve">
-    <value>保存更改</value>
+    <value>Save</value>
   </data>
   <data name="Configurator" xml:space="preserve">
-    <value>个人云控制台</value>
+    <value>Personal Cloud Configurator</value>
   </data>
   <data name="ConfigureApps" xml:space="preserve">
-    <value>配置个人云扩展功能</value>
+    <value>Configure Functions</value>
   </data>
   <data name="DeveloperExit" xml:space="preserve">
-    <value>退出控制台</value>
+    <value>Quit Configurator</value>
   </data>
   <data name="DeveloperRestartService" xml:space="preserve">
-    <value>重新启动服务</value>
+    <value>Restart Windows Service</value>
   </data>
   <data name="Explorer" xml:space="preserve">
-    <value>文件管理器插件</value>
+    <value>File Explorer Integration</value>
   </data>
   <data name="ExplorerMasterSwitch" xml:space="preserve">
-    <value>将个人云显示为网络驱动器</value>
+    <value>Mount Cloud as Network Drive</value>
   </data>
   <data name="ExplorerMountPoint" xml:space="preserve">
-    <value>盘符</value>
+    <value>Drive Letter</value>
   </data>
   <data name="FileSharing" xml:space="preserve">
-    <value>文件共享</value>
+    <value>File Sharing</value>
   </data>
   <data name="FileSharingMasterSwitch" xml:space="preserve">
-    <value>允许此设备分享文件</value>
+    <value>Allow File Sharing on This Device</value>
   </data>
   <data name="FileSharingPath" xml:space="preserve">
-    <value>分享文件夹</value>
+    <value>Share This Folder</value>
   </data>
   <data name="FileSharingPathSelect" xml:space="preserve">
-    <value>重新选择</value>
+    <value>Change</value>
+  </data>
+  <data name="InvitesSentMessage" xml:space="preserve">
+    <value>Enter the following code on other devices:
+
+{0}
+
+Closing this dialog terminates verification session.</value>
+  </data>
+  <data name="InvitesSentTitle" xml:space="preserve">
+    <value>Invitations Sent</value>
+  </data>
+  <data name="ServiceNotRunning" xml:space="preserve">
+    <value>Configurator Not Ready</value>
+  </data>
+  <data name="StopVerification" xml:space="preserve">
+    <value>Stop Verification</value>
+  </data>
+  <data name="WaitForService" xml:space="preserve">
+    <value>Personal Cloud and its components are initializing. Please wait for a few minutes and try again.</value>
   </data>
 </root>

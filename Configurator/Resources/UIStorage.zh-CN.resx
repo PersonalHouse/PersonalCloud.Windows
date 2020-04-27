@@ -117,67 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AlertInvalidDeviceName" xml:space="preserve">
-    <value>Invalid Device Name</value>
+  <data name="Add" xml:space="preserve">
+    <value>添加</value>
   </data>
-  <data name="AlertInvalidDeviceNameMessage" xml:space="preserve">
-    <value>Please choose a name that is short, does not belong to other devices, and contains no special characters.</value>
+  <data name="AliYunAccessID" xml:space="preserve">
+    <value>用户 ID</value>
   </data>
-  <data name="Cloud" xml:space="preserve">
-    <value>Personal Cloud</value>
+  <data name="AliYunAccessKey" xml:space="preserve">
+    <value>访问密钥</value>
   </data>
-  <data name="CloudAddService" xml:space="preserve">
-    <value>Manage Connections</value>
+  <data name="AliYunBucket" xml:space="preserve">
+    <value>存储空间</value>
   </data>
-  <data name="CloudDeviceName" xml:space="preserve">
-    <value>Device Name</value>
+  <data name="AliYunConnectionName" xml:space="preserve">
+    <value>服务名称</value>
   </data>
-  <data name="CloudInviteError" xml:space="preserve">
-    <value>Cannot generate invitation.</value>
+  <data name="AliYunEndpoint" xml:space="preserve">
+    <value>域名</value>
   </data>
-  <data name="CloudInviteStart" xml:space="preserve">
-    <value>Add A Device</value>
+  <data name="ConnectToStorage" xml:space="preserve">
+    <value>添加第三方服务</value>
   </data>
-  <data name="CloudInviteStop" xml:space="preserve">
-    <value>Stop</value>
+  <data name="Delete" xml:space="preserve">
+    <value>删除</value>
   </data>
-  <data name="CloudLeave" xml:space="preserve">
-    <value>Leave Personal Cloud</value>
+  <data name="ErrorAuthenticating" xml:space="preserve">
+    <value>无法验证帐户信息</value>
   </data>
-  <data name="CloudName" xml:space="preserve">
-    <value>Cloud Name</value>
+  <data name="ErrorAuthenticatingAliYun" xml:space="preserve">
+    <value>您提供的帐户无法连接到有效的阿里云存储空间。</value>
   </data>
-  <data name="CloudSaveChanges" xml:space="preserve">
-    <value>Save</value>
+  <data name="ManageConnections" xml:space="preserve">
+    <value>配置第三方服务</value>
   </data>
-  <data name="Configurator" xml:space="preserve">
-    <value>Personal Cloud Configurator</value>
+  <data name="ProviderAliYun" xml:space="preserve">
+    <value>阿里云</value>
   </data>
-  <data name="DeveloperExit" xml:space="preserve">
-    <value>Quit Configurator</value>
+  <data name="SaveAndClose" xml:space="preserve">
+    <value>保存</value>
   </data>
-  <data name="DeveloperRestartService" xml:space="preserve">
-    <value>Restart Windows Service</value>
+  <data name="SavedStorageConnections" xml:space="preserve">
+    <value>已保存的凭据</value>
   </data>
-  <data name="Explorer" xml:space="preserve">
-    <value>File Explorer Integration</value>
+  <data name="StorageProvider" xml:space="preserve">
+    <value>存储提供商</value>
   </data>
-  <data name="ExplorerMasterSwitch" xml:space="preserve">
-    <value>Mount Cloud as Network Drive</value>
-  </data>
-  <data name="ExplorerMountPoint" xml:space="preserve">
-    <value>Drive Letter</value>
-  </data>
-  <data name="FileSharing" xml:space="preserve">
-    <value>File Sharing</value>
-  </data>
-  <data name="FileSharingMasterSwitch" xml:space="preserve">
-    <value>Allow File Sharing on This Device</value>
-  </data>
-  <data name="FileSharingPath" xml:space="preserve">
-    <value>Share This Folder</value>
-  </data>
-  <data name="FileSharingPathSelect" xml:space="preserve">
-    <value>Change</value>
+  <data name="StorageServices" xml:space="preserve">
+    <value>在线存储服务</value>
   </data>
 </root>

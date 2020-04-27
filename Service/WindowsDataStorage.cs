@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+
 using Newtonsoft.Json;
+
 using NSPersonalCloud;
 using NSPersonalCloud.Config;
 using NSPersonalCloud.FileSharing.Aliyun;
+
 using Unishare.Apps.Common;
 using Unishare.Apps.Common.Models;
 
@@ -20,20 +23,27 @@ namespace Unishare.Apps.WindowsService
         {
             var deviceName = Globals.Database.LoadSetting(UserSettings.DeviceName) ?? Environment.MachineName;
             return Globals.Database.Table<CloudModel>().Select(x => {
-                List<StorageProviderInfo> storageProviderInfos = null;
-                try
-                {
-                    storageProviderInfos = JsonConvert.DeserializeObject<List<StorageProviderInfo>>(x.StorageProviders);
-                }
-                catch
-                {
-                    // Ignore
-                }
-                return new PersonalCloudInfo(storageProviderInfos) {
+                var providers = Globals.Database.Table<AliYunOSS>().Where(y => y.CloudId == x.Id).Select(y => {
+                    var config = new OssConfig {
+                        OssEndpoint = y.Endpoint,
+                        BucketName = y.Bucket,
+                        AccessKeyId = y.AccessID,
+                        AccessKeySecret = y.AccessSecret
+                    };
+                    return new StorageProviderInfo {
+                        Type = StorageProviderInstance.TypeAliYun,
+                        Name = y.Name,
+                        Visibility = (StorageProviderVisibility) y.Visibility,
+                        Settings = JsonConvert.SerializeObject(config)
+                    };
+                }).ToList();
+                if (providers is null) providers = new List<StorageProviderInfo>();
+                return new PersonalCloudInfo(providers) {
                     Id = x.Id.ToString("N"),
                     DisplayName = x.Name,
                     NodeDisplayName = deviceName,
-                    MasterKey = Convert.FromBase64String(x.Key)
+                    MasterKey = Convert.FromBase64String(x.Key),
+                    TimeStamp = x.Version
                 };
             });
         }
@@ -54,15 +64,37 @@ namespace Unishare.Apps.WindowsService
         public void SaveCloud(IEnumerable<PersonalCloudInfo> cloud)
         {
             Globals.Database.DeleteAll<CloudModel>();
+            Globals.Database.DeleteAll<AliYunOSS>();
             foreach (var item in cloud)
             {
+                var id = new Guid(item.Id);
                 Globals.Database.Insert(new CloudModel {
-                    Id = new Guid(item.Id),
+                    Id = id,
                     Name = item.DisplayName,
                     Key = Convert.ToBase64String(item.MasterKey),
-                    StorageProviders = JsonConvert.SerializeObject(item.StorageProviders),
-                    Version = Definition.CloudVersion
+                    Version = item.TimeStamp
                 });
+
+                foreach(var provider in item.StorageProviders)
+                {
+                    switch (provider.Type)
+                    {
+                        case StorageProviderInstance.TypeAliYun:
+                        {
+                            var config = JsonConvert.DeserializeObject<OssConfig>(provider.Settings);
+                            Globals.Database.Insert(new AliYunOSS {
+                                CloudId = id,
+                                Name = provider.Name,
+                                Visibility = (int) provider.Visibility,
+                                Endpoint = config.OssEndpoint,
+                                Bucket = config.BucketName,
+                                AccessID = config.AccessKeyId,
+                                AccessSecret = config.AccessKeySecret
+                            });
+                            continue;
+                        }
+                    }
+                }
             }
 
             CloudSaved?.Invoke(this, EventArgs.Empty);

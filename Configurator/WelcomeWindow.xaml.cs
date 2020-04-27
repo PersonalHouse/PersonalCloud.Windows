@@ -61,7 +61,7 @@ namespace Unishare.Apps.WindowsConfigurator
                         using var dialog = new TaskDialog {
                             MainIcon = TaskDialogIcon.Error,
                             WindowTitle = UISettings.Configurator,
-                            MainInstruction = "创建个人云失败"
+                            MainInstruction = UILanding.ErrorCreatingCloud
                         };
 
                         var ok = new TaskDialogButton(ButtonType.Ok);
@@ -112,7 +112,7 @@ namespace Unishare.Apps.WindowsConfigurator
                         using var dialog = new TaskDialog {
                             MainIcon = TaskDialogIcon.Error,
                             WindowTitle = UISettings.Configurator,
-                            MainInstruction = "加入个人云失败"
+                            MainInstruction = UILanding.ErrorEnrollingDevice
                         };
 
                         var ok = new TaskDialogButton(ButtonType.Ok);
