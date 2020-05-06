@@ -226,7 +226,7 @@ namespace Unishare.Apps.WindowsService.IPC
 
         public List<AlbumConfig> GetAlbumSettings(Guid cloudId)
         {
-            return PCLocalService.(cloudId.ToString("N")).Result;
+            return Globals.CloudService.GetAlbumConfig(cloudId.ToString("N"));
         }
 
         public void RemoveConnection(Guid cloudId, string name)

@@ -47,6 +47,8 @@ namespace Unishare.Apps.WindowsService
             Globals.Database.CreateTable<DiskModel>();
             Globals.Database.CreateTable<AlibabaOSS>();
             Globals.Database.CreateTable<AzureBlob>();
+            Globals.Database.CreateTable<WebApp>();
+            Globals.Database.CreateTable<Launcher>();
 
             Globals.CloudFileSystem = new VirtualFileSystem(null);
             Globals.CloudConfig = new WindowsDataStorage();
@@ -97,7 +99,6 @@ namespace Unishare.Apps.WindowsService
 
             #endregion Restore last-known state of File Sharing
 
-
             var resourcesPath = Path.Combine(Globals.ConfigurationPath, "Static");
             Directory.CreateDirectory(resourcesPath);
             Globals.CloudService = new PCLocalService(Globals.CloudConfig, new LoggerFactory(), Globals.CloudFileSystem, resourcesPath);
@@ -105,6 +106,12 @@ namespace Unishare.Apps.WindowsService
                 if (e.ErrorCode == ErrorCode.NeedUpdate)
                     _ = Globals.PopupPresenter.InvokeAsync(x => x.ShowAlert("个人云版本过低", "您必须升级个人云才能访问其它设备。"));
             };
+
+            if (!Globals.Database.CheckSetting(UserSettings.LastInstalledVersion, Globals.Version))
+            {
+                Globals.CloudService.InstallApps().Wait();
+            }
+
             Globals.CloudService.StartService();
             _ = Globals.NotificationCenter.InvokeAsync(x => x.OnServiceStarted());
 

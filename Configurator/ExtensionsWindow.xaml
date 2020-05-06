@@ -45,7 +45,17 @@
                 <ListBox x:Name="PhotosLibraryList"
                          Margin="0, 5, 0, 0"
                          MinHeight="100"
-                         SelectionChanged="OnListItemSelected" />
+                         SelectionChanged="OnListItemSelected">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding Name}"
+                                           FontWeight="Bold" />
+                                <TextBlock Text="{Binding MediaFolder}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </StackPanel>
         </GroupBox>
     </Grid>

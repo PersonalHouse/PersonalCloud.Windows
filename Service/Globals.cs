@@ -17,6 +17,8 @@ namespace Unishare.Apps.WindowsService
 {
     internal static class Globals
     {
+        public const string Version = "2.0.0.1";
+
         public static HostControl Host { get; set; }
 
         public static WindowsDataStorage CloudConfig { get; set; }

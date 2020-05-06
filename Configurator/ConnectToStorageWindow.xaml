@@ -10,7 +10,7 @@
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize">
     <Grid Margin="10"
-          MinWidth="400">
+          MinWidth="600">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -22,7 +22,6 @@
             <ComboBox x:Name="ProviderName"
                       DockPanel.Dock="Right"
                       MinWidth="50"
-                      HorizontalContentAlignment="Center"
                       SelectedIndex="0"
                       IsReadOnly="True"
                       SelectionChanged="OnSwitchingProvider">
@@ -45,7 +44,7 @@
                     <TextBlock DockPanel.Dock="Left"
                                Margin="0, 0, 5, 0"
                                Text="{x:Static resx:UIStorage.AliYunConnectionName}"
-                               MinWidth="120"
+                               MinWidth="150"
                                VerticalAlignment="Center" />
 
                     <TextBox x:Name="AlibabaConnectionNameBox"
@@ -59,7 +58,7 @@
                     <TextBlock DockPanel.Dock="Left"
                                Margin="0, 0, 5, 0"
                                Text="{x:Static resx:UIStorage.AliYunEndpoint}"
-                               MinWidth="120"
+                               MinWidth="150"
                                VerticalAlignment="Center" />
 
                     <TextBox x:Name="AlibabaEndpointBox"
@@ -72,7 +71,7 @@
                     <TextBlock DockPanel.Dock="Left"
                                Margin="0, 0, 5, 0"
                                Text="{x:Static resx:UIStorage.AliYunBucket}"
-                               MinWidth="120"
+                               MinWidth="150"
                                VerticalAlignment="Center" />
 
                     <TextBox x:Name="AlibabaBucketBox"
@@ -85,7 +84,7 @@
                     <TextBlock DockPanel.Dock="Left"
                                Margin="0, 0, 5, 0"
                                Text="{x:Static resx:UIStorage.AliYunAccessID}"
-                               MinWidth="120"
+                               MinWidth="150"
                                VerticalAlignment="Center" />
 
                     <TextBox x:Name="AlibabaAccountBox"
@@ -98,7 +97,7 @@
                     <TextBlock DockPanel.Dock="Left"
                                Margin="0, 0, 5, 0"
                                Text="{x:Static resx:UIStorage.AliYunAccessKey}"
-                               MinWidth="120"
+                               MinWidth="150"
                                VerticalAlignment="Center" />
 
                     <TextBox x:Name="AlibabaSecretBox"
@@ -120,7 +119,7 @@
                     <TextBlock DockPanel.Dock="Left"
                                Margin="0, 0, 5, 0"
                                Text="{x:Static resx:UIStorage.AliYunConnectionName}"
-                               MinWidth="120"
+                               MinWidth="150"
                                VerticalAlignment="Center" />
 
                     <TextBox x:Name="AzureConnectionNameBox"
@@ -134,7 +133,7 @@
                     <TextBlock DockPanel.Dock="Left"
                                Margin="0, 0, 5, 0"
                                Text="{x:Static resx:UIStorage.AzureEndpoint}"
-                               MinWidth="120"
+                               MinWidth="150"
                                VerticalAlignment="Center" />
 
                     <TextBox x:Name="AzureEndpointBox"
@@ -147,7 +146,7 @@
                     <TextBlock DockPanel.Dock="Left"
                                Margin="0, 0, 5, 0"
                                Text="{x:Static resx:UIStorage.AzureAccountName}"
-                               MinWidth="120"
+                               MinWidth="150"
                                VerticalAlignment="Center" />
 
                     <TextBox x:Name="AzureAccountBox"
@@ -160,7 +159,7 @@
                     <TextBlock DockPanel.Dock="Left"
                                Margin="0, 0, 5, 0"
                                Text="{x:Static resx:UIStorage.AzureKey}"
-                               MinWidth="120"
+                               MinWidth="150"
                                VerticalAlignment="Center" />
 
                     <TextBox x:Name="AzureKeyBox"
@@ -173,7 +172,7 @@
                     <TextBlock DockPanel.Dock="Left"
                                Margin="0, 0, 5, 0"
                                Text="{x:Static resx:UIStorage.AzureContainer}"
-                               MinWidth="120"
+                               MinWidth="150"
                                VerticalAlignment="Center" />
 
                     <TextBox x:Name="AzureContainerBox"

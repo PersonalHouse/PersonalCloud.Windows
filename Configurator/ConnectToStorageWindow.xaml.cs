@@ -12,13 +12,18 @@ namespace Unishare.Apps.WindowsConfigurator
 {
     public partial class ConnectToStorageWindow : Window
     {
+        private bool initialized;
+
         public ConnectToStorageWindow()
         {
             InitializeComponent();
+            initialized = true;
         }
 
         private void OnSaveClicked(object sender, RoutedEventArgs e)
         {
+            if (!initialized) return;
+
             switch (ProviderName.SelectedIndex)
             {
                 case 0: // Alibaba Cloud
@@ -37,6 +42,8 @@ namespace Unishare.Apps.WindowsConfigurator
 
         private void OnSwitchingProvider(object sender, SelectionChangedEventArgs e)
         {
+            if (!initialized) return;
+
             switch (ProviderName.SelectedIndex)
             {
                 case 0: // Alibaba Cloud
