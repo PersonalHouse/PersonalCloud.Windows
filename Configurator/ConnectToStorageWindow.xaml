@@ -14,7 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="10" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
@@ -24,8 +24,10 @@
                       MinWidth="50"
                       HorizontalContentAlignment="Center"
                       SelectedIndex="0"
-                      IsReadOnly="True">
+                      IsReadOnly="True"
+                      SelectionChanged="OnSwitchingProvider">
                 <ComboBoxItem Content="{x:Static resx:UIStorage.ProviderAliYun}" />
+                <ComboBoxItem Content="{x:Static resx:UIStorage.ProviderAzure}" />
             </ComboBox>
 
             <TextBlock DockPanel.Dock="Left"
@@ -34,7 +36,8 @@
         </DockPanel>
 
         <GroupBox Grid.Row="1"
-                  Margin="0, 10, 0, 0"
+                  x:Name="AlibabaSection"
+                  Margin="0, 10, 0, 10"
                   Padding="5"
                   Header="{x:Static resx:UIStorage.ProviderAliYun}">
             <StackPanel Orientation="Vertical">
@@ -45,10 +48,10 @@
                                MinWidth="120"
                                VerticalAlignment="Center" />
 
-                    <TextBox x:Name="ConnectionNameBox"
+                    <TextBox x:Name="AlibabaConnectionNameBox"
                              Padding="2"
                              MaxLines="1"
-                             Text="阿里云"
+                             Text="{x:Static resx:UIStorage.ProviderAliYun}"
                              VerticalAlignment="Center" />
                 </DockPanel>
 
@@ -59,7 +62,7 @@
                                MinWidth="120"
                                VerticalAlignment="Center" />
 
-                    <TextBox x:Name="EndpointBox"
+                    <TextBox x:Name="AlibabaEndpointBox"
                              Padding="2"
                              MaxLines="1"
                              VerticalAlignment="Center" />
@@ -72,7 +75,7 @@
                                MinWidth="120"
                                VerticalAlignment="Center" />
 
-                    <TextBox x:Name="BucketBox"
+                    <TextBox x:Name="AlibabaBucketBox"
                              Padding="2"
                              MaxLines="1"
                              VerticalAlignment="Center" />
@@ -85,7 +88,7 @@
                                MinWidth="120"
                                VerticalAlignment="Center" />
 
-                    <TextBox x:Name="AccountBox"
+                    <TextBox x:Name="AlibabaAccountBox"
                              Padding="2"
                              MaxLines="1"
                              VerticalAlignment="Center" />
@@ -98,7 +101,82 @@
                                MinWidth="120"
                                VerticalAlignment="Center" />
 
-                    <TextBox x:Name="SecretBox"
+                    <TextBox x:Name="AlibabaSecretBox"
+                             Padding="2"
+                             MaxLines="1"
+                             VerticalAlignment="Center" />
+                </DockPanel>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Grid.Row="2"
+                  x:Name="AzureSection"
+                  Margin="0, 10, 0, 10"
+                  Padding="5"
+                  Visibility="Collapsed"
+                  Header="{x:Static resx:UIStorage.ProviderAzure}">
+            <StackPanel Orientation="Vertical">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Left"
+                               Margin="0, 0, 5, 0"
+                               Text="{x:Static resx:UIStorage.AliYunConnectionName}"
+                               MinWidth="120"
+                               VerticalAlignment="Center" />
+
+                    <TextBox x:Name="AzureConnectionNameBox"
+                             Padding="2"
+                             MaxLines="1"
+                             Text="{x:Static resx:UIStorage.ProviderAzure}"
+                             VerticalAlignment="Center" />
+                </DockPanel>
+
+                <DockPanel Margin="0, 5">
+                    <TextBlock DockPanel.Dock="Left"
+                               Margin="0, 0, 5, 0"
+                               Text="{x:Static resx:UIStorage.AzureEndpoint}"
+                               MinWidth="120"
+                               VerticalAlignment="Center" />
+
+                    <TextBox x:Name="AzureEndpointBox"
+                             Padding="2"
+                             MaxLines="1"
+                             VerticalAlignment="Center" />
+                </DockPanel>
+
+                <DockPanel Margin="0, 5">
+                    <TextBlock DockPanel.Dock="Left"
+                               Margin="0, 0, 5, 0"
+                               Text="{x:Static resx:UIStorage.AzureAccountName}"
+                               MinWidth="120"
+                               VerticalAlignment="Center" />
+
+                    <TextBox x:Name="AzureAccountBox"
+                             Padding="2"
+                             MaxLines="1"
+                             VerticalAlignment="Center" />
+                </DockPanel>
+
+                <DockPanel Margin="0, 5">
+                    <TextBlock DockPanel.Dock="Left"
+                               Margin="0, 0, 5, 0"
+                               Text="{x:Static resx:UIStorage.AzureKey}"
+                               MinWidth="120"
+                               VerticalAlignment="Center" />
+
+                    <TextBox x:Name="AzureKeyBox"
+                             Padding="2"
+                             MaxLines="1"
+                             VerticalAlignment="Center" />
+                </DockPanel>
+
+                <DockPanel Margin="0, 5">
+                    <TextBlock DockPanel.Dock="Left"
+                               Margin="0, 0, 5, 0"
+                               Text="{x:Static resx:UIStorage.AzureContainer}"
+                               MinWidth="120"
+                               VerticalAlignment="Center" />
+
+                    <TextBox x:Name="AzureContainerBox"
                              Padding="2"
                              MaxLines="1"
                              VerticalAlignment="Center" />

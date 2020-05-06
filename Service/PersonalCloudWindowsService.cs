@@ -44,9 +44,9 @@ namespace Unishare.Apps.WindowsService
             Globals.Database = new SQLiteConnection(databasePath, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.FullMutex);
             Globals.Database.CreateTable<KeyValueModel>();
             Globals.Database.CreateTable<CloudModel>();
-            Globals.Database.CreateTable<NodeModel>();
             Globals.Database.CreateTable<DiskModel>();
-            Globals.Database.CreateTable<AliYunOSS>();
+            Globals.Database.CreateTable<AlibabaOSS>();
+            Globals.Database.CreateTable<AzureBlob>();
 
             Globals.CloudFileSystem = new VirtualFileSystem(null);
             Globals.CloudConfig = new WindowsDataStorage();
@@ -97,7 +97,10 @@ namespace Unishare.Apps.WindowsService
 
             #endregion Restore last-known state of File Sharing
 
-            Globals.CloudService = new PCLocalService(Globals.CloudConfig, new LoggerFactory(), Globals.CloudFileSystem);
+
+            var resourcesPath = Path.Combine(Globals.ConfigurationPath, "Static");
+            Directory.CreateDirectory(resourcesPath);
+            Globals.CloudService = new PCLocalService(Globals.CloudConfig, new LoggerFactory(), Globals.CloudFileSystem, resourcesPath);
             Globals.CloudService.OnError += (o, e) => {
                 if (e.ErrorCode == ErrorCode.NeedUpdate)
                     _ = Globals.PopupPresenter.InvokeAsync(x => x.ShowAlert("个人云版本过低", "您必须升级个人云才能访问其它设备。"));

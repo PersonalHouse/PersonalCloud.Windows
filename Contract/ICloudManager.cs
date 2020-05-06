@@ -62,6 +62,8 @@ namespace Unishare.Apps.WindowsContract
 
         void ConnectToAlibabaCloud(Guid cloudId, string name, OssConfig config);
 
+        void ConnectToAzure(Guid cloudId, string name, AzureBlobConfig config);
+
         string[] GetConnectedServices(Guid cloudId);
 
         void RemoveConnection(Guid cloudId, string name);

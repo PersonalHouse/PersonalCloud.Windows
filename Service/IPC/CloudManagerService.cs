@@ -202,6 +202,11 @@ namespace Unishare.Apps.WindowsService.IPC
             Globals.CloudService.AddStorageProvider(cloudId.ToString("N"), name, config, StorageProviderVisibility.Private);
         }
 
+        public void ConnectToAzure(Guid cloudId, string name, AzureBlobConfig config)
+        {
+            Globals.CloudService.AddStorageProvider(cloudId.ToString("N"), name, config, StorageProviderVisibility.Private);
+        }
+
         public string[] GetConnectedServices(Guid cloudId)
         {
             try
@@ -221,7 +226,7 @@ namespace Unishare.Apps.WindowsService.IPC
 
         public List<AlbumConfig> GetAlbumSettings(Guid cloudId)
         {
-            return Globals.CloudService.GetAlbumConfig(cloudId.ToString("N")).Result;
+            return PCLocalService.(cloudId.ToString("N")).Result;
         }
 
         public void RemoveConnection(Guid cloudId, string name)

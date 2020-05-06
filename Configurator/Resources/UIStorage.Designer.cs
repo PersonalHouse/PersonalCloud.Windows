@@ -115,6 +115,51 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account Name.
+        /// </summary>
+        public static string AzureAccountName {
+            get {
+                return ResourceManager.GetString("AzureAccountName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blob Container.
+        /// </summary>
+        public static string AzureContainer {
+            get {
+                return ResourceManager.GetString("AzureContainer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Endpoint URI / Suffix.
+        /// </summary>
+        public static string AzureEndpoint {
+            get {
+                return ResourceManager.GetString("AzureEndpoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account Key or SAS.
+        /// </summary>
+        public static string AzureKey {
+            get {
+                return ResourceManager.GetString("AzureKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot Use This Name.
+        /// </summary>
+        public static string ConnectionBadName {
+            get {
+                return ResourceManager.GetString("ConnectionBadName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Connect to Online Storage.
         /// </summary>
         public static string ConnectToStorage {
@@ -142,11 +187,20 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Alibaba Cloud does not accept these credentials..
+        ///   Looks up a localized string similar to Alibaba Cloud did not accept these credentials..
         /// </summary>
         public static string ErrorAuthenticatingAliYun {
             get {
                 return ResourceManager.GetString("ErrorAuthenticatingAliYun", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Azure Blob Storage did not accept these credentials..
+        /// </summary>
+        public static string ErrorAuthenticatingAzure {
+            get {
+                return ResourceManager.GetString("ErrorAuthenticatingAzure", resourceCulture);
             }
         }
         
@@ -165,6 +219,15 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         public static string ProviderAliYun {
             get {
                 return ResourceManager.GetString("ProviderAliYun", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Azure Blob Storage.
+        /// </summary>
+        public static string ProviderAzure {
+            get {
+                return ResourceManager.GetString("ProviderAzure", resourceCulture);
             }
         }
         

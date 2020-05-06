@@ -6,7 +6,7 @@ namespace Unishare.Apps.WindowsService.Data
 {
     public static class Extensions
     {
-        public static OssConfig ToConfig(this AliYunOSS model)
+        public static OssConfig ToConfig(this AlibabaOSS model)
         {
             return new OssConfig {
                 OssEndpoint = model.Endpoint,
@@ -16,9 +16,9 @@ namespace Unishare.Apps.WindowsService.Data
             };
         }
 
-        public static AliYunOSS ToModel(this OssConfig config, string name)
+        public static AlibabaOSS ToModel(this OssConfig config, string name)
         {
-            return new AliYunOSS {
+            return new AlibabaOSS {
                 Name = name,
                 Endpoint = config.OssEndpoint,
                 Bucket = config.BucketName,

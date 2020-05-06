@@ -135,6 +135,21 @@
   <data name="AliYunEndpoint" xml:space="preserve">
     <value>域名</value>
   </data>
+  <data name="AzureAccountName" xml:space="preserve">
+    <value>帐户名称</value>
+  </data>
+  <data name="AzureContainer" xml:space="preserve">
+    <value>Blob Container</value>
+  </data>
+  <data name="AzureEndpoint" xml:space="preserve">
+    <value>Endpoint URI or Suffix</value>
+  </data>
+  <data name="AzureKey" xml:space="preserve">
+    <value>帐户密钥或 SAS</value>
+  </data>
+  <data name="ConnectionBadName" xml:space="preserve">
+    <value>不能使用此名称</value>
+  </data>
   <data name="ConnectToStorage" xml:space="preserve">
     <value>添加第三方服务</value>
   </data>
@@ -147,11 +162,17 @@
   <data name="ErrorAuthenticatingAliYun" xml:space="preserve">
     <value>您提供的帐户无法连接到有效的阿里云存储空间。</value>
   </data>
+  <data name="ErrorAuthenticatingAzure" xml:space="preserve">
+    <value>Azure Blob Storage 认证失败。</value>
+  </data>
   <data name="ManageConnections" xml:space="preserve">
     <value>配置第三方服务</value>
   </data>
   <data name="ProviderAliYun" xml:space="preserve">
     <value>阿里云</value>
+  </data>
+  <data name="ProviderAzure" xml:space="preserve">
+    <value>Azure Blob 存储</value>
   </data>
   <data name="SaveAndClose" xml:space="preserve">
     <value>保存</value>

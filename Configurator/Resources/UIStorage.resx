@@ -135,6 +135,21 @@
   <data name="AliYunEndpoint" xml:space="preserve">
     <value>Endpoint</value>
   </data>
+  <data name="AzureAccountName" xml:space="preserve">
+    <value>Account Name</value>
+  </data>
+  <data name="AzureContainer" xml:space="preserve">
+    <value>Blob Container</value>
+  </data>
+  <data name="AzureEndpoint" xml:space="preserve">
+    <value>Endpoint URI / Suffix</value>
+  </data>
+  <data name="AzureKey" xml:space="preserve">
+    <value>Account Key or SAS</value>
+  </data>
+  <data name="ConnectionBadName" xml:space="preserve">
+    <value>Cannot Use This Name</value>
+  </data>
   <data name="ConnectToStorage" xml:space="preserve">
     <value>Connect to Online Storage</value>
   </data>
@@ -145,13 +160,19 @@
     <value>Unable to Verify Credentials</value>
   </data>
   <data name="ErrorAuthenticatingAliYun" xml:space="preserve">
-    <value>Alibaba Cloud does not accept these credentials.</value>
+    <value>Alibaba Cloud did not accept these credentials.</value>
+  </data>
+  <data name="ErrorAuthenticatingAzure" xml:space="preserve">
+    <value>Azure Blob Storage did not accept these credentials.</value>
   </data>
   <data name="ManageConnections" xml:space="preserve">
     <value>Configure Online Storage</value>
   </data>
   <data name="ProviderAliYun" xml:space="preserve">
     <value>Alibaba Cloud</value>
+  </data>
+  <data name="ProviderAzure" xml:space="preserve">
+    <value>Azure Blob Storage</value>
   </data>
   <data name="SaveAndClose" xml:space="preserve">
     <value>Save</value>
