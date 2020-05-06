@@ -26,10 +26,9 @@ namespace Unishare.Apps.WindowsConfigurator
 
             Task.Run(async () => {
                 var settings = await Globals.CloudManager.InvokeAsync(x => x.GetAlbumSettings(Globals.PersonalCloud.Value)).ConfigureAwait(false);
-                foreach (var entry in settings)
-                {
-                    LibraryPaths.Add(entry);
-                }
+                Dispatcher.Invoke(() => {
+                    foreach (var entry in settings) LibraryPaths.Add(entry);
+                });                
             });
         }
 
@@ -42,8 +41,9 @@ namespace Unishare.Apps.WindowsConfigurator
         {
             LibraryPaths.RemoveAt(PhotosLibraryList.SelectedIndex);
 
+            var settings = LibraryPaths.ToList();
             Task.Run(async () => {
-                await Globals.CloudManager.InvokeAsync(x => x.ChangeAlbumSettings(Globals.PersonalCloud.Value, LibraryPaths.ToList())).ConfigureAwait(false);
+                await Globals.CloudManager.InvokeAsync(x => x.ChangeAlbumSettings(Globals.PersonalCloud.Value, settings)).ConfigureAwait(false);
             });
         }
 
@@ -62,12 +62,17 @@ namespace Unishare.Apps.WindowsConfigurator
 
                 var name = Path.GetFileName(path.TrimEnd(Path.DirectorySeparatorChar));
                 var cache = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Personal Cloud", "Thumbnails", DateTime.Now.ToString("yyyyMMddHHmmss"));
+                Directory.CreateDirectory(cache);
                 LibraryPaths.Add(new AlbumConfig {
                     Name = name,
                     MediaFolder = path,
                     ThumbnailFolder = cache
                 });
-                Globals.CloudManager.InvokeAsync(x => x.ChangeAlbumSettings(Globals.PersonalCloud.Value, LibraryPaths.ToList()));
+
+                var settings = LibraryPaths.ToList();
+                Task.Run(async () => {
+                    await Globals.CloudManager.InvokeAsync(x => x.ChangeAlbumSettings(Globals.PersonalCloud.Value, settings)).ConfigureAwait(false);
+                });                
             }
         }
     }

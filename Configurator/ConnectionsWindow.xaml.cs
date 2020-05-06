@@ -18,7 +18,9 @@ namespace Unishare.Apps.WindowsConfigurator
 
             Task.Run(async () => {
                 var connections = await Globals.CloudManager.InvokeAsync(x => x.GetConnectedServices(Globals.PersonalCloud.Value)).ConfigureAwait(false);
-                foreach (var connection in connections) ConnectedServices.Add(connection);
+                Dispatcher.Invoke(() => {
+                    foreach (var connection in connections) ConnectedServices.Add(connection);
+                });                
             });
         }
 
@@ -28,8 +30,10 @@ namespace Unishare.Apps.WindowsConfigurator
             child.ShowDialog();
             Task.Run(async () => {
                 var connections = await Globals.CloudManager.InvokeAsync(x => x.GetConnectedServices(Globals.PersonalCloud.Value)).ConfigureAwait(false);
-                ConnectedServices.Clear();
-                foreach (var connection in connections) ConnectedServices.Add(connection);
+                Dispatcher.Invoke(() => {
+                    ConnectedServices.Clear();
+                    foreach (var connection in connections) ConnectedServices.Add(connection);
+                });
             });
         }
 
@@ -41,6 +45,7 @@ namespace Unishare.Apps.WindowsConfigurator
             Task.Run(async () => {
                 await Globals.CloudManager.InvokeAsync(x => x.RemoveConnection(Globals.PersonalCloud.Value, name)).ConfigureAwait(false);
             });
+            ConnectedServices.RemoveAt(OnlineConnectionsList.SelectedIndex);
         }
 
         private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
