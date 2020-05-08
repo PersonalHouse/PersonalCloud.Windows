@@ -115,7 +115,8 @@ namespace Unishare.Apps.WindowsConfigurator
                 Task.Run(async () => {
                     try
                     {
-                        await Globals.CloudManager.InvokeAsync(x => x.ConnectToAlibabaCloud(Globals.PersonalCloud.Value, name, config)).ConfigureAwait(false);
+                        var storageProviderVisibility = StorageProviderVisibility.Private; // TODO: Configurable
+                        await Globals.CloudManager.InvokeAsync(x => x.ConnectToAlibabaCloud(Globals.PersonalCloud.Value, name, config, storageProviderVisibility)).ConfigureAwait(false);
                     }
                     finally
                     {
@@ -213,7 +214,8 @@ namespace Unishare.Apps.WindowsConfigurator
                 Task.Run(async () => {
                     try
                     {
-                        await Globals.CloudManager.InvokeAsync(x => x.ConnectToAzure(Globals.PersonalCloud.Value, name, config)).ConfigureAwait(false);
+                        var storageProviderVisibility = StorageProviderVisibility.Private; // TODO: Configurable
+                        await Globals.CloudManager.InvokeAsync(x => x.ConnectToAzure(Globals.PersonalCloud.Value, name, config, storageProviderVisibility)).ConfigureAwait(false);
                     }
                     finally
                     {

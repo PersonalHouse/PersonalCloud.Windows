@@ -37,6 +37,7 @@ namespace Unishare.Apps.WindowsService
                     config.AccessKeyId = cipher.DecryptContinuousText(y.AccessID);
                     config.AccessKeySecret = cipher.DecryptContinuousText(y.AccessSecret);
                     return new StorageProviderInfo {
+                        Id = y.Id,
                         Type = StorageProviderInstance.TypeAliYun,
                         Name = y.Name,
                         Visibility = (StorageProviderVisibility) y.Visibility,
@@ -50,6 +51,7 @@ namespace Unishare.Apps.WindowsService
                     using var cipher = new PasswordCipher(y.Id.ToString("N", CultureInfo.InvariantCulture), x.Key);
                     config.ConnectionString = cipher.DecryptTextOnce(y.Parameters);
                     return new StorageProviderInfo {
+                        Id = y.Id,
                         Type = StorageProviderInstance.TypeAzure,
                         Name = y.Name,
                         Visibility = (StorageProviderVisibility) y.Visibility,
@@ -104,7 +106,7 @@ namespace Unishare.Apps.WindowsService
                         {
                             var config = JsonConvert.DeserializeObject<OssConfig>(provider.Settings);
                             var model = new AlibabaOSS {
-                                // Todo: GUID
+                                Id = provider.Id,
                                 Cloud = id,
                                 Name = provider.Name,
                                 Visibility = (int) provider.Visibility,
@@ -123,7 +125,7 @@ namespace Unishare.Apps.WindowsService
                         {
                             var config = JsonConvert.DeserializeObject<AzureBlobConfig>(provider.Settings);
                             var model = new AzureBlob {
-                                // Todo: GUID
+                                Id = provider.Id,
                                 Cloud = id,
                                 Name = provider.Name,
                                 Visibility = (int) provider.Visibility,

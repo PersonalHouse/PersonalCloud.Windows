@@ -197,14 +197,14 @@ namespace Unishare.Apps.WindowsService.IPC
             else Globals.CloudService.StopSharePersonalCloud(Globals.CloudService.PersonalClouds.First(x => new Guid(x.Id) == id)).Wait();
         }
 
-        public void ConnectToAlibabaCloud(Guid cloudId, string name, OssConfig config)
+        public void ConnectToAlibabaCloud(Guid cloudId, string name, OssConfig config, StorageProviderVisibility visibility)
         {
-            Globals.CloudService.AddStorageProvider(cloudId.ToString("N"), name, config, StorageProviderVisibility.Private);
+            Globals.CloudService.AddStorageProvider(cloudId.ToString("N"), Guid.NewGuid(), name, config, visibility);
         }
 
-        public void ConnectToAzure(Guid cloudId, string name, AzureBlobConfig config)
+        public void ConnectToAzure(Guid cloudId, string name, AzureBlobConfig config, StorageProviderVisibility visibility)
         {
-            Globals.CloudService.AddStorageProvider(cloudId.ToString("N"), name, config, StorageProviderVisibility.Private);
+            Globals.CloudService.AddStorageProvider(cloudId.ToString("N"), Guid.NewGuid(), name, config, visibility);
         }
 
         public string[] GetConnectedServices(Guid cloudId)

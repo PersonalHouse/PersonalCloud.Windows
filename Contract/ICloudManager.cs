@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using NSPersonalCloud;
 using NSPersonalCloud.Apps.Album;
 using NSPersonalCloud.FileSharing.Aliyun;
 
@@ -60,9 +60,9 @@ namespace Unishare.Apps.WindowsContract
         /// <param name="id">(Optional) GUID of a target cloud to observe change. If not specified, the first cloud is used.</param>
         void StopBroadcastingInvitation(Guid? id);
 
-        void ConnectToAlibabaCloud(Guid cloudId, string name, OssConfig config);
+        void ConnectToAlibabaCloud(Guid cloudId, string name, OssConfig config, StorageProviderVisibility storageProviderVisibility);
 
-        void ConnectToAzure(Guid cloudId, string name, AzureBlobConfig config);
+        void ConnectToAzure(Guid cloudId, string name, AzureBlobConfig config, StorageProviderVisibility storageProviderVisibility);
 
         string[] GetConnectedServices(Guid cloudId);
 
