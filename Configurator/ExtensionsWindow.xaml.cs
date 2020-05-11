@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -61,7 +62,7 @@ namespace Unishare.Apps.WindowsConfigurator
                 if (LibraryPaths.Any(x => x.MediaFolder == path)) return;
 
                 var name = Path.GetFileName(path.TrimEnd(Path.DirectorySeparatorChar));
-                var cache = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Personal Cloud", "Thumbnails", DateTime.Now.ToString("yyyyMMddHHmmss"));
+                var cache = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Personal Cloud", "Thumbnails", DateTime.Now.ToString("yyyyMMddHHmmss", CultureInfo.InvariantCulture));
                 Directory.CreateDirectory(cache);
                 LibraryPaths.Add(new AlbumConfig {
                     Name = name,

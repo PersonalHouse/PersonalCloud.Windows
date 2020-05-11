@@ -180,6 +180,9 @@
   <data name="SavedStorageConnections" xml:space="preserve">
     <value>Saved Connections</value>
   </data>
+  <data name="SaveToCloud" xml:space="preserve">
+    <value>Share credentials with other devices</value>
+  </data>
   <data name="StorageProvider" xml:space="preserve">
     <value>Storage</value>
   </data>

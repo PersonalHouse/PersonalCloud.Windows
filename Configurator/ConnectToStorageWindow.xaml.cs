@@ -112,11 +112,11 @@ namespace Unishare.Apps.WindowsConfigurator
 
             if (config.Verify())
             {
+                var shareScope = ShareCredentialsBox.IsChecked == true ? StorageProviderVisibility.Public : StorageProviderVisibility.Private;
                 Task.Run(async () => {
                     try
                     {
-                        var storageProviderVisibility = StorageProviderVisibility.Private; // TODO: Configurable
-                        await Globals.CloudManager.InvokeAsync(x => x.ConnectToAlibabaCloud(Globals.PersonalCloud.Value, name, config, storageProviderVisibility)).ConfigureAwait(false);
+                        await Globals.CloudManager.InvokeAsync(x => x.ConnectToAlibabaCloud(Globals.PersonalCloud.Value, name, config, shareScope)).ConfigureAwait(false);
                     }
                     finally
                     {
@@ -211,11 +211,11 @@ namespace Unishare.Apps.WindowsConfigurator
 
             if (config.Verify())
             {
+                var shareScope = ShareCredentialsBox.IsChecked == true ? StorageProviderVisibility.Public : StorageProviderVisibility.Private;
                 Task.Run(async () => {
                     try
                     {
-                        var storageProviderVisibility = StorageProviderVisibility.Private; // TODO: Configurable
-                        await Globals.CloudManager.InvokeAsync(x => x.ConnectToAzure(Globals.PersonalCloud.Value, name, config, storageProviderVisibility)).ConfigureAwait(false);
+                        await Globals.CloudManager.InvokeAsync(x => x.ConnectToAzure(Globals.PersonalCloud.Value, name, config, shareScope)).ConfigureAwait(false);
                     }
                     finally
                     {

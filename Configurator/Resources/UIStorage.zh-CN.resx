@@ -180,6 +180,9 @@
   <data name="SavedStorageConnections" xml:space="preserve">
     <value>已保存的凭据</value>
   </data>
+  <data name="SaveToCloud" xml:space="preserve">
+    <value>与其它设备分享登录信息</value>
+  </data>
   <data name="StorageProvider" xml:space="preserve">
     <value>存储提供商</value>
   </data>

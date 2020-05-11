@@ -250,6 +250,15 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Share credentials with other devices.
+        /// </summary>
+        public static string SaveToCloud {
+            get {
+                return ResourceManager.GetString("SaveToCloud", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Storage.
         /// </summary>
         public static string StorageProvider {
