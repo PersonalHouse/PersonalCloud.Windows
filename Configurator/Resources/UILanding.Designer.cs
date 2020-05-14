@@ -160,7 +160,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welcome to Personal Cloud Configurator.
+        ///   Looks up a localized string similar to Welcome to Personal Cloud.
         /// </summary>
         public static string Welcome {
             get {

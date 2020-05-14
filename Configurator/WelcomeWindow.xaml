@@ -8,7 +8,7 @@
         WindowStartupLocation="CenterScreen"
         SizeToContent="WidthAndHeight"
         ResizeMode="CanMinimize">
-    <Grid Margin="10"
+    <Grid Margin="25"
           MinWidth="350">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -22,7 +22,7 @@
                    Grid.ColumnSpan="3"
                    Text="{x:Static resx:UILanding.Welcome}"
                    FontSize="18"
-                   HorizontalAlignment="Center" />
+                   HorizontalAlignment="Center" FontWeight="Bold" Margin="0,5,0,5" />
 
         <Expander Grid.Row="2"
                   x:Name="CreateSectionExpander"
@@ -65,7 +65,7 @@
                 </DockPanel>
 
                 <Button x:Name="CreateButton"
-                        Margin="0, 5, 0, 0"
+                        Margin="0,5,0,15"
                         Padding="5"
                         MaxWidth="250"
                         Content="{x:Static resx:UILanding.CreateCloud}"
@@ -115,7 +115,7 @@
                 </DockPanel>
 
                 <Button x:Name="JoinButton"
-                        Margin="0, 5, 0, 0"
+                        Margin="0,5,0,10"
                         Padding="5"
                         MaxWidth="250"
                         Content="{x:Static resx:UILanding.JoinCloud}"
