@@ -22,22 +22,21 @@
                    Grid.ColumnSpan="3"
                    Text="{x:Static resx:UILanding.Welcome}"
                    FontSize="18"
-                   HorizontalAlignment="Center" FontWeight="Bold" Margin="0,5,0,5" />
+                   HorizontalAlignment="Center"
+                   FontWeight="Medium"
+                   Margin="0, 5" />
 
         <Expander Grid.Row="2"
                   x:Name="CreateSectionExpander"
-                  FlowDirection="RightToLeft"
                   IsExpanded="True"
                   Expanded="OnExpanded">
             <Expander.Header>
-                <TextBlock FlowDirection="LeftToRight"
-                           VerticalAlignment="Center"
+                <TextBlock VerticalAlignment="Center"
                            Text="{x:Static resx:UILanding.CreateCloudHint}" />
             </Expander.Header>
 
-            <StackPanel Margin="10"
-                        Orientation="Vertical"
-                        FlowDirection="LeftToRight">
+            <StackPanel Margin="10, 10, 10, 20"
+                        Orientation="Vertical">
                 <DockPanel>
                     <TextBlock DockPanel.Dock="Left"
                                Margin="0, 0, 5, 0"
@@ -65,7 +64,7 @@
                 </DockPanel>
 
                 <Button x:Name="CreateButton"
-                        Margin="0,5,0,15"
+                        Margin="0, 5, 0, 0"
                         Padding="5"
                         MaxWidth="250"
                         Content="{x:Static resx:UILanding.CreateCloud}"
@@ -75,17 +74,14 @@
 
         <Expander Grid.Row="4"
                   x:Name="JoinSectionExpander"
-                  FlowDirection="RightToLeft"
                   Expanded="OnExpanded">
             <Expander.Header>
-                <TextBlock FlowDirection="LeftToRight"
-                           VerticalAlignment="Center"
+                <TextBlock VerticalAlignment="Center"
                            Text="{x:Static resx:UILanding.JoinCloudHint}" />
             </Expander.Header>
 
-            <StackPanel Margin="10"
-                        Orientation="Vertical"
-                        FlowDirection="LeftToRight">
+            <StackPanel Margin="10, 10, 10, 20"
+                        Orientation="Vertical">
 
                 <DockPanel>
                     <TextBlock DockPanel.Dock="Left"
@@ -115,7 +111,7 @@
                 </DockPanel>
 
                 <Button x:Name="JoinButton"
-                        Margin="0,5,0,10"
+                        Margin="0, 5, 0, 0"
                         Padding="5"
                         MaxWidth="250"
                         Content="{x:Static resx:UILanding.JoinCloud}"

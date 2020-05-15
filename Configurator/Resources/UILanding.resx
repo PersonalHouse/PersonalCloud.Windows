@@ -151,9 +151,9 @@
     <value>Personal Cloud</value>
   </data>
   <data name="Welcome" xml:space="preserve">
-    <value>Welcome to Personal Cloud</value>
+    <value>Welcome to Your Personal Cloud</value>
   </data>
   <data name="WelcomeHint" xml:space="preserve">
-    <value>This device doesn not belong to any Personal Cloud. You may...</value>
+    <value>This device has not joined any Personal Cloud. You may...</value>
   </data>
 </root>

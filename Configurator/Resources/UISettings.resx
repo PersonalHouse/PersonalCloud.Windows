@@ -154,7 +154,7 @@
     <value>Personal Cloud Configurator</value>
   </data>
   <data name="ConfigureApps" xml:space="preserve">
-    <value>Configure Functions</value>
+    <value>Configure Apps</value>
   </data>
   <data name="DeveloperExit" xml:space="preserve">
     <value>Quit Configurator</value>

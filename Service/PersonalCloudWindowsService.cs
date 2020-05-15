@@ -48,7 +48,6 @@ namespace Unishare.Apps.WindowsService
             Globals.Database.CreateTable<AlibabaOSS>();
             Globals.Database.CreateTable<AzureBlob>();
             Globals.Database.CreateTable<WebApp>();
-            Globals.Database.CreateTable<Launcher>();
 
             Globals.CloudFileSystem = new VirtualFileSystem(null);
             Globals.CloudConfig = new WindowsDataStorage();

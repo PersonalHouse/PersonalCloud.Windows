@@ -61,7 +61,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Functions.
+        ///   Looks up a localized string similar to Applications.
         /// </summary>
         public static string Applets {
             get {
@@ -97,7 +97,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Photos.
+        ///   Looks up a localized string similar to Camera Roll.
         /// </summary>
         public static string Photos {
             get {

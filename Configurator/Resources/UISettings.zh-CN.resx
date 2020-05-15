@@ -154,7 +154,7 @@
     <value>个人云控制台</value>
   </data>
   <data name="ConfigureApps" xml:space="preserve">
-    <value>配置扩展功能</value>
+    <value>配置应用程序</value>
   </data>
   <data name="DeveloperExit" xml:space="preserve">
     <value>退出控制台</value>

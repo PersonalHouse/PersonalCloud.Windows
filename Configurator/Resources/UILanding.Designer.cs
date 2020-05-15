@@ -160,7 +160,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welcome to Personal Cloud.
+        ///   Looks up a localized string similar to Welcome to Your Personal Cloud.
         /// </summary>
         public static string Welcome {
             get {
@@ -169,7 +169,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This device doesn not belong to any Personal Cloud. You may....
+        ///   Looks up a localized string similar to This device has not joined any Personal Cloud. You may....
         /// </summary>
         public static string WelcomeHint {
             get {

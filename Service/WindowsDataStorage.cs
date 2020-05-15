@@ -19,7 +19,7 @@ using VaslD.Utility.Cryptography;
 namespace Unishare.Apps.WindowsService
 {
     internal class WindowsDataStorage : IConfigStorage
-    {
+    { 
         public event EventHandler CloudSaved;
 
         #region Cloud
@@ -61,23 +61,13 @@ namespace Unishare.Apps.WindowsService
                 var providers = new List<StorageProviderInfo>();
                 providers.AddRange(alibaba);
                 providers.AddRange(azure);
-                var launchers = Globals.Database.Table<Launcher>().Where(y => y.Cloud == x.Id).Select(y => {
-                    return new AppLauncher {
-                        Name = y.Name,
-                        AppType = (AppType) y.Type,
-                        NodeId = y.Node.ToString("N"),
-                        AppId = y.AppName,
-                        WebAddress = y.Address,
-                        AccessKey = y.Key
-                    };
-                }).ToList();
                 return new PersonalCloudInfo(providers) {
                     Id = x.Id.ToString("N", CultureInfo.InvariantCulture),
                     DisplayName = x.Name,
                     NodeDisplayName = deviceName,
                     MasterKey = Convert.FromBase64String(x.Key),
                     TimeStamp = x.Version,
-                    Apps = launchers,
+                    Apps = new List<AppLauncher>(),
                 };
             });
         }
@@ -87,7 +77,6 @@ namespace Unishare.Apps.WindowsService
             Globals.Database.DeleteAll<CloudModel>();
             Globals.Database.DeleteAll<AlibabaOSS>();
             Globals.Database.DeleteAll<AzureBlob>();
-            Globals.Database.DeleteAll<Launcher>();
             foreach (var item in cloud)
             {
                 var id = new Guid(item.Id);
@@ -138,19 +127,6 @@ namespace Unishare.Apps.WindowsService
                             continue;
                         }
                     }
-                }
-
-                foreach (var app in item.Apps)
-                {
-                    Globals.Database.Insert(new Launcher {
-                        Name = app.Name,
-                        Type = (int) app.AppType,
-                        Cloud = id,
-                        Node = string.IsNullOrEmpty(app.NodeId) ? Guid.Empty : new Guid(app.NodeId),
-                        AppName = app.AppId,
-                        Address = app.WebAddress,
-                        Key = app.AccessKey
-                    });
                 }
             }
 

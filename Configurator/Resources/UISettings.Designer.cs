@@ -169,7 +169,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configure Functions.
+        ///   Looks up a localized string similar to Configure Apps.
         /// </summary>
         public static string ConfigureApps {
             get {
