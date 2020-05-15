@@ -1,4 +1,4 @@
-﻿namespace Unishare.Apps.WindowsContract
+﻿namespace NSPersonalCloud.WindowsContract
 {
     public static class Pipes
     {

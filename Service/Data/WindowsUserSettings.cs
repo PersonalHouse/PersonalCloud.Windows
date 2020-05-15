@@ -4,7 +4,7 @@ using NSPersonalCloud;
 
 using SQLite;
 
-namespace Unishare.Apps.WindowsService.Data
+namespace NSPersonalCloud.WindowsService.Data
 {
     internal static class WindowsUserSettings
     {

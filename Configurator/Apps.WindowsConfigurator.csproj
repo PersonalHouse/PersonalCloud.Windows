@@ -4,8 +4,8 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
-    <AssemblyName>Unishare.Apps.WindowsConfigurator</AssemblyName>
-    <RootNamespace>Unishare.Apps.WindowsConfigurator</RootNamespace>
+    <AssemblyName>PersonalCloud.WindowsConfigurator</AssemblyName>
+    <RootNamespace>NSPersonalCloud.WindowsConfigurator</RootNamespace>
     <ApplicationManifest>App.manifest</ApplicationManifest>
     <ApplicationIcon>App.ico</ApplicationIcon>
   </PropertyGroup>

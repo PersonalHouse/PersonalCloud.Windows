@@ -3,8 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Unishare.Apps.WindowsService</RootNamespace>
-    <AssemblyName>Unishare.Apps.WindowsService</AssemblyName>
+    <RootNamespace>NSPersonalCloud.WindowsService</RootNamespace>
+    <AssemblyName>PersonalCloud.WindowsService</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

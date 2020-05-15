@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Unishare.Apps.WindowsConfigurator.Resources {
+namespace NSPersonalCloud.WindowsConfigurator.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Unishare.Apps.WindowsConfigurator.Resources.UIStorage", typeof(UIStorage).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NSPersonalCloud.WindowsConfigurator.Resources.UIStorage", typeof(UIStorage).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

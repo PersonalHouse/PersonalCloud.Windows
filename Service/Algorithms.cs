@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Unishare.Apps.WindowsService
+namespace NSPersonalCloud.WindowsService
 {
     public static class Algorithms
     {

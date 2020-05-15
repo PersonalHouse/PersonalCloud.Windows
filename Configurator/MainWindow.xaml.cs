@@ -9,9 +9,9 @@ using System.Windows.Media;
 
 using Ookii.Dialogs.Wpf;
 
-using Unishare.Apps.WindowsConfigurator.Resources;
+using NSPersonalCloud.WindowsConfigurator.Resources;
 
-namespace Unishare.Apps.WindowsConfigurator
+namespace NSPersonalCloud.WindowsConfigurator
 {
     public partial class MainWindow : Window
     {

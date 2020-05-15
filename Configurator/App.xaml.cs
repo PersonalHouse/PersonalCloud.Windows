@@ -10,10 +10,10 @@ using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.Extensions.DependencyInjection;
 
-using Unishare.Apps.WindowsConfigurator.IPC;
-using Unishare.Apps.WindowsContract;
+using NSPersonalCloud.WindowsConfigurator.IPC;
+using NSPersonalCloud.WindowsContract;
 
-namespace Unishare.Apps.WindowsConfigurator
+namespace NSPersonalCloud.WindowsConfigurator
 {
 #pragma warning disable CA1001 // Objects are disposed at app shutdown.
 

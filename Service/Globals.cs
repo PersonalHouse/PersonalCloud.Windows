@@ -11,9 +11,9 @@ using NSPersonalCloud;
 using SQLite;
 
 using Topshelf;
-using Unishare.Apps.WindowsContract;
+using NSPersonalCloud.WindowsContract;
 
-namespace Unishare.Apps.WindowsService
+namespace NSPersonalCloud.WindowsService
 {
     internal static class Globals
     {

@@ -2,7 +2,7 @@
 
 using SQLite;
 
-namespace Unishare.Apps.WindowsService.Data
+namespace NSPersonalCloud.WindowsService.Data
 {
     [Table("Disk")]
     public class DiskModel

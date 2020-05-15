@@ -1,4 +1,4 @@
-﻿namespace Unishare.Apps.WindowsContract
+﻿namespace NSPersonalCloud.WindowsContract
 {
     /// <summary>
     /// This interface defines IPC contract for showing UI pop-ups.
