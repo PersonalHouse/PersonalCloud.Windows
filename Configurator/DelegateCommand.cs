@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Unishare.Apps.WindowsConfigurator
+namespace NSPersonalCloud.WindowsConfigurator
 {
     public class DelegateCommand : ICommand
     {

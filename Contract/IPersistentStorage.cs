@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Unishare.Apps.WindowsContract
+namespace NSPersonalCloud.WindowsContract
 {
     /// <summary>
     /// This interface defines IPC contract for retrieving data from persistent storage.

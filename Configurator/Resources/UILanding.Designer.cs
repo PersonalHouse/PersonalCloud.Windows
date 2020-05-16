@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Unishare.Apps.WindowsConfigurator.Resources {
+namespace NSPersonalCloud.WindowsConfigurator.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Unishare.Apps.WindowsConfigurator.Resources.UILanding", typeof(UILanding).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("NSPersonalCloud.WindowsConfigurator.Resources.UILanding", typeof(UILanding).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -160,7 +160,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welcome to Personal Cloud.
+        ///   Looks up a localized string similar to Welcome to Your Personal Cloud.
         /// </summary>
         public static string Welcome {
             get {
@@ -169,7 +169,7 @@ namespace Unishare.Apps.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This device doesn not belong to any Personal Cloud. You may....
+        ///   Looks up a localized string similar to This device has not joined any Personal Cloud. You may....
         /// </summary>
         public static string WelcomeHint {
             get {

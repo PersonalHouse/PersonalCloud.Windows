@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Unishare.Apps.WindowsContract
+namespace NSPersonalCloud.WindowsContract
 {
     public interface ICloudEventHandler
     {

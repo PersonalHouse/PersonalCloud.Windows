@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Applets" xml:space="preserve">
-    <value>Functions</value>
+    <value>Applications</value>
   </data>
   <data name="LibraryAdd" xml:space="preserve">
     <value>Add</value>
@@ -130,6 +130,6 @@
     <value>Library Path</value>
   </data>
   <data name="Photos" xml:space="preserve">
-    <value>Photos</value>
+    <value>Camera Roll</value>
   </data>
 </root>

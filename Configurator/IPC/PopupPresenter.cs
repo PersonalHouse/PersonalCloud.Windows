@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Unishare.Apps.WindowsContract;
+using NSPersonalCloud.WindowsContract;
 
-namespace Unishare.Apps.WindowsConfigurator.IPC
+namespace NSPersonalCloud.WindowsConfigurator.IPC
 {
     internal class PopupPresenter : IPopupPresenter
     {

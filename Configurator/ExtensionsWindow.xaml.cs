@@ -12,7 +12,7 @@ using NSPersonalCloud.Apps.Album;
 
 using Ookii.Dialogs.Wpf;
 
-namespace Unishare.Apps.WindowsConfigurator
+namespace NSPersonalCloud.WindowsConfigurator
 {
     public partial class ExtensionsWindow : Window
     {

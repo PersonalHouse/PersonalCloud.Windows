@@ -22,13 +22,13 @@ using SQLite;
 
 using Topshelf;
 
-using Unishare.Apps.Common;
-using Unishare.Apps.Common.Models;
-using Unishare.Apps.WindowsContract;
-using Unishare.Apps.WindowsService.Data;
-using Unishare.Apps.WindowsService.IPC;
+using NSPersonalCloud.Common;
+using NSPersonalCloud.Common.Models;
+using NSPersonalCloud.WindowsContract;
+using NSPersonalCloud.WindowsService.Data;
+using NSPersonalCloud.WindowsService.IPC;
 
-namespace Unishare.Apps.WindowsService
+namespace NSPersonalCloud.WindowsService
 {
     internal class PersonalCloudWindowsService : ServiceControl
     {
@@ -48,7 +48,6 @@ namespace Unishare.Apps.WindowsService
             Globals.Database.CreateTable<AlibabaOSS>();
             Globals.Database.CreateTable<AzureBlob>();
             Globals.Database.CreateTable<WebApp>();
-            Globals.Database.CreateTable<Launcher>();
 
             Globals.CloudFileSystem = new VirtualFileSystem(null);
             Globals.CloudConfig = new WindowsDataStorage();

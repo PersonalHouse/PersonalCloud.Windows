@@ -15,12 +15,12 @@ using NSPersonalCloud.Apps.Album;
 using NSPersonalCloud.FileSharing.Aliyun;
 using NSPersonalCloud.Interfaces.Errors;
 
-using Unishare.Apps.Common;
-using Unishare.Apps.Common.Models;
-using Unishare.Apps.WindowsContract;
-using Unishare.Apps.WindowsService.Data;
+using NSPersonalCloud.Common;
+using NSPersonalCloud.Common.Models;
+using NSPersonalCloud.WindowsContract;
+using NSPersonalCloud.WindowsService.Data;
 
-namespace Unishare.Apps.WindowsService.IPC
+namespace NSPersonalCloud.WindowsService.IPC
 {
     public class CloudManagerService : ICloudManager
     {

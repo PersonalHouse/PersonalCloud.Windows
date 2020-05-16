@@ -2,9 +2,9 @@
 
 using JKang.IpcServiceFramework;
 
-using Unishare.Apps.WindowsContract;
+using NSPersonalCloud.WindowsContract;
 
-namespace Unishare.Apps.WindowsConfigurator
+namespace NSPersonalCloud.WindowsConfigurator
 {
     internal static class Globals
     {

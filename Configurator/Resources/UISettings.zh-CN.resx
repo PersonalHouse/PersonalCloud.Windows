@@ -127,7 +127,7 @@
     <value>个人云</value>
   </data>
   <data name="CloudAddService" xml:space="preserve">
-    <value>配置企业云存储</value>
+    <value>配置第三方服务</value>
   </data>
   <data name="CloudDeviceName" xml:space="preserve">
     <value>设备名称</value>
@@ -154,7 +154,7 @@
     <value>个人云控制台</value>
   </data>
   <data name="ConfigureApps" xml:space="preserve">
-    <value>配置Apps</value>
+    <value>配置应用程序</value>
   </data>
   <data name="DeveloperExit" xml:space="preserve">
     <value>退出控制台</value>

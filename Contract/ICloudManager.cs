@@ -4,7 +4,7 @@ using NSPersonalCloud;
 using NSPersonalCloud.Apps.Album;
 using NSPersonalCloud.FileSharing.Aliyun;
 
-namespace Unishare.Apps.WindowsContract
+namespace NSPersonalCloud.WindowsContract
 {
     /// <summary>
     /// This interface defines IPC contract for Personal Cloud management.

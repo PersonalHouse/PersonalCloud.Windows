@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <RootNamespace>Unishare.Apps.WindowsContract</RootNamespace>
+    <RootNamespace>NSPersonalCloud.WindowsContract</RootNamespace>
+    <AssemblyName>PersonalCloud.WindowsContract</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

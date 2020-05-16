@@ -2,9 +2,9 @@
 using System.Threading.Tasks;
 using System.Windows;
 
-using Unishare.Apps.WindowsContract;
+using NSPersonalCloud.WindowsContract;
 
-namespace Unishare.Apps.WindowsConfigurator.IPC
+namespace NSPersonalCloud.WindowsConfigurator.IPC
 {
     public class NotificationCenter : ICloudEventHandler
     {

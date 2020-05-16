@@ -6,9 +6,9 @@ using System.Windows.Controls;
 using NSPersonalCloud;
 using NSPersonalCloud.FileSharing.Aliyun;
 
-using Unishare.Apps.WindowsConfigurator.Resources;
+using NSPersonalCloud.WindowsConfigurator.Resources;
 
-namespace Unishare.Apps.WindowsConfigurator
+namespace NSPersonalCloud.WindowsConfigurator
 {
     public partial class ConnectToStorageWindow : Window
     {

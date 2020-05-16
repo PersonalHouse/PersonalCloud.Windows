@@ -1,8 +1,8 @@
 ﻿using NSPersonalCloud.FileSharing.Aliyun;
 
-using Unishare.Apps.Common.Models;
+using NSPersonalCloud.Common.Models;
 
-namespace Unishare.Apps.WindowsService.Data
+namespace NSPersonalCloud.WindowsService.Data
 {
     public static class Extensions
     {

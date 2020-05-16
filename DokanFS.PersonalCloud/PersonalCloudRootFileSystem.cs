@@ -131,7 +131,7 @@ namespace DokanFS
 
         public void GetVolumeInformation(out string volumeLabel, out FileSystemFeatures features, out string fileSystemName, out uint maximumComponentLength)
         {
-            volumeLabel = "Home Cloud";
+            volumeLabel = "Personal Cloud";
             fileSystemName = "NTFS";
             maximumComponentLength = 256;
 

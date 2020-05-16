@@ -4,9 +4,9 @@ using System.Windows.Threading;
 
 using Ookii.Dialogs.Wpf;
 
-using Unishare.Apps.WindowsConfigurator.Resources;
+using NSPersonalCloud.WindowsConfigurator.Resources;
 
-namespace Unishare.Apps.WindowsConfigurator
+namespace NSPersonalCloud.WindowsConfigurator
 {
     public static class UIHelpers
     {

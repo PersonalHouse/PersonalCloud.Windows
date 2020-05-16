@@ -4,7 +4,7 @@ using System.Reflection;
 
 using Topshelf;
 
-namespace Unishare.Apps.WindowsService
+namespace NSPersonalCloud.WindowsService
 {
     internal class Program
     {
