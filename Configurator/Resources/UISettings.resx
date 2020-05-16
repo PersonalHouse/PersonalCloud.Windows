@@ -127,7 +127,7 @@
     <value>Personal Cloud</value>
   </data>
   <data name="CloudAddService" xml:space="preserve">
-    <value>Manage Connections</value>
+    <value>Manage Cloud Storages</value>
   </data>
   <data name="CloudDeviceName" xml:space="preserve">
     <value>Device Name</value>
@@ -154,7 +154,7 @@
     <value>Personal Cloud Configurator</value>
   </data>
   <data name="ConfigureApps" xml:space="preserve">
-    <value>Configure Functions</value>
+    <value>Configure Apps</value>
   </data>
   <data name="DeveloperExit" xml:space="preserve">
     <value>Quit Configurator</value>

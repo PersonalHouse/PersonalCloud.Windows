@@ -33,7 +33,7 @@ namespace Unishare.Apps.WindowsService
                 x.Service<PersonalCloudWindowsService>();
                 x.RunAsLocalSystem();
 
-                x.SetServiceName("PersonalCloud.Apps.WindowsService");
+                x.SetServiceName("PersonalCloud.WindowsService");
                 x.SetDescription("Personal Cloud Service is responsible for managing Personal Cloud and related network drives.");
                 x.SetDisplayName("Personal Cloud");
 
