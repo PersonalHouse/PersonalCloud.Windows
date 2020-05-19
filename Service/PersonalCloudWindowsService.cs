@@ -27,6 +27,7 @@ using NSPersonalCloud.Common.Models;
 using NSPersonalCloud.WindowsContract;
 using NSPersonalCloud.WindowsService.Data;
 using NSPersonalCloud.WindowsService.IPC;
+using Serilog;
 
 namespace NSPersonalCloud.WindowsService
 {
@@ -146,6 +147,7 @@ namespace NSPersonalCloud.WindowsService
                         }
                         catch (Exception exception)
                         {
+                            logger.LogError(exception, "OnVolumeIOError exception");
                             _ = Globals.NotificationCenter.InvokeAsync(x => x.OnVolumeIOError(mountPoint, exception));
                         }
                     });

@@ -48,6 +48,7 @@ namespace NSPersonalCloud.WindowsService.IPC
                 }
                 catch (Exception exception)
                 {
+                    logger.LogError(exception, "Mount failed with exception");
                     _ = Globals.NotificationCenter.InvokeAsync(x => x.OnVolumeIOError(mountPoint, exception));
                 }
             });
