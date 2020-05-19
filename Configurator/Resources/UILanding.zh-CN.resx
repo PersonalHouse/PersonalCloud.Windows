@@ -124,36 +124,33 @@
     <value>创建个人云</value>
   </data>
   <data name="CreateCloudHint" xml:space="preserve">
-    <value>创建并将此设备加入新的个人云。</value>
+    <value>创建</value>
   </data>
   <data name="DeviceName" xml:space="preserve">
     <value>设备名称</value>
   </data>
+  <data name="DialogOK" xml:space="preserve">
+    <value>好</value>
+  </data>
   <data name="ErrorCreatingCloud" xml:space="preserve">
-    <value>创建个人云失败</value>
+    <value>无法创建个人云。</value>
   </data>
   <data name="ErrorEnrollingDevice" xml:space="preserve">
-    <value>加入个人云失败</value>
-  </data>
-  <data name="Exit" xml:space="preserve">
-    <value>退出向导</value>
+    <value>无法加入个人云。</value>
   </data>
   <data name="Invitation" xml:space="preserve">
     <value>邀请码</value>
   </data>
   <data name="JoinCloud" xml:space="preserve">
-    <value>加入已有个人云</value>
+    <value>加入个人云</value>
   </data>
   <data name="JoinCloudHint" xml:space="preserve">
-    <value>加入其它设备创建的个人云。</value>
+    <value>加入</value>
   </data>
   <data name="PersonalCloud" xml:space="preserve">
     <value>个人云</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>欢迎使用个人云</value>
-  </data>
-  <data name="WelcomeHint" xml:space="preserve">
-    <value>您的设备目前没有加入个人云，您可以……</value>
   </data>
 </root>

@@ -170,8 +170,7 @@ namespace NSPersonalCloud.WindowsService
         public void SaveApp(string appId, string cloudId, string config)
         {
             var guid = new Guid(cloudId);
-            var old = Globals.Database.Find<WebApp>(x => x.Cloud == guid && x.Name == appId);
-            if (old != null) Globals.Database.Delete(old);
+            Globals.Database.Table<WebApp>().Delete(x => x.Cloud == guid && x.Name == appId);
             Globals.Database.Insert(new WebApp {
                 Cloud = new Guid(cloudId),
                 Name = appId,

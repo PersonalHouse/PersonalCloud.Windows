@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
-using Ookii.Dialogs.Wpf;
-
+using NSPersonalCloud.Apps.Album;
 using NSPersonalCloud.WindowsConfigurator.Resources;
+using NSPersonalCloud.WindowsConfigurator.ViewModels;
+
+using Ookii.Dialogs.Wpf;
 
 namespace NSPersonalCloud.WindowsConfigurator
 {
@@ -18,6 +22,9 @@ namespace NSPersonalCloud.WindowsConfigurator
         internal IReadOnlyList<char> DriveLetters { get; private set; }
 
         private bool initialized;
+
+        private ObservableCollection<StorageConnectionItem> Connections { get; }
+        private ObservableCollection<PhotoAlbumItem> Albums { get; }
 
         public MainWindow()
         {
@@ -33,6 +40,12 @@ namespace NSPersonalCloud.WindowsConfigurator
             MountedCloudDrive.ItemsSource = DriveLetters;
             MountedCloudDrive.SelectedIndex = 0;
 
+            Connections = new ObservableCollection<StorageConnectionItem>();
+            ConnectionList.ItemsSource = Connections;
+            Albums = new ObservableCollection<PhotoAlbumItem>();
+            AlbumList.ItemsSource = Albums;
+
+
             Task.Run(async () => {
                 try
                 {
@@ -45,7 +58,10 @@ namespace NSPersonalCloud.WindowsConfigurator
                     var mounted = await Globals.Storage.InvokeAsync(x => x.IsExplorerIntegrationEnabled()).ConfigureAwait(false);
                     var mountPoint = await Globals.Storage.InvokeAsync(x => x.GetMountPointForPersonalCloud(Globals.PersonalCloud.Value)).ConfigureAwait(false);
 
-                    Dispatcher.Invoke(() => {
+                    var connections = await Globals.CloudManager.InvokeAsync(x => x.GetConnectedServices(Globals.PersonalCloud.Value)).ConfigureAwait(false);
+                    var albums = await Globals.CloudManager.InvokeAsync(x => x.GetAlbumSettings(Globals.PersonalCloud.Value)).ConfigureAwait(false);
+
+                    await Dispatcher.InvokeAsync(() => {
                         SharingSwitch.IsChecked = sharingEnabled;
                         if (!string.IsNullOrEmpty(sharingPath)) SharingPathBox.Text = sharingPath;
 
@@ -61,13 +77,32 @@ namespace NSPersonalCloud.WindowsConfigurator
                             MountedCloudDrive.SelectedIndex = letterIndex;
                         }
 
-                        initialized = true;
+                        foreach (var item in connections)
+                        {
+                            var model = new StorageConnectionItem {
+                                IsSelected = false,
+                                Name = item,
+                                Type = "Cloud Storage"
+                            };
+                            Connections.Add(model);
+                        }
+                        foreach (var item in albums)
+                        {
+                            var model = new PhotoAlbumItem {
+                                IsSelected = false,
+                                Name = item.Name,
+                                Path = item.MediaFolder
+                            };
+                            Albums.Add(model);
+                        }
                     });
                 }
                 catch
                 {
-                    initialized = true;
+                    // Todo
                 }
+
+                initialized = true;
             });
         }
 
@@ -157,7 +192,7 @@ namespace NSPersonalCloud.WindowsConfigurator
             _ = Globals.Mounter.InvokeAsync(x => x.UnmountAllDrives());
         }
 
-        private void OnMountPointChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void OnMountPointChanged(object sender, SelectionChangedEventArgs e)
         {
             if (!initialized) return;
 
@@ -178,16 +213,80 @@ namespace NSPersonalCloud.WindowsConfigurator
             Application.Current.Shutdown();
         }
 
-        private void OnConnectToStorageClicked(object sender, RoutedEventArgs e)
+        private void OnConnectionSelected(object sender, SelectionChangedEventArgs e)
         {
-            var child = new ConnectionsWindow();
-            child.ShowDialog();
+            DeleteConnectionButton.IsEnabled = ConnectionList.SelectedIndex >= 0;
         }
 
-        private void OnEditExtensionsClicked(object sender, RoutedEventArgs e)
+        private void OnAlbumSelected(object sender, SelectionChangedEventArgs e)
         {
-            var child = new ExtensionsWindow();
-            child.ShowDialog();
+            DeleteAppButton.IsEnabled = AlbumList.SelectedIndex >= 0;
+        }
+
+        private void OnAddToConnections(object sender, RoutedEventArgs e)
+        {
+            // Todo: Dialog
+        }
+
+        private void OnDeleteFromConnections(object sender, RoutedEventArgs e)
+        {
+            if (ConnectionList.SelectedIndex == -1) return;
+
+            var name = Connections[ConnectionList.SelectedIndex];
+            Task.Run(async () => {
+                await Globals.CloudManager.InvokeAsync(x => x.RemoveConnection(Globals.PersonalCloud.Value, name.Name)).ConfigureAwait(false);
+            });
+            Connections.RemoveAt(ConnectionList.SelectedIndex);
+        }
+
+        private void OnAddToAlbums(object sender, RoutedEventArgs e)
+        {
+            var browseDialog = new VistaFolderBrowserDialog {
+                RootFolder = Environment.SpecialFolder.Personal,
+                ShowNewFolderButton = false
+            };
+            var selected = browseDialog.ShowDialog(this);
+            if (selected == true)
+            {
+                var path = Path.GetFullPath(browseDialog.SelectedPath);
+                if (!Directory.Exists(path)) return;
+                if (Albums.Any(x => x.Path == path)) return;
+
+                var name = Path.GetFileName(path.TrimEnd(Path.DirectorySeparatorChar));
+                var cache = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Personal Cloud", "Thumbnails", DateTime.Now.ToString("yyyyMMddHHmmss", CultureInfo.InvariantCulture));
+                Directory.CreateDirectory(cache);
+                Albums.Add(new PhotoAlbumItem {
+                    IsSelected = false,
+                    Name = name,
+                    Path = path,
+                });
+
+                Task.Run(async () => {
+                    var settings = await Globals.CloudManager.InvokeAsync(x => x.GetAlbumSettings(Globals.PersonalCloud.Value)).ConfigureAwait(false);
+                    settings.Add(new AlbumConfig {
+                        Name = name,
+                        MediaFolder = path,
+                        ThumbnailFolder = cache
+                    });
+                    await Globals.CloudManager.InvokeAsync(x => x.ChangeAlbumSettings(Globals.PersonalCloud.Value, settings)).ConfigureAwait(false);
+                });
+            }
+        }
+
+        private void OnDeleteFromAlbums(object sender, RoutedEventArgs e)
+        {
+            if (AlbumList.SelectedIndex == -1) return;
+
+            var item = Albums[AlbumList.SelectedIndex];
+            Albums.RemoveAt(AlbumList.SelectedIndex);
+
+            Task.Run(async () => {
+                var settings = await Globals.CloudManager.InvokeAsync(x => x.GetAlbumSettings(Globals.PersonalCloud.Value)).ConfigureAwait(false);
+                var config = settings.FirstOrDefault(x => x.Name == item.Name && x.MediaFolder == item.Path);
+                if (config == null) return;
+                settings.Remove(config);
+                await Globals.CloudManager.InvokeAsync(x => x.ChangeAlbumSettings(Globals.PersonalCloud.Value, settings)).ConfigureAwait(false);
+            });
         }
     }
 }

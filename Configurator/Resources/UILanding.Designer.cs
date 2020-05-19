@@ -70,7 +70,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create Personal Cloud.
+        ///   Looks up a localized string similar to CREATE PERSONAL CLOUD.
         /// </summary>
         public static string CreateCloud {
             get {
@@ -79,7 +79,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create new Personal Cloud and add this device to it..
+        ///   Looks up a localized string similar to CREATE.
         /// </summary>
         public static string CreateCloudHint {
             get {
@@ -93,6 +93,15 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         public static string DeviceName {
             get {
                 return ResourceManager.GetString("DeviceName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string DialogOK {
+            get {
+                return ResourceManager.GetString("DialogOK", resourceCulture);
             }
         }
         
@@ -115,15 +124,6 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quit Configurator.
-        /// </summary>
-        public static string Exit {
-            get {
-                return ResourceManager.GetString("Exit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Invitation Code.
         /// </summary>
         public static string Invitation {
@@ -133,7 +133,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Join by Invitation.
+        ///   Looks up a localized string similar to JOIN BY INVITATION.
         /// </summary>
         public static string JoinCloud {
             get {
@@ -142,7 +142,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add this device to existing Personal Cloud..
+        ///   Looks up a localized string similar to JOIN.
         /// </summary>
         public static string JoinCloudHint {
             get {
@@ -165,15 +165,6 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         public static string Welcome {
             get {
                 return ResourceManager.GetString("Welcome", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This device has not joined any Personal Cloud. You may....
-        /// </summary>
-        public static string WelcomeHint {
-            get {
-                return ResourceManager.GetString("WelcomeHint", resourceCulture);
             }
         }
     }

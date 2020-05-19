@@ -121,13 +121,16 @@
     <value>Cloud Name</value>
   </data>
   <data name="CreateCloud" xml:space="preserve">
-    <value>Create Personal Cloud</value>
+    <value>CREATE PERSONAL CLOUD</value>
   </data>
   <data name="CreateCloudHint" xml:space="preserve">
-    <value>Create new Personal Cloud and add this device to it.</value>
+    <value>CREATE</value>
   </data>
   <data name="DeviceName" xml:space="preserve">
     <value>Device Name</value>
+  </data>
+  <data name="DialogOK" xml:space="preserve">
+    <value>OK</value>
   </data>
   <data name="ErrorCreatingCloud" xml:space="preserve">
     <value>Unable to Create Personal Cloud</value>
@@ -135,25 +138,19 @@
   <data name="ErrorEnrollingDevice" xml:space="preserve">
     <value>Unable to Enroll This Device</value>
   </data>
-  <data name="Exit" xml:space="preserve">
-    <value>Quit Configurator</value>
-  </data>
   <data name="Invitation" xml:space="preserve">
     <value>Invitation Code</value>
   </data>
   <data name="JoinCloud" xml:space="preserve">
-    <value>Join by Invitation</value>
+    <value>JOIN BY INVITATION</value>
   </data>
   <data name="JoinCloudHint" xml:space="preserve">
-    <value>Add this device to existing Personal Cloud.</value>
+    <value>JOIN</value>
   </data>
   <data name="PersonalCloud" xml:space="preserve">
     <value>Personal Cloud</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Welcome to Your Personal Cloud</value>
-  </data>
-  <data name="WelcomeHint" xml:space="preserve">
-    <value>This device has not joined any Personal Cloud. You may...</value>
   </data>
 </root>
