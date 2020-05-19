@@ -6,7 +6,6 @@ using System.Linq;
 using DokanFS;
 
 using DokanNet;
-using DokanNet.Logging;
 
 using Nito.AsyncEx;
 
@@ -19,11 +18,17 @@ using NSPersonalCloud.Common;
 using NSPersonalCloud.Common.Models;
 using NSPersonalCloud.WindowsContract;
 using NSPersonalCloud.WindowsService.Data;
+using Microsoft.Extensions.Logging;
 
 namespace NSPersonalCloud.WindowsService.IPC
 {
     public class CloudManagerService : ICloudManager
     {
+        Microsoft.Extensions.Logging.ILogger logger;
+        public CloudManagerService(ILogger l)
+        {
+            logger = l;
+        }
         #region File System Controller
 
         public void MountNetworkDrive(Guid cloudId, string mountPoint)
@@ -39,7 +44,7 @@ namespace NSPersonalCloud.WindowsService.IPC
                 try
                 {
                     var disk = new DokanFileSystemAdapter(new PersonalCloudRootFileSystem(cloud));
-                    disk.Mount(mountPoint, DokanOptions.EnableNotificationAPI, 5, new NullLogger());
+                    disk.Mount(mountPoint, DokanOptions.EnableNotificationAPI, 5, new DokanyLogger(logger));
                 }
                 catch (Exception exception)
                 {

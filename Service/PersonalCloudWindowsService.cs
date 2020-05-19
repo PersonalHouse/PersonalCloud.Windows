@@ -34,9 +34,20 @@ namespace NSPersonalCloud.WindowsService
     {
         private HostControl HostControl { get; set; }
         private CancellationTokenSource Runners { get; set; }
+        ILoggerFactory loggerFactory;
+        Microsoft.Extensions.Logging.ILogger logger;
+        CloudManagerService cloudManagerService;
 
+        public PersonalCloudWindowsService()
+        {
+            var curdir = Path.GetDirectoryName(typeof(PersonalCloudWindowsService).Assembly.Location);
+            Directory.CreateDirectory(Path.Combine(curdir, "log"));
+            loggerFactory = (new LoggerFactory()).AddFile(Path.Combine(curdir, "log", "winsrv.log"), fileSizeLimitBytes: 6291456, retainedFileCountLimit: 3);//6m
+            logger = loggerFactory.CreateLogger("PersonalCloudWindowsService");
+        }
         private static void Initialize()
         {
+
             SQLitePCL.Batteries_V2.Init();
 
             Directory.CreateDirectory(Globals.ConfigurationPath);
@@ -57,14 +68,16 @@ namespace NSPersonalCloud.WindowsService
 
         public bool Start(HostControl hostControl)
         {
+            logger.LogInformation("Windows service started");
             HostControl = hostControl;
 
             Initialize();
 
             Runners = new CancellationTokenSource();
+            cloudManagerService = new CloudManagerService(loggerFactory.CreateLogger("CloudManagerService"));
 
             var ipcServiceCollection = new ServiceCollection()
-                .AddSingleton<CloudManagerService>()
+                .AddSingleton<CloudManagerService>(x=>cloudManagerService)
                 .AddSingleton<StorageService>()
                 .AddIpc(builder => {
                     builder.AddNamedPipe()
@@ -100,10 +113,10 @@ namespace NSPersonalCloud.WindowsService
 
             var resourcesPath = Path.Combine(Globals.ConfigurationPath, "Static");
             Directory.CreateDirectory(resourcesPath);
-            Globals.CloudService = new PCLocalService(Globals.CloudConfig, new LoggerFactory(), Globals.CloudFileSystem, resourcesPath);
+            Globals.CloudService = new PCLocalService(Globals.CloudConfig, loggerFactory, Globals.CloudFileSystem, resourcesPath);
             Globals.CloudService.OnError += (o, e) => {
                 if (e.ErrorCode == ErrorCode.NeedUpdate)
-                    _ = Globals.PopupPresenter.InvokeAsync(x => x.ShowAlert("个人云版本过低", "您必须升级个人云才能访问其它设备。"));
+                    _ = Globals.PopupPresenter.InvokeAsync(x => x.ShowAlert("There is a new version", "Personal Cloud program must be upgraded"));
             };
 
             if (!Globals.Database.CheckSetting(UserSettings.LastInstalledVersion, Globals.Version))
@@ -167,6 +180,7 @@ namespace NSPersonalCloud.WindowsService
 
             Globals.CloudService.Dispose();
             Globals.Database.Dispose();
+            logger.LogInformation("Windows service stoped");
             return true;
         }
     }
