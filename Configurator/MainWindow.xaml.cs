@@ -226,6 +226,8 @@ namespace NSPersonalCloud.WindowsConfigurator
         private void OnAddToConnections(object sender, RoutedEventArgs e)
         {
             // Todo: Dialog
+            var dialog = new ConnectToStorageWindow();
+            dialog.ShowDialog();
         }
 
         private void OnDeleteFromConnections(object sender, RoutedEventArgs e)
