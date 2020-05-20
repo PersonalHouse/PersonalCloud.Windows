@@ -124,10 +124,7 @@
     <value>Please use a short and unique name, and do not use special characters.</value>
   </data>
   <data name="Cloud" xml:space="preserve">
-    <value>Personal Cloud</value>
-  </data>
-  <data name="CloudAddService" xml:space="preserve">
-    <value>Manage Cloud Storages</value>
+    <value>PERSONAL CLOUD</value>
   </data>
   <data name="CloudDeviceName" xml:space="preserve">
     <value>Device Name</value>
@@ -136,34 +133,37 @@
     <value>Cannot generate invitation.</value>
   </data>
   <data name="CloudInviteStart" xml:space="preserve">
-    <value>Add A Device</value>
+    <value>ADD A DEVICE</value>
   </data>
   <data name="CloudInviteStop" xml:space="preserve">
     <value>Stop</value>
   </data>
   <data name="CloudLeave" xml:space="preserve">
-    <value>Leave Personal Cloud</value>
+    <value>LEAVE PERSONAL CLOUD</value>
   </data>
   <data name="CloudName" xml:space="preserve">
     <value>Cloud Name</value>
   </data>
   <data name="CloudSaveChanges" xml:space="preserve">
-    <value>Save</value>
+    <value>SAVE</value>
   </data>
   <data name="Configurator" xml:space="preserve">
-    <value>Personal Cloud Configurator</value>
-  </data>
-  <data name="ConfigureApps" xml:space="preserve">
-    <value>Configure Apps</value>
+    <value>Personal Cloud</value>
   </data>
   <data name="DeveloperExit" xml:space="preserve">
     <value>Quit Configurator</value>
   </data>
   <data name="DeveloperRestartService" xml:space="preserve">
-    <value>Restart Windows Service</value>
+    <value>Restart Service</value>
+  </data>
+  <data name="DeveloperStopService" xml:space="preserve">
+    <value>Stop Service</value>
+  </data>
+  <data name="DeveloperWindowsService" xml:space="preserve">
+    <value>Windows Service</value>
   </data>
   <data name="Explorer" xml:space="preserve">
-    <value>File Explorer Integration</value>
+    <value>FILE EXPLORER INTEGRATION</value>
   </data>
   <data name="ExplorerMasterSwitch" xml:space="preserve">
     <value>Mount Cloud as Network Drive</value>
@@ -172,7 +172,7 @@
     <value>Drive Letter</value>
   </data>
   <data name="FileSharing" xml:space="preserve">
-    <value>File Sharing</value>
+    <value>FILE SHARING</value>
   </data>
   <data name="FileSharingMasterSwitch" xml:space="preserve">
     <value>Allow File Sharing on This Device</value>
@@ -181,7 +181,7 @@
     <value>Share This Folder</value>
   </data>
   <data name="FileSharingPathSelect" xml:space="preserve">
-    <value>Change</value>
+    <value>CHANGE</value>
   </data>
   <data name="InvitesSentMessage" xml:space="preserve">
     <value>Enter the following code on other devices:
@@ -196,10 +196,15 @@ Closing this dialog terminates verification session.</value>
   <data name="ServiceNotRunning" xml:space="preserve">
     <value>Configurator Not Ready</value>
   </data>
+  <data name="StopService" xml:space="preserve">
+    <value>STOP SERVICE</value>
+  </data>
   <data name="StopVerification" xml:space="preserve">
     <value>Stop Verification</value>
   </data>
   <data name="WaitForService" xml:space="preserve">
-    <value>Personal Cloud and its components are initializing. Please wait for a few minutes and try again.</value>
+    <value>Personal Cloud and its components are initializing. Please wait for a few minutes and try again.
+
+If you continue to receive this error after a few minutes, use "Windows Service" &gt; "Restart Service" in the right-click menu to restart companion service.</value>
   </data>
 </root>

@@ -7,28 +7,22 @@ using DokanFS;
 
 using DokanNet;
 
+using Microsoft.Extensions.Logging;
+
 using Nito.AsyncEx;
 
-using NSPersonalCloud;
 using NSPersonalCloud.Apps.Album;
-using NSPersonalCloud.FileSharing.Aliyun;
-using NSPersonalCloud.Interfaces.Errors;
-
 using NSPersonalCloud.Common;
 using NSPersonalCloud.Common.Models;
+using NSPersonalCloud.FileSharing.Aliyun;
+using NSPersonalCloud.Interfaces.Errors;
 using NSPersonalCloud.WindowsContract;
 using NSPersonalCloud.WindowsService.Data;
-using Microsoft.Extensions.Logging;
 
 namespace NSPersonalCloud.WindowsService.IPC
 {
     public class CloudManagerService : ICloudManager
     {
-        Microsoft.Extensions.Logging.ILogger logger;
-        public CloudManagerService(ILogger l)
-        {
-            logger = l;
-        }
         #region File System Controller
 
         public void MountNetworkDrive(Guid cloudId, string mountPoint)
@@ -44,11 +38,11 @@ namespace NSPersonalCloud.WindowsService.IPC
                 try
                 {
                     var disk = new DokanFileSystemAdapter(new PersonalCloudRootFileSystem(cloud));
-                    disk.Mount(mountPoint, DokanOptions.EnableNotificationAPI, 5, new DokanyLogger(logger));
+                    disk.Mount(mountPoint, DokanOptions.EnableNotificationAPI, 5, new DokanyLogger());
                 }
                 catch (Exception exception)
                 {
-                    logger.LogError(exception, "Mount failed with exception");
+                    Globals.Loggers.CreateLogger<CloudManagerService>().LogError(exception, "Mount failed.");
                     _ = Globals.NotificationCenter.InvokeAsync(x => x.OnVolumeIOError(mountPoint, exception));
                 }
             });
@@ -65,7 +59,7 @@ namespace NSPersonalCloud.WindowsService.IPC
 
         public void Restart()
         {
-            Globals.Host.Stop();
+            Globals.ServiceHost.Stop();
             // Todo: Restart?
         }
 
@@ -238,6 +232,18 @@ namespace NSPersonalCloud.WindowsService.IPC
         public void RemoveConnection(Guid cloudId, string name)
         {
             Globals.CloudService.RemoveStorageProvider(cloudId.ToString("N"), name);
+        }
+
+        public void Refresh()
+        {
+            try
+            {
+                Globals.CloudService.StartNetwork(true);
+            }
+            catch
+            {
+                // Ignored.
+            }
         }
 
         #endregion ICloudManager

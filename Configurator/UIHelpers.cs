@@ -14,7 +14,7 @@ namespace NSPersonalCloud.WindowsConfigurator
         {
             var dialog = new TaskDialog {
                 MainIcon = TaskDialogIcon.Information,
-                WindowTitle = UISettings.Cloud,
+                WindowTitle = UISettings.Configurator,
                 MainInstruction = UISettings.ServiceNotRunning,
                 Content = UISettings.WaitForService
             };
@@ -36,7 +36,7 @@ namespace NSPersonalCloud.WindowsConfigurator
         {
             var dialog = new TaskDialog {
                 MainIcon = TaskDialogIcon.Information,
-                WindowTitle = UISettings.Cloud,
+                WindowTitle = UISettings.Configurator,
                 MainInstruction = title,
                 Content = message
             };
@@ -60,7 +60,7 @@ namespace NSPersonalCloud.WindowsConfigurator
         {
             var dialog = new TaskDialog {
                 MainIcon = TaskDialogIcon.Information,
-                WindowTitle = UISettings.Cloud,
+                WindowTitle = UISettings.Configurator,
                 MainInstruction = title,
                 Content = message
             };

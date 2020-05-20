@@ -4,14 +4,15 @@ using System.IO;
 
 using JKang.IpcServiceFramework;
 
+using Microsoft.Extensions.Logging;
+
 using Nito.AsyncEx;
 
-using NSPersonalCloud;
+using NSPersonalCloud.WindowsContract;
 
 using SQLite;
 
 using Topshelf;
-using NSPersonalCloud.WindowsContract;
 
 namespace NSPersonalCloud.WindowsService
 {
@@ -19,7 +20,8 @@ namespace NSPersonalCloud.WindowsService
     {
         public const string Version = "2.0.0.1";
 
-        public static HostControl Host { get; set; }
+        public static HostControl ServiceHost { get; set; }
+        public static ILoggerFactory Loggers { get; set; }
 
         public static WindowsDataStorage CloudConfig { get; set; }
         public static PCLocalService CloudService { get; set; }

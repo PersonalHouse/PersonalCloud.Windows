@@ -79,20 +79,11 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Personal Cloud.
+        ///   Looks up a localized string similar to PERSONAL CLOUD.
         /// </summary>
         public static string Cloud {
             get {
                 return ResourceManager.GetString("Cloud", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Manage Cloud Storages.
-        /// </summary>
-        public static string CloudAddService {
-            get {
-                return ResourceManager.GetString("CloudAddService", resourceCulture);
             }
         }
         
@@ -115,7 +106,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add A Device.
+        ///   Looks up a localized string similar to ADD A DEVICE.
         /// </summary>
         public static string CloudInviteStart {
             get {
@@ -133,7 +124,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Leave Personal Cloud.
+        ///   Looks up a localized string similar to LEAVE PERSONAL CLOUD.
         /// </summary>
         public static string CloudLeave {
             get {
@@ -151,7 +142,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save.
+        ///   Looks up a localized string similar to SAVE.
         /// </summary>
         public static string CloudSaveChanges {
             get {
@@ -160,20 +151,11 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Personal Cloud Configurator.
+        ///   Looks up a localized string similar to Personal Cloud.
         /// </summary>
         public static string Configurator {
             get {
                 return ResourceManager.GetString("Configurator", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Configure Apps.
-        /// </summary>
-        public static string ConfigureApps {
-            get {
-                return ResourceManager.GetString("ConfigureApps", resourceCulture);
             }
         }
         
@@ -187,7 +169,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Restart Windows Service.
+        ///   Looks up a localized string similar to Restart Service.
         /// </summary>
         public static string DeveloperRestartService {
             get {
@@ -196,7 +178,25 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to File Explorer Integration.
+        ///   Looks up a localized string similar to Stop Service.
+        /// </summary>
+        public static string DeveloperStopService {
+            get {
+                return ResourceManager.GetString("DeveloperStopService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Windows Service.
+        /// </summary>
+        public static string DeveloperWindowsService {
+            get {
+                return ResourceManager.GetString("DeveloperWindowsService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FILE EXPLORER INTEGRATION.
         /// </summary>
         public static string Explorer {
             get {
@@ -223,7 +223,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to File Sharing.
+        ///   Looks up a localized string similar to FILE SHARING.
         /// </summary>
         public static string FileSharing {
             get {
@@ -250,7 +250,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change.
+        ///   Looks up a localized string similar to CHANGE.
         /// </summary>
         public static string FileSharingPathSelect {
             get {
@@ -290,6 +290,15 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to STOP SERVICE.
+        /// </summary>
+        public static string StopService {
+            get {
+                return ResourceManager.GetString("StopService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stop Verification.
         /// </summary>
         public static string StopVerification {
@@ -299,7 +308,9 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Personal Cloud and its components are initializing. Please wait for a few minutes and try again..
+        ///   Looks up a localized string similar to Personal Cloud and its components are initializing. Please wait for a few minutes and try again.
+        ///
+        ///If you continue to receive this error after a few minutes, use &quot;Windows Service&quot; &gt; &quot;Restart Service&quot; in the right-click menu to restart companion service..
         /// </summary>
         public static string WaitForService {
             get {

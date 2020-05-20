@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using Microsoft.Extensions.Logging;
+using NSPersonalCloud.WindowsContract;
 
 using Topshelf;
 
@@ -29,12 +31,17 @@ namespace NSPersonalCloud.WindowsService
 
             #endregion Library Architecture
 
+            var logsDir = Path.Combine(Globals.ConfigurationPath, "Logs");
+            Directory.CreateDirectory(logsDir);
+
+            Globals.Loggers = new LoggerFactory().AddFile(Path.Combine(logsDir, "Service.log"), fileSizeLimitBytes: 6291456, retainedFileCountLimit: 3);
+
             var rc = HostFactory.Run(x => {
                 x.Service<PersonalCloudWindowsService>();
                 x.RunAsLocalSystem();
 
-                x.SetServiceName("PersonalCloud.WindowsService");
-                x.SetDescription("Personal Cloud Service is responsible for managing Personal Cloud and related network drives.");
+                x.SetServiceName(Services.ServiceName);
+                x.SetDescription("Personal Cloud Service is responsible for managing Personal Cloud and related network drives in your local network.");
                 x.SetDisplayName("Personal Cloud");
 
                 x.EnableServiceRecovery(service => service.RestartService(1));

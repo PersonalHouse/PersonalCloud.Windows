@@ -12,5 +12,7 @@ namespace NSPersonalCloud.WindowsConfigurator
         public static IpcServiceClient<ICloudManager> CloudManager { get; set; }
         public static IpcServiceClient<IFileSystemController> Mounter { get; set; }
         public static IpcServiceClient<IPersistentStorage> Storage { get; set; }
+
+        public static bool IsServiceRunning { get; set; }
     }
 }

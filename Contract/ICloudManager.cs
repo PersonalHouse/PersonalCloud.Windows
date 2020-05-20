@@ -71,5 +71,7 @@ namespace NSPersonalCloud.WindowsContract
         void ChangeAlbumSettings(Guid cloudId, List<AlbumConfig> settings);
 
         List<AlbumConfig> GetAlbumSettings(Guid cloudId);
+
+        void Refresh();
     }
 }

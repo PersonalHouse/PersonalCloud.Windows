@@ -61,7 +61,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add.
+        ///   Looks up a localized string similar to ADD.
         /// </summary>
         public static string Add {
             get {
@@ -160,7 +160,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connect to Online Storage.
+        ///   Looks up a localized string similar to CONNECTIONS.
         /// </summary>
         public static string ConnectToStorage {
             get {
@@ -169,7 +169,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove.
+        ///   Looks up a localized string similar to REMOVE.
         /// </summary>
         public static string Delete {
             get {
@@ -232,7 +232,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save.
+        ///   Looks up a localized string similar to SAVE.
         /// </summary>
         public static string SaveAndClose {
             get {

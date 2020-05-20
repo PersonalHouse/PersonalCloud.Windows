@@ -117,19 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Applets" xml:space="preserve">
-    <value>Applications</value>
-  </data>
   <data name="LibraryAdd" xml:space="preserve">
-    <value>Add</value>
+    <value>ADD</value>
   </data>
   <data name="LibraryDelete" xml:space="preserve">
-    <value>Remove</value>
+    <value>REMOVE</value>
   </data>
   <data name="LibraryFolders" xml:space="preserve">
-    <value>Library Path</value>
-  </data>
-  <data name="Photos" xml:space="preserve">
-    <value>Camera Roll</value>
+    <value>PHOTO ALBUMS</value>
   </data>
 </root>

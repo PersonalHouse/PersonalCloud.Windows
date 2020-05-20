@@ -1,0 +1,125 @@
+﻿<UserControl x:Class="NSPersonalCloud.WindowsConfigurator.NewConnectionForm"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:resx="clr-namespace:NSPersonalCloud.WindowsConfigurator.Resources"
+             xmlns:local="clr-namespace:NSPersonalCloud.WindowsConfigurator"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <GroupBox x:Name="MainSection"
+              Style="{StaticResource MaterialDesignGroupBox}">
+        <GroupBox.Header>
+            <DockPanel>
+                <TextBlock x:Name="Header"
+                           DockPanel.Dock="Left"
+                           VerticalAlignment="Center"
+                           Foreground="{StaticResource MaterialDesignDarkForeground}"
+                           Text="CONNECT TO CLOUD STORAGE" />
+                <Button DockPanel.Dock="Right" 
+                        Style="{StaticResource MaterialDesignToolForegroundButton}"
+                        HorizontalContentAlignment="Right"
+                        Content="{md:PackIcon Kind=Close}"
+                        Click="Discard"/>
+            </DockPanel>
+        </GroupBox.Header>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="20" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition Height="10" />
+                    <RowDefinition />
+                    <RowDefinition Height="10" />
+                    <RowDefinition />
+                    <RowDefinition Height="10" />
+                    <RowDefinition />
+                    <RowDefinition Height="10" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="10" />
+                    <ColumnDefinition MinWidth="300" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="ConnectionNameLabel"
+                           Text="Name"
+                           VerticalAlignment="Center" />
+                <TextBox x:Name="ConnectionNameBox"
+                         Grid.Column="2"
+                         MaxLines="1"
+                         TextWrapping="Wrap"
+                         VerticalAlignment="Center" />
+
+                <TextBlock x:Name="EndpointLabel"
+                           Grid.Row="2"
+                           Text="Endpoint"
+                           VerticalAlignment="Center" />
+                <TextBox x:Name="EndpointBox"
+                         Grid.Row="2"
+                         Grid.Column="2"
+                         MaxLines="1"
+                         TextWrapping="Wrap"
+                         VerticalAlignment="Center" />
+
+                <TextBlock x:Name="ContainerLabel"
+                           Grid.Row="4"
+                           Text="Container"
+                           VerticalAlignment="Center" />
+                <TextBox x:Name="ContainerBox"
+                         Grid.Row="4"
+                         Grid.Column="2"
+                         MaxLines="1"
+                         TextWrapping="Wrap"
+                         VerticalAlignment="Center" />
+
+                <TextBlock x:Name="AccessIDLabel"
+                           Grid.Row="6"
+                           Text="Account"
+                           VerticalAlignment="Center" />
+                <TextBox x:Name="AccessIDBox"
+                         Grid.Row="6"
+                         Grid.Column="2"
+                         MaxLines="1"
+                         TextWrapping="Wrap"
+                         VerticalAlignment="Center" />
+
+                <TextBlock x:Name="AccessSecretLabel"
+                           Grid.Row="8"
+                           Text="Secret"
+                           VerticalAlignment="Center" />
+                <TextBox x:Name="AccessSecretBox"
+                         Grid.Row="8"
+                         Grid.Column="2"
+                         MaxLines="1"
+                         TextWrapping="Wrap"
+                         VerticalAlignment="Center" />
+            </Grid>
+
+            <DockPanel Grid.Row="2">
+                <TextBlock DockPanel.Dock="Left"
+                           Text="{x:Static resx:UIStorage.SaveToCloud}"
+                           VerticalAlignment="Center" />
+                <CheckBox x:Name="ShareCredentialsBox"
+                          DockPanel.Dock="Left"
+                          Margin="5, 0, 0, 0"
+                          IsChecked="True"
+                          VerticalAlignment="Center" />
+
+                <Button x:Name="SaveButton"
+                        DockPanel.Dock="Right"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        md:ButtonProgressAssist.Value="-1"
+                        md:ButtonProgressAssist.IsIndeterminate="True"
+                        HorizontalAlignment="Right"
+                        Margin="20, 0, 0, 0"
+                        Content="{x:Static resx:UIStorage.SaveAndClose}"
+                        Click="SaveConnection" />
+            </DockPanel>
+        </Grid>
+    </GroupBox>
+</UserControl>

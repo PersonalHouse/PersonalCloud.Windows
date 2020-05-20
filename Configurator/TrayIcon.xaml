@@ -2,19 +2,24 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:tb="http://www.hardcodet.net/taskbar"
                     xmlns:local="clr-namespace:NSPersonalCloud.WindowsConfigurator"
-                    xmlns:resx="clr-namespace:NSPersonalCloud.WindowsConfigurator.Resources">
+                    xmlns:resx="clr-namespace:NSPersonalCloud.WindowsConfigurator.Resources"
+                    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes">
 
     <ContextMenu x:Shared="false"
                  x:Key="TrayMenu">
         <MenuItem Header="{x:Static resx:UILanding.PersonalCloud}"
-                  FontFamily="Microsoft YaHei UI"
                   IsEnabled="False"/>
-        <MenuItem Header="v2.0 (20200320)"
-                  FontFamily="Microsoft YaHei UI"
+        <MenuItem Header="v2.2 (2020520)"
                   IsEnabled="False" />
         <Separator />
+        <MenuItem Header="{x:Static resx:UISettings.DeveloperWindowsService}">
+            <MenuItem Header="{x:Static resx:UISettings.DeveloperRestartService}"
+                      Command="{Binding RestartServiceCommand}"/>
+            <MenuItem Header="{x:Static resx:UISettings.DeveloperStopService}"
+                      Command="{Binding StopServiceCommand}"/>
+        </MenuItem>
+        <Separator />
         <MenuItem Header="{x:Static resx:UISettings.DeveloperExit}"
-                  FontFamily="Microsoft YaHei UI"
                   Command="{Binding ExitApplicationCommand}" />
     </ContextMenu>
 

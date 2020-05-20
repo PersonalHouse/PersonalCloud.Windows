@@ -61,16 +61,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Applications.
-        /// </summary>
-        public static string Applets {
-            get {
-                return ResourceManager.GetString("Applets", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add.
+        ///   Looks up a localized string similar to ADD.
         /// </summary>
         public static string LibraryAdd {
             get {
@@ -79,7 +70,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove.
+        ///   Looks up a localized string similar to REMOVE.
         /// </summary>
         public static string LibraryDelete {
             get {
@@ -88,20 +79,11 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Library Path.
+        ///   Looks up a localized string similar to PHOTO ALBUMS.
         /// </summary>
         public static string LibraryFolders {
             get {
                 return ResourceManager.GetString("LibraryFolders", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Camera Roll.
-        /// </summary>
-        public static string Photos {
-            get {
-                return ResourceManager.GetString("Photos", resourceCulture);
             }
         }
     }

@@ -1,41 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 
 namespace NSPersonalCloud.WindowsService.IPC
 {
-    class DokanyLogger: DokanNet.Logging.ILogger
+    internal class DokanyLogger : DokanNet.Logging.ILogger
     {
-        ILogger logger;
-        public DokanyLogger(ILogger l)
+        private ILogger Logger { get; }
+
+        public DokanyLogger()
         {
-            logger = l;
+            Logger = Globals.Loggers.CreateLogger<DokanyLogger>();
         }
 
         public void Debug(string message, params object[] args)
         {
-            logger.LogDebug(message, args);
+            Logger.LogDebug(message, args);
         }
 
         public void Error(string message, params object[] args)
         {
-            logger.LogError(message, args);
+            Logger.LogError(message, args);
         }
 
         public void Fatal(string message, params object[] args)
         {
-            logger.LogError(message, args);
+            Logger.LogCritical(message, args);
         }
 
         public void Info(string message, params object[] args)
         {
-            logger.LogInformation(message, args);
+            Logger.LogInformation(message, args);
         }
 
         public void Warn(string message, params object[] args)
         {
-            logger.LogWarning(message, args);
+            Logger.LogWarning(message, args);
         }
     }
 }

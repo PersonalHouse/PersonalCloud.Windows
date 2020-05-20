@@ -108,6 +108,8 @@ namespace NSPersonalCloud.WindowsConfigurator
 
         private void JoinPersonalCloud(string deviceName, string invite)
         {
+            ToggleBusyIndicator(true);
+
             Task.Run(async () => {
                 // Animation
                 await Task.Delay(3000).ConfigureAwait(false);

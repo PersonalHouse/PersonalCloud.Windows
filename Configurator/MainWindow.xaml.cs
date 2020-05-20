@@ -9,6 +9,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
+using MaterialDesignThemes.Wpf;
+
 using NSPersonalCloud.Apps.Album;
 using NSPersonalCloud.WindowsConfigurator.Resources;
 using NSPersonalCloud.WindowsConfigurator.ViewModels;
@@ -44,7 +46,6 @@ namespace NSPersonalCloud.WindowsConfigurator
             ConnectionList.ItemsSource = Connections;
             Albums = new ObservableCollection<PhotoAlbumItem>();
             AlbumList.ItemsSource = Albums;
-
 
             Task.Run(async () => {
                 try
@@ -172,7 +173,7 @@ namespace NSPersonalCloud.WindowsConfigurator
 
             Task.Run(async () => {
                 var code = await Globals.CloudManager.InvokeAsync(x => x.StartBroadcastingInvitation(null)).ConfigureAwait(false);
-                this.ShowAlert(UISettings.InvitesSentTitle, string.Format(UISettings.InvitesSentMessage, code), UISettings.StopVerification, true, () => _ = Globals.CloudManager.InvokeAsync(x => x.StopBroadcastingInvitation(null)));
+                this.ShowAlert(UISettings.InvitesSentTitle, string.Format(CultureInfo.InvariantCulture, UISettings.InvitesSentMessage, code), UISettings.StopVerification, true, () => _ = Globals.CloudManager.InvokeAsync(x => x.StopBroadcastingInvitation(null)));
             });
         }
 
@@ -225,9 +226,13 @@ namespace NSPersonalCloud.WindowsConfigurator
 
         private void OnAddToConnections(object sender, RoutedEventArgs e)
         {
-            // Todo: Dialog
-            var dialog = new ConnectToStorageWindow();
-            dialog.ShowDialog();
+            NewConnectionButton.ContextMenu = (ContextMenu) Resources["StorageProviders"];
+            NewConnectionButton.ContextMenu.IsOpen = true;
+        }
+
+        private void OnAddToConnectionsCollapsed(object sender, ContextMenuEventArgs e)
+        {
+            NewConnectionButton.ContextMenu = null;
         }
 
         private void OnDeleteFromConnections(object sender, RoutedEventArgs e)
@@ -288,6 +293,57 @@ namespace NSPersonalCloud.WindowsConfigurator
                 if (config == null) return;
                 settings.Remove(config);
                 await Globals.CloudManager.InvokeAsync(x => x.ChangeAlbumSettings(Globals.PersonalCloud.Value, settings)).ConfigureAwait(false);
+            });
+        }
+
+        private void OnConnectToAlibaba(object sender, RoutedEventArgs e)
+        {
+            var form = new NewConnectionForm();
+            form.Setup(StorageProviderInstance.TypeAliYun);
+            form.DismissDialog += RefreshConnections;
+            Dialog.DialogContent = form;
+            Dialog.IsOpen = true;
+        }
+
+        private void OnConnectToAzure(object sender, RoutedEventArgs e)
+        {
+            var form = new NewConnectionForm();
+            form.Setup(StorageProviderInstance.TypeAzure);
+            form.DismissDialog += RefreshConnections;
+            Dialog.DialogContent = form;
+            Dialog.IsOpen = true;
+        }
+
+        private void RefreshConnections(object sender, EventArgs e)
+        {
+            Dialog.IsOpen = false;
+            Dialog.DialogContent = null;
+            Task.Run(async () => {
+                var connections = await Globals.CloudManager.InvokeAsync(x => x.GetConnectedServices(Globals.PersonalCloud.Value)).ConfigureAwait(false);
+                Dispatcher.Invoke(() => {
+                    Connections.Clear();
+                    foreach (var item in connections)
+                    {
+                        var model = new StorageConnectionItem {
+                            IsSelected = false,
+                            Name = item,
+                            Type = "Cloud Storage"
+                        };
+                        Connections.Add(model);
+                    }
+                });
+            });
+        }
+
+        private void StopService(object sender, RoutedEventArgs e)
+        {
+            ((App) Application.Current).StopService();
+        }
+
+        private void RefreshDevices(object sender, RoutedEventArgs e)
+        {
+            Task.Run(async () => {
+                await Globals.CloudManager.InvokeAsync(x => x.Refresh()).ConfigureAwait(false);
             });
         }
     }

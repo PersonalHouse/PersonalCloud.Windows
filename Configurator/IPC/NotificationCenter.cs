@@ -10,6 +10,8 @@ namespace NSPersonalCloud.WindowsConfigurator.IPC
     {
         public void OnServiceStarted()
         {
+            Globals.IsServiceRunning = true;
+
             Application.Current.Dispatcher.Invoke(() => {
                 if (Application.Current.MainWindow != null)
                 {
@@ -25,6 +27,7 @@ namespace NSPersonalCloud.WindowsConfigurator.IPC
                 Application.Current.Dispatcher.Invoke(() => {
                     if (Globals.PersonalCloud != null) Application.Current.MainWindow = new MainWindow();
                     else Application.Current.MainWindow = new WelcomeWindow();
+                    Application.Current.MainWindow.Show();
                 });
             });
         }
@@ -76,6 +79,8 @@ namespace NSPersonalCloud.WindowsConfigurator.IPC
 
         public void OnServiceStopped()
         {
+            Globals.IsServiceRunning = false;
+
             Application.Current.Dispatcher.Invoke(() => {
                 if (Application.Current.MainWindow != null)
                 {

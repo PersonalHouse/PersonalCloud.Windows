@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.ServiceProcess;
+using System.Threading;
 using System.Windows;
 
 using Hardcodet.Wpf.TaskbarNotification;
@@ -72,6 +73,47 @@ namespace NSPersonalCloud.WindowsConfigurator
             runners.Dispose();
 
             TrayIcon.Dispose();
+        }
+
+        public void RestartService()
+        {
+            try
+            {
+                var service = new ServiceController(Services.ServiceName);
+                if (service.Status != ServiceControllerStatus.Stopped
+                    && service.Status != ServiceControllerStatus.StopPending
+                    && service.CanStop)
+                {
+                    service.Stop();
+                }
+
+                service.Start();
+            }
+            catch
+            {
+                // Ignored.
+            }
+        }
+
+        public void StopService()
+        {
+            try
+            {
+                var service = new ServiceController(Services.ServiceName);
+                if (service.Status != ServiceControllerStatus.Stopped
+                    && service.Status != ServiceControllerStatus.StopPending
+                    && service.CanStop)
+                {
+                    service.Stop();
+                }
+            }
+            catch
+            {
+                // Ignored.
+            }
+
+            MainWindow.Close();
+            MainWindow = null;
         }
     }
 }

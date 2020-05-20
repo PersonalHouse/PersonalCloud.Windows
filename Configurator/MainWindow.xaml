@@ -18,6 +18,12 @@
 
     <Window.Resources>
         <ResourceDictionary>
+            <ContextMenu x:Key="StorageProviders">
+                <MenuItem Header="{x:Static resx:UIStorage.ProviderAliYun}"
+                          Click="OnConnectToAlibaba" />
+                <MenuItem Header="{x:Static resx:UIStorage.ProviderAzure}"
+                          Click="OnConnectToAzure" />
+            </ContextMenu>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -38,7 +44,7 @@
                 </Grid.RowDefinitions>
 
                 <GroupBox Style="{StaticResource MaterialDesignCardGroupBox}"
-                          Header="CONNECTIONS">
+                          Header="{x:Static resx:UIStorage.ConnectToStorage}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -53,16 +59,19 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
-                        <Button Grid.Column="2"
+                        <Button x:Name="NewConnectionButton"
+                                Grid.Column="2"
                                 Style="{StaticResource MaterialDesignOutlinedButton}"
-                                Content="ADD"
-                                Click="OnAddToConnections"/>
+                                Content="{x:Static resx:UIStorage.Add}"
+                                Click="OnAddToConnections"
+                                ContextMenuClosing="OnAddToConnectionsCollapsed" />
+
                         <Button x:Name="DeleteConnectionButton"
                                 Grid.Column="4"
                                 Style="{StaticResource MaterialDesignOutlinedButton}"
-                                Content="REMOVE"
+                                Content="{x:Static resx:UIStorage.Delete}"
                                 IsEnabled="False"
-                                Click="OnDeleteFromConnections"/>
+                                Click="OnDeleteFromConnections" />
 
                         <ListBox x:Name="ConnectionList"
                                  Grid.Row="2"
@@ -71,36 +80,20 @@
                                  SelectionChanged="OnConnectionSelected">
                             <ListBox.ItemTemplate>
                                 <DataTemplate DataType="{x:Type models:StorageConnectionItem}">
-                                    <Border x:Name="Border"
-                                            Padding="8">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition />
-                                                <ColumnDefinition Width="Auto" />
-                                            </Grid.ColumnDefinitions>
-                                            <ToggleButton VerticalAlignment="Center"
-                                                          IsChecked="{Binding IsSelected}"
-                                                          Style="{StaticResource MaterialDesignActionLightToggleButton}">
-                                                <ToggleButton.Content>
-                                                    <md:PackIcon Kind="ServerNetwork" />
-                                                </ToggleButton.Content>
-                                            </ToggleButton>
-                                            <StackPanel Grid.Column="1"
-                                                        Margin="8, 0, 0, 0">
-                                                <TextBlock FontWeight="Medium"
-                                                           Text="{Binding Name}" />
-                                                <TextBlock Text="{Binding Type}" />
-                                            </StackPanel>
-                                        </Grid>
-                                    </Border>
-                                    <DataTemplate.Triggers>
-                                        <DataTrigger Binding="{Binding IsSelected}"
-                                                     Value="True">
-                                            <Setter TargetName="Border"
-                                                    Property="Background"
-                                                    Value="{DynamicResource MaterialDesignSelection}" />
-                                        </DataTrigger>
-                                    </DataTemplate.Triggers>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="10" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <md:PackIcon Kind="ServerNetwork"
+                                                     VerticalAlignment="Center" />
+                                        <StackPanel Grid.Column="2">
+                                            <TextBlock FontWeight="Medium"
+                                                       Text="{Binding Name}" />
+                                            <TextBlock Text="{Binding Type}" />
+                                        </StackPanel>
+                                    </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
@@ -109,7 +102,7 @@
 
                 <GroupBox Grid.Row="2"
                           Style="{StaticResource MaterialDesignCardGroupBox}"
-                          Header="PHOTO ALBUMS">
+                          Header="{x:Static resx:UIApplets.LibraryFolders}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -126,14 +119,14 @@
 
                         <Button Grid.Column="2"
                                 Style="{StaticResource MaterialDesignOutlinedButton}"
-                                Content="ADD"
-                                Click="OnAddToAlbums"/>
+                                Content="{x:Static resx:UIApplets.LibraryAdd}"
+                                Click="OnAddToAlbums" />
                         <Button x:Name="DeleteAppButton"
                                 Grid.Column="4"
                                 Style="{StaticResource MaterialDesignOutlinedButton}"
-                                Content="REMOVE"
+                                Content="{x:Static resx:UIApplets.LibraryDelete}"
                                 IsEnabled="False"
-                                Click="OnDeleteFromAlbums"/>
+                                Click="OnDeleteFromAlbums" />
 
                         <ListBox x:Name="AlbumList"
                                  Grid.Row="2"
@@ -142,38 +135,20 @@
                                  SelectionChanged="OnAlbumSelected">
                             <ListBox.ItemTemplate>
                                 <DataTemplate DataType="{x:Type models:PhotoAlbumItem}">
-                                    <Border x:Name="Border"
-                                            Padding="8">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition />
-                                                <ColumnDefinition Width="Auto" />
-                                            </Grid.ColumnDefinitions>
-                                            <ToggleButton VerticalAlignment="Center"
-                                                          IsChecked="{Binding IsSelected}"
-                                                          Style="{StaticResource MaterialDesignActionLightToggleButton}"
-                                                          HorizontalContentAlignment="Center"
-                                                          VerticalContentAlignment="Center">
-                                                <ToggleButton.Content>
-                                                    <md:PackIcon Kind="Puzzle" />
-                                                </ToggleButton.Content>
-                                            </ToggleButton>
-                                            <StackPanel Grid.Column="1"
-                                                        Margin="8, 0, 0, 0">
-                                                <TextBlock FontWeight="Medium"
-                                                           Text="{Binding Name}" />
-                                                <TextBlock Text="{Binding Path}" />
-                                            </StackPanel>
-                                        </Grid>
-                                    </Border>
-                                    <DataTemplate.Triggers>
-                                        <DataTrigger Binding="{Binding IsSelected}"
-                                                     Value="True">
-                                            <Setter TargetName="Border"
-                                                    Property="Background"
-                                                    Value="{DynamicResource MaterialDesignSelection}" />
-                                        </DataTrigger>
-                                    </DataTemplate.Triggers>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="10" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <md:PackIcon Kind="Puzzle"
+                                                     VerticalAlignment="Center"/>
+                                        <StackPanel Grid.Column="2">
+                                            <TextBlock FontWeight="Medium"
+                                                       Text="{Binding Name}" />
+                                            <TextBlock Text="{Binding Path}" />
+                                        </StackPanel>
+                                    </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
@@ -212,9 +187,7 @@
                                      Text="Windows PC" />
                         </DockPanel>
 
-                        <Separator Margin="0, 5" />
-
-                        <DockPanel>
+                        <DockPanel Margin="0, 10, 0, 10">
                             <Button Style="{StaticResource MaterialDesignOutlinedButton}"
                                     DockPanel.Dock="Right"
                                     IsEnabled="False"
@@ -230,11 +203,13 @@
                                      Text="My Personal Cloud" />
                         </DockPanel>
 
-                        <Separator Margin="0, 5" />
-
                         <StackPanel DockPanel.Dock="Right"
                                     Orientation="Horizontal"
                                     HorizontalAlignment="Right">
+
+                            <Button Style="{StaticResource MaterialDesignOutlinedButton}"
+                                    Content="REFRESH DEVICES"
+                                    Click="RefreshDevices"/>
 
                             <Button Style="{StaticResource MaterialDesignOutlinedButton}"
                                     Margin="5, 0, 0, 0"
@@ -322,8 +297,8 @@
                                 Orientation="Horizontal">
 
                         <Button Style="{StaticResource MaterialDesignOutlinedButton}"
-                                IsEnabled="False"
-                                Content="{x:Static resx:UISettings.DeveloperRestartService}" />
+                                Content="{x:Static resx:UISettings.StopService}"
+                                Click="StopService"/>
 
                         <Button Style="{StaticResource MaterialDesignOutlinedButton}"
                                 BorderBrush="Red"
