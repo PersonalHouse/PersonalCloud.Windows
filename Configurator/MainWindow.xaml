@@ -27,9 +27,9 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <md:DialogHost x:Name="Dialog">
+    <md:DialogHost x:Name="Dialog" SnackbarMessageQueue="{md:MessageQueue}">
 
-        <Grid Margin="10">
+        <Grid Margin="10" MinWidth="800" MaxWidth="1024" MinHeight="600" MaxHeight="768">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="20" />
@@ -294,7 +294,8 @@
 
                     <StackPanel Grid.Row="6"
                                 Margin="5"
-                                Orientation="Horizontal">
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Right">
 
                         <Button Style="{StaticResource MaterialDesignOutlinedButton}"
                                 Content="{x:Static resx:UISettings.StopService}"
@@ -309,6 +310,10 @@
                     </StackPanel>
                 </GroupBox>
             </Grid>
+            <md:Snackbar x:Name="Alert"
+                         Grid.ColumnSpan="3"
+                         MessageQueue="{md:MessageQueue}" />
         </Grid>
+        
     </md:DialogHost>
 </Window>

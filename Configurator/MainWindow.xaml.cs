@@ -9,8 +9,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-using MaterialDesignThemes.Wpf;
-
 using NSPersonalCloud.Apps.Album;
 using NSPersonalCloud.WindowsConfigurator.Resources;
 using NSPersonalCloud.WindowsConfigurator.ViewModels;
@@ -50,17 +48,25 @@ namespace NSPersonalCloud.WindowsConfigurator
             Task.Run(async () => {
                 try
                 {
-                    var sharingEnabled = await Globals.Storage.InvokeAsync(x => x.IsFileSharingEnabled(null)).ConfigureAwait(false);
-                    var sharingPath = await Globals.Storage.InvokeAsync(x => x.GetFileSharingRoot()).ConfigureAwait(false);
+                    var sharingEnabled = await Globals.Storage.InvokeAsync(x => x.IsFileSharingEnabled(null))
+                                                              .ConfigureAwait(false);
+                    var sharingPath = await Globals.Storage.InvokeAsync(x => x.GetFileSharingRoot())
+                                                           .ConfigureAwait(false);
 
-                    var deviceName = await Globals.Storage.InvokeAsync(x => x.GetDeviceName(null)).ConfigureAwait(false);
-                    var cloudName = await Globals.Storage.InvokeAsync(x => x.GetPersonalCloudName(Globals.PersonalCloud.Value)).ConfigureAwait(false);
+                    var deviceName = await Globals.Storage.InvokeAsync(x => x.GetDeviceName(null))
+                                                          .ConfigureAwait(false);
+                    var cloudName = await Globals.Storage.InvokeAsync(x => x.GetPersonalCloudName(Globals.PersonalCloud.Value))
+                                                         .ConfigureAwait(false);
 
-                    var mounted = await Globals.Storage.InvokeAsync(x => x.IsExplorerIntegrationEnabled()).ConfigureAwait(false);
-                    var mountPoint = await Globals.Storage.InvokeAsync(x => x.GetMountPointForPersonalCloud(Globals.PersonalCloud.Value)).ConfigureAwait(false);
+                    var mounted = await Globals.Storage.InvokeAsync(x => x.IsExplorerIntegrationEnabled())
+                                                       .ConfigureAwait(false);
+                    var mountPoint = await Globals.Storage.InvokeAsync(x => x.GetMountPointForPersonalCloud(Globals.PersonalCloud.Value))
+                                                          .ConfigureAwait(false);
 
-                    var connections = await Globals.CloudManager.InvokeAsync(x => x.GetConnectedServices(Globals.PersonalCloud.Value)).ConfigureAwait(false);
-                    var albums = await Globals.CloudManager.InvokeAsync(x => x.GetAlbumSettings(Globals.PersonalCloud.Value)).ConfigureAwait(false);
+                    var connections = await Globals.CloudManager.InvokeAsync(x => x.GetConnectedServices(Globals.PersonalCloud.Value))
+                                                                .ConfigureAwait(false);
+                    var albums = await Globals.CloudManager.InvokeAsync(x => x.GetAlbumSettings(Globals.PersonalCloud.Value))
+                                                           .ConfigureAwait(false);
 
                     await Dispatcher.InvokeAsync(() => {
                         SharingSwitch.IsChecked = sharingEnabled;
@@ -112,20 +118,30 @@ namespace NSPersonalCloud.WindowsConfigurator
             if (!initialized) return;
 
             var path = SharingPathBox.Text;
-            _ = Globals.CloudManager.InvokeAsync(x => x.ChangeSharingRoot(path, null));
+            Task.Run(async () => {
+                await Globals.CloudManager.InvokeAsync(x => x.ChangeSharingRoot(path, null))
+                                          .ConfigureAwait(false);
+                Dispatcher.Invoke(() => {
+                    Alert.MessageQueue.Enqueue(UISettings.SettingsSaved);
+                });
+            });
         }
 
         private void OnSharingUnchecked(object sender, RoutedEventArgs e)
         {
             if (!initialized) return;
 
-            _ = Globals.CloudManager.InvokeAsync(x => x.ChangeSharingRoot(null, null));
+            Task.Run(async () => {
+                await Globals.CloudManager.InvokeAsync(x => x.ChangeSharingRoot(null, null))
+                                          .ConfigureAwait(false);
+                Dispatcher.Invoke(() => {
+                    Alert.MessageQueue.Enqueue(UISettings.SettingsSaved);
+                });
+            });
         }
 
         private void OnChangePathClicked(object sender, RoutedEventArgs e)
         {
-            if (!initialized) return;
-
             var browseDialog = new VistaFolderBrowserDialog {
                 RootFolder = Environment.SpecialFolder.Personal,
                 ShowNewFolderButton = true
@@ -137,34 +153,35 @@ namespace NSPersonalCloud.WindowsConfigurator
                 if (!Directory.Exists(path)) return;
                 SharingPathBox.Text = path;
 
-                _ = Globals.CloudManager.InvokeAsync(x => x.ChangeSharingRoot(path, null));
+                Task.Run(async () => {
+                    await Globals.CloudManager.InvokeAsync(x => x.ChangeSharingRoot(path, null))
+                                              .ConfigureAwait(false);
+                    Dispatcher.Invoke(() => {
+                        Alert.MessageQueue.Enqueue(UISettings.SettingsSaved);
+                    });
+                });
             }
         }
 
         private void OnChangeDeviceNameClicked(object sender, RoutedEventArgs e)
         {
-            if (!initialized) return;
-
             var name = DeviceNameBox.Text;
             foreach (var c in name)
             {
                 if (Path.GetInvalidFileNameChars().Contains(c))
                 {
-                    using var dialog = new TaskDialog {
-                        MainIcon = TaskDialogIcon.Error,
-                        WindowTitle = UISettings.Configurator,
-                        MainInstruction = UISettings.AlertInvalidDeviceName,
-                        Content = UISettings.AlertInvalidDeviceNameMessage
-                    };
-
-                    var ok = new TaskDialogButton(ButtonType.Ok);
-                    dialog.Buttons.Add(ok);
-                    dialog.ShowDialog(this);
+                    Alert.MessageQueue.Enqueue(UISettings.AlertInvalidDeviceName);
                     return;
                 }
             }
 
-            _ = Globals.CloudManager.InvokeAsync(x => x.ChangeDeviceName(name, null));
+            Task.Run(async () => {
+                await Globals.CloudManager.InvokeAsync(x => x.ChangeDeviceName(name, null))
+                                          .ConfigureAwait(false);
+                Dispatcher.Invoke(() => {
+                    Alert.MessageQueue.Enqueue(UISettings.SettingsSaved);
+                });
+            });
         }
 
         private void OnInviteClicked(object sender, RoutedEventArgs e)
@@ -172,8 +189,25 @@ namespace NSPersonalCloud.WindowsConfigurator
             if (!initialized) return;
 
             Task.Run(async () => {
-                var code = await Globals.CloudManager.InvokeAsync(x => x.StartBroadcastingInvitation(null)).ConfigureAwait(false);
-                this.ShowAlert(UISettings.InvitesSentTitle, string.Format(CultureInfo.InvariantCulture, UISettings.InvitesSentMessage, code), UISettings.StopVerification, true, () => _ = Globals.CloudManager.InvokeAsync(x => x.StopBroadcastingInvitation(null)));
+                var code = await Globals.CloudManager.InvokeAsync(x => x.StartBroadcastingInvitation(null))
+                                                     .ConfigureAwait(false);
+                Dispatcher.Invoke(() => {
+                    var session = new InviteDevices();
+                    session.Setup(code);
+                    session.DismissDialog += OnStopVerification;
+                    Dialog.DialogContent = session;
+                    Dialog.IsOpen = true;
+                });
+            });
+        }
+
+        private void OnStopVerification(object sender, EventArgs e)
+        {
+            Dialog.IsOpen = false;
+            Dialog.DialogContent = null;
+            Task.Run(async () => {
+                await Globals.CloudManager.InvokeAsync(x => x.StopBroadcastingInvitation(null))
+                                          .ConfigureAwait(false);
             });
         }
 
@@ -183,14 +217,26 @@ namespace NSPersonalCloud.WindowsConfigurator
 
             if (MountedCloudDrive.SelectedIndex == 0) return;
             var mountPoint = DriveLetters[MountedCloudDrive.SelectedIndex] + @":\";
-            _ = Globals.Mounter.InvokeAsync(x => x.MountNetworkDrive(Globals.PersonalCloud.Value, mountPoint));
+
+            Task.Run(async () => {
+                await Globals.Mounter.InvokeAsync(x => x.MountNetworkDrive(Globals.PersonalCloud.Value, mountPoint))
+                                     .ConfigureAwait(false);
+                Dispatcher.Invoke(() => {
+                    Alert.MessageQueue.Enqueue(UISettings.SettingsSaved);
+                });
+            });
         }
 
         private void OnMountUnchecked(object sender, RoutedEventArgs e)
         {
             if (!initialized) return;
 
-            _ = Globals.Mounter.InvokeAsync(x => x.UnmountAllDrives());
+            Task.Run(async () => {
+                await Globals.Mounter.InvokeAsync(x => x.UnmountAllDrives()).ConfigureAwait(false);
+                Dispatcher.Invoke(() => {
+                    Alert.MessageQueue.Enqueue(UISettings.SettingsSaved);
+                });
+            });
         }
 
         private void OnMountPointChanged(object sender, SelectionChangedEventArgs e)
@@ -200,13 +246,34 @@ namespace NSPersonalCloud.WindowsConfigurator
             if (MountSwitch.IsChecked != true) return;
 
             var mountPoint = MountedCloudDrive.SelectedIndex == 0 ? null : (DriveLetters[MountedCloudDrive.SelectedIndex] + @":\");
-            if (mountPoint != null) _ = Globals.Mounter.InvokeAsync(x => x.MountNetworkDrive(Globals.PersonalCloud.Value, mountPoint));
-            else _ = Globals.Mounter.InvokeAsync(x => x.UnmountNetworkDrive(Globals.PersonalCloud.Value));
+            if (mountPoint != null)
+            {
+                Task.Run(async () => {
+                    await Globals.Mounter.InvokeAsync(x => x.MountNetworkDrive(Globals.PersonalCloud.Value, mountPoint))
+                                         .ConfigureAwait(false);
+                    Dispatcher.Invoke(() => {
+                        Alert.MessageQueue.Enqueue(UISettings.SettingsSaved);
+                    });
+                });
+            }
+            else
+            {
+                Task.Run(async () => {
+                    await Globals.Mounter.InvokeAsync(x => x.UnmountNetworkDrive(Globals.PersonalCloud.Value))
+                                         .ConfigureAwait(false);
+                    Dispatcher.Invoke(() => {
+                        Alert.MessageQueue.Enqueue(UISettings.SettingsSaved);
+                    });
+                });
+            }
         }
 
         private void OnLeaveClicked(object sender, RoutedEventArgs e)
         {
-            _ = Globals.CloudManager.InvokeAsync(x => x.LeavePersonalCloud(Globals.PersonalCloud.Value));
+            Task.Run(async () => {
+                await Globals.CloudManager.InvokeAsync(x => x.LeavePersonalCloud(Globals.PersonalCloud.Value))
+                                          .ConfigureAwait(false);
+            });
         }
 
         private void OnQuitClicked(object sender, RoutedEventArgs e)
@@ -241,7 +308,8 @@ namespace NSPersonalCloud.WindowsConfigurator
 
             var name = Connections[ConnectionList.SelectedIndex];
             Task.Run(async () => {
-                await Globals.CloudManager.InvokeAsync(x => x.RemoveConnection(Globals.PersonalCloud.Value, name.Name)).ConfigureAwait(false);
+                await Globals.CloudManager.InvokeAsync(x => x.RemoveConnection(Globals.PersonalCloud.Value, name.Name))
+                                          .ConfigureAwait(false);
             });
             Connections.RemoveAt(ConnectionList.SelectedIndex);
         }
@@ -260,7 +328,9 @@ namespace NSPersonalCloud.WindowsConfigurator
                 if (Albums.Any(x => x.Path == path)) return;
 
                 var name = Path.GetFileName(path.TrimEnd(Path.DirectorySeparatorChar));
-                var cache = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Personal Cloud", "Thumbnails", DateTime.Now.ToString("yyyyMMddHHmmss", CultureInfo.InvariantCulture));
+                var cache = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
+                                         "Personal Cloud", "Thumbnails",
+                                         DateTime.Now.ToString("yyyyMMddHHmmss", CultureInfo.InvariantCulture));
                 Directory.CreateDirectory(cache);
                 Albums.Add(new PhotoAlbumItem {
                     IsSelected = false,
@@ -269,13 +339,15 @@ namespace NSPersonalCloud.WindowsConfigurator
                 });
 
                 Task.Run(async () => {
-                    var settings = await Globals.CloudManager.InvokeAsync(x => x.GetAlbumSettings(Globals.PersonalCloud.Value)).ConfigureAwait(false);
+                    var settings = await Globals.CloudManager.InvokeAsync(x => x.GetAlbumSettings(Globals.PersonalCloud.Value))
+                                                             .ConfigureAwait(false);
                     settings.Add(new AlbumConfig {
                         Name = name,
                         MediaFolder = path,
                         ThumbnailFolder = cache
                     });
-                    await Globals.CloudManager.InvokeAsync(x => x.ChangeAlbumSettings(Globals.PersonalCloud.Value, settings)).ConfigureAwait(false);
+                    await Globals.CloudManager.InvokeAsync(x => x.ChangeAlbumSettings(Globals.PersonalCloud.Value, settings))
+                                              .ConfigureAwait(false);
                 });
             }
         }
@@ -288,11 +360,13 @@ namespace NSPersonalCloud.WindowsConfigurator
             Albums.RemoveAt(AlbumList.SelectedIndex);
 
             Task.Run(async () => {
-                var settings = await Globals.CloudManager.InvokeAsync(x => x.GetAlbumSettings(Globals.PersonalCloud.Value)).ConfigureAwait(false);
+                var settings = await Globals.CloudManager.InvokeAsync(x => x.GetAlbumSettings(Globals.PersonalCloud.Value))
+                                                         .ConfigureAwait(false);
                 var config = settings.FirstOrDefault(x => x.Name == item.Name && x.MediaFolder == item.Path);
                 if (config == null) return;
                 settings.Remove(config);
-                await Globals.CloudManager.InvokeAsync(x => x.ChangeAlbumSettings(Globals.PersonalCloud.Value, settings)).ConfigureAwait(false);
+                await Globals.CloudManager.InvokeAsync(x => x.ChangeAlbumSettings(Globals.PersonalCloud.Value, settings))
+                                          .ConfigureAwait(false);
             });
         }
 
@@ -319,7 +393,8 @@ namespace NSPersonalCloud.WindowsConfigurator
             Dialog.IsOpen = false;
             Dialog.DialogContent = null;
             Task.Run(async () => {
-                var connections = await Globals.CloudManager.InvokeAsync(x => x.GetConnectedServices(Globals.PersonalCloud.Value)).ConfigureAwait(false);
+                var connections = await Globals.CloudManager.InvokeAsync(x => x.GetConnectedServices(Globals.PersonalCloud.Value))
+                                                            .ConfigureAwait(false);
                 Dispatcher.Invoke(() => {
                     Connections.Clear();
                     foreach (var item in connections)
@@ -343,7 +418,11 @@ namespace NSPersonalCloud.WindowsConfigurator
         private void RefreshDevices(object sender, RoutedEventArgs e)
         {
             Task.Run(async () => {
-                await Globals.CloudManager.InvokeAsync(x => x.Refresh()).ConfigureAwait(false);
+                await Globals.CloudManager.InvokeAsync(x => x.Refresh())
+                                          .ConfigureAwait(false);
+                Dispatcher.Invoke(() => {
+                    Alert.MessageQueue.Enqueue(UISettings.SettingsSaved);
+                });
             });
         }
     }

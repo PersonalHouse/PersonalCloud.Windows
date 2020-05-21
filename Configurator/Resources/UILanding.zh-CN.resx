@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AlertCannotCreate" xml:space="preserve">
+    <value>无法创建个人云。</value>
+  </data>
+  <data name="AlertCannotEnroll" xml:space="preserve">
+    <value>无法加入个人云。</value>
+  </data>
+  <data name="AlertCreating" xml:space="preserve">
+    <value>正在创建个人云……</value>
+  </data>
+  <data name="AlertJoining" xml:space="preserve">
+    <value>正在加入个人云……</value>
+  </data>
   <data name="CloudName" xml:space="preserve">
     <value>云名称</value>
   </data>
@@ -131,12 +143,6 @@
   </data>
   <data name="DialogOK" xml:space="preserve">
     <value>好</value>
-  </data>
-  <data name="ErrorCreatingCloud" xml:space="preserve">
-    <value>无法创建个人云。</value>
-  </data>
-  <data name="ErrorEnrollingDevice" xml:space="preserve">
-    <value>无法加入个人云。</value>
   </data>
   <data name="Invitation" xml:space="preserve">
     <value>邀请码</value>

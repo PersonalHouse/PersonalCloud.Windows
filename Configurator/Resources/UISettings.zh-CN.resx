@@ -117,20 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AlertInvalidDeviceName" xml:space="preserve">
-    <value>设备名称无效</value>
+  <data name="AlertCannotGenerateInvite" xml:space="preserve">
+    <value>无法生成邀请码</value>
   </data>
-  <data name="AlertInvalidDeviceNameMessage" xml:space="preserve">
-    <value>请使用简短的名称，尽量不与其它设备重复，且尽量不包含特殊字符。</value>
+  <data name="AlertInvalidDeviceName" xml:space="preserve">
+    <value>设备名称无效，请使用简短、不与其它设备重复、不包含特殊字符的名称。</value>
+  </data>
+  <data name="AlertOK" xml:space="preserve">
+    <value>好</value>
   </data>
   <data name="Cloud" xml:space="preserve">
     <value>个人云</value>
   </data>
   <data name="CloudDeviceName" xml:space="preserve">
     <value>设备名称</value>
-  </data>
-  <data name="CloudInviteError" xml:space="preserve">
-    <value>无法生成个人云邀请码</value>
   </data>
   <data name="CloudInviteStart" xml:space="preserve">
     <value>添加设备</value>
@@ -184,9 +184,7 @@
     <value>重新选择</value>
   </data>
   <data name="InvitesSentMessage" xml:space="preserve">
-    <value>使用此邀请码将其它设备加入个人云：
-
-{0}
+    <value>使用此邀请码将其它设备加入个人云。
 
 关闭窗口后邀请码将失效。</value>
   </data>
@@ -195,6 +193,9 @@
   </data>
   <data name="ServiceNotRunning" xml:space="preserve">
     <value>尚未就绪</value>
+  </data>
+  <data name="SettingsSaved" xml:space="preserve">
+    <value>已保存此设备上的设置。</value>
   </data>
   <data name="StopService" xml:space="preserve">
     <value>停止服务</value>

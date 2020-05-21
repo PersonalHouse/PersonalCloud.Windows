@@ -8,8 +8,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-using MaterialDesignThemes.Wpf;
-
 using NSPersonalCloud.WindowsConfigurator.Resources;
 
 namespace NSPersonalCloud.WindowsConfigurator
@@ -19,7 +17,6 @@ namespace NSPersonalCloud.WindowsConfigurator
         private readonly bool initialized;
 
         private RadioButton lastChoice;
-        private bool hasPendingTask;
 
         public WelcomeWindow()
         {
@@ -59,15 +56,12 @@ namespace NSPersonalCloud.WindowsConfigurator
 
         private void EnrollDevice(object sender, RoutedEventArgs e)
         {
-            if (!initialized || hasPendingTask) return;
-
             var deviceName = DeviceNameBox.Text;
             foreach (var c in deviceName)
             {
                 if (Path.GetInvalidFileNameChars().Contains(c))
                 {
-                    DialogText.Text = UISettings.AlertInvalidDeviceName;
-                    Dialog.IsOpen = true;
+                    Alert.MessageQueue.Enqueue(UISettings.AlertInvalidDeviceName);
                     return;
                 }
             }
@@ -76,15 +70,10 @@ namespace NSPersonalCloud.WindowsConfigurator
             else if (JoinTab.IsChecked == true) JoinPersonalCloud(deviceName, CloudNameBox.Text);
         }
 
-        private void ToggleBusyIndicator(bool isBusy)
-        {
-            hasPendingTask = isBusy;
-            ButtonProgressAssist.SetIsIndicatorVisible(GoButton, isBusy);
-        }
-
         private void CreatePersonalCloud(string deviceName, string cloudName)
         {
-            ToggleBusyIndicator(true);
+            ProgressText.Text = UILanding.AlertCreating;
+            Dialog.IsOpen = true;
 
             Task.Run(async () => {
                 // Animation
@@ -97,10 +86,8 @@ namespace NSPersonalCloud.WindowsConfigurator
                 catch
                 {
                     Dispatcher.Invoke(() => {
-                        DialogText.Text = UILanding.ErrorCreatingCloud;
-                        Dialog.IsOpen = true;
-
-                        ToggleBusyIndicator(false);
+                        Alert.MessageQueue.Enqueue(UILanding.AlertCannotCreate);
+                        Dialog.IsOpen = false;
                     });
                 }
             });
@@ -108,7 +95,8 @@ namespace NSPersonalCloud.WindowsConfigurator
 
         private void JoinPersonalCloud(string deviceName, string invite)
         {
-            ToggleBusyIndicator(true);
+            ProgressText.Text = UILanding.AlertJoining;
+            Dialog.IsOpen = true;
 
             Task.Run(async () => {
                 // Animation
@@ -120,11 +108,10 @@ namespace NSPersonalCloud.WindowsConfigurator
                 }
                 catch
                 {
+                    await Globals.CloudManager.InvokeAsync(x => x.Refresh()).ConfigureAwait(false);
                     Dispatcher.Invoke(() => {
-                        DialogText.Text = UILanding.ErrorCreatingCloud;
-                        Dialog.IsOpen = true;
-
-                        ToggleBusyIndicator(false);
+                        Alert.MessageQueue.Enqueue(UILanding.AlertCannotEnroll);
+                        Dialog.IsOpen = false;
                     });
                 }
             });

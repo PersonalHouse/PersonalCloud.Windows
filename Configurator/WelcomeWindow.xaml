@@ -15,96 +15,83 @@
         SizeToContent="WidthAndHeight"
         ResizeMode="CanMinimize"
         Closing="HideWindow">
-
-    <md:DialogHost x:Name="Dialog">
+    <md:DialogHost x:Name="Dialog" SnackbarMessageQueue="{md:MessageQueue}">
         <md:DialogHost.DialogContent>
-            <StackPanel Margin="20">
-                <TextBlock x:Name="DialogText"
-                           Style="{StaticResource MaterialDesignBody2TextBlock}"
-                           Text="{x:Static resx:UILanding.Welcome}" />
-
-                <Button Style="{StaticResource MaterialDesignFlatButton}"
-                        Margin="0, 10, 0, 0"
-                        Content="{x:Static resx:UILanding.DialogOK}"
-                        Command="{x:Static md:DialogHost.CloseDialogCommand}" />
+            <StackPanel Margin="20" Orientation="Horizontal">
+                <ProgressBar Style="{StaticResource MaterialDesignCircularProgressBar}"
+                             IsIndeterminate="True" />
+                <TextBlock x:Name="ProgressText"
+                           Margin="10, 0, 0, 0"
+                           VerticalAlignment="Center"/>
             </StackPanel>
         </md:DialogHost.DialogContent>
-
-        <StackPanel Margin="10">
-            <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                       Text="{x:Static resx:UILanding.Welcome}"
-                       HorizontalAlignment="Center"
-                       Padding="5" />
-
-            <Grid Margin="0, 10, 0, 0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="20" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-
-                <RadioButton x:Name="CreateTab"
-                             Style="{StaticResource MaterialDesignTabRadioButton}"
-                             Margin="5"
-                             IsChecked="True"
-                             Content="{x:Static resx:UILanding.CreateCloudHint}"
-                             Click="SwitchTab" />
-                <RadioButton x:Name="JoinTab"
+        <Grid MinWidth="600"
+              MaxWidth="1024">
+            <StackPanel Margin="10">
+                <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
+                           Text="{x:Static resx:UILanding.Welcome}"
+                           HorizontalAlignment="Center" />
+                <Grid Margin="0, 30, 0, 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <RadioButton x:Name="CreateTab"
+                                 Style="{StaticResource MaterialDesignTabRadioButton}"
+                                 Margin="5"
+                                 IsChecked="True"
+                                 Content="{x:Static resx:UILanding.CreateCloudHint}"
+                                 Click="SwitchTab" />
+                    <RadioButton x:Name="JoinTab"
+                                 Grid.Column="2"
+                                 Style="{StaticResource MaterialDesignTabRadioButton}"
+                                 Margin="5"
+                                 IsChecked="False"
+                                 Content="{x:Static resx:UILanding.JoinCloudHint}"
+                                 Click="SwitchTab" />
+                </Grid>
+                <Grid Margin="0, 20, 0, 30">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="15" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="DeviceLabel"
+                               Text="{x:Static resx:UILanding.DeviceName}"
+                               VerticalAlignment="Center" />
+                    <TextBox x:Name="DeviceNameBox"
                              Grid.Column="2"
-                             Style="{StaticResource MaterialDesignTabRadioButton}"
-                             Margin="5"
-                             IsChecked="False"
-                             Content="{x:Static resx:UILanding.JoinCloudHint}"
-                             Click="SwitchTab" />
-            </Grid>
-
-            <Grid Margin="0, 10, 0, 0">
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition Height="10" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="20" />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-
-                <TextBlock x:Name="DeviceLabel"
-                           Text="{x:Static resx:UILanding.DeviceName}"
-                           VerticalAlignment="Center" />
-
-                <TextBox x:Name="DeviceNameBox"
-                         Grid.Column="2"
-                         MaxLines="1"
-                         AcceptsReturn="True"
-                         VerticalAlignment="Center"
-                         TextWrapping="Wrap" />
-
-                <TextBlock x:Name="CloudLabel"
-                           Grid.Row="2"
-                           Grid.Column="0"
-                           Text="{x:Static resx:UILanding.CloudName}"
-                           VerticalAlignment="Center" />
-
-                <TextBox x:Name="CloudNameBox"
-                         Grid.Row="2"
-                         Grid.Column="2"
-                         MinWidth="200"
-                         MaxLines="1"
-                         AcceptsReturn="True"
-                         VerticalAlignment="Center"
-                         TextWrapping="Wrap" />
-            </Grid>
-
-            <Button x:Name="GoButton"
-                    Style="{StaticResource MaterialDesignRaisedButton}"
-                    Margin="0, 20, 0, 0"
-                    md:ButtonProgressAssist.IsIndeterminate="True"
-                    md:ButtonProgressAssist.Value="-1"
-                    Content="{x:Static resx:UILanding.CreateCloud}"
-                    Click="EnrollDevice" />
-        </StackPanel>
-
+                             MaxLines="1"
+                             AcceptsReturn="True"
+                             VerticalAlignment="Center"
+                             TextWrapping="Wrap" />
+                    <TextBlock x:Name="CloudLabel"
+                               Grid.Row="2"
+                               Grid.Column="0"
+                               Text="{x:Static resx:UILanding.CloudName}"
+                               VerticalAlignment="Center" />
+                    <TextBox x:Name="CloudNameBox"
+                             Grid.Row="2"
+                             Grid.Column="2"
+                             MinWidth="200"
+                             MaxLines="1"
+                             AcceptsReturn="True"
+                             VerticalAlignment="Center"
+                             TextWrapping="Wrap" />
+                </Grid>
+                <Button x:Name="GoButton"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Content="{x:Static resx:UILanding.CreateCloud}"
+                        Click="EnrollDevice" />
+            </StackPanel>
+            <md:Snackbar x:Name="Alert"
+                         MessageQueue="{md:MessageQueue}" />
+        </Grid>
     </md:DialogHost>
 </Window>

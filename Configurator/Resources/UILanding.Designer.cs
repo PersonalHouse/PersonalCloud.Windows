@@ -61,6 +61,42 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unable to create Personal Cloud..
+        /// </summary>
+        public static string AlertCannotCreate {
+            get {
+                return ResourceManager.GetString("AlertCannotCreate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to enroll this device..
+        /// </summary>
+        public static string AlertCannotEnroll {
+            get {
+                return ResourceManager.GetString("AlertCannotEnroll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creating Personal Cloud....
+        /// </summary>
+        public static string AlertCreating {
+            get {
+                return ResourceManager.GetString("AlertCreating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Joining Personal Cloud....
+        /// </summary>
+        public static string AlertJoining {
+            get {
+                return ResourceManager.GetString("AlertJoining", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cloud Name.
         /// </summary>
         public static string CloudName {
@@ -102,24 +138,6 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         public static string DialogOK {
             get {
                 return ResourceManager.GetString("DialogOK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to Create Personal Cloud.
-        /// </summary>
-        public static string ErrorCreatingCloud {
-            get {
-                return ResourceManager.GetString("ErrorCreatingCloud", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to Enroll This Device.
-        /// </summary>
-        public static string ErrorEnrollingDevice {
-            get {
-                return ResourceManager.GetString("ErrorEnrollingDevice", resourceCulture);
             }
         }
         

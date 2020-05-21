@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AlertCannotCreate" xml:space="preserve">
+    <value>Unable to create Personal Cloud.</value>
+  </data>
+  <data name="AlertCannotEnroll" xml:space="preserve">
+    <value>Unable to enroll this device.</value>
+  </data>
+  <data name="AlertCreating" xml:space="preserve">
+    <value>Creating Personal Cloud...</value>
+  </data>
+  <data name="AlertJoining" xml:space="preserve">
+    <value>Joining Personal Cloud...</value>
+  </data>
   <data name="CloudName" xml:space="preserve">
     <value>Cloud Name</value>
   </data>
@@ -131,12 +143,6 @@
   </data>
   <data name="DialogOK" xml:space="preserve">
     <value>OK</value>
-  </data>
-  <data name="ErrorCreatingCloud" xml:space="preserve">
-    <value>Unable to Create Personal Cloud</value>
-  </data>
-  <data name="ErrorEnrollingDevice" xml:space="preserve">
-    <value>Unable to Enroll This Device</value>
   </data>
   <data name="Invitation" xml:space="preserve">
     <value>Invitation Code</value>

@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="NSPersonalCloud.WindowsConfigurator.InviteDevices"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:resx="clr-namespace:NSPersonalCloud.WindowsConfigurator.Resources">
+    <GroupBox x:Name="MainSection"
+              Style="{StaticResource MaterialDesignGroupBox}"
+              Header="{x:Static resx:UISettings.CloudInviteStart}">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="20" />
+                <RowDefinition />
+                <RowDefinition Height="20" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}"
+                       Text="{x:Static resx:UISettings.InvitesSentMessage}" />
+            <TextBlock x:Name="InviteLabel"
+                       Grid.Row="2"
+                       Style="{StaticResource MaterialDesignHeadline3TextBlock}"
+                       Text="0000"
+                       HorizontalAlignment="Center" />
+            <Button Grid.Row="6"
+                    Style="{StaticResource MaterialDesignOutlinedButton}"
+                    Content="{x:Static resx:UISettings.StopVerification}"
+                    Foreground="Red"
+                    BorderBrush="Red"
+                    Click="CloseDialog"/>
+        </Grid>
+    </GroupBox>
+</UserControl>

@@ -61,7 +61,16 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid Device Name.
+        ///   Looks up a localized string similar to Cannot generate invitation..
+        /// </summary>
+        public static string AlertCannotGenerateInvite {
+            get {
+                return ResourceManager.GetString("AlertCannotGenerateInvite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid device name. Use a name that is short, is unique, and does not contain special characters..
         /// </summary>
         public static string AlertInvalidDeviceName {
             get {
@@ -70,11 +79,11 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please use a short and unique name, and do not use special characters..
+        ///   Looks up a localized string similar to OK.
         /// </summary>
-        public static string AlertInvalidDeviceNameMessage {
+        public static string AlertOK {
             get {
-                return ResourceManager.GetString("AlertInvalidDeviceNameMessage", resourceCulture);
+                return ResourceManager.GetString("AlertOK", resourceCulture);
             }
         }
         
@@ -93,15 +102,6 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         public static string CloudDeviceName {
             get {
                 return ResourceManager.GetString("CloudDeviceName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cannot generate invitation..
-        /// </summary>
-        public static string CloudInviteError {
-            get {
-                return ResourceManager.GetString("CloudInviteError", resourceCulture);
             }
         }
         
@@ -205,7 +205,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mount Cloud as Network Drive.
+        ///   Looks up a localized string similar to Mount Personal Cloud as Network Drive.
         /// </summary>
         public static string ExplorerMasterSwitch {
             get {
@@ -259,11 +259,9 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the following code on other devices:
+        ///   Looks up a localized string similar to Enter the following code on other devices.
         ///
-        ///{0}
-        ///
-        ///Closing this dialog terminates verification session..
+        ///Closing this dialog terminates verification..
         /// </summary>
         public static string InvitesSentMessage {
             get {
@@ -290,6 +288,15 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Changes to device profile are saved..
+        /// </summary>
+        public static string SettingsSaved {
+            get {
+                return ResourceManager.GetString("SettingsSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to STOP SERVICE.
         /// </summary>
         public static string StopService {
@@ -299,7 +306,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stop Verification.
+        ///   Looks up a localized string similar to STOP VERIFICATION.
         /// </summary>
         public static string StopVerification {
             get {

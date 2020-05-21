@@ -117,20 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AlertInvalidDeviceName" xml:space="preserve">
-    <value>Invalid Device Name</value>
+  <data name="AlertCannotGenerateInvite" xml:space="preserve">
+    <value>Cannot generate invitation.</value>
   </data>
-  <data name="AlertInvalidDeviceNameMessage" xml:space="preserve">
-    <value>Please use a short and unique name, and do not use special characters.</value>
+  <data name="AlertInvalidDeviceName" xml:space="preserve">
+    <value>Invalid device name. Use a name that is short, is unique, and does not contain special characters.</value>
+  </data>
+  <data name="AlertOK" xml:space="preserve">
+    <value>OK</value>
   </data>
   <data name="Cloud" xml:space="preserve">
     <value>PERSONAL CLOUD</value>
   </data>
   <data name="CloudDeviceName" xml:space="preserve">
     <value>Device Name</value>
-  </data>
-  <data name="CloudInviteError" xml:space="preserve">
-    <value>Cannot generate invitation.</value>
   </data>
   <data name="CloudInviteStart" xml:space="preserve">
     <value>ADD A DEVICE</value>
@@ -166,7 +166,7 @@
     <value>FILE EXPLORER INTEGRATION</value>
   </data>
   <data name="ExplorerMasterSwitch" xml:space="preserve">
-    <value>Mount Cloud as Network Drive</value>
+    <value>Mount Personal Cloud as Network Drive</value>
   </data>
   <data name="ExplorerMountPoint" xml:space="preserve">
     <value>Drive Letter</value>
@@ -184,11 +184,9 @@
     <value>CHANGE</value>
   </data>
   <data name="InvitesSentMessage" xml:space="preserve">
-    <value>Enter the following code on other devices:
+    <value>Enter the following code on other devices.
 
-{0}
-
-Closing this dialog terminates verification session.</value>
+Closing this dialog terminates verification.</value>
   </data>
   <data name="InvitesSentTitle" xml:space="preserve">
     <value>Invitations Sent</value>
@@ -196,11 +194,14 @@ Closing this dialog terminates verification session.</value>
   <data name="ServiceNotRunning" xml:space="preserve">
     <value>Configurator Not Ready</value>
   </data>
+  <data name="SettingsSaved" xml:space="preserve">
+    <value>Changes to device profile are saved.</value>
+  </data>
   <data name="StopService" xml:space="preserve">
     <value>STOP SERVICE</value>
   </data>
   <data name="StopVerification" xml:space="preserve">
-    <value>Stop Verification</value>
+    <value>STOP VERIFICATION</value>
   </data>
   <data name="WaitForService" xml:space="preserve">
     <value>Personal Cloud and its components are initializing. Please wait for a few minutes and try again.
