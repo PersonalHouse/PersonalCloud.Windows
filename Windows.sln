@@ -21,8 +21,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DokanFS.Core", "DokanFS\Sou
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DokanFS.PersonalCloud", "DokanFS.PersonalCloud\DokanFS.PersonalCloud.csproj", "{854D6C5C-F833-4440-9057-2557C3BB8185}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JKang.IpcServiceFramework.Server", "IpcServiceFramework\src\JKang.IpcServiceFramework.Server\JKang.IpcServiceFramework.Server.csproj", "{DFEDEB08-65BE-4C5D-AE24-E7B731924B66}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlbumComon", "PersonalCloud.Core\src\Apps\Album\AlbumComon\AlbumComon.csproj", "{013FB07E-165B-4461-8600-239F030F2720}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AlbumApp", "PersonalCloud.Core\src\Apps\Album\AlbumApp\AlbumApp.csproj", "{0EC414B8-B6C8-4E30-A0DE-B11DBF383774}"
@@ -32,6 +30,16 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StorageClient.Azure", "PersonalCloud.Core\src\StorageClient.Azure\src\StorageClient.Azure\StorageClient.Azure.csproj", "{CBBE08F5-8140-46D1-839F-4BA5FBEA9CFF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageIndexer", "PersonalCloud.Core\src\Apps\Album\ImageIndexer\ImageIndexer.csproj", "{AB108BEF-0544-46A3-AAFA-E5AF5B485C72}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JKang.IpcServiceFramework.Hosting.NamedPipe", "IpcServiceFramework\src\JKang.IpcServiceFramework.Hosting.NamedPipe\JKang.IpcServiceFramework.Hosting.NamedPipe.csproj", "{D8EB4D99-F542-4CBE-A193-A29FEEED31CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JKang.IpcServiceFramework.Client.NamedPipe", "IpcServiceFramework\src\JKang.IpcServiceFramework.Client.NamedPipe\JKang.IpcServiceFramework.Client.NamedPipe.csproj", "{FA07B11E-8CF1-4AD8-8468-775AA448FB26}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JKang.IpcServiceFramework.Hosting", "IpcServiceFramework\src\JKang.IpcServiceFramework.Hosting\JKang.IpcServiceFramework.Hosting.csproj", "{124560A1-3B89-4BF0-BFA9-65B8BD1E4289}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IPC Service Framework", "IPC Service Framework", "{7CA41299-7562-4DC9-B745-4BFE7E6E0936}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JKang.IpcServiceFramework.Core", "IpcServiceFramework\src\JKang.IpcServiceFramework.Core\JKang.IpcServiceFramework.Core.csproj", "{845A8455-8C70-46EA-A5D6-D5207B4B89A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,10 +79,6 @@ Global
 		{854D6C5C-F833-4440-9057-2557C3BB8185}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{854D6C5C-F833-4440-9057-2557C3BB8185}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{854D6C5C-F833-4440-9057-2557C3BB8185}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DFEDEB08-65BE-4C5D-AE24-E7B731924B66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DFEDEB08-65BE-4C5D-AE24-E7B731924B66}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DFEDEB08-65BE-4C5D-AE24-E7B731924B66}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DFEDEB08-65BE-4C5D-AE24-E7B731924B66}.Release|Any CPU.Build.0 = Release|Any CPU
 		{013FB07E-165B-4461-8600-239F030F2720}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{013FB07E-165B-4461-8600-239F030F2720}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{013FB07E-165B-4461-8600-239F030F2720}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -95,6 +99,22 @@ Global
 		{AB108BEF-0544-46A3-AAFA-E5AF5B485C72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB108BEF-0544-46A3-AAFA-E5AF5B485C72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB108BEF-0544-46A3-AAFA-E5AF5B485C72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8EB4D99-F542-4CBE-A193-A29FEEED31CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8EB4D99-F542-4CBE-A193-A29FEEED31CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8EB4D99-F542-4CBE-A193-A29FEEED31CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8EB4D99-F542-4CBE-A193-A29FEEED31CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA07B11E-8CF1-4AD8-8468-775AA448FB26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA07B11E-8CF1-4AD8-8468-775AA448FB26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA07B11E-8CF1-4AD8-8468-775AA448FB26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA07B11E-8CF1-4AD8-8468-775AA448FB26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{124560A1-3B89-4BF0-BFA9-65B8BD1E4289}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{124560A1-3B89-4BF0-BFA9-65B8BD1E4289}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{124560A1-3B89-4BF0-BFA9-65B8BD1E4289}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{124560A1-3B89-4BF0-BFA9-65B8BD1E4289}.Release|Any CPU.Build.0 = Release|Any CPU
+		{845A8455-8C70-46EA-A5D6-D5207B4B89A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{845A8455-8C70-46EA-A5D6-D5207B4B89A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{845A8455-8C70-46EA-A5D6-D5207B4B89A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{845A8455-8C70-46EA-A5D6-D5207B4B89A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,12 +125,15 @@ Global
 		{4FB0FDA6-8593-40C3-98AD-B5B94F5C17B1} = {45225AC0-A5CF-4AD8-8827-2447791A5225}
 		{B2D078B3-95C2-4A67-844C-8C393D689734} = {45225AC0-A5CF-4AD8-8827-2447791A5225}
 		{854D6C5C-F833-4440-9057-2557C3BB8185} = {45225AC0-A5CF-4AD8-8827-2447791A5225}
-		{DFEDEB08-65BE-4C5D-AE24-E7B731924B66} = {45225AC0-A5CF-4AD8-8827-2447791A5225}
 		{013FB07E-165B-4461-8600-239F030F2720} = {45225AC0-A5CF-4AD8-8827-2447791A5225}
 		{0EC414B8-B6C8-4E30-A0DE-B11DBF383774} = {45225AC0-A5CF-4AD8-8827-2447791A5225}
 		{EFAF0F25-E633-41CE-BB8B-C24A3BFDA66B} = {45225AC0-A5CF-4AD8-8827-2447791A5225}
 		{CBBE08F5-8140-46D1-839F-4BA5FBEA9CFF} = {45225AC0-A5CF-4AD8-8827-2447791A5225}
 		{AB108BEF-0544-46A3-AAFA-E5AF5B485C72} = {45225AC0-A5CF-4AD8-8827-2447791A5225}
+		{D8EB4D99-F542-4CBE-A193-A29FEEED31CD} = {7CA41299-7562-4DC9-B745-4BFE7E6E0936}
+		{FA07B11E-8CF1-4AD8-8468-775AA448FB26} = {7CA41299-7562-4DC9-B745-4BFE7E6E0936}
+		{124560A1-3B89-4BF0-BFA9-65B8BD1E4289} = {7CA41299-7562-4DC9-B745-4BFE7E6E0936}
+		{845A8455-8C70-46EA-A5D6-D5207B4B89A5} = {7CA41299-7562-4DC9-B745-4BFE7E6E0936}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C56E5B9B-DB07-4FA1-B3C0-20F7EAC5C1C1}

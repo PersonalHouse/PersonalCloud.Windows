@@ -120,6 +120,14 @@
   <data name="AlertCannotGenerateInvite" xml:space="preserve">
     <value>Cannot generate invitation.</value>
   </data>
+  <data name="AlertCannotMountDrive" xml:space="preserve">
+    <value>Cannot Mount Network Drive</value>
+  </data>
+  <data name="AlertCannotMountDriveTroubleshoot" xml:space="preserve">
+    <value>Personal Cloud mounted network drive disconnected unexpectedly. There was another program interfering with our file system driver or the driver was not installed.
+
+If you continue seeing this dialog, uncheck the "Mount as Network Drive" box to avoid it for the moment. Contact your system administrator or reinstall Personal Cloud to resolve this issue.</value>
+  </data>
   <data name="AlertInvalidDeviceName" xml:space="preserve">
     <value>Invalid device name. Use a name that is short, is unique, and does not contain special characters.</value>
   </data>

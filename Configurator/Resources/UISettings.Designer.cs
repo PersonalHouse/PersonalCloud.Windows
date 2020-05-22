@@ -70,6 +70,26 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot Mount Network Drive.
+        /// </summary>
+        public static string AlertCannotMountDrive {
+            get {
+                return ResourceManager.GetString("AlertCannotMountDrive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Personal Cloud mounted network drive disconnected unexpectedly. There was another program interfering with our file system driver or the driver was not installed.
+        ///
+        ///If you continue seeing this dialog, uncheck the &quot;Mount as Network Drive&quot; box to avoid it for the moment. Contact your system administrator or reinstall Personal Cloud to resolve this issue..
+        /// </summary>
+        public static string AlertCannotMountDriveTroubleshoot {
+            get {
+                return ResourceManager.GetString("AlertCannotMountDriveTroubleshoot", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid device name. Use a name that is short, is unique, and does not contain special characters..
         /// </summary>
         public static string AlertInvalidDeviceName {

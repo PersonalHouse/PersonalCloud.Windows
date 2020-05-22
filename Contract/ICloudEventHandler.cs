@@ -2,7 +2,7 @@
 
 namespace NSPersonalCloud.WindowsContract
 {
-    public interface ICloudEventHandler
+    public interface ICloudEventHandler : IPopupPresenter
     {
         void OnServiceStarted();
 

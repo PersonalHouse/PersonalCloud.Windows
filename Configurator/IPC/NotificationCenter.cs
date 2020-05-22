@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows;
 
+using NSPersonalCloud.WindowsConfigurator.Resources;
 using NSPersonalCloud.WindowsContract;
 
 namespace NSPersonalCloud.WindowsConfigurator.IPC
@@ -21,7 +22,7 @@ namespace NSPersonalCloud.WindowsConfigurator.IPC
             });
 
             Task.Run(async () => {
-                var cloud = await Globals.Storage.InvokeAsync(x => x.GetAllPersonalCloud()).ConfigureAwait(false);
+                var cloud = await Globals.CloudManager.InvokeAsync(x => x.GetAllPersonalCloud()).ConfigureAwait(false);
                 Globals.PersonalCloud = cloud.Length == 0 ? null : (Guid?) cloud[0];
 
                 Application.Current.Dispatcher.Invoke(() => {
@@ -67,7 +68,7 @@ namespace NSPersonalCloud.WindowsConfigurator.IPC
             });
 
             Task.Run(async ()=> { 
-                var cloud = await Globals.Storage.InvokeAsync(x => x.GetAllPersonalCloud()).ConfigureAwait(false);
+                var cloud = await Globals.CloudManager.InvokeAsync(x => x.GetAllPersonalCloud()).ConfigureAwait(false);
                 Globals.PersonalCloud = cloud[0];
 
                 Application.Current.Dispatcher.Invoke(() => {
@@ -92,16 +93,16 @@ namespace NSPersonalCloud.WindowsConfigurator.IPC
 
         public void OnVolumeIOError(string mountPoint, Exception exception)
         {
-            if (exception is DllNotFoundException)
-            {
-                Application.Current.ShowAlert("无法加载网络驱动器",
-                    "个人云部分组件已损坏，请重新运行个人云安装程序。" + Environment.NewLine + Environment.NewLine + "如果您选择跳过安装网络驱动器组件，您无法使用网络驱动器功能。");
-            }
-            else
-            {
-                Application.Current.ShowAlert("网络驱动器非正常断开",
-                    $"通过个人云加载的网络驱动器 {mountPoint[0]} 工作异常、即将断开。" + Environment.NewLine + Environment.NewLine + "请重新加载网络驱动器，或联系技术支持。");
-            }
+            Application.Current.ShowAlert(UISettings.AlertCannotMountDrive, UISettings.AlertCannotMountDriveTroubleshoot);
         }
+
+        #region Pop-up Alert
+
+        public void ShowAlert(string title, string message)
+        {
+            Application.Current.Dispatcher.ShowAlert(title, message);
+        }
+
+        #endregion
     }
 }

@@ -12,6 +12,7 @@
         /// <param name="message">Message body for the alert.</param>
         void ShowAlert(string title, string message);
 
+        /*
         /// <summary>
         /// Invoke to show a message with 2 choice, one continues the action, and the other dismisses the message.
         /// </summary>
@@ -29,5 +30,6 @@
         /// <param name="title">Window title for the alert.</param>
         /// <param name="message">Message body for the alert.</param>
         void ShowFatalAlert(string title, string message);
+        */
     }
 }

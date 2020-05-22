@@ -1,15 +1,22 @@
-﻿using System.ServiceProcess;
+﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.ServiceProcess;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 
 using Hardcodet.Wpf.TaskbarNotification;
 
-using JKang.IpcServiceFramework;
+using JKang.IpcServiceFramework.Client;
+using JKang.IpcServiceFramework.Hosting;
 
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 using NSPersonalCloud.WindowsConfigurator.IPC;
 using NSPersonalCloud.WindowsContract;
@@ -21,6 +28,10 @@ namespace NSPersonalCloud.WindowsConfigurator
     public partial class App : Application
 #pragma warning restore CA1001
     {
+        private const string CloudManagerClient = "Cloud Service";
+        private const string DiskMounterClient = "Dokany Service";
+        private const string StorageClient = "Database Service";
+
         public TaskbarIcon TrayIcon { get; private set; }
 
         private CancellationTokenSource runners;
@@ -37,31 +48,44 @@ namespace NSPersonalCloud.WindowsConfigurator
 
             runners = new CancellationTokenSource();
 
+            /*
             var ipcServiceCollection = new ServiceCollection()
                 .AddSingleton<PopupPresenter>()
                 .AddSingleton<NotificationCenter>()
-                .AddIpc(builder => {
+                .AddIpcClient(builder => {
                     builder.AddNamedPipe()
                            .AddService<IPopupPresenter>(services => services.GetRequiredService<PopupPresenter>())
                            .AddService<ICloudEventHandler>(services => services.GetRequiredService<NotificationCenter>());
                 });
+
             _ = new IpcServiceHostBuilder(ipcServiceCollection.BuildServiceProvider())
                 .AddNamedPipeEndpoint<IPopupPresenter>("Popups", Pipes.Messenger, true)
                 .AddNamedPipeEndpoint<ICloudEventHandler>("Notifications", Pipes.NotificationCenter, true)
                 .Build().RunAsync(runners.Token);
+            */
 
-            Globals.CloudManager = new IpcServiceClientBuilder<ICloudManager>().UseNamedPipe(Pipes.CloudAdmin).Build();
-            Globals.Mounter = new IpcServiceClientBuilder<IFileSystemController>().UseNamedPipe(Pipes.DiskMounter).Build();
-            Globals.Storage = new IpcServiceClientBuilder<IPersistentStorage>().UseNamedPipe(Pipes.UserSettings).Build();
+            Host.CreateDefaultBuilder().ConfigureServices(services => {
+                services.AddSingleton<ICloudEventHandler, NotificationCenter>();
+            }).ConfigureIpcHost(builder => {
+                builder.AddNamedPipeEndpoint<ICloudEventHandler>(Pipes.NotificationCenter);
+            }).ConfigureLogging(builder => {
+                builder.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Debug);
+            }).Build().RunAsync();
+
+            var services = new ServiceCollection().AddNamedPipeIpcClient<ICloudManager>(CloudManagerClient, Pipes.CloudAdmin)
+                                                  .BuildServiceProvider();
+
+            Globals.CloudManager = services.GetRequiredService<IIpcClientFactory<ICloudManager>>().CreateClient(CloudManagerClient);
 
             /*
             Task.Run(async () => {
-                var cloud = await Globals.Storage.InvokeAsync(x => x.GetAllPersonalCloud()).ConfigureAwait(false);
+                var cloud = await Globals.CloudManager.InvokeAsync(x => x.GetAllPersonalCloud()).ConfigureAwait(false);
                 Globals.PersonalCloud = cloud.Length == 0 ? null : (Guid?) cloud[0];
 
                 Dispatcher.Invoke(() => {
                     if (Globals.PersonalCloud != null) MainWindow = new MainWindow();
                     else MainWindow = new WelcomeWindow();
+                    MainWindow.Show();
                 });
             });
             */
@@ -77,6 +101,9 @@ namespace NSPersonalCloud.WindowsConfigurator
 
         public void RestartService()
         {
+            Globals.IsServiceRunning = false;
+            MainWindow?.Close();
+
             try
             {
                 var service = new ServiceController(Services.ServiceName);
@@ -89,14 +116,42 @@ namespace NSPersonalCloud.WindowsConfigurator
 
                 service.Start();
             }
-            catch
+            catch (Exception exception)
             {
+                if (exception is InvalidOperationException ioe
+                    && ioe.InnerException is Win32Exception w32e
+                    && w32e.NativeErrorCode == 5)
+                {
+                    using (var process = new Process())
+                    {
+                        process.StartInfo.FileName = "sc.exe";
+                        process.StartInfo.Arguments = "stop PersonalCloud.WindowsService";
+                        process.StartInfo.UseShellExecute = true;
+                        process.StartInfo.Verb = "runas";
+                        process.Start();
+                        process.WaitForExit();
+                    }
+
+                    using (var process = new Process())
+                    {
+                        process.StartInfo.FileName = "sc.exe";
+                        process.StartInfo.Arguments = "start PersonalCloud.WindowsService";
+                        process.StartInfo.UseShellExecute = true;
+                        process.StartInfo.Verb = "runas";
+                        process.Start();
+                        process.WaitForExit();
+                    }
+                }
+
                 // Ignored.
             }
         }
 
         public void StopService()
         {
+            Globals.IsServiceRunning = false;
+            MainWindow?.Close();
+
             try
             {
                 var service = new ServiceController(Services.ServiceName);
@@ -107,12 +162,25 @@ namespace NSPersonalCloud.WindowsConfigurator
                     service.Stop();
                 }
             }
-            catch
+            catch (Exception exception)
             {
-                // Ignored.
+                if (exception is InvalidOperationException ioe
+                    && ioe.InnerException is Win32Exception w32e
+                    && w32e.NativeErrorCode == 5)
+                {
+                    using (var process = new Process())
+                    {
+                        process.StartInfo.FileName = "sc.exe";
+                        process.StartInfo.Arguments = "stop PersonalCloud.WindowsService";
+                        process.StartInfo.UseShellExecute = true;
+                        process.StartInfo.Verb = "runas";
+                        process.Start();
+                        process.WaitForExit();
+                    }
+                }
             }
 
-            MainWindow.Close();
+            MainWindow?.Close();
             MainWindow = null;
         }
     }

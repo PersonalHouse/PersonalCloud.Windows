@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.0.8" />
-    <PackageReference Include="JKang.IpcServiceFramework.Client" Version="2.3.1" />
     <PackageReference Include="MaterialDesignThemes" Version="3.1.2" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="3.2.1" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="3.2.1" />
@@ -28,6 +27,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.4" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.4" />
     <PackageReference Include="Ookii.Dialogs.Wpf" Version="1.1.0" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
@@ -38,7 +38,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Contract\Apps.WindowsContract.csproj" />
-    <ProjectReference Include="..\IpcServiceFramework\src\JKang.IpcServiceFramework.Server\JKang.IpcServiceFramework.Server.csproj" />
+    <ProjectReference Include="..\IpcServiceFramework\src\JKang.IpcServiceFramework.Client.NamedPipe\JKang.IpcServiceFramework.Client.NamedPipe.csproj" />
+    <ProjectReference Include="..\IpcServiceFramework\src\JKang.IpcServiceFramework.Hosting.NamedPipe\JKang.IpcServiceFramework.Hosting.NamedPipe.csproj" />
     <ProjectReference Include="..\PersonalCloud.Core\src\Interface\Interface.csproj" />
     <ProjectReference Include="..\PersonalCloud.Core\src\PersonalCloud\PersonalCloud.csproj" />
   </ItemGroup>

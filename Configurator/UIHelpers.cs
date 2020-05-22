@@ -22,7 +22,7 @@ namespace NSPersonalCloud.WindowsConfigurator
             var ok = new TaskDialogButton(ButtonType.Ok);
             dialog.Buttons.Add(ok);
 
-            Application.Current.Dispatcher.Invoke(() => {
+            Application.Current.Dispatcher?.Invoke(() => {
                 dialog.ShowDialog();
                 dialog.Dispose();
             });
@@ -44,7 +44,7 @@ namespace NSPersonalCloud.WindowsConfigurator
             var ok = new TaskDialogButton(ButtonType.Ok);
             dialog.Buttons.Add(ok);
 
-            dispatcher.Invoke(() => {
+            dispatcher?.Invoke(() => {
                 dialog.ShowDialog();
                 dialog.Dispose();
             });
@@ -71,7 +71,7 @@ namespace NSPersonalCloud.WindowsConfigurator
             if (actionIsCommand) dialog.ButtonStyle = TaskDialogButtonStyle.CommandLinks;
             dialog.Buttons.Add(ok);
 
-            dispatcher.Invoke(() => {
+            dispatcher?.Invoke(() => {
                 dialog.ShowDialog();
                 dialog.Dispose();
 

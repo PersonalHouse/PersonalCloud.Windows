@@ -120,6 +120,14 @@
   <data name="AlertCannotGenerateInvite" xml:space="preserve">
     <value>无法生成邀请码</value>
   </data>
+  <data name="AlertCannotMountDrive" xml:space="preserve">
+    <value>网络驱动器非正常断开</value>
+  </data>
+  <data name="AlertCannotMountDriveTroubleshoot" xml:space="preserve">
+    <value>个人云加载的网络驱动器意外断开，可能由于其它程序干扰或占用了文件系统管理组件、或此可选组件没有安装。
+
+如果此对话框重复出现，请取消勾选“将个人云显示为网络驱动器”来暂时忽略此错误。要修复此问题，您需要联系计算机管理员或重新安装个人云。</value>
+  </data>
   <data name="AlertInvalidDeviceName" xml:space="preserve">
     <value>设备名称无效，请使用简短、不与其它设备重复、不包含特殊字符的名称。</value>
   </data>

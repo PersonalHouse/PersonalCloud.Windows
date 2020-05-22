@@ -48,19 +48,19 @@ namespace NSPersonalCloud.WindowsConfigurator
             Task.Run(async () => {
                 try
                 {
-                    var sharingEnabled = await Globals.Storage.InvokeAsync(x => x.IsFileSharingEnabled(null))
+                    var sharingEnabled = await Globals.CloudManager.InvokeAsync(x => x.IsFileSharingEnabled(null))
                                                               .ConfigureAwait(false);
-                    var sharingPath = await Globals.Storage.InvokeAsync(x => x.GetFileSharingRoot())
+                    var sharingPath = await Globals.CloudManager.InvokeAsync(x => x.GetFileSharingRoot())
                                                            .ConfigureAwait(false);
 
-                    var deviceName = await Globals.Storage.InvokeAsync(x => x.GetDeviceName(null))
+                    var deviceName = await Globals.CloudManager.InvokeAsync(x => x.GetDeviceName(null))
                                                           .ConfigureAwait(false);
-                    var cloudName = await Globals.Storage.InvokeAsync(x => x.GetPersonalCloudName(Globals.PersonalCloud.Value))
+                    var cloudName = await Globals.CloudManager.InvokeAsync(x => x.GetPersonalCloudName(Globals.PersonalCloud.Value))
                                                          .ConfigureAwait(false);
 
-                    var mounted = await Globals.Storage.InvokeAsync(x => x.IsExplorerIntegrationEnabled())
+                    var mounted = await Globals.CloudManager.InvokeAsync(x => x.IsExplorerIntegrationEnabled())
                                                        .ConfigureAwait(false);
-                    var mountPoint = await Globals.Storage.InvokeAsync(x => x.GetMountPointForPersonalCloud(Globals.PersonalCloud.Value))
+                    var mountPoint = await Globals.CloudManager.InvokeAsync(x => x.GetMountPointForPersonalCloud(Globals.PersonalCloud.Value))
                                                           .ConfigureAwait(false);
 
                     var connections = await Globals.CloudManager.InvokeAsync(x => x.GetConnectedServices(Globals.PersonalCloud.Value))
@@ -219,7 +219,7 @@ namespace NSPersonalCloud.WindowsConfigurator
             var mountPoint = DriveLetters[MountedCloudDrive.SelectedIndex] + @":\";
 
             Task.Run(async () => {
-                await Globals.Mounter.InvokeAsync(x => x.MountNetworkDrive(Globals.PersonalCloud.Value, mountPoint))
+                await Globals.CloudManager.InvokeAsync(x => x.MountNetworkDrive(Globals.PersonalCloud.Value, mountPoint))
                                      .ConfigureAwait(false);
                 Dispatcher.Invoke(() => {
                     Alert.MessageQueue.Enqueue(UISettings.SettingsSaved);
@@ -232,7 +232,7 @@ namespace NSPersonalCloud.WindowsConfigurator
             if (!initialized) return;
 
             Task.Run(async () => {
-                await Globals.Mounter.InvokeAsync(x => x.UnmountAllDrives()).ConfigureAwait(false);
+                await Globals.CloudManager.InvokeAsync(x => x.UnmountAllDrives()).ConfigureAwait(false);
                 Dispatcher.Invoke(() => {
                     Alert.MessageQueue.Enqueue(UISettings.SettingsSaved);
                 });
@@ -249,7 +249,7 @@ namespace NSPersonalCloud.WindowsConfigurator
             if (mountPoint != null)
             {
                 Task.Run(async () => {
-                    await Globals.Mounter.InvokeAsync(x => x.MountNetworkDrive(Globals.PersonalCloud.Value, mountPoint))
+                    await Globals.CloudManager.InvokeAsync(x => x.MountNetworkDrive(Globals.PersonalCloud.Value, mountPoint))
                                          .ConfigureAwait(false);
                     Dispatcher.Invoke(() => {
                         Alert.MessageQueue.Enqueue(UISettings.SettingsSaved);
@@ -259,7 +259,7 @@ namespace NSPersonalCloud.WindowsConfigurator
             else
             {
                 Task.Run(async () => {
-                    await Globals.Mounter.InvokeAsync(x => x.UnmountNetworkDrive(Globals.PersonalCloud.Value))
+                    await Globals.CloudManager.InvokeAsync(x => x.UnmountNetworkDrive(Globals.PersonalCloud.Value))
                                          .ConfigureAwait(false);
                     Dispatcher.Invoke(() => {
                         Alert.MessageQueue.Enqueue(UISettings.SettingsSaved);

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using NSPersonalCloud;
+
 using NSPersonalCloud.Apps.Album;
 using NSPersonalCloud.FileSharing.Aliyun;
 
@@ -9,7 +9,7 @@ namespace NSPersonalCloud.WindowsContract
     /// <summary>
     /// This interface defines IPC contract for Personal Cloud management.
     /// </summary>
-    public interface ICloudManager : IFileSystemController
+    public interface ICloudManager : IFileSystemController, IPersistentStorage
     {
         /// <summary>
         /// Invoke to update the device name, optionally for a specific cloud.

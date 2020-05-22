@@ -8,31 +8,33 @@ using DokanFS;
 using DokanNet;
 using DokanNet.Logging;
 
-using JKang.IpcServiceFramework;
+using JKang.IpcServiceFramework.Client;
+using JKang.IpcServiceFramework.Hosting;
 
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 using Nito.AsyncEx;
 
-using NSPersonalCloud;
+using NSPersonalCloud.Common;
+using NSPersonalCloud.Common.Models;
 using NSPersonalCloud.Interfaces.Errors;
+using NSPersonalCloud.WindowsContract;
+using NSPersonalCloud.WindowsService.Data;
+using NSPersonalCloud.WindowsService.IPC;
 
 using SQLite;
 
 using Topshelf;
 
-using NSPersonalCloud.Common;
-using NSPersonalCloud.Common.Models;
-using NSPersonalCloud.WindowsContract;
-using NSPersonalCloud.WindowsService.Data;
-using NSPersonalCloud.WindowsService.IPC;
-using Serilog;
-
 namespace NSPersonalCloud.WindowsService
 {
     internal class PersonalCloudWindowsService : ServiceControl
     {
+        private const string PopupClient = "Pop-up Presenter";
+        private const string NotificationClient = "Event Handler";
+
         private HostControl HostControl { get; set; }
         private CancellationTokenSource Runners { get; set; }
 
@@ -72,6 +74,7 @@ namespace NSPersonalCloud.WindowsService
 
             Runners = new CancellationTokenSource();
 
+            /*
             var ipcServiceCollection = new ServiceCollection()
                 .AddSingleton<CloudManagerService>()
                 .AddSingleton<StorageService>()
@@ -86,9 +89,25 @@ namespace NSPersonalCloud.WindowsService
                 .AddNamedPipeEndpoint<IFileSystemController>("Dokan Controller", Pipes.DiskMounter, true)
                 .AddNamedPipeEndpoint<IPersistentStorage>("Storage", Pipes.UserSettings, true)
                 .Build().RunAsync(Runners.Token);
+            */
 
-            Globals.PopupPresenter = new IpcServiceClientBuilder<IPopupPresenter>().UseNamedPipe(Pipes.Messenger).Build();
-            Globals.NotificationCenter = new IpcServiceClientBuilder<ICloudEventHandler>().UseNamedPipe(Pipes.NotificationCenter).Build();
+            Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder()
+                                             .ConfigureServices(services => {
+                                                 services.AddSingleton<ICloudManager, CloudManagerService>();
+                                             })
+                                             .ConfigureIpcHost(builder => {
+                                                 builder.AddNamedPipeEndpoint<ICloudManager>(Pipes.CloudAdmin);
+                                             })
+                                             .ConfigureLogging(builder => {
+                                                 builder.SetMinimumLevel(LogLevel.Information);
+                                             })
+                                             .Build().RunAsync();
+
+            var services = new ServiceCollection().AddNamedPipeIpcClient<ICloudEventHandler>(NotificationClient, Pipes.NotificationCenter)
+                                                  .BuildServiceProvider();
+
+            Globals.NotificationCenter = services.GetRequiredService<IIpcClientFactory<ICloudEventHandler>>()
+                                                                .CreateClient(NotificationClient);
 
             #region Restore last-known state of File Sharing
 
@@ -112,7 +131,8 @@ namespace NSPersonalCloud.WindowsService
             Globals.CloudService = new PCLocalService(Globals.CloudConfig, Globals.Loggers, Globals.CloudFileSystem, resourcesPath);
             Globals.CloudService.OnError += (o, e) => {
                 if (e.ErrorCode == ErrorCode.NeedUpdate)
-                    _ = Globals.PopupPresenter.InvokeAsync(x => x.ShowAlert("There is a new version", "Personal Cloud program must be upgraded"));
+                    Globals.NotificationCenter.InvokeAsync(x => x.ShowAlert("New Version Available",
+                        "Upgrade Personal Cloud to connect to some devices in your network."));
             };
 
             if (!Globals.Database.CheckSetting(UserSettings.LastInstalledVersion, Globals.Version))
@@ -121,7 +141,7 @@ namespace NSPersonalCloud.WindowsService
             }
 
             Globals.CloudService.StartService();
-            _ = Globals.NotificationCenter.InvokeAsync(x => x.OnServiceStarted());
+            Globals.NotificationCenter.InvokeAsync(x => x.OnServiceStarted());
 
             #region Restore last-known state of Network Drives
 
@@ -143,7 +163,7 @@ namespace NSPersonalCloud.WindowsService
                         catch (Exception exception)
                         {
                             Logger.LogError(exception, "OnVolumeIOError exception");
-                            _ = Globals.NotificationCenter.InvokeAsync(x => x.OnVolumeIOError(mountPoint, exception));
+                            Globals.NotificationCenter.InvokeAsync(x => x.OnVolumeIOError(mountPoint, exception));
                         }
                     });
 
@@ -159,7 +179,7 @@ namespace NSPersonalCloud.WindowsService
         public bool Stop(HostControl hostControl)
         {
             Runners.Cancel();
-            _ = Globals.NotificationCenter.InvokeAsync(x => x.OnServiceStopped());
+            Globals.NotificationCenter.InvokeAsync(x => x.OnServiceStopped());
 
             foreach (var volume in Globals.Database.Table<DiskModel>().ToList())
             {

@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.IO;
 
-using JKang.IpcServiceFramework;
+using JKang.IpcServiceFramework.Client;
 
 using Microsoft.Extensions.Logging;
 
@@ -30,9 +30,9 @@ namespace NSPersonalCloud.WindowsService
 
         public static ConcurrentDictionary<Guid, AsyncContextThread> Volumes { get; set; }
 
-        public static IpcServiceClient<IPopupPresenter> PopupPresenter { get; set; }
-        public static IpcServiceClient<ICloudEventHandler> NotificationCenter { get; set; }
+        public static IIpcClient<ICloudEventHandler> NotificationCenter { get; set; }
 
-        public static string ConfigurationPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Personal Cloud");
+        public static string ConfigurationPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
+                                                               "Personal Cloud");
     }
 }

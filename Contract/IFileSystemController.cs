@@ -26,10 +26,5 @@ namespace NSPersonalCloud.WindowsContract
         /// Invoke to unmount all network drives. Their last mount points should be saved internally.
         /// </summary>
         void UnmountAllDrives();
-
-        /// <summary>
-        /// Invoke to terminate and restart the driver/service, for debugging and as a last resort to recover from error.
-        /// </summary>
-        void Restart();
     }
 }

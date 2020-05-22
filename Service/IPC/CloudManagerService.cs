@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 using DokanFS;
 
@@ -43,7 +44,15 @@ namespace NSPersonalCloud.WindowsService.IPC
                 catch (Exception exception)
                 {
                     Globals.Loggers.CreateLogger<CloudManagerService>().LogError(exception, "Mount failed.");
-                    _ = Globals.NotificationCenter.InvokeAsync(x => x.OnVolumeIOError(mountPoint, exception));
+                    Globals.Database.SaveSetting(WindowsUserSettings.EnableVolumeMounting, "0");
+
+                    Task.Run(async () => {
+                        await Globals.NotificationCenter.InvokeAsync(x => x.OnVolumeIOError(mountPoint, exception))
+                                                        .ConfigureAwait(false);
+                        await Task.Delay(TimeSpan.FromSeconds(5)).ConfigureAwait(false);
+                        Globals.Volumes.TryRemove(cloudId, out _);
+                        dokanThread.Dispose();
+                    });
                 }
             });
 
@@ -57,18 +66,14 @@ namespace NSPersonalCloud.WindowsService.IPC
             throw new NotSupportedException();
         }
 
-        public void Restart()
-        {
-            Globals.ServiceHost.Stop();
-            // Todo: Restart?
-        }
-
         public void UnmountAllDrives()
         {
             foreach (var volume in Globals.Database.Table<DiskModel>().ToList())
             {
                 var mountPoint = Globals.Database.GetMountPoint(volume.Id);
-                if (Dokan.RemoveMountPoint(mountPoint)) Globals.Database.RemoveMountPoint(volume.Id);
+                try { Dokan.RemoveMountPoint(mountPoint); }
+                catch { } // Ignored.
+                Globals.Database.RemoveMountPoint(volume.Id);
             }
 
             Globals.Database.SaveSetting(WindowsUserSettings.EnableVolumeMounting, "0");
@@ -77,16 +82,16 @@ namespace NSPersonalCloud.WindowsService.IPC
         public void UnmountNetworkDrive(Guid cloudId)
         {
             var mountPoint = Globals.Database.GetMountPoint(cloudId);
-            if (Dokan.RemoveMountPoint(mountPoint))
-            {
-                Globals.Database.RemoveMountPoint(cloudId);
-                if (Globals.Volumes.TryRemove(cloudId, out var thread)) thread.Dispose();
-            }
+            try { Dokan.RemoveMountPoint(mountPoint); }
+            catch { } // Ignored.
+
+            Globals.Database.RemoveMountPoint(cloudId);
+            if (Globals.Volumes.TryRemove(cloudId, out var thread)) thread.Dispose();
         }
 
         #endregion File System Controller
 
-        #region ICloudManager
+        #region Cloud Manager
 
         public void ChangeDeviceName(string newName, Guid? cloudId)
         {
@@ -135,13 +140,23 @@ namespace NSPersonalCloud.WindowsService.IPC
 
             // Todo: Check for Dokany readiness?
 
-            var connectedDrives = DriveInfo.GetDrives().Select(x => x.Name[0]);
-            var availableLetter = Algorithms.LowestMissingLetter(connectedDrives);
-            if (availableLetter != char.MinValue) MountNetworkDrive(cloudId, availableLetter + @":\");
+            try
+            {
+                var connectedDrives = DriveInfo.GetDrives().Select(x => x.Name[0]);
+                var availableLetter = Algorithms.LowestMissingLetter(connectedDrives);
+                if (availableLetter != char.MinValue) MountNetworkDrive(cloudId, availableLetter + @":\");
+            }
+            catch
+            {
+                // Ignored.
+            }
 
             #endregion Auto Mount
 
-            _ = Globals.NotificationCenter.InvokeAsync(x => x.OnPersonalCloudAdded());
+            Task.Run(async () => {
+                await Globals.NotificationCenter.InvokeAsync(x => x.OnPersonalCloudAdded())
+                                                .ConfigureAwait(false);
+            });
             return cloudId;
         }
 
@@ -163,14 +178,23 @@ namespace NSPersonalCloud.WindowsService.IPC
             #region Auto Mount
 
             // Todo: Check for Dokany readiness?
-
-            var connectedDrives = DriveInfo.GetDrives().Select(x => x.Name[0]);
-            var availableLetter = Algorithms.LowestMissingLetter(connectedDrives);
-            if (availableLetter != char.MinValue) MountNetworkDrive(cloudId, availableLetter + @":\");
+            try
+            {
+                var connectedDrives = DriveInfo.GetDrives().Select(x => x.Name[0]);
+                var availableLetter = Algorithms.LowestMissingLetter(connectedDrives);
+                if (availableLetter != char.MinValue) MountNetworkDrive(cloudId, availableLetter + @":\");
+            }
+            catch
+            {
+                // Ignored.
+            }
 
             #endregion Auto Mount
 
-            _ = Globals.NotificationCenter.InvokeAsync(x => x.OnPersonalCloudAdded());
+            Task.Run(async () => {
+                await Globals.NotificationCenter.InvokeAsync(x => x.OnPersonalCloudAdded())
+                                                .ConfigureAwait(false);
+            });
             return cloudId;
         }
 
@@ -182,7 +206,10 @@ namespace NSPersonalCloud.WindowsService.IPC
             Globals.Database.Delete<CloudModel>(id);
             Globals.Database.Delete<DiskModel>(id);
 
-            _ = Globals.NotificationCenter.InvokeAsync(x => x.OnLeftPersonalCloud());
+            Task.Run(async () => {
+                await Globals.NotificationCenter.InvokeAsync(x => x.OnLeftPersonalCloud())
+                                                .ConfigureAwait(false);
+            });
         }
 
         public string StartBroadcastingInvitation(Guid? id)
@@ -246,6 +273,47 @@ namespace NSPersonalCloud.WindowsService.IPC
             }
         }
 
-        #endregion ICloudManager
+        #endregion Cloud Manager
+
+        #region Storage
+
+        public Guid[] GetAllPersonalCloud()
+        {
+            return Globals.Database.Table<CloudModel>().Select(x => x.Id).ToArray();
+        }
+
+        public string GetDeviceName(Guid? cloudId = null)
+        {
+            if (cloudId == null) return Globals.Database.LoadSetting(UserSettings.DeviceName);
+            else throw new NotSupportedException();
+        }
+
+        public string GetFileSharingRoot()
+        {
+            return Globals.Database.LoadSetting(UserSettings.SharingRoot);
+        }
+
+        public string GetMountPointForPersonalCloud(Guid id)
+        {
+            return Globals.Database.GetMountPoint(id);
+        }
+
+        public string GetPersonalCloudName(Guid id)
+        {
+            return Globals.Database.Find<CloudModel>(id)?.Name;
+        }
+
+        public bool IsExplorerIntegrationEnabled()
+        {
+            return Globals.Database.CheckSetting(WindowsUserSettings.EnableVolumeMounting, "1");
+        }
+
+        public bool IsFileSharingEnabled(Guid? cloudId = null)
+        {
+            if (cloudId == null) return Globals.Database.CheckSetting(UserSettings.EnableSharing, "1");
+            else throw new NotSupportedException();
+        }
+
+        #endregion Storage
     }
 }
