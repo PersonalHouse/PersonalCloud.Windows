@@ -23,7 +23,7 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 3.1.101
+          dotnet-version: 3.1.202
 
       - name: Setup MSBuild
         uses: microsoft/setup-msbuild@v1.0.0
@@ -32,4 +32,4 @@ jobs:
         run: msbuild $env:SolutionPath /t:Restore /p:Configuration=$env:Configuration
 
       - name: Build
-        run: msbuild $env:SolutionPath /v:d /t:Restore /p:Configuration=$env:Configuration 
+        run: msbuild $env:SolutionPath /v:d /t:Rebuild /p:Configuration=$env:Configuration 

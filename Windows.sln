@@ -41,6 +41,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IPC Service Framework", "IP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JKang.IpcServiceFramework.Core", "IpcServiceFramework\src\JKang.IpcServiceFramework.Core\JKang.IpcServiceFramework.Core.csproj", "{845A8455-8C70-46EA-A5D6-D5207B4B89A5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JKang.IpcServiceFramework.Client", "IpcServiceFramework\src\JKang.IpcServiceFramework.Client\JKang.IpcServiceFramework.Client.csproj", "{7812F27F-4681-4630-8695-B97513FA577A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,6 +117,10 @@ Global
 		{845A8455-8C70-46EA-A5D6-D5207B4B89A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{845A8455-8C70-46EA-A5D6-D5207B4B89A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{845A8455-8C70-46EA-A5D6-D5207B4B89A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7812F27F-4681-4630-8695-B97513FA577A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7812F27F-4681-4630-8695-B97513FA577A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7812F27F-4681-4630-8695-B97513FA577A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7812F27F-4681-4630-8695-B97513FA577A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -134,6 +140,7 @@ Global
 		{FA07B11E-8CF1-4AD8-8468-775AA448FB26} = {7CA41299-7562-4DC9-B745-4BFE7E6E0936}
 		{124560A1-3B89-4BF0-BFA9-65B8BD1E4289} = {7CA41299-7562-4DC9-B745-4BFE7E6E0936}
 		{845A8455-8C70-46EA-A5D6-D5207B4B89A5} = {7CA41299-7562-4DC9-B745-4BFE7E6E0936}
+		{7812F27F-4681-4630-8695-B97513FA577A} = {7CA41299-7562-4DC9-B745-4BFE7E6E0936}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C56E5B9B-DB07-4FA1-B3C0-20F7EAC5C1C1}
