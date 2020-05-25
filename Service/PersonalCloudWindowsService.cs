@@ -157,7 +157,7 @@ namespace NSPersonalCloud.WindowsService
                     dokanThread.Factory.Run(() => {
                         try
                         {
-                            var disk = new DokanFileSystemAdapter(new PersonalCloudRootFileSystem(cloud));
+                            var disk = new DokanFileSystemAdapter(new PersonalCloudRootFileSystem(cloud, Globals.Loggers.CreateLogger<PersonalCloudRootFileSystem>()));
                             disk.Mount(mountPoint, DokanOptions.EnableNotificationAPI, 5, new NullLogger());
                         }
                         catch (Exception exception)

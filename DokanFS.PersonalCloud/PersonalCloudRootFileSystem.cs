@@ -4,21 +4,39 @@ using System.IO;
 using System.Linq;
 using DokanNet;
 
+using Microsoft.Extensions.Logging;
+
 using NSPersonalCloud;
+using NSPersonalCloud.FileSharing;
+using NSPersonalCloud.Interfaces.FileSystem;
 
 namespace DokanFS
 {
     public class PersonalCloudRootFileSystem : IReadableFileSystem, IWriteableFileSystem
     {
-        private readonly PersonalCloud _PersonalCloud;
+        //private readonly PersonalCloud _PersonalCloud;
 
-        public PersonalCloudRootFileSystem(PersonalCloud personalCloud)
+        private Microsoft.Extensions.Logging.ILogger Logger;
+        IFileSystem RootFs;
+
+        public PersonalCloudRootFileSystem(PersonalCloud personalCloud, Microsoft.Extensions.Logging.ILogger l)
         {
-            _PersonalCloud = personalCloud;
+            Logger = l;
+            //_PersonalCloud = personalCloud;
+            var dic = new Dictionary<string, IFileSystem>();
+            dic["Files"] = personalCloud.RootFS;
+            var aif = new AppInFs();
+            aif.GetApps = () =>  personalCloud.Apps;
+            aif.GetUrl = (x) => personalCloud.GetWebAppUri(x).ToString();
+            dic["Apps"] = aif;
+            RootFs = new FileSystemContainer(dic);
         }
 
         public object CreateFileContext(string fileName, FileMode mode, bool readAccess, FileShare share, FileOptions options)
         {
+
+            //Logger.LogError("PersonalCloudRootFileSystem.CreateFileContext called");
+
             if (mode == FileMode.CreateNew || mode == FileMode.Create)
             {
                 this.CreateFile(fileName);
@@ -34,23 +52,24 @@ namespace DokanFS
         public void CreateDirectory(string filePath)
         {
             filePath = filePath?.Replace("\\", "/");
-            _PersonalCloud.RootFS.CreateDirectoryAsync(filePath).ConfigureAwait(false).GetAwaiter().GetResult();
+            RootFs.CreateDirectoryAsync(filePath).ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         public void CreateFile(string filePath)
         {
             filePath = filePath?.Replace("\\", "/");
-            _PersonalCloud.RootFS.WriteFileAsync(filePath, new MemoryStream()).ConfigureAwait(false).GetAwaiter().GetResult();
+            RootFs.WriteFileAsync(filePath, new MemoryStream()).ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         public bool IsEmptyDirectory(string filePath)
         {
             filePath = filePath?.Replace("\\", "/");
-            return !_PersonalCloud.RootFS.EnumerateChildrenAsync(filePath).ConfigureAwait(false).GetAwaiter().GetResult().Any();
+            return !RootFs.EnumerateChildrenAsync(filePath).ConfigureAwait(false).GetAwaiter().GetResult().Any();
         }
 
         public void CheckNodeExists(string filePath, out bool isDirectory, out bool isFile)
         {
+            //Logger.LogError("PersonalCloudRootFileSystem.CheckNodeExists called");
             GetFileInformation(filePath, out var fileInfo);
             if (fileInfo.Attributes.HasFlag(FileAttributes.Directory))
             {
@@ -67,19 +86,19 @@ namespace DokanFS
         public void DeleteDirectory(string filePath)
         {
             filePath = filePath?.Replace("\\", "/");
-            _PersonalCloud.RootFS.DeleteAsync(filePath).ConfigureAwait(false).GetAwaiter().GetResult();
+            RootFs.DeleteAsync(filePath).ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         public void DeleteFile(string fileName)
         {
             fileName = fileName?.Replace("\\", "/");
-            _PersonalCloud.RootFS.DeleteAsync(fileName).ConfigureAwait(false).GetAwaiter().GetResult();
+            RootFs.DeleteAsync(fileName).ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         public void WriteFile(string fileName, byte[] buffer, out int bytesWritten, long offset)
         {
             fileName = fileName?.Replace("\\", "/");
-            _PersonalCloud.RootFS.WritePartialFileAsync(fileName, offset, buffer.Length, new MemoryStream(buffer)).ConfigureAwait(false).GetAwaiter().GetResult();
+            RootFs.WritePartialFileAsync(fileName, offset, buffer.Length, new MemoryStream(buffer)).ConfigureAwait(false).GetAwaiter().GetResult();
             bytesWritten = buffer.Length;
         }
 
@@ -91,38 +110,38 @@ namespace DokanFS
         public void SetFileLength(string fileName, long length)
         {
             fileName = fileName?.Replace("\\", "/");
-            _PersonalCloud.RootFS.SetFileLengthAsync(fileName, length).ConfigureAwait(false).GetAwaiter().GetResult();
+            RootFs.SetFileLengthAsync(fileName, length).ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         public void MoveDirectory(string oldName, string newName)
         {
             oldName = oldName?.Replace("\\", "/");
             newName = newName?.Replace("\\", "/");
-            _PersonalCloud.RootFS.RenameAsync(oldName, newName).ConfigureAwait(false).GetAwaiter().GetResult();
+            RootFs.RenameAsync(oldName, newName).ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         public void MoveFile(string oldName, string newName)
         {
             oldName = oldName?.Replace("\\", "/");
             newName = newName?.Replace("\\", "/");
-            _PersonalCloud.RootFS.RenameAsync(oldName, newName).ConfigureAwait(false).GetAwaiter().GetResult();
+            RootFs.RenameAsync(oldName, newName).ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         public void SetFileAttributes(string fileName, FileAttributes attributes)
         {
             fileName = fileName?.Replace("\\", "/");
-            _PersonalCloud.RootFS.SetFileAttributesAsync(fileName, attributes).ConfigureAwait(false).GetAwaiter().GetResult();
+            RootFs.SetFileAttributesAsync(fileName, attributes).ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         public void SetFileTime(string fileName, DateTime? creationTime, DateTime? lastAccessTime, DateTime? lastWriteTime)
         {
             fileName = fileName?.Replace("\\", "/");
-            _PersonalCloud.RootFS.SetFileTimeAsync(fileName, creationTime.Value, lastAccessTime.Value, lastWriteTime.Value).ConfigureAwait(false).GetAwaiter().GetResult();
+            RootFs.SetFileTimeAsync(fileName, creationTime.Value, lastAccessTime.Value, lastWriteTime.Value).ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         public void GetDiskFreeSpace(out long freeBytesAvailable, out long totalNumberOfBytes, out long totalNumberOfFreeBytes)
         {
-            var dinfo = _PersonalCloud.RootFS.GetFreeSpaceAsync().ConfigureAwait(false).GetAwaiter().GetResult();
+            var dinfo = RootFs.GetFreeSpaceAsync().ConfigureAwait(false).GetAwaiter().GetResult();
 
             freeBytesAvailable = dinfo.FreeBytesAvailable;
             totalNumberOfBytes = dinfo.TotalNumberOfBytes;
@@ -156,7 +175,7 @@ namespace DokanFS
         private IList<FileInformation> _RealEnumerateChildren(string filePath, string searchPattern)
         {
             filePath = filePath?.Replace("\\", "/");
-            var items = _PersonalCloud.RootFS.EnumerateChildrenAsync(filePath).ConfigureAwait(false).GetAwaiter().GetResult();
+            var items = RootFs.EnumerateChildrenAsync(filePath).ConfigureAwait(false).GetAwaiter().GetResult();
             IList<FileInformation> files = items
                 .Where(finfo => DokanHelper.DokanIsNameInExpression(searchPattern, finfo.Name, true))
                 .Select(finfo => new FileInformation {
@@ -173,9 +192,11 @@ namespace DokanFS
 
         public void GetFileInformation(string fileName, out FileInformation fileInfo)
         {
+            //Logger.LogError("PersonalCloudRootFileSystem.GetFileInformation called");
             fileName = fileName?.Replace("\\", "/");
+            FileSystemEntry finfo = null;
 
-            var finfo = _PersonalCloud.RootFS.ReadMetadataAsync(fileName).ConfigureAwait(false).GetAwaiter().GetResult();
+            finfo = RootFs.ReadMetadataAsync(fileName).ConfigureAwait(false).GetAwaiter().GetResult();
 
             fileInfo = new FileInformation {
                 Attributes = FileAttributes.Normal | (finfo.IsDirectory ? FileAttributes.Directory : 0) | (finfo.IsHidden ? FileAttributes.Hidden : 0) | (finfo.IsReadOnly ? FileAttributes.ReadOnly : 0),
@@ -190,7 +211,7 @@ namespace DokanFS
         public void ReadFile(string fileName, long offset, int length, byte[] buffer, out int bytesRead)
         {
             fileName = fileName?.Replace("\\", "/");
-            var stream = _PersonalCloud.RootFS.ReadPartialFileAsync(fileName, offset, offset + buffer.Length - 1).ConfigureAwait(false).GetAwaiter().GetResult();
+            var stream = RootFs.ReadPartialFileAsync(fileName, offset, offset + buffer.Length - 1).ConfigureAwait(false).GetAwaiter().GetResult();
             Array.Clear(buffer, 0, buffer.Length);
             int remainBytes = buffer.Length;
             bytesRead = 0;
