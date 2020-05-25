@@ -2,24 +2,24 @@ name: Build
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
     runs-on: windows-latest
 
     env:
-      SolutionPath: Windows.sln
-      Configuration: Release
+      SolutionPath: 'Windows.sln'
+      Configuration: 'Release'
 
     steps:
       - name: Checkout
         uses: actions/checkout@master
         with:
           submodules: 'recursive'
-        
+
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
@@ -32,4 +32,4 @@ jobs:
         run: msbuild $env:SolutionPath /t:Restore /p:Configuration=$env:Configuration
 
       - name: Build
-        run: msbuild $env:SolutionPath /v:d /t:Rebuild /p:Configuration=$env:Configuration 
+        run: msbuild $env:SolutionPath /v:d /t:Rebuild /p:Configuration=$env:Configuration
