@@ -2,8 +2,6 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.ServiceProcess;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 
 using Hardcodet.Wpf.TaskbarNotification;
@@ -34,8 +32,6 @@ namespace NSPersonalCloud.WindowsConfigurator
 
         public TaskbarIcon TrayIcon { get; private set; }
 
-        private CancellationTokenSource runners;
-
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -45,8 +41,6 @@ namespace NSPersonalCloud.WindowsConfigurator
         private void OnApplicationStarted(object sender, StartupEventArgs e)
         {
             TrayIcon = (TaskbarIcon) FindResource("TrayIcon");
-
-            runners = new CancellationTokenSource();
 
             /*
             var ipcServiceCollection = new ServiceCollection()
@@ -64,18 +58,19 @@ namespace NSPersonalCloud.WindowsConfigurator
                 .Build().RunAsync(runners.Token);
             */
 
-            Host.CreateDefaultBuilder().ConfigureServices(services => {
+            Globals.ServiceHost = Host.CreateDefaultBuilder().ConfigureServices(services => {
                 services.AddSingleton<ICloudEventHandler, NotificationCenter>();
             }).ConfigureIpcHost(builder => {
                 builder.AddNamedPipeEndpoint<ICloudEventHandler>(Pipes.NotificationCenter);
             }).ConfigureLogging(builder => {
                 builder.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Debug);
-            }).Build().RunAsync();
+            }).Build();
+            Globals.ServiceHost.StartAsync();
 
-            var services = new ServiceCollection().AddNamedPipeIpcClient<ICloudManager>(CloudManagerClient, Pipes.CloudAdmin)
-                                                  .BuildServiceProvider();
+            Globals.ServiceContainer = new ServiceCollection().AddNamedPipeIpcClient<ICloudManager>(CloudManagerClient, Pipes.CloudAdmin)
+                                                              .BuildServiceProvider();
 
-            Globals.CloudManager = services.GetRequiredService<IIpcClientFactory<ICloudManager>>().CreateClient(CloudManagerClient);
+            Globals.CloudManager = Globals.ServiceContainer.GetRequiredService<IIpcClientFactory<ICloudManager>>().CreateClient(CloudManagerClient);
 
             /*
             Task.Run(async () => {
@@ -93,8 +88,8 @@ namespace NSPersonalCloud.WindowsConfigurator
 
         private void OnApplicationExit(object sender, ExitEventArgs e)
         {
-            runners.Cancel();
-            runners.Dispose();
+            Globals.ServiceContainer.Dispose();
+            Globals.ServiceHost.Dispose();
 
             TrayIcon.Dispose();
         }

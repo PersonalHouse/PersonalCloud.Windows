@@ -82,7 +82,7 @@ namespace NSPersonalCloud.WindowsConfigurator.IPC
         {
             Globals.IsServiceRunning = false;
 
-            Application.Current.Dispatcher.Invoke(() => {
+            Application.Current?.Dispatcher.Invoke(() => {
                 if (Application.Current.MainWindow != null)
                 {
                     Application.Current.MainWindow.Close();
