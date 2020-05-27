@@ -2,6 +2,8 @@
 using System.IO;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
+
 using NSPersonalCloud.WindowsContract;
 
 using Topshelf;
@@ -16,7 +18,25 @@ namespace NSPersonalCloud.WindowsService
 
         public static void Main(string[] args)
         {
-            Console.WriteLine("Personal Cloud service started.");
+
+            var logsDir = Path.Combine(Globals.ConfigurationPath, "Logs");
+            Directory.CreateDirectory(logsDir);
+
+            if (args == null || args.Length == 0)
+            {
+                Globals.Loggers = LoggerFactory.Create(builder => builder.SetMinimumLevel(LogLevel.Trace).
+                AddConsole(x => {
+                    x.TimestampFormat = "G";
+                }).AddFile(Path.Combine(logsDir, "Service.log"),LogLevel.Trace, fileSizeLimitBytes: 6291456, retainedFileCountLimit: 3));
+            }
+            else
+            {
+                Globals.Loggers = LoggerFactory.Create(builder => builder.
+                 AddFile(Path.Combine(logsDir, "Service.log"), fileSizeLimitBytes: 6291456, retainedFileCountLimit: 3));
+            }
+
+            var l = Globals.Loggers.CreateLogger<Program>();
+            l.LogInformation("Personal Cloud service started.");
 
             #region Library Architecture
 
@@ -31,10 +51,6 @@ namespace NSPersonalCloud.WindowsService
 
             #endregion Library Architecture
 
-            var logsDir = Path.Combine(Globals.ConfigurationPath, "Logs");
-            Directory.CreateDirectory(logsDir);
-
-            Globals.Loggers = new LoggerFactory().AddFile(Path.Combine(logsDir, "Service.log"), fileSizeLimitBytes: 6291456, retainedFileCountLimit: 3);
 
             var rc = HostFactory.Run(x => {
                 x.Service<PersonalCloudWindowsService>();
@@ -50,6 +66,9 @@ namespace NSPersonalCloud.WindowsService
 
             var exitCode = (int) Convert.ChangeType(rc, rc.GetTypeCode());
             Environment.ExitCode = exitCode;
+
+            l.LogInformation($"Personal Cloud service exit with {exitCode}.");
+            Globals.Loggers?.Dispose();
         }
     }
 }
