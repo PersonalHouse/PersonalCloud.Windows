@@ -6,3 +6,4 @@
 using System.Diagnostics.CodeAnalysis;
 
 [assembly: SuppressMessage("Design", "CA1031", Justification = "Catch general exceptions to avoid crashes.", Scope = "module")]
+[assembly: SuppressMessage("Design", "CA1060", Justification = "P/Invokes are fine.", Scope = "module")]
