@@ -101,7 +101,7 @@ namespace DokanFS
 
         public void WriteFile(string fileName, byte[] buffer, out int bytesWritten, long offset)
         {
-            Logger.LogTrace($"WriteFile {fileName}");
+            Logger.LogTrace($"WriteFile called");
             fileName = fileName?.Replace("\\", "/");
             RootFs.WritePartialFileAsync(fileName, offset, buffer.Length, new MemoryStream(buffer)).AsTask().Wait();
             bytesWritten = buffer.Length;
@@ -114,14 +114,14 @@ namespace DokanFS
 
         public void SetFileLength(string fileName, long length)
         {
-            Logger.LogTrace($"SetFileLength called {fileName} {length} ");
+            Logger.LogTrace($"SetFileLength called");
             fileName = fileName?.Replace("\\", "/");
             RootFs.SetFileLengthAsync(fileName, length).ConfigureAwait(false).GetAwaiter().GetResult();
         }
 
         public void MoveDirectory(string oldName, string newName)
         {
-            Logger.LogTrace($"SetFileLength called {oldName} {newName} ");
+            Logger.LogTrace($"SetFileLength called ");
             oldName = oldName?.Replace("\\", "/");
             newName = newName?.Replace("\\", "/");
             RootFs.RenameAsync(oldName, newName).ConfigureAwait(false).GetAwaiter().GetResult();
@@ -176,7 +176,7 @@ namespace DokanFS
         public IList<FileInformation> EnumerateChildren(string filePath, string searchPattern)
         {
 
-            Logger.LogTrace($"EnumerateChildren {filePath} searchPattern {searchPattern}");
+            Logger.LogTrace($"EnumerateChildren called");
             if (searchPattern.IndexOfAny(new char[] { '?', '*' }) < 0)
             {
                 GetFileInformation(Path.Combine(filePath, searchPattern), out var fileInfo);
@@ -202,7 +202,7 @@ namespace DokanFS
                     Length = finfo.Size ?? 0,
                     FileName = finfo.Name
                 }).ToArray();
-            Logger.LogTrace($"_RealEnumerateChildren {filePath} received {items.Count} item(s), return {files.Count} file(s)");
+            //Logger.LogTrace($"_RealEnumerateChildren {filePath} received {items.Count} item(s), return {files.Count} file(s)");
             return files;
         }
 
@@ -214,7 +214,7 @@ namespace DokanFS
 
             finfo = RootFs.ReadMetadataAsync(fileName).AsTask().Result;
 
-            Logger.LogTrace($"GetFileInformation {fileName} received {finfo.Name} {finfo.Attributes}");
+            //Logger.LogTrace($"GetFileInformation {fileName} received {finfo.Name} {finfo.Attributes}");
 
             fileInfo = new FileInformation {
                 Attributes = FileAttributes.Normal | (finfo.IsDirectory ? FileAttributes.Directory : 0) | (finfo.IsHidden ? FileAttributes.Hidden : 0) | (finfo.IsReadOnly ? FileAttributes.ReadOnly : 0),
@@ -228,19 +228,27 @@ namespace DokanFS
 
         public void ReadFile(string fileName, long offset, int length, byte[] buffer, out int bytesRead)
         {
-            Logger.LogTrace("ReadFile called");
-            fileName = fileName?.Replace("\\", "/");
-            var stream = RootFs.ReadPartialFileAsync(fileName, offset, offset + buffer.Length - 1).ConfigureAwait(false).GetAwaiter().GetResult();
-            Array.Clear(buffer, 0, buffer.Length);
-            int remainBytes = buffer.Length;
+            Logger.LogTrace($"ReadFile called fileName {fileName} offset {offset} length {length}");
             bytesRead = 0;
-            while (remainBytes > 0)
+            try
             {
-                int count = stream.Read(buffer, bytesRead, remainBytes);
-                if (count == 0) break;
-                bytesRead += count;
-                remainBytes -= count;
+                fileName = fileName?.Replace("\\", "/");
+                var stream = RootFs.ReadPartialFileAsync(fileName, offset, offset + buffer.Length - 1).ConfigureAwait(false).GetAwaiter().GetResult();
+                Array.Clear(buffer, 0, buffer.Length);
+                int remainBytes = buffer.Length;
+                while (remainBytes > 0)
+                {
+                    int count = stream.Read(buffer, bytesRead, remainBytes);
+                    if (count == 0) break;
+                    bytesRead += count;
+                    remainBytes -= count;
+                }
             }
+            catch (Exception ex)
+            {
+                Logger.LogError($"ReadFile exception {ex.Message} {ex.StackTrace}");
+            }
+            Logger.LogTrace($"ReadFile return with  bytesRead {bytesRead}");
         }
     }
 }
