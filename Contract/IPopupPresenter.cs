@@ -1,4 +1,6 @@
-﻿namespace NSPersonalCloud.WindowsContract
+﻿using System.ComponentModel;
+
+namespace NSPersonalCloud.WindowsContract
 {
     /// <summary>
     /// This interface defines IPC contract for showing UI pop-ups.
@@ -10,7 +12,7 @@
         /// </summary>
         /// <param name="title">Window title for the alert.</param>
         /// <param name="message">Message body for the alert.</param>
-        void ShowAlert(string title, string message);
+        void ShowAlert([Localizable(true)] string title, [Localizable(true)] string message);
 
         /*
         /// <summary>

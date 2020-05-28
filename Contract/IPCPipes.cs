@@ -1,6 +1,6 @@
 ﻿namespace NSPersonalCloud.WindowsContract
 {
-    public static class Pipes
+    public static class IPCPipes
     {
         public const string CloudAdmin = "PersonalCloud-273C2923668845DC9D0A8CB5AC5C5B3B";
         public const string DiskMounter = "PersonalCloud-ECA95733EB1B4553BBE240750248FB63";

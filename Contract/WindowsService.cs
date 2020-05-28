@@ -1,6 +1,6 @@
 ﻿namespace NSPersonalCloud.WindowsContract
 {
-    public static class Services
+    public static class WindowsServices
     {
         public const string ServiceName = "PersonalCloud.WindowsService";
     }

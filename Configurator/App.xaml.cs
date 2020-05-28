@@ -27,8 +27,11 @@ namespace NSPersonalCloud.WindowsConfigurator
 #pragma warning restore CA1001
     {
         private const string CloudManagerClient = "Cloud Service";
+
+        /*
         private const string DiskMounterClient = "Dokany Service";
         private const string StorageClient = "Database Service";
+        */
 
         public TaskbarIcon TrayIcon { get; private set; }
 
@@ -61,13 +64,13 @@ namespace NSPersonalCloud.WindowsConfigurator
             Globals.ServiceHost = Host.CreateDefaultBuilder().ConfigureServices(services => {
                 services.AddSingleton<ICloudEventHandler, NotificationCenter>();
             }).ConfigureIpcHost(builder => {
-                builder.AddNamedPipeEndpoint<ICloudEventHandler>(Pipes.NotificationCenter);
+                builder.AddNamedPipeEndpoint<ICloudEventHandler>(IPCPipes.NotificationCenter);
             }).ConfigureLogging(builder => {
                 builder.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Debug);
             }).Build();
             Globals.ServiceHost.StartAsync();
 
-            Globals.ServiceContainer = new ServiceCollection().AddNamedPipeIpcClient<ICloudManager>(CloudManagerClient, Pipes.CloudAdmin)
+            Globals.ServiceContainer = new ServiceCollection().AddNamedPipeIpcClient<ICloudManager>(CloudManagerClient, IPCPipes.CloudAdmin)
                                                               .BuildServiceProvider();
 
             Globals.CloudManager = Globals.ServiceContainer.GetRequiredService<IIpcClientFactory<ICloudManager>>().CreateClient(CloudManagerClient);
@@ -101,7 +104,7 @@ namespace NSPersonalCloud.WindowsConfigurator
 
             try
             {
-                var service = new ServiceController(Services.ServiceName);
+                var service = new ServiceController(WindowsServices.ServiceName);
                 if (service.Status != ServiceControllerStatus.Stopped
                     && service.Status != ServiceControllerStatus.StopPending
                     && service.CanStop)
@@ -149,7 +152,7 @@ namespace NSPersonalCloud.WindowsConfigurator
 
             try
             {
-                var service = new ServiceController(Services.ServiceName);
+                var service = new ServiceController(WindowsServices.ServiceName);
                 if (service.Status != ServiceControllerStatus.Stopped
                     && service.Status != ServiceControllerStatus.StopPending
                     && service.CanStop)

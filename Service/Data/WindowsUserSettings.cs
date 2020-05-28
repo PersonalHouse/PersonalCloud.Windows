@@ -19,7 +19,9 @@ namespace NSPersonalCloud.WindowsService.Data
 
         public static void SaveMountPoint(this SQLiteConnection database, Guid cloudId, string mountPoint)
         {
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
             if (mountPoint?.Length != 3 || !mountPoint.EndsWith(@":\", StringComparison.OrdinalIgnoreCase)) throw new ArgumentException("Mount Point is invalid.");
+#pragma warning restore CA1303
 
             database.InsertOrReplace(new DiskModel {
                 Id = cloudId,

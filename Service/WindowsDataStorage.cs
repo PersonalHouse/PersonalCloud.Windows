@@ -6,13 +6,11 @@ using System.Net;
 
 using Newtonsoft.Json;
 
-using NSPersonalCloud;
+using NSPersonalCloud.Common;
+using NSPersonalCloud.Common.Models;
 using NSPersonalCloud.Config;
 using NSPersonalCloud.FileSharing.Aliyun;
 using NSPersonalCloud.Interfaces.Apps;
-
-using NSPersonalCloud.Common;
-using NSPersonalCloud.Common.Models;
 
 using VaslD.Utility.Cryptography;
 
@@ -142,7 +140,7 @@ namespace NSPersonalCloud.WindowsService
             var id = Globals.Database.LoadSetting(UserSettings.DeviceId);
             if (id is null) return null;
 
-            var port = int.Parse(Globals.Database.LoadSetting(UserSettings.DevicePort));
+            var port = int.Parse(Globals.Database.LoadSetting(UserSettings.DevicePort), CultureInfo.InvariantCulture);
             if (port <= IPEndPoint.MinPort || port > IPEndPoint.MaxPort) throw new InvalidOperationException();
             return new ServiceConfiguration {
                 Id = new Guid(id),

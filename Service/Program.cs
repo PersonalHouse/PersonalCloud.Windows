@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
@@ -36,7 +37,11 @@ namespace NSPersonalCloud.WindowsService
             }
 
             var l = Globals.Loggers.CreateLogger<Program>();
+
+
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
             l.LogInformation("Personal Cloud service started.");
+#pragma warning restore CA1303
 
             #region Library Architecture
 
@@ -56,7 +61,7 @@ namespace NSPersonalCloud.WindowsService
                 x.Service<PersonalCloudWindowsService>();
                 x.RunAsLocalSystem();
 
-                x.SetServiceName(Services.ServiceName);
+                x.SetServiceName(WindowsServices.ServiceName);
                 x.SetDescription("Personal Cloud Service is responsible for managing Personal Cloud and related network drives in your local network.");
                 x.SetDisplayName("Personal Cloud");
 
@@ -64,7 +69,7 @@ namespace NSPersonalCloud.WindowsService
                 x.StartAutomaticallyDelayed();
             });
 
-            var exitCode = (int) Convert.ChangeType(rc, rc.GetTypeCode());
+            var exitCode = (int) Convert.ChangeType(rc, rc.GetTypeCode(), CultureInfo.InvariantCulture);
             Environment.ExitCode = exitCode;
 
             l.LogInformation($"Personal Cloud service exit with {exitCode}.");

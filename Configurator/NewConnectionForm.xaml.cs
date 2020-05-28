@@ -88,7 +88,7 @@ namespace NSPersonalCloud.WindowsConfigurator
             var invalidCharHit = false;
             foreach (var character in VirtualFileSystem.InvalidCharacters)
             {
-                if (name?.Contains(character) == true) invalidCharHit = true;
+                if (name?.Contains(character, StringComparison.Ordinal) == true) invalidCharHit = true;
             }
             if (string.IsNullOrEmpty(name) || invalidCharHit)
             {
@@ -172,7 +172,7 @@ namespace NSPersonalCloud.WindowsConfigurator
             var invalidCharHit = false;
             foreach (var character in VirtualFileSystem.InvalidCharacters)
             {
-                if (name?.Contains(character) == true) invalidCharHit = true;
+                if (name?.Contains(character, StringComparison.Ordinal) == true) invalidCharHit = true;
             }
             if (string.IsNullOrEmpty(name) || invalidCharHit)
             {
@@ -220,7 +220,7 @@ namespace NSPersonalCloud.WindowsConfigurator
 
             string connection;
             if (endpoint.Contains(accountName, StringComparison.Ordinal)) accountName = null;
-            if (endpoint.StartsWith("http://", StringComparison.Ordinal)) endpoint.Replace("http://", "https://");
+            if (endpoint.StartsWith("http://", StringComparison.Ordinal)) endpoint = endpoint.Replace("http://", "https://", StringComparison.OrdinalIgnoreCase);
             if (endpoint.StartsWith("https://", StringComparison.Ordinal))
             {
                 if (string.IsNullOrEmpty(accountName))

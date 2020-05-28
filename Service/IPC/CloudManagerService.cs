@@ -22,6 +22,8 @@ using NSPersonalCloud.WindowsService.Data;
 
 namespace NSPersonalCloud.WindowsService.IPC
 {
+
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
     public class CloudManagerService : ICloudManager
     {
         #region File System Controller
@@ -316,4 +318,5 @@ namespace NSPersonalCloud.WindowsService.IPC
 
         #endregion Storage
     }
+#pragma warning restore CA1303 // Do not pass literals as localized parameters
 }

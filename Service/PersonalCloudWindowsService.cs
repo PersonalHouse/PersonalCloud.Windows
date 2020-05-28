@@ -32,7 +32,7 @@ namespace NSPersonalCloud.WindowsService
 {
     internal class PersonalCloudWindowsService : ServiceControl
     {
-        private const string PopupClient = "Pop-up Presenter";
+        // private const string PopupClient = "Pop-up Presenter";
         private const string NotificationClient = "Event Handler";
 
         private HostControl HostControl { get; set; }
@@ -67,7 +67,10 @@ namespace NSPersonalCloud.WindowsService
 
         public bool Start(HostControl hostControl)
         {
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
             Logger.LogInformation("Windows service started.");
+#pragma warning restore CA1303
+
             HostControl = hostControl;
 
             Initialize();
@@ -96,14 +99,14 @@ namespace NSPersonalCloud.WindowsService
                                                  services.AddSingleton<ICloudManager, CloudManagerService>();
                                              })
                                              .ConfigureIpcHost(builder => {
-                                                 builder.AddNamedPipeEndpoint<ICloudManager>(Pipes.CloudAdmin);
+                                                 builder.AddNamedPipeEndpoint<ICloudManager>(IPCPipes.CloudAdmin);
                                              })
                                              .ConfigureLogging(builder => {
                                                  builder.SetMinimumLevel(LogLevel.Information);
                                              })
                                              .Build().RunAsync();
 
-            var services = new ServiceCollection().AddNamedPipeIpcClient<ICloudEventHandler>(NotificationClient, Pipes.NotificationCenter)
+            var services = new ServiceCollection().AddNamedPipeIpcClient<ICloudEventHandler>(NotificationClient, IPCPipes.NotificationCenter)
                                                   .BuildServiceProvider();
 
             Globals.NotificationCenter = services.GetRequiredService<IIpcClientFactory<ICloudEventHandler>>()
@@ -198,7 +201,9 @@ namespace NSPersonalCloud.WindowsService
             Globals.CloudService.Dispose();
             Globals.Database.Dispose();
 
+#pragma warning disable CA1303 // Do not pass literals as localized parameters
             Logger.LogInformation("Windows service stopped.");
+#pragma warning restore CA1303
 
             return true;
         }
