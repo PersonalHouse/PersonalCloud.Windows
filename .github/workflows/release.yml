@@ -1,0 +1,73 @@
+name: Build Release
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+        with:
+          ref: ${{ github.ref }}
+          submodules: 'recursive'
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.202
+
+      - name: Download Setup Tool
+        run: Invoke-WebRequest https://github.com/Personal-Cloud/PersonalCloudSetup/releases/download/v1.0/PersonalCloudSetup.zip -Out .\PersonalCloudSetup.zip
+
+      - name: Extract Setup Tool
+        run: Expand-Archive -Path .\PersonalCloudSetup.zip -DestinationPath .\PersonalCloudSetup
+
+      - name: Get Version String
+        uses: frabert/replace-string-action@master
+        id: get-version-string
+        with:
+          pattern: '^v(.*)$'
+          string: "${{ github.event.release.tag_name }}"
+          replace-with: '$1'
+          flags: 'g'
+
+      - name: Build ImageIndexer
+        run: dotnet publish PersonalCloud.Core\src\Apps\Album\ImageIndexer\ImageIndexer.csproj -c Release -o .\PersonalCloudSetup\Data\ImageIndexer\ -p:PublishSingleFile=true -p:PublishTrimmed=true -r win-x86
+        
+      - name: Build Service
+        run: dotnet publish Service\Apps.WindowsService.csproj -c Release -o .\PersonalCloudSetup\Data\Service\x64 -p:PublishTrimmed=true -r win-x64 --self-contained
+        
+      - name: Build Configurator
+        run: dotnet publish Configurator\Apps.WindowsConfigurator.csproj -c Release -o .\PersonalCloudSetup\Data\GUI\ -p:PublishTrimmed=true -r win-x86 --self-contained
+        
+      - name: Move ImageIndexer
+        run: Move-Item -Path .\PersonalCloudSetup\Data\ImageIndexer\*.* -Destination .\PersonalCloudSetup\Data\Service\x64\
+        
+      - name: Generate Setup Files
+        run: .\PersonalCloudSetup\PersonalCloudSetup.exe -d .\PersonalCloudSetup\Data -b "${{ steps.get-version-string.outputs.replaced }}"
+        
+      - name: Upload Setup (EXE)
+        id: upload-release-exe
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64.exe
+          asset_name: PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64.exe
+          asset_content_type: application/octet-stream
+          
+      - name: Upload Setup (MSI)
+        id: upload-release-msi
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64.msi
+          asset_name: PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64.msi
+          asset_content_type: application/octet-stream
