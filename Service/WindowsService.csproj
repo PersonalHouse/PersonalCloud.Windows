@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>NSPersonalCloud.WindowsService</RootNamespace>
+    <AssemblyName>PersonalCloud.WindowsService</AssemblyName>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <NoWarn>NU1701;NU1702</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>NU1701;NU1702</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DokanNet" Version="1.3.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.4" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.4" />
+    <PackageReference Include="Nito.AsyncEx.Context" Version="5.0.0" />
+    <PackageReference Include="Serilog.Extensions.Logging.File" Version="2.0.0" />
+    <PackageReference Include="sqlite-net-base" Version="1.7.335" />
+    <PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.0.3" />
+    <PackageReference Include="Topshelf" Version="4.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IpcServiceFramework\src\JKang.IpcServiceFramework.Client.NamedPipe\JKang.IpcServiceFramework.Client.NamedPipe.csproj" />
+    <ProjectReference Include="..\IpcServiceFramework\src\JKang.IpcServiceFramework.Hosting.NamedPipe\JKang.IpcServiceFramework.Hosting.NamedPipe.csproj" />
+    <ProjectReference Include="..\Contract\WindowsContract.csproj" />
+    <ProjectReference Include="..\DokanFS.PersonalCloud\DokanFS.PersonalCloud.csproj" />
+    <ProjectReference Include="..\PersonalCloud.Apps.Common\Apps.Common.csproj" />
+    <ProjectReference Include="..\PersonalCloud.Core\src\PersonalCloud\PersonalCloud.csproj" />
+  </ItemGroup>
+
+</Project>

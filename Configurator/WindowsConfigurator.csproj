@@ -1,0 +1,108 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>PersonalCloud.WindowsConfigurator</AssemblyName>
+    <RootNamespace>NSPersonalCloud.WindowsConfigurator</RootNamespace>
+    <ApplicationManifest>App.manifest</ApplicationManifest>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <NoWarn>NU1701;NU1702</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>NU1701;NU1702</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="App.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.0.8" />
+    <PackageReference Include="MaterialDesignThemes" Version="3.1.3" />
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="3.2.1" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="3.2.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.4" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.4" />
+    <PackageReference Include="Ookii.Dialogs.Wpf" Version="1.1.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="3.0.1" />
+    <PackageReference Include="Serilog.Sinks.Debug" Version="1.0.1" />
+    <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
+    <PackageReference Include="System.ServiceProcess.ServiceController" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Contract\WindowsContract.csproj" />
+    <ProjectReference Include="..\IpcServiceFramework\src\JKang.IpcServiceFramework.Client.NamedPipe\JKang.IpcServiceFramework.Client.NamedPipe.csproj" />
+    <ProjectReference Include="..\IpcServiceFramework\src\JKang.IpcServiceFramework.Hosting.NamedPipe\JKang.IpcServiceFramework.Hosting.NamedPipe.csproj" />
+    <ProjectReference Include="..\PersonalCloud.Core\src\Interface\Interface.csproj" />
+    <ProjectReference Include="..\PersonalCloud.Core\src\PersonalCloud\PersonalCloud.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="App.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\UIApplets.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UIApplets.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\UILanding.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UILanding.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\UISettings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UISettings.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\UIStorage.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UIStorage.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\UIApplets.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UIApplets.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\UILanding.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UILanding.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\UISettings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UISettings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\UIStorage.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UIStorage.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+</Project>

@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apps.WindowsConfigurator", "Configurator\Apps.WindowsConfigurator.csproj", "{D0CF8996-9A69-4F6B-A695-37EEF2A7A082}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsConfigurator", "Configurator\WindowsConfigurator.csproj", "{D0CF8996-9A69-4F6B-A695-37EEF2A7A082}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apps.WindowsContract", "Contract\Apps.WindowsContract.csproj", "{FFADB406-09FA-4608-B075-55F23DD1658F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsContract", "Contract\WindowsContract.csproj", "{FFADB406-09FA-4608-B075-55F23DD1658F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{45225AC0-A5CF-4AD8-8827-2447791A5225}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apps.WindowsService", "Service\Apps.WindowsService.csproj", "{1901BB3E-EEB7-4222-9227-BF3489B56C6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsService", "Service\WindowsService.csproj", "{1901BB3E-EEB7-4222-9227-BF3489B56C6C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interface", "PersonalCloud.Core\src\Interface\Interface.csproj", "{407CC864-7BC5-43F9-9169-860498990FB8}"
 EndProject
