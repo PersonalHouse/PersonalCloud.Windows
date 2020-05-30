@@ -208,7 +208,7 @@
                                     HorizontalAlignment="Right">
 
                             <Button Style="{StaticResource MaterialDesignOutlinedButton}"
-                                    Content="REFRESH DEVICES"
+                                    Content="{x:Static resx:UISettings.RefreshNetwork}"
                                     Click="RefreshDevices"/>
 
                             <Button Style="{StaticResource MaterialDesignOutlinedButton}"
@@ -290,7 +290,7 @@
 
                 <GroupBox Grid.Row="6"
                           Style="{StaticResource MaterialDesignCardGroupBox}"
-                          Header="MAINTENANCE">
+                          Header="{x:Static resx:UISettings.DeveloperOptions}">
 
                     <StackPanel Grid.Row="6"
                                 Margin="5"
