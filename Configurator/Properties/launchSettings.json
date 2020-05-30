@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Apps.WindowsConfigurator": {
+      "commandName": "Project",
+      "commandLineArgs": "/startup"
+    }
+  }
+}

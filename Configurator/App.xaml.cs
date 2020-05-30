@@ -39,6 +39,11 @@ namespace NSPersonalCloud.WindowsConfigurator
         {
             base.OnStartup(e);
             AppCenter.Start("b3c9ef09-9572-4eab-bb3c-33e203d862ea", typeof(Analytics), typeof(Crashes));
+
+            if (e.Args.Length != 0 && e.Args[0].EndsWith("startup", StringComparison.InvariantCultureIgnoreCase))
+            {
+                Globals.DoNotShow = true;
+            }
         }
 
         private void OnApplicationStarted(object sender, StartupEventArgs e)
