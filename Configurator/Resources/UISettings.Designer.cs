@@ -189,6 +189,15 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MAINTENANCE.
+        /// </summary>
+        public static string DeveloperOptions {
+            get {
+                return ResourceManager.GetString("DeveloperOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Restart Service.
         /// </summary>
         public static string DeveloperRestartService {
@@ -295,6 +304,15 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         public static string InvitesSentTitle {
             get {
                 return ResourceManager.GetString("InvitesSentTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to REFRESH DEVICES.
+        /// </summary>
+        public static string RefreshNetwork {
+            get {
+                return ResourceManager.GetString("RefreshNetwork", resourceCulture);
             }
         }
         

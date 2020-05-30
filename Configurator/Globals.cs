@@ -23,5 +23,7 @@ namespace NSPersonalCloud.WindowsConfigurator
         */
 
         public static bool IsServiceRunning { get; set; }
+
+        public static bool DoNotShow { get; set; }
     }
 }

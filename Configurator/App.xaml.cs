@@ -27,8 +27,11 @@ namespace NSPersonalCloud.WindowsConfigurator
 #pragma warning restore CA1001
     {
         private const string CloudManagerClient = "Cloud Service";
+
+        /*
         private const string DiskMounterClient = "Dokany Service";
         private const string StorageClient = "Database Service";
+        */
 
         public TaskbarIcon TrayIcon { get; private set; }
 
@@ -36,6 +39,11 @@ namespace NSPersonalCloud.WindowsConfigurator
         {
             base.OnStartup(e);
             AppCenter.Start("b3c9ef09-9572-4eab-bb3c-33e203d862ea", typeof(Analytics), typeof(Crashes));
+
+            if (e.Args.Length != 0 && e.Args[0].EndsWith("startup", StringComparison.InvariantCultureIgnoreCase))
+            {
+                Globals.DoNotShow = true;
+            }
         }
 
         private void OnApplicationStarted(object sender, StartupEventArgs e)

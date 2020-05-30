@@ -161,6 +161,9 @@
   <data name="DeveloperExit" xml:space="preserve">
     <value>退出控制台</value>
   </data>
+  <data name="DeveloperOptions" xml:space="preserve">
+    <value>高级设置</value>
+  </data>
   <data name="DeveloperRestartService" xml:space="preserve">
     <value>重启服务</value>
   </data>
@@ -198,6 +201,9 @@
   </data>
   <data name="InvitesSentTitle" xml:space="preserve">
     <value>邀请码已生成</value>
+  </data>
+  <data name="RefreshNetwork" xml:space="preserve">
+    <value>刷新状态</value>
   </data>
   <data name="ServiceNotRunning" xml:space="preserve">
     <value>尚未就绪</value>

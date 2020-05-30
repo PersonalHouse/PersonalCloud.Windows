@@ -161,6 +161,9 @@ If you continue seeing this dialog, uncheck the "Mount as Network Drive" box to 
   <data name="DeveloperExit" xml:space="preserve">
     <value>Quit Configurator</value>
   </data>
+  <data name="DeveloperOptions" xml:space="preserve">
+    <value>MAINTENANCE</value>
+  </data>
   <data name="DeveloperRestartService" xml:space="preserve">
     <value>Restart Service</value>
   </data>
@@ -198,6 +201,9 @@ Closing this dialog terminates verification.</value>
   </data>
   <data name="InvitesSentTitle" xml:space="preserve">
     <value>Invitations Sent</value>
+  </data>
+  <data name="RefreshNetwork" xml:space="preserve">
+    <value>REFRESH DEVICES</value>
   </data>
   <data name="ServiceNotRunning" xml:space="preserve">
     <value>Configurator Not Ready</value>
