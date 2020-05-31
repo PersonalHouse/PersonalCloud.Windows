@@ -65,9 +65,17 @@ namespace DokanFS
 
         public bool IsEmptyDirectory(string filePath)
         {
-            Logger.LogTrace("IsEmptyDirectory called");
-            filePath = filePath?.Replace("\\", "/");
-            return !RootFs.EnumerateChildrenAsync(filePath).ConfigureAwait(false).GetAwaiter().GetResult().Any();
+            Logger.LogTrace("IsEmptyDirectory called {0}", filePath);
+            try
+            {
+                filePath = filePath?.Replace("\\", "/");
+                return !RootFs.EnumerateChildrenAsync(filePath).ConfigureAwait(false).GetAwaiter().GetResult().Any();
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, $"IsEmptyDirectory exception");
+                throw;
+            }
         }
 
         public void CheckNodeExists(string filePath, out bool isDirectory, out bool isFile)
@@ -176,7 +184,7 @@ namespace DokanFS
         public IList<FileInformation> EnumerateChildren(string filePath, string searchPattern)
         {
 
-            Logger.LogTrace($"EnumerateChildren called");
+            Logger.LogTrace("EnumerateChildren called {0}", filePath);
             if (searchPattern.IndexOfAny(new char[] { '?', '*' }) < 0)
             {
                 GetFileInformation(Path.Combine(filePath, searchPattern), out var fileInfo);
@@ -190,40 +198,56 @@ namespace DokanFS
 
         private IList<FileInformation> _RealEnumerateChildren(string filePath, string searchPattern)
         {
-            filePath = filePath?.Replace("\\", "/");
-            var items = RootFs.EnumerateChildrenAsync(filePath).AsTask().Result;
-            IList<FileInformation> files = items
-                .Where(finfo => DokanHelper.DokanIsNameInExpression(searchPattern, finfo.Name, true))
-                .Select(finfo => new FileInformation {
-                    Attributes = FileAttributes.Normal | (finfo.IsDirectory ? FileAttributes.Directory : 0) | (finfo.IsHidden ? FileAttributes.Hidden : 0),// | (finfo.IsReadOnly ? FileAttributes.ReadOnly : 0),
-                CreationTime = finfo.CreationDate,
-                    LastAccessTime = null,
-                    LastWriteTime = null,
-                    Length = finfo.Size ?? 0,
-                    FileName = finfo.Name
-                }).ToArray();
-            //Logger.LogTrace($"_RealEnumerateChildren {filePath} received {items.Count} item(s), return {files.Count} file(s)");
-            return files;
+            try
+            {
+                filePath = filePath?.Replace("\\", "/");
+                var items = RootFs.EnumerateChildrenAsync(filePath).AsTask().Result;
+                IList<FileInformation> files = items
+                    .Where(finfo => DokanHelper.DokanIsNameInExpression(searchPattern, finfo.Name, true))
+                    .Select(finfo => new FileInformation {
+                        Attributes = FileAttributes.Normal | (finfo.IsDirectory ? FileAttributes.Directory : 0) | (finfo.IsHidden ? FileAttributes.Hidden : 0),// | (finfo.IsReadOnly ? FileAttributes.ReadOnly : 0),
+                        CreationTime = finfo.CreationDate,
+                        LastAccessTime = null,
+                        LastWriteTime = null,
+                        Length = finfo.Size ?? 0,
+                        FileName = finfo.Name
+                    }).ToArray();
+                //Logger.LogTrace($"_RealEnumerateChildren {filePath} received {items.Count} item(s), return {files.Count} file(s)");
+                return files;
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, $"_RealEnumerateChildren exception");
+                throw;
+            }
         }
 
         public void GetFileInformation(string fileName, out FileInformation fileInfo)
         {
-            Logger.LogTrace("GetFileInformation called");
-            fileName = fileName?.Replace("\\", "/");
-            FileSystemEntry finfo = null;
+            Logger.LogTrace("GetFileInformation called {0}", fileName);
+            try
+            {
+                fileName = fileName?.Replace("\\", "/");
+                FileSystemEntry finfo = null;
 
-            finfo = RootFs.ReadMetadataAsync(fileName).AsTask().Result;
+                finfo = RootFs.ReadMetadataAsync(fileName).AsTask().Result;
 
-            //Logger.LogTrace($"GetFileInformation {fileName} received {finfo.Name} {finfo.Attributes}");
+                //Logger.LogTrace($"GetFileInformation {fileName} received {finfo.Name} {finfo.Attributes}");
 
-            fileInfo = new FileInformation {
-                Attributes = FileAttributes.Normal | (finfo.IsDirectory ? FileAttributes.Directory : 0) | (finfo.IsHidden ? FileAttributes.Hidden : 0) | (finfo.IsReadOnly ? FileAttributes.ReadOnly : 0),
-                CreationTime = finfo.CreationDate,
-                LastAccessTime = null,
-                LastWriteTime = null,
-                Length = finfo.Size ?? 0,
-                FileName = finfo.Name
-            };
+                fileInfo = new FileInformation {
+                    Attributes = FileAttributes.Normal | (finfo.IsDirectory ? FileAttributes.Directory : 0) | (finfo.IsHidden ? FileAttributes.Hidden : 0) | (finfo.IsReadOnly ? FileAttributes.ReadOnly : 0),
+                    CreationTime = finfo.CreationDate,
+                    LastAccessTime = null,
+                    LastWriteTime = null,
+                    Length = finfo.Size ?? 0,
+                    FileName = finfo.Name
+                };
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e, $"GetFileInformation exception");
+                throw;
+            }
         }
 
         public void ReadFile(string fileName, long offset, int length, byte[] buffer, out int bytesRead)
@@ -246,7 +270,7 @@ namespace DokanFS
             }
             catch (Exception ex)
             {
-                Logger.LogError($"ReadFile exception {ex.Message} {ex.StackTrace}");
+                Logger.LogError(ex,$"ReadFile exception");
             }
             Logger.LogTrace($"ReadFile return with  bytesRead {bytesRead}");
         }
