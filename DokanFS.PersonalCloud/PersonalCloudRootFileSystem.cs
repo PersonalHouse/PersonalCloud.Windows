@@ -73,15 +73,23 @@ namespace DokanFS
         public void CheckNodeExists(string filePath, out bool isDirectory, out bool isFile)
         {
             GetFileInformation(filePath, out var fileInfo);
-            if (fileInfo.Attributes.HasFlag(FileAttributes.Directory))
+            if (fileInfo != null)
             {
-                isDirectory = true;
-                isFile = false;
+                if (((FileInformation)fileInfo).Attributes.HasFlag(FileAttributes.Directory))
+                {
+                    isDirectory = true;
+                    isFile = false;
+                }
+                else
+                {
+                    isDirectory = false;
+                    isFile = true;
+                }
             }
             else
             {
                 isDirectory = false;
-                isFile = true;
+                isFile = false;
             }
         }
 
@@ -179,8 +187,13 @@ namespace DokanFS
             Logger.LogTrace($"EnumerateChildren called");
             if (searchPattern.IndexOfAny(new char[] { '?', '*' }) < 0)
             {
+                var result = new List<FileInformation>();
                 GetFileInformation(Path.Combine(filePath, searchPattern), out var fileInfo);
-                return new[] { fileInfo };
+                if (fileInfo != null)
+                {
+                    result.Add((FileInformation)fileInfo);
+                }
+                return result;
             }
             else
             {
@@ -206,24 +219,38 @@ namespace DokanFS
             return files;
         }
 
-        public void GetFileInformation(string fileName, out FileInformation fileInfo)
+        public void GetFileInformation(string fileName, out FileInformation? fileInfo)
         {
             Logger.LogTrace("GetFileInformation called");
             fileName = fileName?.Replace("\\", "/");
             FileSystemEntry finfo = null;
 
-            finfo = RootFs.ReadMetadataAsync(fileName).AsTask().Result;
+            try
+            {
+                finfo = RootFs.ReadMetadataAsync(fileName).AsTask().Result;
+            }
+            catch
+            {
+                finfo = null;
+            }
 
             //Logger.LogTrace($"GetFileInformation {fileName} received {finfo.Name} {finfo.Attributes}");
 
-            fileInfo = new FileInformation {
-                Attributes = FileAttributes.Normal | (finfo.IsDirectory ? FileAttributes.Directory : 0) | (finfo.IsHidden ? FileAttributes.Hidden : 0) | (finfo.IsReadOnly ? FileAttributes.ReadOnly : 0),
-                CreationTime = finfo.CreationDate,
-                LastAccessTime = null,
-                LastWriteTime = null,
-                Length = finfo.Size ?? 0,
-                FileName = finfo.Name
-            };
+            if (finfo != null)
+            {
+                fileInfo = new FileInformation {
+                    Attributes = FileAttributes.Normal | (finfo.IsDirectory ? FileAttributes.Directory : 0) | (finfo.IsHidden ? FileAttributes.Hidden : 0) | (finfo.IsReadOnly ? FileAttributes.ReadOnly : 0),
+                    CreationTime = finfo.CreationDate,
+                    LastAccessTime = null,
+                    LastWriteTime = null,
+                    Length = finfo.Size ?? 0,
+                    FileName = finfo.Name
+                };
+            }
+            else
+            {
+                fileInfo = null;
+            }
         }
 
         public void ReadFile(string fileName, long offset, int length, byte[] buffer, out int bytesRead)
