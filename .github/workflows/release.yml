@@ -21,7 +21,7 @@ jobs:
           dotnet-version: 3.1.202
 
       - name: Download Setup Tool
-        run: Invoke-WebRequest https://github.com/Personal-Cloud/PersonalCloudSetup/releases/download/v1.0/PersonalCloudSetup.zip -Out .\PersonalCloudSetup.zip
+        run: Invoke-WebRequest https://github.com/Personal-Cloud/PersonalCloudSetup/releases/download/v1.1/PersonalCloudSetup.zip -Out .\PersonalCloudSetup.zip
 
       - name: Extract Setup Tool
         run: Expand-Archive -Path .\PersonalCloudSetup.zip -DestinationPath .\PersonalCloudSetup
