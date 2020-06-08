@@ -160,7 +160,10 @@ namespace DokanFS
         public void GetDiskFreeSpace(out long freeBytesAvailable, out long totalNumberOfBytes, out long totalNumberOfFreeBytes)
         {
             Logger.LogTrace($"GetDiskFreeSpace called");
-            throw new InvalidOperationException();
+            totalNumberOfBytes = 2L * 1024 * 1024 * 1024*1014;
+            freeBytesAvailable = totalNumberOfFreeBytes= 1024L * 1024 * 1024 * 1014;
+            return;
+            //throw new InvalidOperationException();
 
 //             var dinfo = RootFs.GetFreeSpaceAsync().AsTask().Result;
 // 
