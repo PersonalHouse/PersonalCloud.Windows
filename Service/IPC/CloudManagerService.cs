@@ -10,6 +10,8 @@ using DokanNet;
 
 using Microsoft.Extensions.Logging;
 
+using Newtonsoft.Json;
+
 using Nito.AsyncEx;
 
 using NSPersonalCloud.Apps.Album;
@@ -248,12 +250,18 @@ namespace NSPersonalCloud.WindowsService.IPC
 
         public void ChangeAlbumSettings(Guid cloudId, List<AlbumConfig> settings)
         {
-            Globals.CloudService.SetAlbumConfig(cloudId.ToString("N"), settings);
+            var strcfig = JsonConvert.SerializeObject(settings);
+            Globals.CloudService.SetAppMgrConfig("Album", cloudId.ToString("N"), strcfig).ConfigureAwait(false);
         }
 
         public List<AlbumConfig> GetAlbumSettings(Guid cloudId)
         {
-            return Globals.CloudService.GetAlbumConfig(cloudId.ToString("N"));
+            var json = Globals.CloudService.GetAppConfig(cloudId.ToString("N"), "Album");
+            if (json != null)
+            {
+                return JsonConvert.DeserializeObject<List<Apps.Album.AlbumConfig>>(json);
+            }
+            return new List<Apps.Album.AlbumConfig>();
         }
 
         public void RemoveConnection(Guid cloudId, string name)
