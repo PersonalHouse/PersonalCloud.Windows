@@ -73,5 +73,8 @@ namespace NSPersonalCloud.WindowsContract
         List<AlbumConfig> GetAlbumSettings(Guid cloudId);
 
         void Refresh();
+
+        //tell client the service is alive
+        int Ping(int num);
     }
 }

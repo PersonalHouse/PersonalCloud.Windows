@@ -281,6 +281,11 @@ namespace NSPersonalCloud.WindowsService.IPC
             }
         }
 
+        public int Ping(int num)
+        {
+            return num;
+        }
+
         #endregion Cloud Manager
 
         #region Storage

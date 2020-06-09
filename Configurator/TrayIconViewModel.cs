@@ -1,5 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace NSPersonalCloud.WindowsConfigurator
 {
@@ -12,12 +15,28 @@ namespace NSPersonalCloud.WindowsConfigurator
             CommandAction = () => {
                 if (Application.Current.MainWindow == null)
                 {
-                    if (Globals.IsServiceRunning)
-                    {
-                        Application.Current.MainWindow = new MainWindow();
-                        Application.Current.MainWindow.Show();
-                    }
-                    else UIHelpers.ShowLoadingMessage();
+                    Application.Current.MainWindow = new MainWindow();
+                    Application.Current.MainWindow.Show();
+
+                    Task.Run(async () => {
+                        try
+                        {
+                            var ret = await Globals.CloudManager.InvokeAsync(x => x.Ping(666))
+                                                 .ConfigureAwait(false);
+                            if (ret == 666)
+                            {
+                                return;
+                            }
+                        }
+                        catch 
+                        {
+                        }
+                        Application.Current.Dispatcher.Invoke(() => {
+                            UIHelpers.ShowLoadingMessage();
+                            Application.Current.MainWindow.Hide();
+                            Application.Current.MainWindow = null;
+                        });
+                    });
                 }
                 else Application.Current.MainWindow.Show();
             }
