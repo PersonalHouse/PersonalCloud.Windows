@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -21,7 +22,9 @@ namespace NSPersonalCloud.WindowsConfigurator
                     Task.Run(async () => {
                         try
                         {
-                            var ret = await Globals.CloudManager.InvokeAsync(x => x.Ping(666))
+                            var cts = new CancellationTokenSource();
+                            cts.CancelAfter(2 * 1000);
+                            var ret = await Globals.CloudManager.InvokeAsync(x => x.Ping(666),cts.Token)
                                                  .ConfigureAwait(false);
                             if (ret == 666)
                             {
