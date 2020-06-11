@@ -21,7 +21,7 @@ jobs:
           dotnet-version: 3.1.202
 
       - name: Download Setup Tool
-        run: Invoke-WebRequest https://github.com/Personal-Cloud/PersonalCloudSetup/releases/download/v1.0/PersonalCloudSetup.zip -Out .\PersonalCloudSetup.zip
+        run: Invoke-WebRequest https://github.com/Personal-Cloud/PersonalCloudSetup/releases/download/v1.2/PersonalCloudSetup.zip -Out .\PersonalCloudSetup.zip
 
       - name: Extract Setup Tool
         run: Expand-Archive -Path .\PersonalCloudSetup.zip -DestinationPath .\PersonalCloudSetup
@@ -36,38 +36,78 @@ jobs:
           flags: 'g'
 
       - name: Build ImageIndexer
-        run: dotnet publish PersonalCloud.Core\src\Apps\Album\ImageIndexer\ImageIndexer.csproj -c Release -o .\PersonalCloudSetup\Data\ImageIndexer\ -p:PublishSingleFile=true -p:PublishTrimmed=true -r win-x86
+        run: dotnet publish PersonalCloud.Core\src\Apps\Album\ImageIndexer\ImageIndexer.csproj -c Release -o .\PersonalCloudSetup\Data\ImageIndexer\ -r win-x86 --self-contained
         
-      - name: Build Service
-        run: dotnet publish Service\Apps.WindowsService.csproj -c Release -o .\PersonalCloudSetup\Data\Service\x64 -p:PublishTrimmed=true -r win-x64 --self-contained
+      - name: Build AlbumApp
+        run: dotnet build PersonalCloud.Core\src\Apps\Album\AlbumApp\AlbumApp.csproj -c Release -o .\PersonalCloudSetup\Data\AlbumApp\
+
+      - name: Build Service (x86)
+        run: dotnet publish Service\WindowsService.csproj -c Release -o .\PersonalCloudSetup\Data\Service\x86 -r win-x86 --self-contained
+
+      - name: Build Service (x64)
+        run: dotnet publish Service\WindowsService.csproj -c Release -o .\PersonalCloudSetup\Data\Service\x64 -r win-x64 --self-contained
         
       - name: Build Configurator
-        run: dotnet publish Configurator\Apps.WindowsConfigurator.csproj -c Release -o .\PersonalCloudSetup\Data\GUI\ -p:PublishTrimmed=true -r win-x86 --self-contained
+        run: dotnet publish Configurator\WindowsConfigurator.csproj -c Release -o .\PersonalCloudSetup\Data\GUI\ -r win-x86 --self-contained
         
-      - name: Move ImageIndexer
-        run: Move-Item -Path .\PersonalCloudSetup\Data\ImageIndexer\*.* -Destination .\PersonalCloudSetup\Data\Service\x64\
+      - name: Copy ImageIndexer and AlbumApp
+        run: |
+            Copy-Item -Path .\PersonalCloudSetup\Data\ImageIndexer\ -Filter *.* -Destination .\PersonalCloudSetup\Data\Service\x86\Apps\Album\ -Recurse
+            Copy-Item -Path .\PersonalCloudSetup\Data\ImageIndexer\ -Filter *.* -Destination .\PersonalCloudSetup\Data\Service\x64\Apps\Album\ -Recurse
+            Copy-Item -Path .\PersonalCloudSetup\Data\AlbumApp\ -Filter *.* -Destination .\PersonalCloudSetup\Data\Service\x86\Apps\Album\ -Recurse
+            Copy-Item -Path .\PersonalCloudSetup\Data\AlbumApp\ -Filter *.* -Destination .\PersonalCloudSetup\Data\Service\x64\Apps\Album\ -Recurse
+        
+      - name: Move ffmpeg
+        run: |
+            Move-Item -Path .\PersonalCloudSetup\Data\ffmpeg_bin\x86\ffmpeg.exe -Destination .\PersonalCloudSetup\Data\Service\x86\Apps\Album\AlbumApp\ffmpeg.exe
+            Move-Item -Path .\PersonalCloudSetup\Data\ffmpeg_bin\x64\ffmpeg.exe -Destination .\PersonalCloudSetup\Data\Service\x64\Apps\Album\AlbumApp\ffmpeg.exe
         
       - name: Generate Setup Files
         run: .\PersonalCloudSetup\PersonalCloudSetup.exe -d .\PersonalCloudSetup\Data -b "${{ steps.get-version-string.outputs.replaced }}"
         
-      - name: Upload Setup (EXE)
-        id: upload-release-exe
+      - name: Create Zip File
+        run: |
+            Compress-Archive -Path .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x86.exe -DestinationPath .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x86-with-dokan.zip
+            Compress-Archive -Path .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x86.msi -DestinationPath .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x86-no-dokan.zip
+            Compress-Archive -Path .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64.exe -DestinationPath .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64-with-dokan.zip
+            Compress-Archive -Path .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64.msi -DestinationPath .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64-no-dokan.zip
+
+      - name: Upload Setup (32-bit EXE)
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64.exe
-          asset_name: PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64.exe
+          asset_path: .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x86-with-dokan.zip
+          asset_name: PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x86-with-dokan.zip
           asset_content_type: application/octet-stream
           
-      - name: Upload Setup (MSI)
-        id: upload-release-msi
+      - name: Upload Setup (32-bit MSI)
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64.msi
-          asset_name: PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64.msi
+          asset_path: .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x86-no-dokan.zip
+          asset_name: PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x86-no-dokan.zip
+          asset_content_type: application/octet-stream
+        
+      - name: Upload Setup (64-bit EXE)
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64-with-dokan.zip
+          asset_name: PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64-with-dokan.zip
+          asset_content_type: application/octet-stream
+          
+      - name: Upload Setup (64-bit MSI)
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64-no-dokan.zip
+          asset_name: PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64-no-dokan.zip
           asset_content_type: application/octet-stream
