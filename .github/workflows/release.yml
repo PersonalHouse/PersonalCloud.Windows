@@ -59,8 +59,8 @@ jobs:
         
       - name: Move ffmpeg
         run: |
-            Move-Item -Path .\PersonalCloudSetup\Data\ffmpeg_bin\x86\ffmpeg.exe -Destination .\PersonalCloudSetup\Data\Service\x86\Apps\Album\AlbumApp\ffmpeg.exe
-            Move-Item -Path .\PersonalCloudSetup\Data\ffmpeg_bin\x64\ffmpeg.exe -Destination .\PersonalCloudSetup\Data\Service\x64\Apps\Album\AlbumApp\ffmpeg.exe
+            Move-Item -Path .\PersonalCloudSetup\Data\ffmpeg_bin\x86\ffmpeg.exe -Destination .\PersonalCloudSetup\Data\Service\x86\Apps\Album\ffmpeg.exe
+            Move-Item -Path .\PersonalCloudSetup\Data\ffmpeg_bin\x64\ffmpeg.exe -Destination .\PersonalCloudSetup\Data\Service\x64\Apps\Album\ffmpeg.exe
         
       - name: Generate Setup Files
         run: .\PersonalCloudSetup\PersonalCloudSetup.exe -d .\PersonalCloudSetup\Data -b "${{ steps.get-version-string.outputs.replaced }}"
