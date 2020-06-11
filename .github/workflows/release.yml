@@ -54,8 +54,8 @@ jobs:
         run: |
             Copy-Item -Path .\PersonalCloudSetup\Data\ImageIndexer\ -Filter *.* -Destination .\PersonalCloudSetup\Data\Service\x86\Apps\Album\ -Recurse
             Copy-Item -Path .\PersonalCloudSetup\Data\ImageIndexer\ -Filter *.* -Destination .\PersonalCloudSetup\Data\Service\x64\Apps\Album\ -Recurse
-            Copy-Item -Path .\PersonalCloudSetup\Data\AlbumApp\ -Filter *.* -Destination .\PersonalCloudSetup\Data\Service\x86\Apps\Album\ -Recurse
-            Copy-Item -Path .\PersonalCloudSetup\Data\AlbumApp\ -Filter *.* -Destination .\PersonalCloudSetup\Data\Service\x64\Apps\Album\ -Recurse
+            Copy-Item -Path .\PersonalCloudSetup\Data\AlbumApp\* -Filter *.* -Destination .\PersonalCloudSetup\Data\Service\x86\Apps\Album\ -Recurse -Force
+            Copy-Item -Path .\PersonalCloudSetup\Data\AlbumApp\* -Filter *.* -Destination .\PersonalCloudSetup\Data\Service\x64\Apps\Album\ -Recurse -Force
         
       - name: Move ffmpeg
         run: |
