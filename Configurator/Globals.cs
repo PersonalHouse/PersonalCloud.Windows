@@ -22,8 +22,7 @@ namespace NSPersonalCloud.WindowsConfigurator
         public static IIpcClient<IPersistentStorage> Storage { get; set; }
         */
 
-        public static bool IsServiceRunning { get; set; }
 
-        public static bool DoNotShow { get; set; }
+        public static bool DoNotShowMainWinOnLaunch { get; set; }
     }
 }

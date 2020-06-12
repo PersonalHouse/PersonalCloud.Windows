@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.ServiceProcess;
+using System.Threading.Tasks;
 using System.Windows;
 
 using Hardcodet.Wpf.TaskbarNotification;
@@ -37,12 +38,13 @@ namespace NSPersonalCloud.WindowsConfigurator
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            base.OnStartup(e);
             AppCenter.Start("b3c9ef09-9572-4eab-bb3c-33e203d862ea", typeof(Analytics), typeof(Crashes));
+
+            base.OnStartup(e);
 
             if (e.Args.Length != 0 && e.Args[0].EndsWith("startup", StringComparison.InvariantCultureIgnoreCase))
             {
-                Globals.DoNotShow = true;
+                Globals.DoNotShowMainWinOnLaunch = true;
             }
         }
 
@@ -71,7 +73,7 @@ namespace NSPersonalCloud.WindowsConfigurator
             }).ConfigureIpcHost(builder => {
                 builder.AddNamedPipeEndpoint<ICloudEventHandler>(Pipes.NotificationCenter);
             }).ConfigureLogging(builder => {
-                builder.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Debug);
+                builder.SetMinimumLevel(Microsoft.Extensions.Logging.LogLevel.Information);
             }).Build();
             Globals.ServiceHost.StartAsync();
 
@@ -79,6 +81,8 @@ namespace NSPersonalCloud.WindowsConfigurator
                                                               .BuildServiceProvider();
 
             Globals.CloudManager = Globals.ServiceContainer.GetRequiredService<IIpcClientFactory<ICloudManager>>().CreateClient(CloudManagerClient);
+
+            SetMainWindow();
 
             /*
             Task.Run(async () => {
@@ -94,6 +98,22 @@ namespace NSPersonalCloud.WindowsConfigurator
             */
         }
 
+        void SetMainWindow()
+        {
+            Task.Run(async () => {
+                var cloud = await Globals.CloudManager.InvokeAsync(x => x.GetAllPersonalCloud()).ConfigureAwait(false);
+                Globals.PersonalCloud = cloud.Length == 0 ? null : (Guid?) cloud[0];
+
+                Dispatcher.Invoke(() => {
+                    if (Globals.PersonalCloud != null) MainWindow = new MainWindow();
+                    else MainWindow = new WelcomeWindow();
+
+                    if (!Globals.DoNotShowMainWinOnLaunch) MainWindow.Show();
+                    Globals.DoNotShowMainWinOnLaunch = false;
+                });
+            });
+        }
+
         private void OnApplicationExit(object sender, ExitEventArgs e)
         {
             Globals.ServiceContainer.Dispose();
@@ -104,7 +124,6 @@ namespace NSPersonalCloud.WindowsConfigurator
 
         public void RestartService()
         {
-            Globals.IsServiceRunning = false;
             MainWindow?.Close();
 
             try
@@ -152,7 +171,6 @@ namespace NSPersonalCloud.WindowsConfigurator
 
         public void StopService()
         {
-            Globals.IsServiceRunning = false;
             MainWindow?.Close();
 
             try

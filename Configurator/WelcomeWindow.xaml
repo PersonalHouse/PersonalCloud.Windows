@@ -27,11 +27,11 @@
         </md:DialogHost.DialogContent>
         <Grid MinWidth="600"
               MaxWidth="1024">
-            <StackPanel Margin="10">
+            <StackPanel Margin="20">
                 <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"
                            Text="{x:Static resx:UILanding.Welcome}"
-                           HorizontalAlignment="Center" />
-                <Grid Margin="0, 30, 0, 0">
+                           HorizontalAlignment="Center" Margin="0,25,0,30" />
+                <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition Width="20" />
@@ -51,7 +51,7 @@
                                  Content="{x:Static resx:UILanding.JoinCloudHint}"
                                  Click="SwitchTab" />
                 </Grid>
-                <Grid Margin="0, 20, 0, 30">
+                <Grid Margin="30">
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition Height="15" />
@@ -88,7 +88,7 @@
                 <Button x:Name="GoButton"
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         Content="{x:Static resx:UILanding.CreateCloud}"
-                        Click="EnrollDevice" />
+                        Click="EnrollDevice" Margin="50,10,50,10" />
             </StackPanel>
             <md:Snackbar x:Name="Alert"
                          MessageQueue="{md:MessageQueue}" />

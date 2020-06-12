@@ -77,11 +77,12 @@ namespace NSPersonalCloud.WindowsConfigurator
 
             Task.Run(async () => {
                 // Animation
-                await Task.Delay(3000).ConfigureAwait(false);
+                var t = Task.Delay(3000).ConfigureAwait(false);
 
                 try
                 {
                     await Globals.CloudManager.InvokeAsync(x => x.CreatePersonalCloud(cloudName, deviceName)).ConfigureAwait(false);
+                    await t;
                 }
                 catch
                 {
@@ -89,6 +90,9 @@ namespace NSPersonalCloud.WindowsConfigurator
                         Alert.MessageQueue.Enqueue(UILanding.AlertCannotCreate);
                         Dialog.IsOpen = false;
                     });
+                }finally
+                {
+                    Dialog.IsOpen = false;
                 }
             });
         }

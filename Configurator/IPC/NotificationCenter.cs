@@ -11,25 +11,24 @@ namespace NSPersonalCloud.WindowsConfigurator.IPC
     {
         public void OnServiceStarted()
         {
-            Globals.IsServiceRunning = true;
-            if (Application.Current is null) return;
-
-            Application.Current.Dispatcher.Invoke(() => {
-                Application.Current.MainWindow?.Close();
-                Application.Current.MainWindow = null;
-            });
-
-            Task.Run(async () => {
-                var cloud = await Globals.CloudManager.InvokeAsync(x => x.GetAllPersonalCloud()).ConfigureAwait(false);
-                Globals.PersonalCloud = cloud.Length == 0 ? null : (Guid?) cloud[0];
-
-                Application.Current.Dispatcher.Invoke(() => {
-                    if (Globals.PersonalCloud != null) Application.Current.MainWindow = new MainWindow();
-                    else Application.Current.MainWindow = new WelcomeWindow();
-                    if (!Globals.DoNotShow) Application.Current.MainWindow.Show();
-                    Globals.DoNotShow = false;
-                });
-            });
+//             if (Application.Current is null) return;
+// 
+//             Application.Current.Dispatcher.Invoke(() => {
+//                 Application.Current.MainWindow?.Close();
+//                 Application.Current.MainWindow = null;
+//             });
+// 
+//             Task.Run(async () => {
+//                 var cloud = await Globals.CloudManager.InvokeAsync(x => x.GetAllPersonalCloud()).ConfigureAwait(false);
+//                 Globals.PersonalCloud = cloud.Length == 0 ? null : (Guid?) cloud[0];
+// 
+//                 Application.Current.Dispatcher.Invoke(() => {
+//                     if (Globals.PersonalCloud != null) Application.Current.MainWindow = new MainWindow();
+//                     else Application.Current.MainWindow = new WelcomeWindow();
+//                     if (!Globals.DoNotShowMainWinOnLaunch) Application.Current.MainWindow.Show();
+//                     Globals.DoNotShowMainWinOnLaunch = false;
+//                 });
+//             });
         }
 
         public void OnLeftPersonalCloud()
@@ -77,7 +76,6 @@ namespace NSPersonalCloud.WindowsConfigurator.IPC
 
         public void OnServiceStopped()
         {
-            Globals.IsServiceRunning = false;
             if (Application.Current is null) return;
 
             Application.Current.Dispatcher.Invoke(() => {

@@ -178,7 +178,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welcome to Your Personal Cloud.
+        ///   Looks up a localized string similar to Welcome to Personal Cloud.
         /// </summary>
         public static string Welcome {
             get {
