@@ -88,11 +88,12 @@ namespace NSPersonalCloud.WindowsConfigurator
                 {
                     Dispatcher.Invoke(() => {
                         Alert.MessageQueue.Enqueue(UILanding.AlertCannotCreate);
-                        Dialog.IsOpen = false;
                     });
                 }finally
                 {
-                    Dialog.IsOpen = false;
+                    Dispatcher.Invoke(() => {
+                        Dialog.IsOpen = false;
+                    });
                 }
             });
         }
@@ -104,15 +105,23 @@ namespace NSPersonalCloud.WindowsConfigurator
 
             Task.Run(async () => {
                 // Animation
-                await Task.Delay(3000).ConfigureAwait(false);
+                var t = Task.Delay(3000).ConfigureAwait(false);
 
                 try
                 {
                     await Globals.CloudManager.InvokeAsync(x => x.JoinPersonalCloud(invite, deviceName)).ConfigureAwait(false);
+                    await t;
                 }
                 catch
                 {
                     await Globals.CloudManager.InvokeAsync(x => x.Refresh()).ConfigureAwait(false);
+                    Dispatcher.Invoke(() => {
+                        Alert.MessageQueue.Enqueue(UILanding.AlertCannotEnroll);
+                        Dialog.IsOpen = false;
+                    });
+                }
+                finally
+                {
                     Dispatcher.Invoke(() => {
                         Alert.MessageQueue.Enqueue(UILanding.AlertCannotEnroll);
                         Dialog.IsOpen = false;

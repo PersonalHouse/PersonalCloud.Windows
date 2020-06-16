@@ -88,7 +88,7 @@
                 <Button x:Name="GoButton"
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         Content="{x:Static resx:UILanding.CreateCloud}"
-                        Click="EnrollDevice" Margin="50,10,50,10" />
+                        Click="EnrollDevice" Margin="10" />
             </StackPanel>
             <md:Snackbar x:Name="Alert"
                          MessageQueue="{md:MessageQueue}" />
