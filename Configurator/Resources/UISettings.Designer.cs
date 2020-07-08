@@ -180,7 +180,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quit Configurator.
+        ///   Looks up a localized string similar to Quit.
         /// </summary>
         public static string DeveloperExit {
             get {

@@ -9,8 +9,6 @@
                  x:Key="TrayMenu">
         <MenuItem Header="{x:Static resx:UILanding.PersonalCloud}"
                   IsEnabled="False"/>
-        <MenuItem Header="v2.2 (2020520)"
-                  IsEnabled="False" />
         <Separator />
         <MenuItem Header="{x:Static resx:UISettings.DeveloperWindowsService}">
             <MenuItem Header="{x:Static resx:UISettings.DeveloperRestartService}"

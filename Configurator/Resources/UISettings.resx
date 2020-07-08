@@ -159,7 +159,7 @@ If you continue seeing this dialog, uncheck the "Mount as Network Drive" box to 
     <value>Personal Cloud</value>
   </data>
   <data name="DeveloperExit" xml:space="preserve">
-    <value>Quit Configurator</value>
+    <value>Quit</value>
   </data>
   <data name="DeveloperOptions" xml:space="preserve">
     <value>MAINTENANCE</value>

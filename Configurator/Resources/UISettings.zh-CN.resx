@@ -159,7 +159,7 @@
     <value>个人云控制台</value>
   </data>
   <data name="DeveloperExit" xml:space="preserve">
-    <value>退出控制台</value>
+    <value>退出</value>
   </data>
   <data name="DeveloperOptions" xml:space="preserve">
     <value>高级设置</value>
