@@ -22,6 +22,8 @@ using NSPersonalCloud.Interfaces.Errors;
 using NSPersonalCloud.WindowsContract;
 using NSPersonalCloud.WindowsService.Data;
 
+using Zio.FileSystems;
+
 namespace NSPersonalCloud.WindowsService.IPC
 {
     public class CloudManagerService : ICloudManager
@@ -110,7 +112,7 @@ namespace NSPersonalCloud.WindowsService.IPC
         {
             if (absolutePath == null)
             {
-                Globals.CloudFileSystem.RootPath = null;
+                Globals.SetupFS(absolutePath);
                 Globals.Database.SaveSetting(UserSettings.EnableSharing, "0");
                 return;
             }
@@ -119,7 +121,10 @@ namespace NSPersonalCloud.WindowsService.IPC
 
             Globals.Database.SaveSetting(UserSettings.SharingRoot, absolutePath);
             Globals.Database.SaveSetting(UserSettings.EnableSharing, "1");
-            if (cloudId == null) Globals.CloudFileSystem.RootPath = absolutePath;
+            if (cloudId == null)
+            {
+                Globals.SetupFS(absolutePath);
+            }
             else throw new NotSupportedException();
         }
 

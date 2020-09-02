@@ -28,6 +28,8 @@ using SQLite;
 
 using Topshelf;
 
+using Zio.FileSystems;
+
 namespace NSPersonalCloud.WindowsService
 {
     internal class PersonalCloudWindowsService : ServiceControl
@@ -59,7 +61,7 @@ namespace NSPersonalCloud.WindowsService
             Globals.Database.CreateTable<AzureBlob>();
             Globals.Database.CreateTable<WebApp>();
 
-            Globals.CloudFileSystem = new VirtualFileSystem(null);
+            Globals.SetupFS(null);
             Globals.CloudConfig = new WindowsDataStorage();
 
             Globals.Volumes = new ConcurrentDictionary<Guid, AsyncContextThread>();
@@ -121,7 +123,7 @@ namespace NSPersonalCloud.WindowsService
                     sharedPath = null;
                 }
 
-                Globals.CloudFileSystem.RootPath = sharedPath;
+                Globals.SetupFS(sharedPath);
             }
 
             #endregion Restore last-known state of File Sharing

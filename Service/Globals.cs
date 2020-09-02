@@ -14,6 +14,9 @@ using SQLite;
 
 using Topshelf;
 
+using Zio;
+using Zio.FileSystems;
+
 namespace NSPersonalCloud.WindowsService
 {
     internal static class Globals
@@ -25,7 +28,30 @@ namespace NSPersonalCloud.WindowsService
 
         public static WindowsDataStorage CloudConfig { get; set; }
         public static PCLocalService CloudService { get; set; }
-        public static VirtualFileSystem CloudFileSystem { get; set; }
+        public static IFileSystem CloudFileSystem => _CloudFileSystem;
+        private static IFileSystem _CloudFileSystem;
+
+        public static void SetupFS(string absolutePath)
+        {
+            if (string.IsNullOrWhiteSpace(absolutePath))
+            {
+                RootPath = null;
+                _CloudFileSystem = new MemoryFileSystem();
+            }
+            else
+            {
+                RootPath = absolutePath;
+#pragma warning disable CA2000 // Dispose objects before losing scope
+                var fs = new PhysicalFileSystem();
+#pragma warning restore CA2000 // Dispose objects before losing scope
+                Directory.CreateDirectory(absolutePath);
+                _CloudFileSystem = new SubFileSystem(fs, fs.ConvertPathFromInternal(absolutePath), true);
+                CloudService.FileSystem = CloudFileSystem;
+            }
+            CloudService.StopNetwork();
+            CloudService.StartNetwork(true);
+        }
+        public static string RootPath { get; set; }
         public static SQLiteConnection Database { get; set; }
 
         public static ConcurrentDictionary<Guid, AsyncContextThread> Volumes { get; set; }

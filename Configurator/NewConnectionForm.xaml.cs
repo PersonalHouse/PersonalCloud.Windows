@@ -86,7 +86,7 @@ namespace NSPersonalCloud.WindowsConfigurator
 
             var name = ConnectionNameBox.Text;
             var invalidCharHit = false;
-            foreach (var character in VirtualFileSystem.InvalidCharacters)
+            foreach (var character in PathConsts.InvalidCharacters)
             {
                 if (name?.Contains(character) == true) invalidCharHit = true;
             }
@@ -170,7 +170,7 @@ namespace NSPersonalCloud.WindowsConfigurator
 
             var name = ConnectionNameBox.Text;
             var invalidCharHit = false;
-            foreach (var character in VirtualFileSystem.InvalidCharacters)
+            foreach (var character in PathConsts.InvalidCharacters)
             {
                 if (name?.Contains(character) == true) invalidCharHit = true;
             }
