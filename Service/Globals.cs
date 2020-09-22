@@ -46,10 +46,16 @@ namespace NSPersonalCloud.WindowsService
 #pragma warning restore CA2000 // Dispose objects before losing scope
                 Directory.CreateDirectory(absolutePath);
                 _CloudFileSystem = new SubFileSystem(fs, fs.ConvertPathFromInternal(absolutePath), true);
-                CloudService.FileSystem = CloudFileSystem;
+                if (CloudService != null)
+                {
+                    CloudService.FileSystem = CloudFileSystem;
+                }
             }
-            CloudService.StopNetwork();
-            CloudService.StartNetwork(true);
+            if (CloudService!=null)
+            {
+                CloudService.StopNetwork();
+                CloudService.StartNetwork(true);
+            }
         }
         public static string RootPath { get; set; }
         public static SQLiteConnection Database { get; set; }
