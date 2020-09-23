@@ -141,7 +141,7 @@ If you continue seeing this dialog, uncheck the "Mount as Network Drive" box to 
     <value>Device Name</value>
   </data>
   <data name="CloudInviteStart" xml:space="preserve">
-    <value>ADD A DEVICE</value>
+    <value>Invite Other Devices</value>
   </data>
   <data name="CloudInviteStop" xml:space="preserve">
     <value>Stop</value>
@@ -197,7 +197,7 @@ If you continue seeing this dialog, uncheck the "Mount as Network Drive" box to 
   <data name="InvitesSentMessage" xml:space="preserve">
     <value>Enter the following code on other devices.
 
-Closing this dialog terminates verification.</value>
+Closing this dialog stop inviting.</value>
   </data>
   <data name="InvitesSentTitle" xml:space="preserve">
     <value>Invitations Sent</value>
@@ -215,7 +215,7 @@ Closing this dialog terminates verification.</value>
     <value>STOP SERVICE</value>
   </data>
   <data name="StopVerification" xml:space="preserve">
-    <value>STOP VERIFICATION</value>
+    <value>Stop inviting</value>
   </data>
   <data name="WaitForService" xml:space="preserve">
     <value>Personal Cloud and its components are initializing. Please wait for a few minutes and try again.

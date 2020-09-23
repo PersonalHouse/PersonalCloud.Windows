@@ -126,7 +126,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ADD A DEVICE.
+        ///   Looks up a localized string similar to Invite Other Devices.
         /// </summary>
         public static string CloudInviteStart {
             get {
@@ -290,7 +290,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Enter the following code on other devices.
         ///
-        ///Closing this dialog terminates verification..
+        ///Closing this dialog stop inviting..
         /// </summary>
         public static string InvitesSentMessage {
             get {
@@ -344,7 +344,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to STOP VERIFICATION.
+        ///   Looks up a localized string similar to Stop inviting.
         /// </summary>
         public static string StopVerification {
             get {
