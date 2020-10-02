@@ -28,7 +28,7 @@ namespace DokanFS
             //_PersonalCloud = personalCloud;
             var dic = new Dictionary<string, IFileSystem>();
             dic["Files"] = personalCloud.RootFS;
-            var aif = new AppInFs();
+            var aif = new AppInFs(l);
             aif.GetApps = () =>  personalCloud.Apps;
             aif.GetUrl = (x) => personalCloud.GetWebAppUri(x).ToString();
             dic["Apps"] = aif;
@@ -234,7 +234,6 @@ namespace DokanFS
             }
             catch
             {
-                finfo = null;
             }
 
             //Logger.LogTrace($"GetFileInformation {fileName} received {finfo.Name} {finfo.Attributes}");
