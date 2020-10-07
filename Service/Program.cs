@@ -27,12 +27,12 @@ namespace NSPersonalCloud.WindowsService
                 Globals.Loggers = LoggerFactory.Create(builder => builder.//SetMinimumLevel(LogLevel.Trace).
                 AddConsole(x => {
                     x.TimestampFormat = "G";
-                }).AddFile(Path.Combine(logsDir, "Service.log"),/*LogLevel.Trace,*/ fileSizeLimitBytes: 6291456, retainedFileCountLimit: 3));
+                }).AddFile(Path.Combine(logsDir, "Service.log"),/*LogLevel.Trace, */fileSizeLimitBytes: 6291456, retainedFileCountLimit: 3));
             }
             else
             {
-                Globals.Loggers = LoggerFactory.Create(builder => builder.SetMinimumLevel(LogLevel.Trace).
-                 AddFile(Path.Combine(logsDir, "Service.log"), LogLevel.Trace, fileSizeLimitBytes: 6291456, retainedFileCountLimit: 3));
+                Globals.Loggers = LoggerFactory.Create(builder => builder.//SetMinimumLevel(LogLevel.Trace).
+                 AddFile(Path.Combine(logsDir, "Service.log"), /*LogLevel.Trace,*/ fileSizeLimitBytes: 6291456, retainedFileCountLimit: 3));
             }
 
             var l = Globals.Loggers.CreateLogger<Program>();
