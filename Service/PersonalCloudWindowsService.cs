@@ -152,6 +152,10 @@ namespace NSPersonalCloud.WindowsService
 
                 foreach (var cloud in Globals.CloudService.PersonalClouds)
                 {
+                    if (cloud==null)
+                    {
+                        continue;
+                    }
                     var cloudId = new Guid(cloud.Id);
                     var mountPoint = Globals.Database.GetMountPoint(cloudId);
 

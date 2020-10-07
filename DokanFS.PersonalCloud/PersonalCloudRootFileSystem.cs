@@ -30,7 +30,23 @@ namespace DokanFS
             dic["Files"] = personalCloud.RootFS;
             var aif = new AppInFs(l);
             aif.GetApps = () =>  personalCloud.Apps;
-            aif.GetUrl = (x) => personalCloud.GetWebAppUri(x).ToString();
+            aif.GetUrl = (x) => {
+                try
+                {
+                    var uri = personalCloud.GetWebAppUri(x);
+                    if (uri==null)
+                    {
+                        Logger.LogError($"personalCloud.GetWebAppUri return null.");
+                        return null;
+                    }
+                    return uri.AbsoluteUri;
+                }
+                catch (Exception e)
+                {
+                    Logger.LogError(e,$"Exception when calling GetWebAppUri");
+                    throw;
+                }
+            };
             dic["Apps"] = aif;
             RootFs = new FileSystemContainer(dic, Logger);
         }
