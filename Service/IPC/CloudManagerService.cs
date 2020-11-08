@@ -105,7 +105,7 @@ namespace NSPersonalCloud.WindowsService.IPC
             else Globals.CloudService.PersonalClouds.First(x => new Guid(x.Id) == cloudId).NodeDisplayName = newName;
 
             Globals.Database.SaveSetting(UserSettings.DeviceName, newName);
-            Globals.CloudService.NetworkRefeshNodes();
+            Globals.CloudService.NetworkRefeshNodes(false);
         }
 
         public void ChangeSharingRoot(string absolutePath, Guid? cloudId)
