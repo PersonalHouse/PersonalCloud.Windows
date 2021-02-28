@@ -53,15 +53,27 @@ namespace NSPersonalCloud.WindowsService
 
 
             var rc = HostFactory.Run(x => {
-                x.Service<PersonalCloudWindowsService>();
-                x.RunAsLocalSystem();
+                try
+                {
+                    x.Service<PersonalCloudWindowsService>();
+                    x.RunAsLocalSystem();
 
-                x.SetServiceName(Services.ServiceName);
-                x.SetDescription("Personal Cloud Service is responsible for managing Personal Cloud and related network drives in your local network.");
-                x.SetDisplayName("Personal Cloud");
+                    x.SetServiceName(Services.ServiceName);
+                    x.SetDescription("Personal House Service is responsible for managing Personal Cloud and related network drives in your local network.");
+                    x.SetDisplayName("Personal House");
 
-                x.EnableServiceRecovery(service => service.RestartService(1));
-                x.StartAutomaticallyDelayed();
+                    x.EnableServiceRecovery(service => service.RestartService(1));
+                    x.StartAutomaticallyDelayed();
+                    x.OnException(e => {
+                        l.LogError(e, "Service OnException called");
+                    });
+
+                }
+                catch (Exception e)
+                {
+                    l.LogError(e, "Exception in HostFactory.Run");
+                    throw;
+                }
             });
 
             var exitCode = (int) Convert.ChangeType(rc, rc.GetTypeCode());

@@ -106,7 +106,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CREATE PERSONAL CLOUD.
+        ///   Looks up a localized string similar to Create Personal Cloud.
         /// </summary>
         public static string CreateCloud {
             get {
@@ -115,7 +115,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CREATE.
+        ///   Looks up a localized string similar to Create.
         /// </summary>
         public static string CreateCloudHint {
             get {
@@ -151,7 +151,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to JOIN BY INVITATION.
+        ///   Looks up a localized string similar to Join by invitation.
         /// </summary>
         public static string JoinCloud {
             get {
@@ -160,7 +160,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to JOIN.
+        ///   Looks up a localized string similar to Join.
         /// </summary>
         public static string JoinCloudHint {
             get {

@@ -105,7 +105,7 @@ namespace NSPersonalCloud.WindowsService.IPC
             else Globals.CloudService.PersonalClouds.First(x => new Guid(x.Id) == cloudId).NodeDisplayName = newName;
 
             Globals.Database.SaveSetting(UserSettings.DeviceName, newName);
-            Globals.CloudService.NetworkRefeshNodes(false);
+            Globals.CloudService.TellNetworkIveChanged();
         }
 
         public void ChangeSharingRoot(string absolutePath, Guid? cloudId)
@@ -138,7 +138,7 @@ namespace NSPersonalCloud.WindowsService.IPC
                 if (string.IsNullOrEmpty(deviceName)) throw new ArgumentException("Device Name cannot be empty.", nameof(deviceName));
             }
 
-            var cloud = Globals.CloudService.CreatePersonalCloud(cloudName, deviceName).Result;
+            var cloud = Globals.CloudService.CreatePersonalCloud(cloudName, deviceName);
             Globals.Database.SaveSetting(UserSettings.DeviceName, deviceName);
 
             var cloudId = new Guid(cloud.Id);
@@ -221,14 +221,14 @@ namespace NSPersonalCloud.WindowsService.IPC
 
         public string StartBroadcastingInvitation(Guid? id)
         {
-            if (id == null) return Globals.CloudService.SharePersonalCloud(Globals.CloudService.PersonalClouds[0]).Result;
-            else return Globals.CloudService.SharePersonalCloud(Globals.CloudService.PersonalClouds.First(x => new Guid(x.Id) == id)).Result;
+            if (id == null) return Globals.CloudService.SharePersonalCloud(Globals.CloudService.PersonalClouds[0]);
+            else return Globals.CloudService.SharePersonalCloud(Globals.CloudService.PersonalClouds.First(x => new Guid(x.Id) == id));
         }
 
         public void StopBroadcastingInvitation(Guid? id)
         {
-            if (id == null) Globals.CloudService.StopSharePersonalCloud(Globals.CloudService.PersonalClouds[0]).Wait();
-            else Globals.CloudService.StopSharePersonalCloud(Globals.CloudService.PersonalClouds.First(x => new Guid(x.Id) == id)).Wait();
+            if (id == null) Globals.CloudService.StopSharePersonalCloud(Globals.CloudService.PersonalClouds[0]);
+            else Globals.CloudService.StopSharePersonalCloud(Globals.CloudService.PersonalClouds.First(x => new Guid(x.Id) == id));
         }
 
         public void ConnectToAlibabaCloud(Guid cloudId, string name, OssConfig config, StorageProviderVisibility visibility)
@@ -278,7 +278,7 @@ namespace NSPersonalCloud.WindowsService.IPC
         {
             try
             {
-                Globals.CloudService.StartNetwork(true);
+                Globals.CloudService.NetworkMayChanged(true);
             }
             catch
             {

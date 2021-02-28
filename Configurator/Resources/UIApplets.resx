@@ -118,12 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="LibraryAdd" xml:space="preserve">
-    <value>ADD</value>
+    <value>Add</value>
   </data>
   <data name="LibraryDelete" xml:space="preserve">
-    <value>REMOVE</value>
+    <value>Remove</value>
   </data>
   <data name="LibraryFolders" xml:space="preserve">
-    <value>PHOTO ALBUMS</value>
+    <value>Photo albums</value>
   </data>
 </root>

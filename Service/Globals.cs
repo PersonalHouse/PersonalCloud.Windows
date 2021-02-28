@@ -53,8 +53,7 @@ namespace NSPersonalCloud.WindowsService
             }
             if (CloudService!=null)
             {
-                CloudService.StopNetwork();
-                CloudService.StartNetwork(true);
+                CloudService.TellNetworkIveChanged();
             }
         }
         public static string RootPath { get; set; }

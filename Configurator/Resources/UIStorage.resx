@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Add" xml:space="preserve">
-    <value>ADD</value>
+    <value>Add</value>
   </data>
   <data name="AliYunAccessID" xml:space="preserve">
     <value>Access Key ID</value>
@@ -151,10 +151,10 @@
     <value>Cannot Use This Name</value>
   </data>
   <data name="ConnectToStorage" xml:space="preserve">
-    <value>CONNECTIONS</value>
+    <value>Connections</value>
   </data>
   <data name="Delete" xml:space="preserve">
-    <value>REMOVE</value>
+    <value>Remove</value>
   </data>
   <data name="ErrorAuthenticating" xml:space="preserve">
     <value>Unable to Verify Credentials</value>
@@ -175,7 +175,7 @@
     <value>Azure Blob Storage</value>
   </data>
   <data name="SaveAndClose" xml:space="preserve">
-    <value>SAVE</value>
+    <value>Save</value>
   </data>
   <data name="SavedStorageConnections" xml:space="preserve">
     <value>Saved Connections</value>

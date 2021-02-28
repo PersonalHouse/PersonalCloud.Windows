@@ -70,7 +70,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot Mount Network Drive.
+        ///   Looks up a localized string similar to Cannot mount network drive.
         /// </summary>
         public static string AlertCannotMountDrive {
             get {
@@ -79,7 +79,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Personal Cloud mounted network drive disconnected unexpectedly. There was another program interfering with our file system driver or the driver was not installed.
+        ///   Looks up a localized string similar to Personal cloud mounted network drive disconnected unexpectedly. There was another program interfering with our file system driver or the driver was not installed.
         ///
         ///If you continue seeing this dialog, uncheck the &quot;Mount as Network Drive&quot; box to avoid it for the moment. Contact your system administrator or reinstall Personal Cloud to resolve this issue..
         /// </summary>
@@ -108,7 +108,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PERSONAL CLOUD.
+        ///   Looks up a localized string similar to Personal cloud.
         /// </summary>
         public static string Cloud {
             get {
@@ -126,7 +126,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invite Other Devices.
+        ///   Looks up a localized string similar to Invite other devices.
         /// </summary>
         public static string CloudInviteStart {
             get {
@@ -144,7 +144,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to LEAVE PERSONAL CLOUD.
+        ///   Looks up a localized string similar to Leave Personal cloud.
         /// </summary>
         public static string CloudLeave {
             get {
@@ -153,7 +153,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cloud Name.
+        ///   Looks up a localized string similar to Cloud name.
         /// </summary>
         public static string CloudName {
             get {
@@ -162,7 +162,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SAVE.
+        ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string CloudSaveChanges {
             get {
@@ -189,7 +189,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to MAINTENANCE.
+        ///   Looks up a localized string similar to Maintenance.
         /// </summary>
         public static string DeveloperOptions {
             get {
@@ -198,7 +198,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Restart Service.
+        ///   Looks up a localized string similar to Restart service.
         /// </summary>
         public static string DeveloperRestartService {
             get {
@@ -207,7 +207,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stop Service.
+        ///   Looks up a localized string similar to Stop service.
         /// </summary>
         public static string DeveloperStopService {
             get {
@@ -216,7 +216,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Windows Service.
+        ///   Looks up a localized string similar to Windows service.
         /// </summary>
         public static string DeveloperWindowsService {
             get {
@@ -225,7 +225,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FILE EXPLORER INTEGRATION.
+        ///   Looks up a localized string similar to File explorer integration.
         /// </summary>
         public static string Explorer {
             get {
@@ -234,7 +234,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mount Personal Cloud as Network Drive.
+        ///   Looks up a localized string similar to Mount Personal cloud as network drive.
         /// </summary>
         public static string ExplorerMasterSwitch {
             get {
@@ -243,7 +243,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Drive Letter.
+        ///   Looks up a localized string similar to Drive letter.
         /// </summary>
         public static string ExplorerMountPoint {
             get {
@@ -252,7 +252,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FILE SHARING.
+        ///   Looks up a localized string similar to File sharing.
         /// </summary>
         public static string FileSharing {
             get {
@@ -261,7 +261,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Allow File Sharing on This Device.
+        ///   Looks up a localized string similar to Allow file sharing on this device.
         /// </summary>
         public static string FileSharingMasterSwitch {
             get {
@@ -270,7 +270,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Share This Folder.
+        ///   Looks up a localized string similar to Share this folder.
         /// </summary>
         public static string FileSharingPath {
             get {
@@ -279,7 +279,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CHANGE.
+        ///   Looks up a localized string similar to Change.
         /// </summary>
         public static string FileSharingPathSelect {
             get {
@@ -299,7 +299,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invitations Sent.
+        ///   Looks up a localized string similar to Invitations sent.
         /// </summary>
         public static string InvitesSentTitle {
             get {
@@ -308,7 +308,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to REFRESH DEVICES.
+        ///   Looks up a localized string similar to Refresh devices.
         /// </summary>
         public static string RefreshNetwork {
             get {
@@ -317,7 +317,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configurator Not Ready.
+        ///   Looks up a localized string similar to Configurator not ready.
         /// </summary>
         public static string ServiceNotRunning {
             get {
@@ -335,7 +335,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to STOP SERVICE.
+        ///   Looks up a localized string similar to Stop service.
         /// </summary>
         public static string StopService {
             get {
@@ -353,7 +353,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Personal Cloud and its components are initializing. Please wait for a few minutes and try again.
+        ///   Looks up a localized string similar to Personal cloud and its components are initializing. Please wait for a few minutes and try again.
         ///
         ///If you continue to receive this error after a few minutes, use &quot;Windows Service&quot; &gt; &quot;Restart Service&quot; in the right-click menu to restart companion service..
         /// </summary>

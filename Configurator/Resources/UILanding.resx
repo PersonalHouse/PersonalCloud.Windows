@@ -133,10 +133,10 @@
     <value>Cloud Name</value>
   </data>
   <data name="CreateCloud" xml:space="preserve">
-    <value>CREATE PERSONAL CLOUD</value>
+    <value>Create Personal Cloud</value>
   </data>
   <data name="CreateCloudHint" xml:space="preserve">
-    <value>CREATE</value>
+    <value>Create</value>
   </data>
   <data name="DeviceName" xml:space="preserve">
     <value>Device Name</value>
@@ -148,10 +148,10 @@
     <value>Invitation Code</value>
   </data>
   <data name="JoinCloud" xml:space="preserve">
-    <value>JOIN BY INVITATION</value>
+    <value>Join by invitation</value>
   </data>
   <data name="JoinCloudHint" xml:space="preserve">
-    <value>JOIN</value>
+    <value>Join</value>
   </data>
   <data name="PersonalCloud" xml:space="preserve">
     <value>Personal Cloud</value>

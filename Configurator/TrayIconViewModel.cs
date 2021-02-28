@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -63,6 +66,74 @@ namespace NSPersonalCloud.WindowsConfigurator
         public ICommand ExitApplicationCommand => new DelegateCommand {
             CommandAction = () => Application.Current.Shutdown()
         };
+        private void OpenUrl(string url)
+        {
+            try
+            {
+                Process.Start(url);
+            }
+            catch
+            {
+                // hack because of this: https://github.com/dotnet/corefx/issues/10361
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    url = url.Replace("&", "^&");
+                    Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                {
+                    Process.Start("xdg-open", url);
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                {
+                    Process.Start("open", url);
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+
+        public ICommand OpenWebSite => new DelegateCommand {
+            CommandAction = () => OpenUrl("https://Personal.House")
+        };
+
+
+
+        [DllImport("msi.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        internal static extern int MsiEnumRelatedProducts(string lpUpgradeCode, int dwReserved,
+            int iProductIndex, StringBuilder lpProductBuf);
+
+        [DllImport("msi.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        internal static extern Int32 MsiGetProductInfo(string product, string property,
+            [Out] StringBuilder valueBuf, ref Int32 cchValueBuf);
+
+        public string PHVersion { get {
+
+                string upgradeCode = "{B8B67678-128E-47D8-BE23-90132BCF1058}";
+                StringBuilder sbProductCode = new StringBuilder(39); // A buffer to receive the product code GUID.
+                                                                     // The first 38 characters are for the GUID, and the last character is for the terminating null character.
+
+                for (int iProductIndex = 0; ; iProductIndex++)
+                {
+                    int iRes = MsiEnumRelatedProducts(upgradeCode, 0, iProductIndex, sbProductCode);
+                    if (iRes != 0)
+                    {
+                        break;
+                    }
+                    int len = 512;
+                    StringBuilder builder = new StringBuilder(len);
+                    int ok = MsiGetProductInfo(sbProductCode.ToString(), "VersionString", builder, ref len);
+                    if (ok == 0)
+                    {
+                        return $"Personal House {builder.ToString()}";
+                    }
+                }
+
+                return "Personal House";
+
+            } }
     }
 
 #pragma warning restore CA1822

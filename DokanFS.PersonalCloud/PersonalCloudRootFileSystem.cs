@@ -191,7 +191,7 @@ namespace DokanFS
         public void GetVolumeInformation(out string volumeLabel, out FileSystemFeatures features, out string fileSystemName, out uint maximumComponentLength)
         {
             Logger.LogTrace($"GetVolumeInformation called");
-            volumeLabel = "Personal Cloud";
+            volumeLabel = "Personal House";
             fileSystemName = "NTFS";
             maximumComponentLength = 256;
 

@@ -112,19 +112,19 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AlertCannotGenerateInvite" xml:space="preserve">
     <value>Cannot generate invitation.</value>
   </data>
   <data name="AlertCannotMountDrive" xml:space="preserve">
-    <value>Cannot Mount Network Drive</value>
+    <value>Cannot mount network drive</value>
   </data>
   <data name="AlertCannotMountDriveTroubleshoot" xml:space="preserve">
-    <value>Personal Cloud mounted network drive disconnected unexpectedly. There was another program interfering with our file system driver or the driver was not installed.
+    <value>Personal cloud mounted network drive disconnected unexpectedly. There was another program interfering with our file system driver or the driver was not installed.
 
 If you continue seeing this dialog, uncheck the "Mount as Network Drive" box to avoid it for the moment. Contact your system administrator or reinstall Personal Cloud to resolve this issue.</value>
   </data>
@@ -135,25 +135,25 @@ If you continue seeing this dialog, uncheck the "Mount as Network Drive" box to 
     <value>OK</value>
   </data>
   <data name="Cloud" xml:space="preserve">
-    <value>PERSONAL CLOUD</value>
+    <value>Personal cloud</value>
   </data>
   <data name="CloudDeviceName" xml:space="preserve">
     <value>Device Name</value>
   </data>
   <data name="CloudInviteStart" xml:space="preserve">
-    <value>Invite Other Devices</value>
+    <value>Invite other devices</value>
   </data>
   <data name="CloudInviteStop" xml:space="preserve">
     <value>Stop</value>
   </data>
   <data name="CloudLeave" xml:space="preserve">
-    <value>LEAVE PERSONAL CLOUD</value>
+    <value>Leave Personal cloud</value>
   </data>
   <data name="CloudName" xml:space="preserve">
-    <value>Cloud Name</value>
+    <value>Cloud name</value>
   </data>
   <data name="CloudSaveChanges" xml:space="preserve">
-    <value>SAVE</value>
+    <value>Save</value>
   </data>
   <data name="Configurator" xml:space="preserve">
     <value>Personal Cloud</value>
@@ -162,37 +162,37 @@ If you continue seeing this dialog, uncheck the "Mount as Network Drive" box to 
     <value>Quit</value>
   </data>
   <data name="DeveloperOptions" xml:space="preserve">
-    <value>MAINTENANCE</value>
+    <value>Maintenance</value>
   </data>
   <data name="DeveloperRestartService" xml:space="preserve">
-    <value>Restart Service</value>
+    <value>Restart service</value>
   </data>
   <data name="DeveloperStopService" xml:space="preserve">
-    <value>Stop Service</value>
+    <value>Stop service</value>
   </data>
   <data name="DeveloperWindowsService" xml:space="preserve">
-    <value>Windows Service</value>
+    <value>Windows service</value>
   </data>
   <data name="Explorer" xml:space="preserve">
-    <value>FILE EXPLORER INTEGRATION</value>
+    <value>File explorer integration</value>
   </data>
   <data name="ExplorerMasterSwitch" xml:space="preserve">
-    <value>Mount Personal Cloud as Network Drive</value>
+    <value>Mount Personal cloud as network drive</value>
   </data>
   <data name="ExplorerMountPoint" xml:space="preserve">
-    <value>Drive Letter</value>
+    <value>Drive letter</value>
   </data>
   <data name="FileSharing" xml:space="preserve">
-    <value>FILE SHARING</value>
+    <value>File sharing</value>
   </data>
   <data name="FileSharingMasterSwitch" xml:space="preserve">
-    <value>Allow File Sharing on This Device</value>
+    <value>Allow file sharing on this device</value>
   </data>
   <data name="FileSharingPath" xml:space="preserve">
-    <value>Share This Folder</value>
+    <value>Share this folder</value>
   </data>
   <data name="FileSharingPathSelect" xml:space="preserve">
-    <value>CHANGE</value>
+    <value>Change</value>
   </data>
   <data name="InvitesSentMessage" xml:space="preserve">
     <value>Enter the following code on other devices.
@@ -200,25 +200,25 @@ If you continue seeing this dialog, uncheck the "Mount as Network Drive" box to 
 Closing this dialog stop inviting.</value>
   </data>
   <data name="InvitesSentTitle" xml:space="preserve">
-    <value>Invitations Sent</value>
+    <value>Invitations sent</value>
   </data>
   <data name="RefreshNetwork" xml:space="preserve">
-    <value>REFRESH DEVICES</value>
+    <value>Refresh devices</value>
   </data>
   <data name="ServiceNotRunning" xml:space="preserve">
-    <value>Configurator Not Ready</value>
+    <value>Configurator not ready</value>
   </data>
   <data name="SettingsSaved" xml:space="preserve">
     <value>Changes to device profile are saved.</value>
   </data>
   <data name="StopService" xml:space="preserve">
-    <value>STOP SERVICE</value>
+    <value>Stop service</value>
   </data>
   <data name="StopVerification" xml:space="preserve">
     <value>Stop inviting</value>
   </data>
   <data name="WaitForService" xml:space="preserve">
-    <value>Personal Cloud and its components are initializing. Please wait for a few minutes and try again.
+    <value>Personal cloud and its components are initializing. Please wait for a few minutes and try again.
 
 If you continue to receive this error after a few minutes, use "Windows Service" &gt; "Restart Service" in the right-click menu to restart companion service.</value>
   </data>

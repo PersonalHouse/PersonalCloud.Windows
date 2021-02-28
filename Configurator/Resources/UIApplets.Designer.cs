@@ -61,7 +61,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ADD.
+        ///   Looks up a localized string similar to Add.
         /// </summary>
         public static string LibraryAdd {
             get {
@@ -70,7 +70,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to REMOVE.
+        ///   Looks up a localized string similar to Remove.
         /// </summary>
         public static string LibraryDelete {
             get {
@@ -79,7 +79,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to PHOTO ALBUMS.
+        ///   Looks up a localized string similar to Photo albums.
         /// </summary>
         public static string LibraryFolders {
             get {

@@ -7,8 +7,7 @@
 
     <ContextMenu x:Shared="false"
                  x:Key="TrayMenu">
-        <MenuItem Header="{x:Static resx:UILanding.PersonalCloud}"
-                  IsEnabled="False"/>
+        <MenuItem Header="{Binding PHVersion}" Command="{Binding OpenWebSite}"/>
         <Separator />
         <MenuItem Header="{x:Static resx:UISettings.DeveloperWindowsService}">
             <MenuItem Header="{x:Static resx:UISettings.DeveloperRestartService}"
