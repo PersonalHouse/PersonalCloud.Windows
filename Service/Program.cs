@@ -1,6 +1,10 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 
@@ -18,6 +22,8 @@ namespace NSPersonalCloud.WindowsService
 
         public static void Main(string[] args)
         {
+
+            AppCenter.Start("b3c9ef09-9572-4eab-bb3c-33e203d862ea", typeof(Analytics), typeof(Crashes));
 
             var logsDir = Path.Combine(Globals.ConfigurationPath, "Logs");
             Directory.CreateDirectory(logsDir);
