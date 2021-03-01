@@ -67,10 +67,10 @@ jobs:
         
       - name: Create Zip File
         run: |
-            Compress-Archive -Path .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x86.exe -DestinationPath .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x86-with-dokan.zip
-            Compress-Archive -Path .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x86.msi -DestinationPath .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x86-no-dokan.zip
-            Compress-Archive -Path .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64.exe -DestinationPath .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64-with-dokan.zip
-            Compress-Archive -Path .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64.msi -DestinationPath .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64-no-dokan.zip
+            Compress-Archive -Path .\PersonalCloudSetup\PersonalHouse-${{ steps.get-version-string.outputs.replaced }}-x86.exe -DestinationPath .\PersonalCloudSetup\PersonalHouse-${{ steps.get-version-string.outputs.replaced }}-x86-with-dokan.zip
+            Compress-Archive -Path .\PersonalCloudSetup\PersonalHouse-${{ steps.get-version-string.outputs.replaced }}-x86.msi -DestinationPath .\PersonalCloudSetup\PersonalHouse-${{ steps.get-version-string.outputs.replaced }}-x86-no-dokan.zip
+            Compress-Archive -Path .\PersonalCloudSetup\PersonalHouse-${{ steps.get-version-string.outputs.replaced }}-x64.exe -DestinationPath .\PersonalCloudSetup\PersonalHouse-${{ steps.get-version-string.outputs.replaced }}-x64-with-dokan.zip
+            Compress-Archive -Path .\PersonalCloudSetup\PersonalHouse-${{ steps.get-version-string.outputs.replaced }}-x64.msi -DestinationPath .\PersonalCloudSetup\PersonalHouse-${{ steps.get-version-string.outputs.replaced }}-x64-no-dokan.zip
 
       - name: Upload Setup (32-bit EXE)
         uses: actions/upload-release-asset@v1
@@ -78,8 +78,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x86-with-dokan.zip
-          asset_name: PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x86-with-dokan.zip
+          asset_path: .\PersonalCloudSetup\PersonalHouse-${{ steps.get-version-string.outputs.replaced }}-x86-with-dokan.zip
+          asset_name: PersonalHouse-${{ steps.get-version-string.outputs.replaced }}-x86-with-dokan.zip
           asset_content_type: application/octet-stream
           
       - name: Upload Setup (32-bit MSI)
@@ -88,8 +88,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x86-no-dokan.zip
-          asset_name: PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x86-no-dokan.zip
+          asset_path: .\PersonalCloudSetup\PersonalHouse-${{ steps.get-version-string.outputs.replaced }}-x86-no-dokan.zip
+          asset_name: PersonalHouse-${{ steps.get-version-string.outputs.replaced }}-x86-no-dokan.zip
           asset_content_type: application/octet-stream
         
       - name: Upload Setup (64-bit EXE)
@@ -98,8 +98,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64-with-dokan.zip
-          asset_name: PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64-with-dokan.zip
+          asset_path: .\PersonalCloudSetup\PersonalHouse-${{ steps.get-version-string.outputs.replaced }}-x64-with-dokan.zip
+          asset_name: PersonalHouse-${{ steps.get-version-string.outputs.replaced }}-x64-with-dokan.zip
           asset_content_type: application/octet-stream
           
       - name: Upload Setup (64-bit MSI)
@@ -108,6 +108,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: .\PersonalCloudSetup\PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64-no-dokan.zip
-          asset_name: PersonalCloud-${{ steps.get-version-string.outputs.replaced }}-x64-no-dokan.zip
+          asset_path: .\PersonalCloudSetup\PersonalHouse-${{ steps.get-version-string.outputs.replaced }}-x64-no-dokan.zip
+          asset_name: PersonalHouse-${{ steps.get-version-string.outputs.replaced }}-x64-no-dokan.zip
           asset_content_type: application/octet-stream
