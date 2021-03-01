@@ -18,7 +18,7 @@ jobs:
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: 3.1.202
+          dotnet-version: 5.0.100
 
       - name: Download Setup Tool
         run: Invoke-WebRequest https://github.com/Personal-Cloud/PersonalCloudSetup/releases/download/1.2.6/PersonalCloudSetup.zip -Out .\PersonalCloudSetup.zip
