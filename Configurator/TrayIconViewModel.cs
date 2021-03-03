@@ -21,28 +21,7 @@ namespace NSPersonalCloud.WindowsConfigurator
                 {
                     Application.Current.MainWindow = new MainWindow();
                     Application.Current.MainWindow.Show();
-
-                    Task.Run(async () => {
-                        try
-                        {
-                            var cts = new CancellationTokenSource();
-                            cts.CancelAfter(1000);
-                            var ret = await Globals.CloudManager.InvokeAsync(x => x.Ping(666),cts.Token)
-                                                 .ConfigureAwait(false);
-                            if (ret == 666)
-                            {
-                                return;
-                            }
-                        }
-                        catch 
-                        {
-                        }
-                        Application.Current.Dispatcher.Invoke(() => {
-                            UIHelpers.ShowLoadingMessage();
-                            Application.Current.MainWindow.Hide();
-                            Application.Current.MainWindow = null;
-                        });
-                    });
+                    ((App) Application.Current).EnsureServiceHasBeenStarted();
                 }
                 else Application.Current.MainWindow.Show();
             }

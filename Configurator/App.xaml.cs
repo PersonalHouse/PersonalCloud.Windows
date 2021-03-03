@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.ServiceProcess;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -83,7 +84,7 @@ namespace NSPersonalCloud.WindowsConfigurator
             Globals.CloudManager = Globals.ServiceContainer.GetRequiredService<IIpcClientFactory<ICloudManager>>().CreateClient(CloudManagerClient);
 
             SetMainWindow();
-
+            EnsureServiceHasBeenStarted(false);
             /*
             Task.Run(async () => {
                 var cloud = await Globals.CloudManager.InvokeAsync(x => x.GetAllPersonalCloud()).ConfigureAwait(false);
@@ -121,10 +122,42 @@ namespace NSPersonalCloud.WindowsConfigurator
 
             TrayIcon.Dispose();
         }
+        public void EnsureServiceHasBeenStarted(bool showui=true)
+        {
+            Task.Run(async () => {
+                try
+                {
+                    var cts = new CancellationTokenSource();
+                    cts.CancelAfter(1000);
+                    var ret = await Globals.CloudManager.InvokeAsync(x => x.Ping(666), cts.Token)
+                                         .ConfigureAwait(false);
+                    if (ret == 666)
+                    {
+                        return;
+                    }
+                }
+                catch
+                {
+                }
+                _ = Task.Run(() => {
+                    RestartService();
+                });
+                if (showui)
+                {
+                    Application.Current.Dispatcher.Invoke(() => {
+                        UIHelpers.ShowLoadingMessage();
+                        MainWindow?.Hide();
+                        MainWindow = null;
+                    });
+                }
+            });
+        }
 
         public void RestartService()
         {
-            MainWindow?.Close();
+            Dispatcher.Invoke(() => {
+                MainWindow?.Close();
+            });
 
             try
             {
@@ -171,7 +204,9 @@ namespace NSPersonalCloud.WindowsConfigurator
 
         public void StopService()
         {
-            MainWindow?.Close();
+            Dispatcher.Invoke(() => {
+                MainWindow?.Close();
+            });
 
             try
             {
@@ -201,8 +236,10 @@ namespace NSPersonalCloud.WindowsConfigurator
                 }
             }
 
-            MainWindow?.Close();
-            MainWindow = null;
+            Dispatcher.Invoke(() => {
+                MainWindow?.Close();
+                MainWindow = null;
+            });
         }
     }
 }
