@@ -26,7 +26,7 @@ namespace NSPersonalCloud.WindowsConfigurator
                         try
                         {
                             var cts = new CancellationTokenSource();
-                            cts.CancelAfter(2 * 1000);
+                            cts.CancelAfter(1000);
                             var ret = await Globals.CloudManager.InvokeAsync(x => x.Ping(666),cts.Token)
                                                  .ConfigureAwait(false);
                             if (ret == 666)

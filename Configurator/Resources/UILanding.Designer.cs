@@ -169,7 +169,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Personal Cloud.
+        ///   Looks up a localized string similar to Personal House.
         /// </summary>
         public static string PersonalCloud {
             get {
@@ -178,7 +178,7 @@ namespace NSPersonalCloud.WindowsConfigurator.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Welcome to Personal Cloud.
+        ///   Looks up a localized string similar to Welcome to Personal House.
         /// </summary>
         public static string Welcome {
             get {

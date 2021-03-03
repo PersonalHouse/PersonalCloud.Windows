@@ -68,7 +68,7 @@
                     <TextBox x:Name="DeviceNameBox"
                              Grid.Column="2"
                              MaxLines="1"
-                             AcceptsReturn="True"
+                             AcceptsReturn="false"
                              VerticalAlignment="Center"
                              TextWrapping="Wrap" />
                     <TextBlock x:Name="CloudLabel"
@@ -81,7 +81,7 @@
                              Grid.Column="2"
                              MinWidth="200"
                              MaxLines="1"
-                             AcceptsReturn="True"
+                             AcceptsReturn="false"
                              VerticalAlignment="Center"
                              TextWrapping="Wrap" />
                 </Grid>
